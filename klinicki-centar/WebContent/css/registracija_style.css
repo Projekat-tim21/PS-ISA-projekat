@@ -1,0 +1,219 @@
+@charset "ISO-8859-1";
+
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+
+.nav ul {
+	margin: 0;
+}
+
+.nav li {
+	display: inline;
+}
+
+.nav a {
+	padding: .5em; /*space between elements*/
+	text-decoration: none;
+	color: white;
+	display: inline-block;
+}
+
+.nav1 li {
+	padding: 0 5%;
+}
+
+.nav1 {
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: bold;
+	border-bottom: 1px solid rgba(255, 255, 255, .3);
+}
+
+.nav a:hover {
+	background-color: #FFFF99;
+}
+
+.naslovOglasi {
+	text-align: center;
+	margin: 0;
+	font-size: 6em;
+	font-weight: bold;
+	color: white;
+}
+
+.btn {
+	text-align: center;
+	vertical-align: middle;
+	padding: .67em;
+	cursor: pointer;
+}
+
+.btnUnaslovu {
+	margin: .3em 10% 1em 10%;
+	color: black;
+	border: 2px solid #2D9CDB;
+	border-radius: 0; /*no round adges*/
+	font-size: 1em;
+	font-weight: lighter;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+}
+
+.btn:hover {
+	background-color: #FFFF99;
+}
+
+.btn1 {
+	text-align: center;
+	vertical-align: middle;
+	padding: .67em;
+	cursor: pointer;
+	margin: .2em 0% .5em 0%;
+	color: black;
+	border: 2px solid #2D9CDB;
+	border-radius: 0; /*no round adges*/
+	font-size: 1em;
+	font-weight: lighter;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+}
+
+.btn1:hover {
+	background-color: #FFFF99;
+}
+
+.btn {
+	text-align: center;
+	vertical-align: middle;
+	padding: .67em;
+	cursor: pointer;
+}
+
+
+.btnUnaslovu {
+	margin: .3em 10% 1em 10%;
+	color: black;
+	border: 2px solid #2D9CDB;
+	border-radius: 0; /*no round adges*/
+	font-size: 1em;
+	font-weight: lighter;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+}
+
+.btnUnaslovu:hover {
+	background-color: #FFFF99;
+}
+
+.section-header {
+	text-align: center;
+	margin: 0;
+	font-size: 2.5em;
+	font-weight: bold;
+	color: black;
+}
+
+.message {
+	font-size: 1em;
+}
+
+.logtext {
+	font-size: 1em;
+	/*background-color:red;*/
+	color: white;
+}
+
+.logtext:hover {
+	background-color: #FFFF99;
+	color: black;
+}
+
+.form {
+	position: relative;
+	z-index: 1;
+	background: rgba(7, 40, 195, 0.8);
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+}
+
+/*dodato za about*/
+.text {
+	margin: 1em;
+}
+
+.container {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 1.5em;
+	font-size: 20px;
+}
+
+.text2 {
+	font-size: 20px;
+}
+
+
+
+body{
+    background-color: #008B8B;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family:new time roman;
+    
+}
+
+h1{
+    text-align: center;
+    font-size:40px;
+    color:white;
+    margin-top:20px;
+    margin-bottom:30px;
+
+}
+
+.col-md-9{
+    text-align: center;
+}
+
+.label{
+    font-size:19px;
+    margin-top:20px;
+    font-weight:normal;
+}
+
+.form-control{
+    background:rgba(255,255,255,0.2);
+    border:0px;
+    border-radius:0px;
+    border-bottom:4px solid white;
+    font-size:25px;
+    color:white;
+    margin-top:25px;
+}
+
+small{
+    font-size:20px;
+    color:white;
+}
+
+.btn-info{
+    margin-top:20px;
+    margin-left:150px;
+    width:180px;
+    font-size:19px;
+    border-radius:1000px;
+}
+
+.col-mg-6{
+    background:rgba(0,0,0,0.4);
+    height:660px;
+    box-shadow:-1px 1px 60px 10px black inset;
+
+}
+
