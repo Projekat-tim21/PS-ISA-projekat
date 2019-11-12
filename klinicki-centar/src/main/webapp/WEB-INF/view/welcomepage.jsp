@@ -10,8 +10,67 @@
 <title>Registrovanje</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+
+<script>
+function validateForm(this)
+{
+  re = /^\w+$/;
+  if(!re.test(form.korIme.value)) {
+    alert("Error: Username must contain only letters, numbers and underscores!");
+    form.username.focus();
+    return false;
+  }
+  if(form.sifra.value != "" && form.sifra.value == form.sifra-confirm.value) {
+    if(form.sifra.value.length < 6) {
+      alert("Error: Password must contain at least six characters!");
+      form.sifra.focus();
+      return false;
+    }
+    if(form.sifra.value != form.sifra-confirm.value) {
+        if(form.sifra.value.length < 6) {
+          alert("Error: Polja za sifru i potvrdu sifre moraju biti ista!");
+          form.sifra.focus();
+          return false;
+        }
+    if(form.sifra.value == form.korIme.value) {
+      alert("Error: Password must be different from Username!");
+      form.sifra.focus();
+      return false;
+    }
+    re = /[0-9]/;
+    if(!re.test(form.sifra.value)) {
+      alert("Error: password must contain at least one number (0-9)!");
+      form.sifra.focus();
+      return false;
+    }
+    re = /[a-z]/;
+    if(!re.test(form.sifra.value)) {
+      alert("Error: password must contain at least one lowercase letter (a-z)!");
+      form.sifra.focus();
+      return false;
+    }
+    re = /[A-Z]/;
+    if(!re.test(form.sifra.value)) {
+      alert("Error: password must contain at least one uppercase letter (A-Z)!");
+      form.sifra.focus();
+      return false;
+    }
+  } else {
+    alert("Error: Please check that you've entered and confirmed your password!");
+    form.sifra.focus();
+    return false;
+  }
+
+  alert("You entered a valid password: " + form.sifra.value);
+  return true;
+  }}
+</script>
+
+
 </head>
 <body style="background-color:#FFEFD5;">
+
+
 
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
@@ -39,8 +98,8 @@
 		<c:when test="${mode=='MODE_REGISTER' }">
 			<div class="container text-center">
 				<h3>Registruj se</h3>
-				<hr>
-				<form class="form-horizontal" method="POST" action="sacuvaj">
+				<hr>               <!--onsubmit="return checkForm(this);"-->
+				<form class="form-horizontal" method="POST" action="sacuvaj" onsubmit="return validateForm(this)">
 					<input type="hidden" name="id" value="${korisnik.id }" />
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
@@ -64,62 +123,57 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Jedinstveni broj osiguranika </label>
+						<label class="control-label col-md-3">Jedinstveni broj osiguranika-unesite samo brojeve </label>
 						<div class="col-md-3">
-							<input type="text" class="form-control" name="jedBrOsig"
+							<input type="number" class="form-control" name="jedBrOsig"
 								value="${korisnik.jedBrOsig }" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Email</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" name="email"
+							<input type="email" class="form-control" name="email"
 								value="${korisnik.email }" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Adresa prebivalista</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" name="adresa"
-								value="${korisnik.adresa }" required>
+							<input type="text" class="form-control" name="adresa" value="${korisnik.adresa }" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Grad</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" name="grad"
-								value="${korisnik.grad }" required>
+							<input type="text" class="form-control" name="grad" value="${korisnik.grad }" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Drzava</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" name="drzava"
-								value="${korisnik.drzava }" required>
+							<input type="text" class="form-control" name="drzava" value="${korisnik.drzava }" required>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Telefon-samo brojevi bez ostalih karaktra</label>
+						<label class="control-label col-md-3">Telefon-unesite samo brojeve</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" name="telefon"
-								value="${korisnik.telefon }" required>
+							<input type="number" class="form-control" name="telefon" value="${korisnik.telefon }" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Sifra</label>
 						<div class="col-md-7">
-							<input type="password" class="form-control" name="sifra"
-								value="${korisnik.sifra }" required>
+							<input type="password" class="form-control" name="sifra" value="${korisnik.sifra}" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Potvrda sifre</label>
 						<div class="col-md-7">
-							<input type="password" class="form-control" name="password-confirm" required>
+							<input type="password" class="form-control" name="sifra-confirm" value="${korisnik.sifra-confirm}" required>
 						</div>
 					</div>
 					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="Register" required>
+						<input type="submit" class="btn btn-primary" value="Register" >
 					</div>
 				</form>
 			</div>
@@ -252,6 +306,9 @@
 			</div>
 		</c:when>
 	</c:choose>
+
+
+
 
 
 
