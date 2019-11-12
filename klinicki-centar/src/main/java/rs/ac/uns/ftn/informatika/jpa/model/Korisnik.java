@@ -54,6 +54,9 @@ public class Korisnik {
 	private String sifra;
 
 	
+	public Korisnik() {
+	}
+
 	public Korisnik(String jedBrOsig, String korIme, String ime, String prezime, String email, String adresa,
 			String grad, String drzava, String telefon, String sifra) {
 		super();

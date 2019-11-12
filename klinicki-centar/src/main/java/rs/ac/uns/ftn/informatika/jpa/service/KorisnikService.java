@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -17,7 +20,16 @@ public class KorisnikService {
 		this.korisnikRepository=korisnikRepository;
 	}
 	
-	public void saveMogKorisnika(Korisnik k) {
-		korisnikRepository.save(k);
+	public void saveMogKorisnika(Korisnik korisnik) {
+		korisnikRepository.save(korisnik);
+	}
+
+	public List<Korisnik> pokaziSveKorisnike() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findAll()) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
 	}	
 }
