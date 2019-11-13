@@ -34,6 +34,14 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "MODE_HOME");
 		return "pocetna_stranica";
 	}
+	
+	//logovanje
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest request) {
+		request.setAttribute("mode", "MODE_HOME");
+		return "login";
+	}
 
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
