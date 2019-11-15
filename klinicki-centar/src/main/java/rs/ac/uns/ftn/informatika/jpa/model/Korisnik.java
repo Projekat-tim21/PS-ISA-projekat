@@ -1,17 +1,10 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +19,8 @@ public class Korisnik {
 	@Column(name = "jedBrOsig", unique = true, nullable = false)
 	String jedBrOsig;
 
-	@Column(name = "korIme", unique = true, nullable = false)
-	String korIme;
+	@Column(name = "username", unique = true, nullable = false)
+	String username;
 	
 	@Column(name = "ime", nullable = false)
 	private String ime;
@@ -50,8 +43,8 @@ public class Korisnik {
 	@Column(name = "telefon", nullable = false)
 	private String telefon;
 	
-	@Column(name = "sifra", nullable = false)
-	private String sifra;
+	@Column(name = "password", nullable = false)
+	private String password;
 
 	
 	public Korisnik() {
@@ -61,7 +54,7 @@ public class Korisnik {
 			String grad, String drzava, String telefon, String sifra) {
 		super();
 		this.jedBrOsig = jedBrOsig;
-		this.korIme = korIme;
+		this.username = korIme;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.email = email;
@@ -69,7 +62,7 @@ public class Korisnik {
 		this.grad = grad;
 		this.drzava = drzava;
 		this.telefon = telefon;
-		this.sifra = sifra;
+		this.password = sifra;
 	}
 
 	public Long getId() {
@@ -88,12 +81,12 @@ public class Korisnik {
 		this.jedBrOsig = jedBrOsig;
 	}
 
-	public String getKorIme() {
-		return korIme;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setKorIme(String korIme) {
-		this.korIme = korIme;
+	public void setUsername(String korIme) {
+		this.username = korIme;
 	}
 
 	public String getIme() {
@@ -152,19 +145,19 @@ public class Korisnik {
 		this.telefon = telefon;
 	}
 
-	public String getSifra() {
-		return sifra;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
+	public void setPassword(String sifra) {
+		this.password = sifra;
 	}
 
 	@Override
 	public String toString() {
-		return "Korisnik [id=" + id + ", jedBrOsig=" + jedBrOsig + ", korIme=" + korIme + ", ime=" + ime + ", prezime="
+		return "Korisnik [id=" + id + ", jedBrOsig=" + jedBrOsig + ", korIme=" + username + ", ime=" + ime + ", prezime="
 				+ prezime + ", email=" + email + ", adresa=" + adresa + ", grad=" + grad + ", drzava=" + drzava
-				+ ", telefon=" + telefon + ", sifra=" + sifra + "]";
+				+ ", telefon=" + telefon + ", sifra=" + password + "]";
 	}
 	
 	

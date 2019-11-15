@@ -13,7 +13,7 @@
 
 <script>
 	function validateForm() {
-		var korIme = document.forms["forma"]["korIme"];
+		var korIme = document.forms["forma"]["username"];
 		var ime = document.forms["forma"]["ime"];
 		var prezime = document.forms["forma"]["prezime"];
 		var jedBrOsig = document.forms["forma"]["jedBrOsig"];
@@ -22,7 +22,7 @@
 		var grad = document.forms["forma"]["grad"];
 		var drzava = document.forms["forma"]["drzava"];
 		var telefon = document.forms["forma"]["telefon"];
-		var sifra = document.forms["forma"]["sifra"];
+		var sifra = document.forms["forma"]["password"];
 		var sifra_confirm = document.forms["forma"]["sifra_confirm"];
 		var pass1 = document.getElementById('pass1');
 		var pass2 = document.getElementById('pass2');
@@ -53,9 +53,6 @@
 
 </head>
 <body >
-
-
-
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<a href="/welcome" class="navbar-brand">Klinika AB</a>
@@ -86,12 +83,12 @@
 				<!--onsubmit="return checkForm(this);"-->
 				<form name="forma" class="form-horizontal" method="POST"
 					action="sacuvaj" onsubmit="return validateForm()">
-					<input type="hidden" name="id" value="${korisnik.id }" />
+					
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="korIme"
-								value="${korisnik.korIme }" required>
+							<input type="text" class="form-control" name="username"
+								value="${korisnik.username }" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -156,7 +153,7 @@
 						<label class="control-label col-md-3">Sifra</label>
 						<div class="col-md-6">
 							<input type="password" class="form-control" id="pass1"
-								name="sifra" value="${korisnik.sifra}" required>
+								name="password" value="${korisnik.password}" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -199,7 +196,7 @@
 							<c:forEach var="korisnik" items="${korisnici }">
 								<tr>
 									<td>${korisnik.id}</td>
-									<td>${korisnik.korIme}</td>
+									<td>${korisnik.username}</td>
 									<td>${korisnik.ime}</td>
 									<td>${korisnik.prezime}</td>
 									<td>${korisnik.jedBrOsig}</td>
@@ -208,7 +205,7 @@
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-									<td>${korisnik.sifra}</td>
+									<td>${korisnik.password}</td>
 									<td><a href="/delete-user?id=${korisnik.id }"><span
 											class="glyphicon glyphicon-trash"></span></a></td>
 									<td><a href="/edit-user?id=${korisnik.id }"><span
@@ -226,12 +223,12 @@
 				<h3>Update User</h3>
 				<hr>
 				<form class="form-horizontal" method="POST" action="sacuvaj">
-					<input type="hidden" name="id" value="${korisnik.id }" />
+					
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-7">
 							<input type="text" class="form-control" name="username"
-								value="${korisnik.korIme }" />
+								value="${korisnik.username }" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -274,20 +271,20 @@
 				<h3>User Login</h3>
 				<hr>
 				<form class="form-horizontal" method="POST" action="/login-user">
-					<c:if test="${not empty error }">
+				<!--  	<c:if test="${not empty error }">
 						<div class="alert alert-danger">
 							<c:out value="${error }"></c:out>
 						</div>
-					</c:if>
+					</c:if>-->
 					<div class="form-group">
-						<label class="control-label col-md-3">Username</label>
+						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-7">
 							<input type="text" class="form-control" name="username"
 								value="${korisnik.username }" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Password</label>
+						<label class="control-label col-md-3">Sifra</label>
 						<div class="col-md-7">
 							<input type="password" class="form-control" name="password"
 								value="${korisnik.password }" />

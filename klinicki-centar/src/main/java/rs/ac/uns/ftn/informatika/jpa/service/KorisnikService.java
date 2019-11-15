@@ -32,4 +32,12 @@ public class KorisnikService {
 		}
 		return korisnici;
 	}	
+	
+	public Korisnik findByUsernameAndPassword(String username, String password) {
+		return korisnikRepository.findByUsernameAndPassword(username, password);
+	}
+	
+	
+	
+
 }

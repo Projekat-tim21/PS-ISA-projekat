@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
@@ -37,24 +36,38 @@ public class KorisnikContreller {
 	
 	//logovanje
 	
+	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
-		request.setAttribute("mode", "MODE_HOME");
-		return "login";
+		request.setAttribute("mode", "MODE_LOGIN");
+		return "welcomepage";
+	}
+	
+	@RequestMapping("/login-user")
+	public String loginUser(@ModelAttribute Korisnik korisnik, HttpServletRequest request) {
+		if(korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword())!=null) {
+			return "login";
+		}else {
+			request.setAttribute("error", "Invalid Username or Password");
+			request.setAttribute("mode", "MODE_LOGIN");
+			return "welcomepage";
+		}
+		
 	}
 
+	
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_REGISTER");
 		return "welcomepage";
 	}
-	
+	/*
 	@GetMapping("/sacuvajProba")
 	public String saveKorisnik(@RequestParam String jedBrOsig,@RequestParam String username, @RequestParam String ime, @RequestParam String prezime, @RequestParam String email, @RequestParam String adresa, @RequestParam String grad, @RequestParam String drzava, @RequestParam String telefon, @RequestParam String sifra  ) {
 		Korisnik kor=new Korisnik(jedBrOsig, username, ime, prezime, email, adresa, grad, drzava, telefon, sifra);
 		korisnikServis.saveMogKorisnika(kor);
 		return "Korisnik sacuvan";
-	}
+	}*/
 	
 	@PostMapping("/sacuvaj") //korisnik povezan sa valuom iz js
 	public String registerKorisnik(@ModelAttribute Korisnik korisnik, BindingResult bindingResult, HttpServletRequest request) {

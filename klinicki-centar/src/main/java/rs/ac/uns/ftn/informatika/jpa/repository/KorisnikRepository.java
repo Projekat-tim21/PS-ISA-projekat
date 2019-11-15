@@ -6,4 +6,6 @@ import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 
 public interface KorisnikRepository extends CrudRepository<Korisnik, Integer> {
 
+	public Korisnik findByUsernameAndPassword(String username, String password);
+
 }
