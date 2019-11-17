@@ -48,6 +48,12 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		request.setAttribute("mode", "MODE_LOGIN");
+		return "welcomepage";
+	}
+	
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute Korisnik korisnik, HttpServletRequest request) {
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {

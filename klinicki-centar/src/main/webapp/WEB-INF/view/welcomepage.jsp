@@ -62,6 +62,7 @@
 					<li><a href="/registracija">Registruj se</a></li>
 					<li><a href="/pokazi-korisnika">Svi korisnici</a></li>
 				</ul>
+			
 			</div>
 		</div>
 	</div>

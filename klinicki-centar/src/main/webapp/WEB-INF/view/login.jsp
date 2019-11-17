@@ -11,7 +11,9 @@
 <body style="background-color:#FFEFD5;">
 
 	Dobrodosliiiiiiiiiiiiiiiiiiiiiiiiiii na ulogovanu stranicu
-
+	<div>
+		<a href="/logout">Odjavi se</a>
+</div>
 <script src="static/js/jquery-1.11.1.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
 </body>
