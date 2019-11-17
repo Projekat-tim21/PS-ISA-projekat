@@ -8,4 +8,8 @@ public interface KorisnikRepository extends CrudRepository<Korisnik, Integer> {
 
 	public Korisnik findByUsernameAndPassword(String username, String password);
 
+	public Korisnik findByUsername(String username);
+	
+	
+
 }

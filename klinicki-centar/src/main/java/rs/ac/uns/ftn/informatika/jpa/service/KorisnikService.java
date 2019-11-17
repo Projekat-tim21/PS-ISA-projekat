@@ -37,7 +37,9 @@ public class KorisnikService {
 		return korisnikRepository.findByUsernameAndPassword(username, password);
 	}
 	
-	
+	public Korisnik findByUsername(String username) {
+		return korisnikRepository.findByUsername(username);
+	}
 	
 
 }

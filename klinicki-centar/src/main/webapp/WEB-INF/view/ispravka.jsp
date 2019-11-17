@@ -101,16 +101,16 @@ $(document).ready(function(){
 			<div class="container text-center">
 				<h3>Registruj se</h3>
 				<hr>
-				<!--onsubmit="return checkForm(this);"-->
 				<form name="forma" class="form-horizontal" method="POST"
 					action="sacuvaj" onsubmit="return validateForm()">
-					
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="username" name="username"
 								value="${korisnik.username }" required>
-								<span id="free"></span>
+								
+									<label>Korisnicko ime vec postoji</label>
+								
 						</div>
 					</div>
 					<div class="form-group">
