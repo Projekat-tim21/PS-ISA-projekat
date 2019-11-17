@@ -51,27 +51,6 @@
 </script>
 
 
-
-<script>
-$(document).ready(function(){
-	$('#username').blur(function(){
-		var username=$(this).val();
-		$.ajax({
-			url:"check.php"
-			method:"POST",
-			data:{user_name:username},
-			dataType:"text",
-			success:function(html)
-			{
-				$('#free').html(html);
-				}
-			});
-		});
-});
-</script>
-
-
-
 </head>
 <body >
 	<div role="navigation">

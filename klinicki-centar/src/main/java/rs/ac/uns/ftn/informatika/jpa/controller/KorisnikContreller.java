@@ -69,21 +69,19 @@ public class KorisnikContreller {
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
 	public String registerKorisnik(@ModelAttribute Korisnik korisnik, BindingResult bindingResult,
 			HttpServletRequest request) {
-		ModelAndView modelAndView;
+		
 		Korisnik existingUser = userRepository.findByUsername(korisnik.getUsername());
 		if (existingUser != null) {
 
-			 request.setAttribute("errorMessage", "Invalid username"); 
-			System.out.println("caoooooooooooooo");
-		
-			//return "welcomepage";
-			// modelAndView.addObject("message","This username already exists!");
-			// modelAndView.setViewName("error");
-			 //System.out.println("caoooooooooooooo");
+			
+			request.setAttribute("errorMessage", "Invalid username"); 
+			return "ispravka";
+			
 		} else {
 			korisnikServis.saveMogKorisnika(korisnik);
-			request.setAttribute("mode", "MODE_HOME");}
+			request.setAttribute("mode", "MODE_HOME");
 			return "welcomepage";
+		}
 		
 	}
 
@@ -94,37 +92,6 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 
-	@RequestMapping(value = "/registracija", method = RequestMethod.POST)
-	public ModelAndView registerUser(ModelAndView modelAndView, Korisnik user) {
-
-		Korisnik existingUser = userRepository.findByUsername(user.getUsername());
-		if (existingUser != null) {
-			modelAndView.addObject("message", "This username already exists!");
-			modelAndView.setViewName("error");
-		} else {/*
-				 * userRepository.save(user);
-				 * 
-				 * ConfirmationToken confirmationToken = new ConfirmationToken(user);
-				 * 
-				 * confirmationTokenRepository.save(confirmationToken);
-				 * 
-				 * SimpleMailMessage mailMessage = new SimpleMailMessage();
-				 * mailMessage.setTo(user.getEmailId());
-				 * mailMessage.setSubject("Complete Registration!");
-				 * mailMessage.setFrom("chand312902@gmail.com");
-				 * mailMessage.setText("To confirm your account, please click here : "
-				 * +"http://localhost:8082/confirm-account?token="+confirmationToken.
-				 * getConfirmationToken());
-				 * 
-				 * emailSenderService.sendEmail(mailMessage);
-				 * 
-				 * modelAndView.addObject("emailId", user.getEmailId());
-				 */
-
-			modelAndView.setViewName("successfulRegisteration");
-		}
-
-		return modelAndView;
-	}
+	
 
 }
