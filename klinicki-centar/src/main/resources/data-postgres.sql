@@ -8,6 +8,10 @@ insert into student (index_number, first_name, last_name) values ('ra7-2014', 'B
 insert into student (index_number, first_name, last_name) values ('ra8-2014', 'Milana', 'Milanović');
 insert into student (index_number, first_name, last_name) values ('ra9-2014', 'Jovana', 'Jovanić');
 
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username ) values ( 'Bate Brkic 4', 'Srbija', 'marko22@gmail.com', 'Novi Sad', 'Marko', '225846', 'markomarkovic', 'Markovic', '063528496', 'marko22');
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username ) values ( 'Kralja Petra 2', 'Srbija','sanja22@gmail.com', 'Novi Sad', 'Sanja', '225586', 'sanjasanjic', 'Sanjic', '063222496', 'sanja22');
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username ) values ('Todora Jovanovica 5', 'Srbija', 'petar22@gmail.com',  'Novi Sad', 'Petar', '125846', 'petarpetrovic', 'Petrovic', '067528856', 'petar22');
+
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');
 insert into course (name) values ('Objektno programiranje');

@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
 @Controller
@@ -19,41 +22,50 @@ public class KorisnikContreller {
 
 	@Autowired
 	private KorisnikService korisnikServis;
-	
+
+	@Autowired
+	private KorisnikRepository userRepository;
+
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
 	}
-	
-	//prikaz neautentifikovanim korisnicima
-	
+
+	// prikaz neautentifikovanim korisnicima
+
 	@RequestMapping("/prikazOsnovnihInfo")
 	public String info(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
 		return "pocetna_stranica";
 	}
-	
-	//logovanje
-	
-	
+
+	// logovanje
+
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
+		request.setAttribute("mode", "MODE_LOGIN");
+		return "welcomepage";
+	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_LOGIN");
 		return "welcomepage";
 	}
 	
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute Korisnik korisnik, HttpServletRequest request) {
-		if(korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword())!=null) {
+		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 			return "login";
-		}else {
+		} else {
 			request.setAttribute("error", "Invalid Username or Password");
 			request.setAttribute("mode", "MODE_LOGIN");
 			return "welcomepage";
 		}
-		
+
 	}
+
 
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -61,33 +73,40 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 	
+
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_REGISTER");
 		return "welcomepage";
 	}
-	/*
-	@GetMapping("/sacuvajProba")
-	public String saveKorisnik(@RequestParam String jedBrOsig,@RequestParam String username, @RequestParam String ime, @RequestParam String prezime, @RequestParam String email, @RequestParam String adresa, @RequestParam String grad, @RequestParam String drzava, @RequestParam String telefon, @RequestParam String sifra  ) {
-		Korisnik kor=new Korisnik(jedBrOsig, username, ime, prezime, email, adresa, grad, drzava, telefon, sifra);
-		korisnikServis.saveMogKorisnika(kor);
-		return "Korisnik sacuvan";
-	}*/
-	
-	@PostMapping("/sacuvaj") //korisnik povezan sa valuom iz js
-	public String registerKorisnik(@ModelAttribute Korisnik korisnik, BindingResult bindingResult, HttpServletRequest request) {
-		korisnikServis.saveMogKorisnika(korisnik);  
-		request.setAttribute("mode", "MODE_HOME");
-		return "welcomepage";
+
+	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
+	public String registerKorisnik(@ModelAttribute Korisnik korisnik, BindingResult bindingResult,
+			HttpServletRequest request) {
+		
+		Korisnik existingUser = userRepository.findByUsername(korisnik.getUsername());
+		if (existingUser != null) {
+
+			
+			request.setAttribute("errorMessage", "Invalid username"); 
+			return "ispravka";
+			
+		} else {
+			korisnikServis.saveMogKorisnika(korisnik);
+			request.setAttribute("mode", "MODE_HOME");
+			return "welcomepage";
+		}
+		
 	}
-	
-	
-	
+
+
 	@GetMapping("/pokazi-korisnika")
 	public String pokaziSveKorisnike(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
 		request.setAttribute("mode", "ALL_USERS");
 		return "welcomepage";
 	}
+
 	
+
 }

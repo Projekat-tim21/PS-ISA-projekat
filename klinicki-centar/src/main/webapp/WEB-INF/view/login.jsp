@@ -11,8 +11,9 @@
 <body style="background-color:#FFEFD5;">
 
 
-	<h1>Dobrodosliiiiiiiiiiiiiiiiiiiiiiiiiii na ulogovanu stranicu</h1>
-	
+
+
+	Dobrodosliiiiiiiiiiiiiiiiiiiiiiiiiii na ulogovanu stranicu
 	<div>
 		<a href="/logout">Odjavi se</a>
 </div>

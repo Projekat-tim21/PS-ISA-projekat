@@ -62,6 +62,7 @@
 					<li><a href="/registracija">Registruj se</a></li>
 					<li><a href="/pokazi-korisnika">Svi korisnici</a></li>
 				</ul>
+			
 			</div>
 		</div>
 	</div>
@@ -87,8 +88,9 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="username"
+							<input type="text" class="form-control" id="username" name="username"
 								value="${korisnik.username }" required>
+								<span id="free"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -270,16 +272,16 @@
 			<div class="container text-center">
 				<h3>User Login</h3>
 				<hr>
-				<form class="form-horizontal" method="POST" action="/login-user">
-				<!--  	<c:if test="${not empty error }">
+				<form class="form-horizontal" id="myform" method="POST" action="/login-user">
+				  	<c:if test="${not empty error }">
 						<div class="alert alert-danger">
 							<c:out value="${error }"></c:out>
 						</div>
-					</c:if>-->
+					</c:if>
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" name="username"
+							<input type="text" class="form-control" id="username" name="username"
 								value="${korisnik.username }" />
 						</div>
 					</div>
