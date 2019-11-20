@@ -67,11 +67,7 @@ public class KorisnikContreller {
 	}
 
 
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		//request.setAttribute("mode", "MODE_REGISTER");
-		return "welcomepage";
-	}
+	
 	
 
 	@RequestMapping("/registracija")
