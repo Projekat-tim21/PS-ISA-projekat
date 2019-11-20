@@ -55,6 +55,11 @@ public class KorisnikContreller {
 		
 	}
 
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		//request.setAttribute("mode", "MODE_REGISTER");
+		return "welcomepage";
+	}
 	
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
@@ -75,6 +80,8 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
 	}
+	
+	
 	
 	@GetMapping("/pokazi-korisnika")
 	public String pokaziSveKorisnike(HttpServletRequest request) {

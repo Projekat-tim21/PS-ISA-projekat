@@ -10,7 +10,12 @@
 </head>
 <body style="background-color:#FFEFD5;">
 
+
+	<h1>Dobrodosliiiiiiiiiiiiiiiiiiiiiiiiiii na ulogovanu stranicu</h1>
 	
+	<div>
+		<a href="/logout">Odjavi se</a>
+</div>
 
 <script src="static/js/jquery-1.11.1.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
