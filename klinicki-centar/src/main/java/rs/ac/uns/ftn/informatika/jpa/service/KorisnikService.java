@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 

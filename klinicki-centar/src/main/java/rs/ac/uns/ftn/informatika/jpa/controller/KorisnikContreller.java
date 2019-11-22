@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
@@ -55,7 +56,7 @@ public class KorisnikContreller {
 	}
 	
 	@RequestMapping("/login-user")
-	public String loginUser(@ModelAttribute Korisnik korisnik, HttpServletRequest request) {
+	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 			return "login";
 		} else {
@@ -77,10 +78,10 @@ public class KorisnikContreller {
 	}
 
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
-	public String registerKorisnik(@ModelAttribute Korisnik korisnik, BindingResult bindingResult,
+	public String registerKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 		
-		Korisnik existingUser = userRepository.findByUsername(korisnik.getUsername());
+		Korisnik existingUser = userRepository.findByUsername(korisnikd.getUsername());
 		if (existingUser != null) {
 
 			
@@ -88,7 +89,20 @@ public class KorisnikContreller {
 			return "ispravka";
 			
 		} else {
-			korisnikServis.saveMogKorisnika(korisnik);
+			Korisnik k=new Korisnik();
+			k.setId(korisnikd.getId());
+			k.setIme(korisnikd.getIme());
+			k.setPrezime(korisnikd.getPrezime());
+			k.setJedBrOsig(korisnikd.getJedBrOsig());
+			k.setEmail(korisnikd.getEmail());
+			k.setAdresa(korisnikd.getAdresa());
+			k.setDrzava(korisnikd.getDrzava());
+			k.setGrad(korisnikd.getGrad());
+			k.setTelefon(korisnikd.getTelefon());
+			k.setUsername(korisnikd.getUsername());
+			k.setPassword(korisnikd.getPassword());
+			
+			korisnikServis.saveMogKorisnika(k);
 			request.setAttribute("mode", "MODE_HOME");
 			return "welcomepage";
 		}
