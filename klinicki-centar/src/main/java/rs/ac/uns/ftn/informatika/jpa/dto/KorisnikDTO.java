@@ -18,6 +18,7 @@ public class KorisnikDTO {
 	private String drzava;
 	private String telefon;
 	private String password;
+	private String repeatPassword;
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
 			String adresa, String grad, String drzava, String telefon, String password) {
@@ -41,6 +42,17 @@ public class KorisnikDTO {
 	}
 
 	
+	
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
+	}
+
+
 	public KorisnikDTO() {
 		super();
 	}
@@ -148,6 +160,15 @@ public class KorisnikDTO {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
+
+
+	
+
+	
+	
+
+
+	
 	
 	
 	

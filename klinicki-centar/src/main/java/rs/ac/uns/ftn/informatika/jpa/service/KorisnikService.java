@@ -17,6 +17,9 @@ public class KorisnikService {
 
 	private final KorisnikRepository korisnikRepository;
 	
+	
+	KorisnikDTO korDto;
+	
 	public KorisnikService(KorisnikRepository korisnikRepository) {
 		this.korisnikRepository=korisnikRepository;
 	}
@@ -43,4 +46,28 @@ public class KorisnikService {
 	}
 	
 
+	public Korisnik findOne(Long id) {
+		return korisnikRepository.findById(id).orElseGet(null);
+	}
+
+	public Object editUser2(Long id) {
+		return korisnikRepository.findById(id);
+	}
+	
+	
+	
+	public Korisnik editUser(Long id) {
+		return korisnikRepository.findOneById(id);
+	}
+
+	public void deleteMyUser(Long id) {
+		korisnikRepository.deleteById(id);
+	}
+	
+	
+	
+
+	
+
+	
 }

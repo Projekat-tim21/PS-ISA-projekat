@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.security.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,6 +71,8 @@ public class Korisnik {
 		return id;
 	}
 
+	
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -159,6 +163,7 @@ public class Korisnik {
 				+ prezime + ", email=" + email + ", adresa=" + adresa + ", grad=" + grad + ", drzava=" + drzava
 				+ ", telefon=" + telefon + ", sifra=" + password + "]";
 	}
+
 	
 	
 
