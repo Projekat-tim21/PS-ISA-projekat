@@ -63,6 +63,10 @@ public class KorisnikService {
 	public Korisnik editUser(Long id) {
 		return korisnikRepository.findOneById(id);
 	}
+	
+	/*public Korisnik editUserByUsername(String username) {
+		return korisnikRepository.findByUsername(username);
+	}*/
 
 	public void deleteMyUser(Long id) {
 		korisnikRepository.deleteById(id);

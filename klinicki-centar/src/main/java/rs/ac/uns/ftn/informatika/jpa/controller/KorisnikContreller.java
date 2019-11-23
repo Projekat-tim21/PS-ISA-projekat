@@ -6,21 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
@@ -67,15 +61,14 @@ public class KorisnikContreller {
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
-			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!" );
-			String username=request.getParameter("username");
-			String password=request.getParameter("password");
-			
-			HttpSession session=request.getSession();
-			session.setAttribute("username", username); 
-			
-			
-			
+			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
+			String username = request.getParameter("username");
+			//String password = request.getParameter("password");
+			HttpSession session = request.getSession();
+			session.setAttribute("username", username);
+
+			System.out.println("OVDE " + session.getAttribute(username));
+
 			return "login";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
@@ -126,11 +119,10 @@ public class KorisnikContreller {
 	public String pokaziSveKorisnike(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
 		request.setAttribute("mode", "ALL_USERS");
-		
-		
+
 		return "welcomepage";
 	}
-	
+
 	@GetMapping("/pokazi-korisnika2")
 	public String pokaziSveKorisnike2(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
@@ -138,66 +130,138 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 
-	@RequestMapping(value="/edit/{userId}", method=RequestMethod.GET)
-	public String edit(@PathVariable("id") Long id, Map<String,Object>map) {
-		System.out.println("caooooooooooooooodsflsjfk");
-		Korisnik k=korisnikServis.findOne(id);
+	@GetMapping("/pokazikorisnikaSaLogina")
+	public String pokaziSveKorisnikeNaLoginu(HttpServletRequest request) {
+		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
+		request.setAttribute("mode", "ALL_USERS");
+		return "pregledUseraSaLogina";
+	}
+
+	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
+	public String edit(@PathVariable("id") Long id, Map<String, Object> map) {
+		Korisnik k = korisnikServis.findOne(id);
 		map.put("korisnik", k);
 		return "edit";
 	}
-	
+
 	@PostMapping("/sacuvajupdate") // korisnik povezan sa valuom iz js
 	public String UpdateKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 
-		
-			Korisnik k = new Korisnik();
-			Long Idx=korisnikd.getId();
-			
-			k.setId(korisnikd.getId());
-			k.setIme(korisnikd.getIme());
-			k.setPrezime(korisnikd.getPrezime());
-			k.setJedBrOsig(korisnikd.getJedBrOsig());
-			k.setEmail(korisnikd.getEmail());
-			k.setAdresa(korisnikd.getAdresa());
-			k.setDrzava(korisnikd.getDrzava());
-			k.setGrad(korisnikd.getGrad());
-			k.setTelefon(korisnikd.getTelefon());
-			k.setUsername(korisnikd.getUsername());
-			k.setPassword(korisnikd.getPassword());
-			
-			korisnikServis.deleteMyUser(korisnikd.getId());
-			k.setId(Idx);
-			korisnikServis.saveMogKorisnika(k);
-			//k.setId(Idx);
-			
-			request.setAttribute("mode", "MODE_HOME");
-			return "welcomepage";
-		
-			
-		}
+		Korisnik k = new Korisnik();
+		Long Idx = korisnikd.getId();
 
-	
+		k.setId(korisnikd.getId());
+		k.setIme(korisnikd.getIme());
+		k.setPrezime(korisnikd.getPrezime());
+		k.setJedBrOsig(korisnikd.getJedBrOsig());
+		k.setEmail(korisnikd.getEmail());
+		k.setAdresa(korisnikd.getAdresa());
+		k.setDrzava(korisnikd.getDrzava());
+		k.setGrad(korisnikd.getGrad());
+		k.setTelefon(korisnikd.getTelefon());
+		k.setUsername(korisnikd.getUsername());
+		k.setPassword(korisnikd.getPassword());
+
+		korisnikServis.deleteMyUser(korisnikd.getId());
+		k.setId(Idx);
+		korisnikServis.saveMogKorisnika(k);
+
+		request.setAttribute("mode", "MODE_HOME");
+		return "welcomepage";
+
+	}
+
+	@PostMapping("/sacuvajupdateNaLogin") // korisnik povezan sa valuom iz js
+	public String UpdateKorisnik2(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
+			HttpServletRequest request) {
+
+		Korisnik k = new Korisnik();
+		Long Idx = korisnikd.getId();
+		System.out.println("caopoooooooooooooooo");
+		k.setId(korisnikd.getId());
+		k.setIme(korisnikd.getIme());
+		k.setPrezime(korisnikd.getPrezime());
+		k.setJedBrOsig(korisnikd.getJedBrOsig());
+		k.setEmail(korisnikd.getEmail());
+		k.setAdresa(korisnikd.getAdresa());
+		k.setDrzava(korisnikd.getDrzava());
+		k.setGrad(korisnikd.getGrad());
+		k.setTelefon(korisnikd.getTelefon());
+		k.setUsername(korisnikd.getUsername());
+		k.setPassword(korisnikd.getPassword());
+
+		// korisnikServis.deleteMyUser(korisnikd.getId());
+		k.setId(Idx);
+		korisnikServis.saveMogKorisnika(k);
+		// k.setId(Idx);
+
+		// request.setAttribute("mode", "MODE_PREGLED");
+		return "uspesnaIzmenaInfo";
+
+	}
+
 	@RequestMapping("/edit-user")
-	public String editUser(@RequestParam Long id,HttpServletRequest request) {
+	public String editUser(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.editUser(id));
 		request.setAttribute("mode", "MODE_UPDATE");
 		return "welcomepage";
 	}
-	
-	@RequestMapping("/profil")
-	public String editUserProfil(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("korisnik", korisnikServis.editUser(id));
+
+	@RequestMapping("/idiNaLoginBezDobrodosli")
+	public String idiNaLoginBezDobrodosliFunc(@RequestParam Long id, HttpServletRequest request) {
+
+		return "loginBezDobrodosli";
+	}
+
+	@RequestMapping("/profilkaPregledu")
+	public String editUserProfilPregled(@RequestParam String username, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
+		request.setAttribute("mode", "MODE_PREGLED");
+		return "pregledInfo";
+	}
+
+	@RequestMapping("/izmenaPodatakaizBara")
+	public String editUserProfilIzBara(@RequestParam String username, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "login";
 	}
-	
+
+	@RequestMapping("/profil")
+	public String editUserProfil(@RequestParam String username, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
+		request.setAttribute("mode", "MODE_PREGLED");
+		return "login";
+	}
+
+	@RequestMapping("/vratiSeNaPocetnu")
+	public String VratiSeNaPocetnu(@RequestParam String username, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
+		// request.setAttribute("mode", "MODE_PREGLED");
+		return "loginBezDobrodosli";
+	}
+
+	@RequestMapping("/profilnaBezDob")
+	public String editUserProfilBezDob(@RequestParam String username, HttpServletRequest request) {
+		// request.setAttribute("korisnik", korisnikServis.findByUsername(username));
+		// request.setAttribute("mode", "MODE_PREGLED");
+		return "pregledInfo";
+	}
+
+	@RequestMapping("/izmenaPodataka")
+	public String editUserProfil2(@RequestParam String username, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
+		request.setAttribute("mode", "MODE_PREGLED");
+		return "login";
+	}
+
 	@RequestMapping("/profil2")
-	public String editUserProfil2(@RequestParam Long id,HttpServletRequest request,@ModelAttribute KorisnikDTO korisnikd) {
-		
+	public String editUserProfil2(@RequestParam Long id, HttpServletRequest request,
+			@ModelAttribute KorisnikDTO korisnikd) {
+
 		request.setAttribute("korisnik", korisnikServis.editUser(id));
 		request.setAttribute("mode", "MODE_UPDATE");
-		
 
 		korisnikd.getId();
 		korisnikd.getIme();
@@ -210,12 +274,10 @@ public class KorisnikContreller {
 		korisnikd.getTelefon();
 		korisnikd.getUsername();
 		korisnikd.getPassword();
-		
-		System.out.println(korisnikd.getId()+korisnikd.getIme());
-		
-		//request.setAttribute("korisnik", korisnikServis.editUser(id));
-		//request.setAttribute("mode", "MODE_PREGLED");
+
+		System.out.println(korisnikd.getId() + korisnikd.getIme());
+;
 		return "login";
 	}
-	
+
 }

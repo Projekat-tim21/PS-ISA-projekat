@@ -65,7 +65,6 @@
 <body >
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
-			<a href="/welcome" class="navbar-brand">Klinika AB</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/login">Logovanje</a></li>
