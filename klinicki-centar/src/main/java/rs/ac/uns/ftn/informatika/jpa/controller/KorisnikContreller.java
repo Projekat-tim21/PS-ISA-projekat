@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.informatika.jpa.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,14 @@ public class KorisnikContreller {
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!" );
+			String username=request.getParameter("username");
+			String password=request.getParameter("password");
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("username", username); 
+			
+			
+			
 			return "login";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
@@ -117,6 +126,8 @@ public class KorisnikContreller {
 	public String pokaziSveKorisnike(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
 		request.setAttribute("mode", "ALL_USERS");
+		
+		
 		return "welcomepage";
 	}
 	

@@ -26,7 +26,8 @@
 			</div>
 		</div>
 	</div>
-	<h2>Dobrodosli! Uspesno ste se ulogovali.</h2>
+	<h2>Dobrodosli ${username}   ! Uspesno ste se ulogovali.</h2>
+	
 
 	
 

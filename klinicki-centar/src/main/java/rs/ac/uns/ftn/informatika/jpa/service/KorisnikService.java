@@ -37,6 +37,10 @@ public class KorisnikService {
 		return korisnici;
 	}	
 	
+	//public Korisnik findAllData(Long id, String username, String ime, String prezime, String jedBrOsig, String email, String adresa, String grad, String drzava, String telefon, String password) {
+	//	return korisnikRepository.findAllData(id, username, ime, prezime, jedBrOsig, email, adresa, grad, drzava, telefon, password);
+	//}
+	
 	public Korisnik findByUsernameAndPassword(String username, String password) {
 		return korisnikRepository.findByUsernameAndPassword(username, password);
 	}
