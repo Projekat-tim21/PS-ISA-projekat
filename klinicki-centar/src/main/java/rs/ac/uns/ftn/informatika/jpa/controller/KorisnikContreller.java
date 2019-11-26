@@ -1,30 +1,31 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
+import rs.ac.uns.ftn.informatika.jpa.model.enums.Role;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
 @Controller
-public class KorisnikContreller {
+public class KorisnikContreller extends AuthorizationController {
 
-	@Autowired
-	private KorisnikService korisnikServis;
+	
+	private final KorisnikService korisnikServis;
 
-	@Autowired
-	private KorisnikRepository userRepository;
+	public KorisnikContreller(KorisnikService service) {
+		super(service);
+		this.korisnikServis = service;
+	}
+
 
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
@@ -56,6 +57,7 @@ public class KorisnikContreller {
 	
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute Korisnik korisnik, HttpServletRequest request) {
+		boolean isAuthorised =  checkAuhtority("pera", new ArrayList<Role>() {{ add(Role.CLINIC_ADMIN);}});
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 			return "login";
 		} else {
@@ -80,7 +82,7 @@ public class KorisnikContreller {
 	public String registerKorisnik(@ModelAttribute Korisnik korisnik, BindingResult bindingResult,
 			HttpServletRequest request) {
 		
-		Korisnik existingUser = userRepository.findByUsername(korisnik.getUsername());
+		Korisnik existingUser = korisnikServis.findByUsername(korisnik.getUsername());
 		if (existingUser != null) {
 
 			
