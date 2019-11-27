@@ -15,15 +15,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
+import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
 @Controller
 public class KorisnikContreller {
 
+	private Logger logger = LoggerFactory.getLogger(KorisnikContreller.class);
+	
+	@Autowired
+	private EmailService emailService;
+	
 	@Autowired
 	private KorisnikService korisnikServis;
 
@@ -36,7 +44,6 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 
-	// prikaz neautentifikovanim korisnicima
 
 	@RequestMapping("/prikazOsnovnihInfo")
 	public String info(HttpServletRequest request) {
@@ -45,6 +52,8 @@ public class KorisnikContreller {
 	}
 
 	// logovanje
+	
+	
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
@@ -178,7 +187,6 @@ public class KorisnikContreller {
 
 		Korisnik k = new Korisnik();
 		Long Idx = korisnikd.getId();
-		System.out.println("caopoooooooooooooooo");
 		k.setId(korisnikd.getId());
 		k.setIme(korisnikd.getIme());
 		k.setPrezime(korisnikd.getPrezime());
@@ -190,13 +198,16 @@ public class KorisnikContreller {
 		k.setTelefon(korisnikd.getTelefon());
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
-
-		// korisnikServis.deleteMyUser(korisnikd.getId());
 		k.setId(Idx);
 		korisnikServis.saveMogKorisnika(k);
 		// k.setId(Idx);
+		
+		try {
+			emailService.sendNotificaitionSync(k);
+		}catch( Exception e ){
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+		}
 
-		// request.setAttribute("mode", "MODE_PREGLED");
 		return "uspesnaIzmenaInfo";
 
 	}
@@ -225,6 +236,8 @@ public class KorisnikContreller {
 	public String editUserProfilIzBara(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
+		
+		
 		return "login";
 	}
 
@@ -238,14 +251,11 @@ public class KorisnikContreller {
 	@RequestMapping("/vratiSeNaPocetnu")
 	public String VratiSeNaPocetnu(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
-		// request.setAttribute("mode", "MODE_PREGLED");
 		return "loginBezDobrodosli";
 	}
 
 	@RequestMapping("/profilnaBezDob")
 	public String editUserProfilBezDob(@RequestParam String username, HttpServletRequest request) {
-		// request.setAttribute("korisnik", korisnikServis.findByUsername(username));
-		// request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
 	}
 
