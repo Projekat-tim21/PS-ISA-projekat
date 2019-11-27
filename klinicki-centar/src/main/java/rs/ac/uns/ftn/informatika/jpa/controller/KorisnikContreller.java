@@ -118,7 +118,15 @@ public class KorisnikContreller {
 			k.setPassword(korisnikd.getPassword());
 
 			korisnikServis.saveMogKorisnika(k);
+			
+			try {
+				emailService.sendNotificaitionZaRegistraciju(k);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+			
 			request.setAttribute("mode", "MODE_HOME");
+			
 			return "welcomepage";
 		}
 

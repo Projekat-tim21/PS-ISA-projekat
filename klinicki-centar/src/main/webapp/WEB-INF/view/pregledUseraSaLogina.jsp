@@ -44,7 +44,7 @@
 								<th>Grad</th>
 								<th>Drzava</th>
 								<th>Telefon</th>
-								<th>Sifra</th>
+						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
 						<tbody>
@@ -60,7 +60,7 @@
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-									<td>${korisnik.password}</td>
+					<!--  				<td>${korisnik.password}</td>  -->
 								</tr>
 							</c:forEach>
 						</tbody>

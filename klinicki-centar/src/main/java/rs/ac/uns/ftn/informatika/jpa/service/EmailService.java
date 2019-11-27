@@ -43,4 +43,18 @@ public class EmailService {
 		System.out.println("Email poslat!");
 	}
 
+	public void sendNotificaitionZaRegistraciju(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje emaila na register...");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Uspesno ste se registrovali");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nUspesno ste se registrovali.");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+
 }
