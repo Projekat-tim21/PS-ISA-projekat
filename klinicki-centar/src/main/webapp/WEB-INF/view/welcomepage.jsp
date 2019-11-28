@@ -69,7 +69,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/login">Logovanje</a></li>
 					<li><a href="/registracija">Registruj se</a></li>
-					<li><a href="/pokazi-korisnika">Svi korisnici</a></li>
+					<!-- <a href="/pokazi-korisnika">Svi korisnici</a></li> -->
 				</ul>
 			
 			</div>

@@ -271,11 +271,20 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
 	}
+	
+	@RequestMapping("/profilkaPregleduDrugi")
+	public String editUserProfilPregledDrugi(@RequestParam String username, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
+		request.setAttribute("mode", "MODE_PREGLED");
+		return "pregledInfo";
+	}
+	
 
 	@RequestMapping("/izmenaPodatakaizBara")
 	public String editUserProfilIzBara(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
+		
 		
 		
 		return "login";
@@ -303,6 +312,8 @@ public class KorisnikContreller {
 	public String editUserProfil2(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
+		
+	
 		return "login";
 	}
 
