@@ -47,8 +47,15 @@ public class Korisnik {
 	
 	@Column(name = "password", nullable = false)
 	private String password;
-
 	
+	@Column(name="active",nullable=false)
+	private Boolean isActive;
+	
+	@Column(name="role",nullable=false)
+	private String roleName;
+	
+	
+
 	public Korisnik() {
 	}
 
@@ -155,6 +162,25 @@ public class Korisnik {
 
 	public void setPassword(String sifra) {
 		this.password = sifra;
+	}
+	
+
+	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	@Override
