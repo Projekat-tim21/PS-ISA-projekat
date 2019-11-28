@@ -1,11 +1,16 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
@@ -41,6 +47,8 @@ public class KorisnikContreller {
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
+		
+		
 		return "welcomepage";
 	}
 
@@ -58,6 +66,10 @@ public class KorisnikContreller {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_LOGIN");
+	
+		
+		
+		
 		return "welcomepage";
 	}
 
@@ -70,15 +82,29 @@ public class KorisnikContreller {
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
+		
+			Korisnik k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
 			String username = request.getParameter("username");
 			//String password = request.getParameter("password");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-
-			System.out.println("OVDE " + session.getAttribute(username));
-
-			return "login";
+			//korisnikServis.findByUsername(username);
+			//Korisnik k=korisnikServis.findByUsername(username);
+			
+			System.out.println("OVDE " + k.getRoleName());
+			
+			System.out.println("Koja je uloga u klasi"+Role.ADMIN.name());
+			System.out.println("Korisnikova uloga"+k.getRoleName());
+			
+			if(k.getRoleName().equals(Role.ADMIN.name())) {
+				return "nesto";
+			}else{
+				return "error";
+			}
+			
+			
+			//return "";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
 			request.setAttribute("mode", "MODE_LOGIN");

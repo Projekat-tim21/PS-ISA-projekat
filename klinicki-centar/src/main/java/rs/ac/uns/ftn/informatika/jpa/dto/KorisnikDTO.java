@@ -19,9 +19,10 @@ public class KorisnikDTO {
 	private String telefon;
 	private String password;
 	private String repeatPassword;
+	private String role;
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
-			String adresa, String grad, String drzava, String telefon, String password) {
+			String adresa, String grad, String drzava, String telefon, String password, String role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -34,15 +35,26 @@ public class KorisnikDTO {
 		this.drzava = drzava;
 		this.telefon = telefon;
 		this.password = password;
+		this.role=role;
 	}
 
 
 	public KorisnikDTO(Korisnik korisnik) {
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword());
+		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName());
 	}
 
 	
 	
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 	public String getRepeatPassword() {
 		return repeatPassword;
 	}

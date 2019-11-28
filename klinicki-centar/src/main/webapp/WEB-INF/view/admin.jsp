@@ -135,40 +135,7 @@
 			</div>
 		</c:when>
 		
-		<!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">data table</h3>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <th>Korisnicko ime</th>
-                                                <th>Email</th>
-                                                <th>Odobri</th>
-                                                <th>Odbij</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="korisnik" items="${korisnici }">
-								<tr>
-									<td>${korisnik.korIme}</td>
-									<td>${korisnik.email}</td>
-									<td><a href="/delete-user?id=${korisnik.id }"><span
-											class="glyphicon glyphicon-trash"></span></a></td>
-									<td><a href="/edit-user?id=${korisnik.id }"><span
-											class="glyphicon glyphicon-pencil"></span></a></td>
-								</tr>
-							</c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE -->
+		
 
 		
 	</c:choose>
