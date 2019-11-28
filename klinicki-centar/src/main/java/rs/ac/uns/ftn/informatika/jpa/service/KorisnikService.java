@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 
@@ -15,6 +16,9 @@ import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 public class KorisnikService {
 
 	private final KorisnikRepository korisnikRepository;
+	
+	
+	KorisnikDTO korDto;
 	
 	public KorisnikService(KorisnikRepository korisnikRepository) {
 		this.korisnikRepository=korisnikRepository;
@@ -33,6 +37,10 @@ public class KorisnikService {
 		return korisnici;
 	}	
 	
+	//public Korisnik findAllData(Long id, String username, String ime, String prezime, String jedBrOsig, String email, String adresa, String grad, String drzava, String telefon, String password) {
+	//	return korisnikRepository.findAllData(id, username, ime, prezime, jedBrOsig, email, adresa, grad, drzava, telefon, password);
+	//}
+	
 	public Korisnik findByUsernameAndPassword(String username, String password) {
 		return korisnikRepository.findByUsernameAndPassword(username, password);
 	}
@@ -42,4 +50,32 @@ public class KorisnikService {
 	}
 	
 
+	public Korisnik findOne(Long id) {
+		return korisnikRepository.findById(id).orElseGet(null);
+	}
+
+	public Object editUser2(Long id) {
+		return korisnikRepository.findById(id);
+	}
+	
+	
+	
+	public Korisnik editUser(Long id) {
+		return korisnikRepository.findOneById(id);
+	}
+	
+	/*public Korisnik editUserByUsername(String username) {
+		return korisnikRepository.findByUsername(username);
+	}*/
+
+	public void deleteMyUser(Long id) {
+		korisnikRepository.deleteById(id);
+	}
+	
+	
+	
+
+	
+
+	
 }

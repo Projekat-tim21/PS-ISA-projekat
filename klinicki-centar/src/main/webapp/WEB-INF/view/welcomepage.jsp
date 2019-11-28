@@ -49,13 +49,22 @@
 
 	}
 </script>
+<script>
+//function welcome(){
 
+//    window.location.href="http://localhost:8081/login-user";
+//    var last = document.getElementById("username").value;
+//    var welcomeF = "Dobrodosli " + last;
+ //   console.log(welcomeF);
+ //   window.alert(welcomeF);
+ //   return true;
+//}
+</script>
 
 </head>
 <body >
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
-			<a href="/welcome" class="navbar-brand">Klinika AB</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/login">Logovanje</a></li>
@@ -96,14 +105,14 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Ime</label>
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="ime"
+							<input type="text" class="form-control" id="ime" name="ime"
 								value="${korisnik.ime }" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Prezime</label>
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="prezime"
+							<input type="text" id="prezime" class="form-control" name="prezime"
 								value="${korisnik.prezime }" required>
 						</div>
 					</div>
@@ -222,47 +231,94 @@
 
 		<c:when test="${mode=='MODE_UPDATE' }">
 			<div class="container text-center">
-				<h3>Update User</h3>
+				<h3>Izmeni korisnika</h3>
 				<hr>
-				<form class="form-horizontal" method="POST" action="sacuvaj">
-					
+				<form class="form-horizontal" method="POST" action="sacuvajupdate"   >
+				
+					<div class="form-group">
+						<label class="control-label col-md-3">Id</label>
+						<div class="col-md-6">
+							<input type="text"  class="form-control" id="id" name="id"
+								value="${korisnik.id }" readonly>
+								<span id="free"></span>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
-						<div class="col-md-7">
-							<input type="text" class="form-control" name="username"
-								value="${korisnik.username }" />
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="username" name="username"
+								value="${korisnik.username }" required>
+								<span id="free"></span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">First Name</label>
-						<div class="col-md-7">
-							<input type="text" class="form-control" name="firstname"
-								value="${korisnik.firstname }" />
+						<label class="control-label col-md-3">Ime</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="ime"
+								value="${korisnik.ime }" required>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Last Name</label>
-						<div class="col-md-7">
-							<input type="text" class="form-control" name="lastname"
-								value="${korisnik.lastname }" />
+						<label class="control-label col-md-3">Prezime</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="prezime"
+								value="${korisnik.prezime }" required>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Age </label>
-						<div class="col-md-3">
-							<input type="text" class="form-control" name="age"
-								value="${korisnik.age }" />
+						<label class="control-label col-md-3">Jedinstveni broj
+							osiguranika-unesite samo brojeve </label>
+						<div class="col-md-6">
+							<input type="number" class="form-control" name="jedBrOsig"
+								value="${korisnik.jedBrOsig }" readonly>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Password</label>
-						<div class="col-md-7">
-							<input type="password" class="form-control" name="password"
-								value="${korisnik.password }" />
+						<label class="control-label col-md-3">Email</label>
+						<div class="col-md-6">
+							<input type="email" class="form-control" name="email"
+								value="${korisnik.email }" readonly>
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Adresa prebivalista</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="adresa"
+								value="${korisnik.adresa }" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Grad</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="grad"
+								value="${korisnik.grad }" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Drzava</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="drzava"
+								value="${korisnik.drzava }" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Telefon-unesite samo
+							brojeve</label>
+						<div class="col-md-6">
+							<input type="number" class="form-control" name="telefon"
+								value="${korisnik.telefon }" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Sifra</label>
+						<div class="col-md-6">
+							<input type="password" class="form-control" id="pass1"
+								name="password" value="${korisnik.password}" required>
+						</div>
+					</div>
+				
 					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="Update" />
+						<input type="submit" class="btn btn-primary" value="Update">
 					</div>
 				</form>
 			</div>
@@ -272,7 +328,7 @@
 			<div class="container text-center">
 				<h3>User Login</h3>
 				<hr>
-				<form class="form-horizontal" id="myform" method="POST" action="/login-user">
+				<form class="form-horizontal" id="myform" method="POST" action="/login-user" >
 				  	<c:if test="${not empty error }">
 						<div class="alert alert-danger">
 							<c:out value="${error }"></c:out>
@@ -281,7 +337,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-7">
-							<input type="text" class="form-control" id="username" name="username"
+							<input type="text" class="form-control" id="username"  name="username"
 								value="${korisnik.username }" />
 						</div>
 					</div>
