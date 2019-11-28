@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 
 @Service
@@ -36,6 +37,16 @@ public class KorisnikService {
 		}
 		return korisnici;
 	}	
+	
+	
+	public List<Korisnik> pokaziSvePacijente() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("PACIJENT")) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
+	}
 	
 	//public Korisnik findAllData(Long id, String username, String ime, String prezime, String jedBrOsig, String email, String adresa, String grad, String drzava, String telefon, String password) {
 	//	return korisnikRepository.findAllData(id, username, ime, prezime, jedBrOsig, email, adresa, grad, drzava, telefon, password);

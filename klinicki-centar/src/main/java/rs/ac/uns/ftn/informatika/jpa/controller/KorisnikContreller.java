@@ -1,12 +1,13 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-import java.util.ArrayList;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,37 +17,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.enums.Role;
-
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
+
 @Controller
-public class KorisnikContreller extends AuthorizationController {
-
+public class KorisnikContreller {
 	
-	private final KorisnikService korisnikServis;
-
-
-	public KorisnikContreller(KorisnikService service) {
-		super(service);
-		this.korisnikServis = service;
-	}
 	private Logger logger = LoggerFactory.getLogger(KorisnikContreller.class);
 	
 	@Autowired
 	private EmailService emailService;
-	
+
 	@Autowired
-	private KorisnikService korisnikServis;
+	private  KorisnikService korisnikServis;
 
+	@Autowired
+	private KorisnikRepository userRepository;
 
+	
 
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
@@ -79,11 +73,9 @@ public class KorisnikContreller extends AuthorizationController {
 
 	@RequestMapping("/login-user")
 
-	public String loginUser(@ModelAttribute Korisnik korisnik, HttpServletRequest request) {
-		boolean isAuthorised =  checkAuhtority("pera", new ArrayList<Role>() {{ add(Role.CLINIC_ADMIN);}});
-
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
-
+		Korisnik k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
+		//if(!k.getRoleName().equals(Role.PACIJENT.name())) {
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
 			String username = request.getParameter("username");
@@ -92,13 +84,20 @@ public class KorisnikContreller extends AuthorizationController {
 			session.setAttribute("username", username);
 
 			System.out.println("OVDE " + session.getAttribute(username));
-
+			System.out.println(k.getRoleName());
+			
+			if(k.getRoleName().equals(Role.LEKAR.name())) {
+					return "lekarStranica";
+			}
+			
 			return "login";
-		} else {
+		//}
+		}else {
 			request.setAttribute("error", "Invalid Username or Password");
 			request.setAttribute("mode", "MODE_LOGIN");
 			return "welcomepage";
 		}
+		//return "ispravka";
 
 	}
 
@@ -107,12 +106,16 @@ public class KorisnikContreller extends AuthorizationController {
 		request.setAttribute("mode", "MODE_REGISTER");
 		return "welcomepage";
 	}
+	
+	@RequestMapping("/lekarStranica")
+	public String lekarStranica(HttpServletRequest request) {
+		//request.setAttribute("mode", "MODE_ALLUSER");
+		return "lekarStranica";
+	}
 
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
 	public String registerKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
-
-		Korisnik existingUser = korisnikServis.findByUsername(korisnik.getUsername());
 
 
 		Korisnik existingUser = userRepository.findByUsername(korisnikd.getUsername());
@@ -135,7 +138,8 @@ public class KorisnikContreller extends AuthorizationController {
 			k.setTelefon(korisnikd.getTelefon());
 			k.setUsername(korisnikd.getUsername());
 			k.setPassword(korisnikd.getPassword());
-
+			k.setRoleName(Role.PACIJENT.name());
+			System.out.println(k.getRoleName());
 			korisnikServis.saveMogKorisnika(k);
 			
 			try {
@@ -171,6 +175,15 @@ public class KorisnikContreller extends AuthorizationController {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
 		request.setAttribute("mode", "ALL_USERS");
 		return "pregledUseraSaLogina";
+	}
+	//JECA
+	
+	@GetMapping("/pregledSvihPacijenataMetoda")
+	public String pokaziPacijente(HttpServletRequest request) {
+		request.setAttribute("korisnici", korisnikServis.pokaziSvePacijente());
+		request.setAttribute("mode", "ALL_USERS");
+		
+		return "pregledSvihPacijenata";
 	}
 
 	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)

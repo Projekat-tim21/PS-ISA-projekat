@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.enums.Role;
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
 @Controller
