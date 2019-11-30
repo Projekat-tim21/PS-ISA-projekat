@@ -57,7 +57,6 @@ public class KorisnikContreller {
 
 	// logovanje
 	
-	
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
@@ -72,7 +71,6 @@ public class KorisnikContreller {
 	}
 
 	@RequestMapping("/login-user")
-
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 
 		Korisnik k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
@@ -194,6 +192,7 @@ public class KorisnikContreller {
 	}
 	//JECA
 	
+	
 	@GetMapping("/pregledSvihPacijenataMetoda")
 	public String pokaziPacijente(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSvePacijente());
@@ -227,6 +226,7 @@ public class KorisnikContreller {
 		k.setTelefon(korisnikd.getTelefon());
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
+		k.setRoleName(Role.PACIJENT.name());
 
 		korisnikServis.deleteMyUser(korisnikd.getId());
 		k.setId(Idx);
@@ -254,6 +254,7 @@ public class KorisnikContreller {
 		k.setTelefon(korisnikd.getTelefon());
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
+		k.setRoleName(Role.PACIJENT.name());
 		k.setId(Idx);
 		korisnikServis.saveMogKorisnika(k);
 		// k.setId(Idx);
@@ -351,6 +352,7 @@ public class KorisnikContreller {
 		korisnikd.getTelefon();
 		korisnikd.getUsername();
 		korisnikd.getPassword();
+		korisnikd.getRole();
 
 		System.out.println(korisnikd.getId() + korisnikd.getIme());
 ;

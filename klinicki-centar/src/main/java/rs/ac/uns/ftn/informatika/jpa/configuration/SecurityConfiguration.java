@@ -94,6 +94,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sacuvaj").permitAll()
 		.antMatchers("/logout").permitAll()
 		.antMatchers("/prikazOsnovnihInfo").permitAll()
+		.antMatchers("/listaSvihKlinika").permitAll()
 		
 		.anyRequest()
 		.authenticated();

@@ -2,12 +2,13 @@ package rs.ac.uns.ftn.informatika.jpa.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
+import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 
@@ -81,6 +82,8 @@ public class KorisnikService {
 	public void deleteMyUser(Long id) {
 		korisnikRepository.deleteById(id);
 	}
+
+
 
 	//public Korisnik findById(String id) {
 	//	return korisnikRepository.findById(id);

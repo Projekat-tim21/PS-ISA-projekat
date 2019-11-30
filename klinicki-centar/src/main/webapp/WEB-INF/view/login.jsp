@@ -19,7 +19,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/profilkaPregledu?id=${id}">Profil</a></li>
 					<li><a href="/izmenaPodatakaizBara?id=${id}">Izmena podataka</a></li>
-				<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->
+				 	<li><a href="/listaSvihKlinika">Lista klinika</a></li> 	
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
