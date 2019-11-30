@@ -15,18 +15,19 @@
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-			  	<ul class="nav navbar-nav">
-			<!--  <li><a href="/profilkaPregledu?username=${username}">Profil</a></li>
-					<li><a href="/izmenaPodatakaizBara?username=${username}">Izmena podataka</a></li> -->	
-					<li><a href="/vratiSeNaPocetnu?username=${username}">Vrati se na pocetnu</a></li>
-					<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	
+				<ul class="nav navbar-nav">
+					<!--  <li><a href="/profilkaPregledu?username=${username}">Profil</a></li>
+					<li><a href="/izmenaPodatakaizBara?username=${username}">Izmena podataka</a></li> -->
+					<li><a href="/vratiSeNaPocetnu?id=${id}">Vrati se na
+							pocetnu</a></li>
+					<!-- 		<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
-			
+
 			</div>
 		</div>
 	</div>
-	<h2>Uspesno ste izmenili svoje podatke. </h2>
-
+	<h2>Uspesno ste izmenili svoje podatke.</h2>
+	
 </body>
 </html>

@@ -17,9 +17,9 @@
 			<div class="navbar-collapse collapse">
 			<h2>Pocetna stranica</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/profilkaPregledu?username=${username}">Profil</a></li>
-					<li><a href="/izmenaPodataka?username=${username}">Izmena podataka</a></li>
-					<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	
+					<li><a href="/profilkaPregledu?id=${id}">Profil</a></li>
+					<li><a href="/izmenaPodataka?id=${id}">Izmena podataka</a></li>
+			<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->	
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
