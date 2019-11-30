@@ -78,7 +78,7 @@ public class KorisnikContreller {
 		Korisnik k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 		//if(!k.getRoleName().equals(Role.PACIJENT.name())) {
 
-		Korisnik k=new Korisnik();
+		Korisnik k2=new Korisnik();
 		k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {

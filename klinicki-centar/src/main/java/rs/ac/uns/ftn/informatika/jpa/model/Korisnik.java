@@ -60,7 +60,7 @@ public class Korisnik {
 	}
 
 	public Korisnik(String jedBrOsig, String korIme, String ime, String prezime, String email, String adresa,
-			String grad, String drzava, String telefon, String sifra) {
+			String grad, String drzava, String telefon, String sifra, String roleName) {
 		super();
 		this.jedBrOsig = jedBrOsig;
 		this.username = korIme;
