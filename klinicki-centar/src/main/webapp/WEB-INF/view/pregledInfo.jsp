@@ -19,7 +19,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/profilkaPregledu?username=${username}">Profil</a></li>
 					<li><a href="/izmenaPodatakaizBara?username=${username}">Izmena podataka</a></li>
-					<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	
+			<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->	
 					<li><a href="/logout">Odjavi se</a></li> 
 				</ul>
 

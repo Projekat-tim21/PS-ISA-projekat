@@ -2,9 +2,9 @@ package rs.ac.uns.ftn.informatika.jpa.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
@@ -71,6 +71,15 @@ public class KorisnikService {
 	public void deleteMyUser(Long id) {
 		korisnikRepository.deleteById(id);
 	}
+
+	//public Korisnik findById(String id) {
+	//	return korisnikRepository.findById(id);
+	//}
+
+	//public Korisnik findByIdLong(Long id) {
+	//	// TODO Auto-generated method stub
+	//	return korisnikRepository.findById(id);
+	//}
 	
 	
 	
