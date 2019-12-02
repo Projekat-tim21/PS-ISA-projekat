@@ -12,6 +12,11 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Kralja Petra 2', 'Srbija','sanja22@gmail.com', 'Novi Sad', 'Sanja', '225586', 'sanjasanjic', 'Sanjic', '063222496', 'sanja22',TRUE,'PACIJENT');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Todora Jovanovica 5', 'Srbija', 'petar22@gmail.com',  'Novi Sad', 'Petar', '125846', 'petarpetrovic', 'Petrovic', '067528856', 'petar22','TRUE','PACIJENT');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Todora Jovanovica 5', 'Srbija', 'adminn22@gmail.com',  'Novi Sad', 'Petar', '125446', 'adminkc', 'Petrovic', '067528856', 'adminn','TRUE','ADMIN');
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Jovana Subotica 10', 'Srbija', 'lekar11@gmail.com',  'Novi Sad', 'Jovan', '888432', 'leka1111', 'Jovic', '064553772', 'jova','TRUE','LEKAR');
+
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
 
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');

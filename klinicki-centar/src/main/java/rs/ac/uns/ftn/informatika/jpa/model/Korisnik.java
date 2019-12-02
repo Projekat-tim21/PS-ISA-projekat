@@ -48,10 +48,10 @@ public class Korisnik {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name="active",nullable=false)
+	@Column(name="active",nullable=true)
 	private Boolean isActive;
 	
-	@Column(name="role",nullable=false)
+	@Column(name="role",nullable=true)
 	private String roleName;
 	
 	@Column(name="login", nullable=false)
@@ -72,7 +72,7 @@ public class Korisnik {
 	}
 
 	public Korisnik(String jedBrOsig, String korIme, String ime, String prezime, String email, String adresa,
-			String grad, String drzava, String telefon, String sifra) {
+			String grad, String drzava, String telefon, String sifra, String roleName) {
 		super();
 		this.jedBrOsig = jedBrOsig;
 		this.username = korIme;
@@ -84,6 +84,7 @@ public class Korisnik {
 		this.drzava = drzava;
 		this.telefon = telefon;
 		this.password = sifra;
+		this.roleName=Role.PACIJENT.name();
 	}
 
 	public Long getId() {

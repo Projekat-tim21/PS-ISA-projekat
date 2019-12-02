@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests()
+			/*.authorizeRequests()
 			.antMatchers("/console/**").permitAll()
 			.antMatchers("/", "/sacuvaj").authenticated()
 			.antMatchers("/pokazikorisnikaSaLogina/**").hasAuthority(Role.PACIJENT.name())
@@ -58,7 +58,47 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 				.exceptionHandling().accessDeniedPage("/403")
 			.and()
-				.csrf().disable();
+				.csrf().disable();*/
+		
+		.authorizeRequests().antMatchers("/").permitAll()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/registracija").permitAll()
+		.antMatchers("/login-user").permitAll()
+		.antMatchers("/pokazi-korisnika").hasAuthority(Role.ADMIN.name())
+		.antMatchers("/pregledSvihPacijenataMetoda").permitAll()
+		.antMatchers("/sacuvaj").permitAll()
+		.antMatchers("/error").permitAll()
+		.antMatchers("/ispravka").permitAll()
+		.antMatchers("/loginBezDobrodosli").permitAll()
+		.antMatchers("/pocetna_stranica").permitAll()
+		.antMatchers("/profilkaPregledu").permitAll()
+		.antMatchers("/pregledUseraSaLogina").permitAll()
+		.antMatchers("/uspesnaIzmenaInfo").permitAll()
+		.antMatchers("/welcomepage").permitAll()
+		.antMatchers("/izmenaPodataka").permitAll()
+		.antMatchers("/profilnaBezDob").permitAll()
+		.antMatchers("/vratiSeNaPocetnu").permitAll()
+		.antMatchers("/profil").permitAll()
+		.antMatchers("/izmenaPodatakaizBara").permitAll()
+		.antMatchers("/profilkaPregledu").permitAll()
+		.antMatchers("/idiNaLoginBezDobrodosli").permitAll()
+		.antMatchers("/izmenaPodataka").permitAll()
+		.antMatchers("/edit-user").permitAll()
+		.antMatchers("/sacuvajupdateNaLogin").permitAll()
+		.antMatchers("/sacuvajupdate").permitAll()
+		.antMatchers( "/edit/{userId}").permitAll()
+		.antMatchers("/pregledSvihPacijenataMetoda").permitAll()
+		.antMatchers("/pokazikorisnikaSaLogina").permitAll()
+		.antMatchers("/pokazi-korisnika2").permitAll()
+		.antMatchers("/pokazi-korisnika").permitAll()
+		.antMatchers("/sacuvaj").permitAll()
+		.antMatchers("/logout").permitAll()
+		.antMatchers("/prikazOsnovnihInfo").permitAll()
+		.antMatchers("/listaSvihKlinika").permitAll()
+		
+		.anyRequest()
+		.authenticated();
+		http.csrf().disable();
 		
 		http.sessionManagement()
 				.maximumSessions(1)
