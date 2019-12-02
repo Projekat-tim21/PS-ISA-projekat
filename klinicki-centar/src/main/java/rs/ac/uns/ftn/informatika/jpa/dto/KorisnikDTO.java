@@ -20,9 +20,10 @@ public class KorisnikDTO {
 	private String password;
 	private String repeatPassword;
 	private String role;
+	private Boolean firstLogin;
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
-			String adresa, String grad, String drzava, String telefon, String password, String role) {
+			String adresa, String grad, String drzava, String telefon, String password, String role,Boolean firstLogin) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -36,15 +37,26 @@ public class KorisnikDTO {
 		this.telefon = telefon;
 		this.password = password;
 		this.role=role;
+		this.firstLogin=firstLogin;
 	}
 
 
 	public KorisnikDTO(Korisnik korisnik) {
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName());
+		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName(),korisnik.getFirst_Login());
 	}
 
 	
 	
+	public Boolean getFirstLogin() {
+		return firstLogin;
+	}
+
+
+	public void setFirstLogin(Boolean firstLogin) {
+		this.firstLogin = firstLogin;
+	}
+
+
 	public String getRole() {
 		return role;
 	}

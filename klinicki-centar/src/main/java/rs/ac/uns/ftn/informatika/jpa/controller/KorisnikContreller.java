@@ -98,6 +98,12 @@ public class KorisnikContreller {
 			System.out.println("Korisnikova uloga"+k.getRoleName());
 			
 			if(k.getRoleName().equals(Role.ADMIN.name())) {
+				
+				if(k.getFirst_Login().equals("TRUE")) {
+					
+				}else {
+					
+				}
 				return "nesto";
 			}else{
 				return "error";

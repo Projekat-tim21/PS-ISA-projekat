@@ -54,7 +54,19 @@ public class Korisnik {
 	@Column(name="role",nullable=false)
 	private String roleName;
 	
+	@Column(name="login", nullable=false)
+	private Boolean first_Login;
 	
+	
+	
+
+	public Boolean getFirst_Login() {
+		return first_Login;
+	}
+
+	public void setFirst_Login(Boolean first_Login) {
+		this.first_Login = first_Login;
+	}
 
 	public Korisnik() {
 	}
