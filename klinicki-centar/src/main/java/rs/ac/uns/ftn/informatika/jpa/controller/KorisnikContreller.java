@@ -92,7 +92,7 @@ public class KorisnikContreller {
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 		
-			Korisnik k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
+			//Korisnik =korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
 			//Korisnik idK=korisnikServis.findOne(korisnik.getId());
 			//System.out.println("id korisnika je: "+ k.getId()); 
@@ -117,39 +117,24 @@ public class KorisnikContreller {
 				}else {
 					
 				}
-				return "nesto";
+				return "admin";
+			}else if(k.getRoleName().equals(Role.LEKAR.name())) {
+				return "lekarStranica";
 			}else{
-				return "error";
+				return "login";
 			}
 			
 			
 			//return "";
-		} else {
-
-
-			System.out.println("OVDE " + session.getAttribute(username));
-			System.out.println(k.getRoleName());
+		}
 			
-			if(k.getRoleName().equals(Role.LEKAR.name())) {
-					return "lekarStranica";
-			}
-			
-
-			session.setAttribute("id", k.getId());
-			
-			//session.setAttribute("id", id);
-
 
 			return "login";
 		//}
-		}else {
-			request.setAttribute("error", "Invalid Username or Password");
-			request.setAttribute("mode", "MODE_LOGIN");
-			return "welcomepage";
 		}
 		//return "ispravka";
 
-	}
+	
 
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {

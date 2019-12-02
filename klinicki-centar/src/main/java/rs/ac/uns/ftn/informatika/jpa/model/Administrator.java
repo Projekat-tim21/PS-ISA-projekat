@@ -1,8 +1,10 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
-public class Admin extends Korisnik{
+@Entity
+public class Administrator extends Korisnik{
 	
 	@Column(name = "firstLogin", nullable = false)
 	private boolean firstLogin;
@@ -10,7 +12,7 @@ public class Admin extends Korisnik{
 	@Column(name = "predefinisani", nullable = false)
 	private boolean predefinisani;
 	
-	public Admin() {
+	public Administrator() {
 		
 	}
 

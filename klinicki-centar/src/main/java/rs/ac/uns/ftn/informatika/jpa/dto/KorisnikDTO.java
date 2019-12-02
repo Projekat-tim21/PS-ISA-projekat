@@ -23,10 +23,7 @@ public class KorisnikDTO {
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
 			String adresa, String grad, String drzava, String telefon, String password, String role,Boolean firstLogin) {
-
-
-	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
-			String adresa, String grad, String drzava, String telefon, String password, String role) {
+		
 
 		super();
 		this.id = id;
@@ -71,22 +68,6 @@ public class KorisnikDTO {
 		this.firstLogin = firstLogin;
 	}
 
-
-	public String getRole() {
-		return role;
-	}
-
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-
-
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(),
-				korisnik.getJedBrOsig(), korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(),
-				korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(), korisnik.getRoleName());
-	}
 
 
 	public String getRepeatPassword() {

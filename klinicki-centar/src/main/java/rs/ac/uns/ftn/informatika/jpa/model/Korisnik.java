@@ -54,7 +54,7 @@ public class Korisnik {
 	@Column(name="role",nullable=true)
 	private String roleName;
 	
-	@Column(name="login", nullable=false)
+	@Column(name="login", nullable=true)
 	private Boolean first_Login;
 	
 	
