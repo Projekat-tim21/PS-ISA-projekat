@@ -42,20 +42,20 @@
 								<th>Adresa</th>
 								<th>Grad</th>
 								<th>Drzava</th>
-								<th>Prosecna ocena</th>
 								<th>Cena</th>
+								<th>Ocena</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="klinike" items="${klinike}">
+							<c:forEach var="klinika" items="${klinike}">
 								<tr>
-									<td>${korisnik.id}</td>
-									<td>${korisnik.naziv}</td>
-									<td>${korisnik.adresa}</td>
-									<td>${korisnik.grad}</td>
-									<td>${korisnik.drzava}</td>
-									<td>${korisnik.prosecna_ocena}</td>
-									<td>${korisnik.cena}</td>
+									<td>${klinika.id}</td>
+									<td>${klinika.naziv}</td>
+									<td>${klinika.adresa}</td>
+									<td>${klinika.grad}</td>
+									<td>${klinika.drzava}</td>
+									<td>${klinika.cena}</td>
+									<td>${klinika.ocena}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

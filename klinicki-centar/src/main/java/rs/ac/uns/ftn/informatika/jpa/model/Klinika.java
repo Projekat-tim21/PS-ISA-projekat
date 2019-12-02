@@ -15,17 +15,17 @@ public class Klinika {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 		
-		@Column(name = "naziv", unique = true, nullable = false)
+		@Column(name = "naziv", nullable = false)
 		String naziv;
 
-		@Column(name = "grad", unique = true, nullable = false)
+		@Column(name = "grad", nullable = false)
 		String grad;
 		
 		@Column(name = "drzava", nullable = false)
 		private String drzava;
 
-		@Column(name = "prosecna_ocena", nullable = false)
-		private int prosecna_ocena;
+		@Column(name = "ocena", nullable = true)
+		private int ocena;
 	
 		@Column(name = "adresa", nullable = false)
 		private String adresa;
@@ -39,15 +39,14 @@ public class Klinika {
 		}
 
 		
-		
-		public Klinika(Long id, String naziv, String grad, String drzava, int prosecnaOcena, String adresa,
+		public Klinika(Long id, String naziv, String grad, String drzava, int ocena, String adresa,
 				int cena) {
 			super();
 			this.id = id;
 			this.naziv = naziv;
 			this.grad = grad;
 			this.drzava = drzava;
-			this.prosecna_ocena = prosecnaOcena;
+			this.ocena = ocena;
 			this.adresa = adresa;
 			this.cena = cena;
 		}
@@ -84,12 +83,12 @@ public class Klinika {
 			this.drzava = drzava;
 		}
 
-		public int getProsecnaOcena() {
-			return prosecna_ocena;
+		public int getOcena() {
+			return ocena;
 		}
 
-		public void setProsecnaOcena(int prosecna_ocena) {
-			this.prosecna_ocena = prosecna_ocena;
+		public void setOcena(int ocena) {
+			this.ocena = ocena;
 		}
 
 		public String getAdresa() {
