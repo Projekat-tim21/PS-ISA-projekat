@@ -329,8 +329,6 @@ public class KorisnikContreller {
 	public String editUserProfil2(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
-		
-	
 		return "login";
 	}
 

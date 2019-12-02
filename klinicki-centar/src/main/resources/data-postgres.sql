@@ -13,10 +13,15 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Todora Jovanovica 5', 'Srbija', 'petar22@gmail.com',  'Novi Sad', 'Petar', '125846', 'petarpetrovic', 'Petrovic', '067528856', 'petar22','TRUE','PACIJENT');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Todora Jovanovica 5', 'Srbija', 'adminn22@gmail.com',  'Novi Sad', 'Petar', '125446', 'adminkc', 'Petrovic', '067528856', 'adminn','TRUE','ADMIN');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Jovana Subotica 10', 'Srbija', 'lekar11@gmail.com',  'Novi Sad', 'Jovan', '888432', 'leka1111', 'Jovic', '064553772', 'jova','TRUE','LEKAR');
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Bate Brkic 4', 'Srbija', 'marko22@gmail.com', 'Novi Sad', 'Marko', '215846', 'asdasd', 'Markovic', '063528496', 'test',TRUE,'PACIJENT');
 
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
+
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, '27.12.2019', 'Jovan Jovic', '203', 'operacija ociju', '15min', '09:00');
+
+insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'operacija ociju', '1h', '09:00');
 
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');
