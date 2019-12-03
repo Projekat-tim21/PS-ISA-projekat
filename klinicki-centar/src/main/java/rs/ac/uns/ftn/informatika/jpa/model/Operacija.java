@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pregled")
-public class Pregled {
+@Table(name="operacija")
+public class Operacija {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,7 @@ public class Pregled {
 	@Column(name="cena", nullable=false)
 	int cena;
 
-	public Pregled() {
-		super();
-	}
-
-	public Pregled(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
+	public Operacija(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
 			int cena) {
 		super();
 		this.id = id;
@@ -51,6 +47,10 @@ public class Pregled {
 		this.sala = sala;
 		this.lekar = lekar;
 		this.cena = cena;
+	}
+
+	public Operacija() {
+		super();
 	}
 
 	public Long getId() {
@@ -116,6 +116,8 @@ public class Pregled {
 	public void setCena(int cena) {
 		this.cena = cena;
 	}
+	
+	
 	
 	
 	

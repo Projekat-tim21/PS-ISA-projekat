@@ -15,11 +15,8 @@
   	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-			<h2>Pregled informacija</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/profilkaPregledu?username=${username}">Profil</a></li>
-					<li><a href="/izmenaPodatakaizBara?username=${username}">Izmena podataka</a></li>
-			<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->	
+					<li><a href="/korakUnazadNaLogin">Vrati se nazad</a></li>	
 					<li><a href="/logout">Odjavi se</a></li> 
 				</ul>
 
