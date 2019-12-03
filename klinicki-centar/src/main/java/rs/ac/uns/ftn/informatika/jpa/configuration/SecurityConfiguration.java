@@ -100,7 +100,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/klinike").permitAll()
 		.antMatchers("/adminiKlinike").permitAll()
 		.antMatchers("/dijagnoze").permitAll()
-		
+
+		.antMatchers("/addNewLek").permitAll()
+		.antMatchers("/noviLek").permitAll()
+		.antMatchers("/delete/*").permitAll()
+		.antMatchers("/saveLek").permitAll()
+		.antMatchers("/update").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

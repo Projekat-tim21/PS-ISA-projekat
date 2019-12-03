@@ -8,5 +8,5 @@ public interface LekRepository extends JpaRepository<Lek, Long> {
 
 	public Lek findBySifra(String sifra);
 	public Lek findByNaziv(String naziv);
-	public Lek findOneById(String id);
+	public Lek findOneById(Long id);
 }

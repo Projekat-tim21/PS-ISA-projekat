@@ -6,8 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.Response;
+import rs.ac.uns.ftn.informatika.jpa.model.Lek;
 import rs.ac.uns.ftn.informatika.jpa.repository.DijagnozaRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.KlinikaRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
@@ -16,6 +23,7 @@ import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
+import rs.uns.ac.ftn.informatika.jpa.constatns.AppConstant;
 
 @Controller
 public class AdminController {
@@ -145,6 +153,28 @@ public class AdminController {
 	        return modelAndView;
 	    }
 	    
+	    @PostMapping("/noviLek")
+	    public String noviLek(@ModelAttribute Lek lek) {
+	        String result = "redirect:/";
+	        Lek dbLek=lekService.findBySifra(lek.getSifra());
+	        if(lek.getNaziv()==null || lek.getNaziv().trim().isEmpty()) {
+	        	result = "redirect:/addNewLek?error=Unesite naziv";
+	        }
+	        if (lek.getSifra() == null || lek.getSifra().trim().isEmpty()) {
+	            result = "redirect:/addNewLek?error=Unesite sifru";
+	        } else if (lek.getDodatno() == null || lek.getDodatno().trim().isEmpty()) {
+	            result = "redirect:/addNewUser?error=Enter valid last name";
+	        } 
+	        if (dbLek == null) {
+	            lekService.sacuvajLek(lek);
+	            result="redirect:/lekovi";
+	        } else {
+	            result = "redirect:/addNewUser?error=Lek vec postoji!";
+	        }
+
+	        return result;
+	    }
+	    
 	    @GetMapping("/zahteviRegistrovanje")
 	    public ModelAndView zahtevi(HttpServletRequest request) {
 	    	request.setAttribute("korisnici", korisnikService.pokaziSveKorisnike());
@@ -189,6 +219,22 @@ public class AdminController {
 	        ModelAndView modelAndView = new ModelAndView();
 	        System.out.println("modelbidjbkjdf");
 	        return modelAndView;
+	    }
+	    
+	    @ResponseBody
+	    @PostMapping("/saveLek")
+	    public Response update(@RequestBody Lek lek) {
+	        Lek dbLek = lekService.findLekById(lek.getId());
+	        dbLek.setNaziv(lek.getNaziv()); 
+	        dbLek.setDodatno(lek.getDodatno());
+	        lekService.sacuvajLek(dbLek);
+	        return new Response(302, AppConstant.SUCCESS, "redirect:/lekovi");
+	    }
+	    
+	    @GetMapping("/delete/{lekId}")
+	    public String delete(@PathVariable Long lekId) {
+	        lekService.obrisiLek(lekId); 
+	        return "redirect:/lekovi";
 	    }
 	    
 	  /*  @ResponseBody

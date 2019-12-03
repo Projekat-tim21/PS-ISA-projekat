@@ -22,6 +22,14 @@ public class LekServiceImpl {
 	public LekServiceImpl(LekRepository lekRepository) {
 		this.lekRepository=lekRepository;
 	}
+	
+	public Lek findLekById(Long id) {
+        return lekRepository.findOneById(id);
+    }
+	
+	public Lek findBySifra(String sifra) {
+		return lekRepository.findBySifra(sifra);
+	}
 
 	LekDTO lekDTO;
 	

@@ -2,11 +2,11 @@ $(function () {
     $('.updateData').click(function () {
         console.log('updateData')
         var id = $(this).attr('id').substring(7);
-        $('#fname_' + id).hide();
-        $('#text_fname_' + id).show();
-        $('#text_fname_' + id).focus();
-        $('#lname_' + id).hide();
-        $('#text_lname_' + id).show();
+        $('#fnaziv_' + id).hide();
+        $('#text_fnaziv_' + id).show();
+        $('#text_fnaziv_' + id).focus();
+        $('#fdodatno_' + id).hide();
+        $('#text_fdodatno_' + id).show();
         $(this).hide();
         $('#save_' + id).show();
 
