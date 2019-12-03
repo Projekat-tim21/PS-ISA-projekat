@@ -100,6 +100,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/prikaziListuOperacija").permitAll()
 		.antMatchers("/naLogin").permitAll()
 		.antMatchers("/korakUnazadNaLogin").permitAll()
+		.antMatchers("/kartonZ").permitAll()
 		
 		
 		
