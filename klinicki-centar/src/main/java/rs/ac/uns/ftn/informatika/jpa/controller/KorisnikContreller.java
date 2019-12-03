@@ -128,6 +128,8 @@ public class KorisnikContreller {
 		//request.setAttribute("mode", "MODE_ALLUSER");
 		return "lekarStranica";
 	}
+	
+	
 
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
 	public String registerKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
@@ -200,6 +202,18 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "ALL_USERS");
 		
 		return "pregledSvihPacijenata";
+	}
+	
+	//JA DODALA VANJIN DEO
+	@GetMapping("/pacijenti")
+	public String pokaziKarton(HttpServletRequest request) {
+		return "pacijent";
+	}
+	
+	//STRANICA ZA ZAKAZIVANJE PREGLEDA
+	@GetMapping("/zakazivanjePregleda")
+	public String zakaziPregled() {
+		return "zakaziPregled";
 	}
 
 	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)

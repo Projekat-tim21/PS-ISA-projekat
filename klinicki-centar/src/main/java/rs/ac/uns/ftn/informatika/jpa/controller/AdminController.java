@@ -1,35 +1,38 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.Role;
-import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
+import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
+import rs.ac.uns.ftn.informatika.jpa.repository.AdminRepository;
+import rs.ac.uns.ftn.informatika.jpa.service.AdminService;
+import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
 
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	//private PregledService pregledSer;
+	
+	@Autowired
+	private AdminRepository adminRepo;
 
-public class AdminConroller {
+/*	@RequestMapping("/zakazivanjePregleda")
+	public void zakaziPregled(@ModelAttribute PregledDTO pregled, HttpServletRequest request) {
+		
+		Pregled p = pregledSer.findByDate(pregled.getDatum());
+		
+		
+	}*/
 /*	
 	 @Autowired
 	    private KorisnikService userService;

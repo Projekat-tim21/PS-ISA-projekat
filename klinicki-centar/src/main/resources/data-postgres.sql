@@ -14,6 +14,9 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Todora Jovanovica 5', 'Srbija', 'adminn22@gmail.com',  'Novi Sad', 'Petar', '125446', 'adminkc', 'Petrovic', '067528856', 'adminn','TRUE','ADMIN');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Jovana Subotica 10', 'Srbija', 'lekar11@gmail.com',  'Novi Sad', 'Jovan', '888432', 'leka1111', 'Jovic', '064553772', 'jova','TRUE','LEKAR');
 
+insert into pregled (datum, satnica, sala, lekar, cena, tip) values ('2019-12-06', '10', '5', 'Jova', '3000.00', 'opsta praksa');
+insert into pregled (datum, satnica, sala, lekar, cena, tip) values ('2019-10-10', '11', '2', 'Marko', '2000.00', 'kardioloski pregled');
+
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');
 insert into course (name) values ('Objektno programiranje');
