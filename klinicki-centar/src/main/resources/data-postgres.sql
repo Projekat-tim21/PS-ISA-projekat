@@ -23,7 +23,7 @@ insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, 
 
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'operacija ociju', '1h', '09:00');
 
-insert into zdravstveni_karton(alergije, anamneza, bolesti, datum, dioptrija, ime, jed_br_osig, kgrupa, pol, prezime, tezina, visina) values ('alergije', 'anamneza', 'bolesti', '27.8.1999', '-1', 'Tanja', '56536', 'B', 'zenski', 'Tasic', '65kg', '173cm');
+
 
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');
