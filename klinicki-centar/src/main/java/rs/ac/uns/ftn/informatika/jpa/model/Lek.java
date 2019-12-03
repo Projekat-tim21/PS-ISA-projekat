@@ -19,12 +19,16 @@ public class Lek {
 	@Column(name="sifra",unique=true,nullable=false)
 	String sifra;
 	
-	@Column(name="name",unique=true,nullable=false)
+	@Column(name="naziv",unique=true,nullable=false)
 	String naziv;
 	
 	@Column(name="dodatno",unique=true,nullable=false)
 	String dodatno;
 
+	public Lek() {
+		
+	}
+	
 	public Lek(String sifra, String name, String dodatno) {
 		super();
 		this.sifra = sifra;
@@ -48,11 +52,11 @@ public class Lek {
 		this.sifra = sifra;
 	}
 
-	public String getName() {
+	public String getNaziv() {
 		return naziv;
 	}
 
-	public void setName(String name) {
+	public void setNaziv(String name) {
 		this.naziv = name;
 	}
 

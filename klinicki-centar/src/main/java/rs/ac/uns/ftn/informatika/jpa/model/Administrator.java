@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.informatika.jpa.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+
 @Entity
 public class Administrator extends Korisnik{
 	

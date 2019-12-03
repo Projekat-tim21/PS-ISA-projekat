@@ -31,6 +31,10 @@ public class Dijagnoza {
 		this.naziv = naziv;
 		this.dodatno = dodatno;
 	}
+	
+	public Dijagnoza() {
+		
+	}
 
 	public Long getId() {
 		return id;

@@ -95,6 +95,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/logout").permitAll()
 		.antMatchers("/prikazOsnovnihInfo").permitAll()
 		.antMatchers("/listaSvihKlinika").permitAll()
+		.antMatchers("/zahteviRegistrovanje").permitAll()
+		.antMatchers("/lekovi").permitAll()
+		.antMatchers("/klinike").permitAll()
+		.antMatchers("/adminiKlinike").permitAll()
+		.antMatchers("/dijagnoze").permitAll()
 		
 		.anyRequest()
 		.authenticated();

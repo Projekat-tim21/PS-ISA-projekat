@@ -1,8 +1,5 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,18 +100,13 @@ public class KorisnikContreller {
 			//korisnikServis.findByUsername(username);
 			//Korisnik k=korisnikServis.findByUsername(username);
 			
-			System.out.println("OVDE " + k.getRoleName());
+			System.out.println("OVDE " + k.getRoleName() +"  "+ k.getId());
 			
 			System.out.println("Koja je uloga u klasi"+Role.ADMIN.name());
 			System.out.println("Korisnikova uloga"+k.getRoleName());
 			
 			if(k.getRoleName().equals(Role.ADMIN.name())) {
 				
-				if(k.getFirst_Login().equals("TRUE")) {
-					
-				}else {
-					
-				}
 				return "admin";
 			}else if(k.getRoleName().equals(Role.LEKAR.name())) {
 				return "lekarStranica";
