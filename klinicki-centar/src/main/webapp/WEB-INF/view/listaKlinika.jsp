@@ -7,66 +7,68 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Pregled informacija</title>
+<title>Lista klinika</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <body>
- 
-	<div role="navigation">
+  
+  	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/vratiSeNaPocetnu?username=${username}">Vrati se na pocetnu</a></li>
+					<li><a href="/korakUnazadNaLogin">Vrati se nazad</a></li>	
 					<li><a href="/logout">Odjavi se</a></li> 
 				</ul>
 
 			</div>
 		</div>
 	</div>
-	
+  
+  
 	<c:choose>
-	<c:when test="${mode=='ALL_USERS' }">
+		<c:when test="${mode=='ALL_KLINIKE' }">     
 			<div class="container text-center" id="tasksDiv">
-				<h3>Svi korisnici</h3>
+				<h3>Lista klinika</h3>
 				<hr>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
 								<th>Id</th>
-								<th>Korisnicko ime</th>
-								<th>Ime</th>
-								<th>Prezime</th>
-								<th>Jedinstveni br. osiguranika</th>
-								<th>Email</th>
-								<th>Adresa prebivalista</th>
+								<th>Naziv</th>
+								<th>Adresa</th>
 								<th>Grad</th>
 								<th>Drzava</th>
-								<th>Telefon</th>
-						<!--		<th>Sifra</th>  -->
+								<th>Cena</th>
+								<th>Ocena</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="korisnik" items="${korisnici }">
+							<c:forEach var="klinika" items="${klinike}">
 								<tr>
-									<td>${korisnik.id}</td>
-									<td>${korisnik.username}</td>
-									<td>${korisnik.ime}</td>
-									<td>${korisnik.prezime}</td>
-									<td>${korisnik.jedBrOsig}</td>
-									<td>${korisnik.email}</td>
-									<td>${korisnik.adresa}</td>
-									<td>${korisnik.grad}</td>
-									<td>${korisnik.drzava}</td>
-									<td>${korisnik.telefon}</td>
-					<!--  				<td>${korisnik.password}</td>  -->
+									<td>${klinika.id}</td>
+									<td>${klinika.naziv}</td>
+									<td>${klinika.adresa}</td>
+									<td>${klinika.grad}</td>
+									<td>${klinika.drzava}</td>
+									<td>${klinika.cena}</td>
+									<td>${klinika.ocena}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
+
+			<!-- <div class="btn-group" >
+ 			   <button type="button" class="btn btn-primary center-block">Prikazi</button>
+ 			 </div>
+	 -->
+
+
+
 		</c:when>
-</c:choose>
+	</c:choose>
+ 
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,26 @@ public class PregledService {
 		
 		return pregledRepo.findByDate(date);
 	}
-*/
+/*
+@Service
+@Transactional
+public class PregledService {
+
+		private final PregledRepository prepo;
+		
+		public PregledService(PregledRepository prepo) {
+			this.prepo=prepo;
+		}
+		
+		public List<Pregled> pokaziSvePreglede() {
+			// TODO Auto-generated method stub
+			List<Pregled> pregledi=new ArrayList<Pregled>();
+			for(Pregled pregled : prepo.findAll()) {
+				pregledi.add(pregled);
+			}
+			return pregledi;
+		}
+	
+
 }
+*/

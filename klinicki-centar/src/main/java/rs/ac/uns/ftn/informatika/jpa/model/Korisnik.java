@@ -58,8 +58,123 @@ public class Korisnik {
 	@Column(name="role",nullable=true)
 	private String roleName;
 	
-
+	@Column(name = "datum", nullable = true)
+	private String datum;
 	
+	@Column(name = "pol", nullable = true)
+	private String pol;
+	
+	@Column(name = "visina", nullable = true)
+	private String visina;
+	
+	@Column(name = "tezina", nullable = true)
+	private String tezina;
+	
+	@Column(name = "kgrupa", nullable = true)
+	private String kgrupa;
+	
+	@Column(name = "dioptrija", nullable = true)
+	private String dioptrija;
+	
+	@Column(name = "alergije", nullable = true)
+	private String alergije;
+	
+	@Column(name = "bolesti", nullable = true)
+	private String bolesti;
+	
+	@Column(name = "anamneza", nullable = true)
+	private String anamneza;
+
+	//za zdravstveni karton
+	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
+			String tezina, String kgrupa, String dioptrija, String alergije, String bolesti, String anamneza) {
+		super();
+		this.id = id;
+		this.jedBrOsig = jedBrOsig;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.datum = datum;
+		this.pol = pol;
+		this.visina = visina;
+		this.tezina = tezina;
+		this.kgrupa = kgrupa;
+		this.dioptrija = dioptrija;
+		this.alergije = alergije;
+		this.bolesti = bolesti;
+		this.anamneza = anamneza;
+	}
+
+	public String getDatum() {
+		return datum;
+	}
+
+	public void setDatum(String datum) {
+		this.datum = datum;
+	}
+
+	public String getPol() {
+		return pol;
+	}
+
+	public void setPol(String pol) {
+		this.pol = pol;
+	}
+
+	public String getVisina() {
+		return visina;
+	}
+
+	public void setVisina(String visina) {
+		this.visina = visina;
+	}
+
+	public String getTezina() {
+		return tezina;
+	}
+
+	public void setTezina(String tezina) {
+		this.tezina = tezina;
+	}
+
+	public String getKgrupa() {
+		return kgrupa;
+	}
+
+	public void setKgrupa(String kgrupa) {
+		this.kgrupa = kgrupa;
+	}
+
+	public String getDioptrija() {
+		return dioptrija;
+	}
+
+	public void setDioptrija(String dioptrija) {
+		this.dioptrija = dioptrija;
+	}
+
+	public String getAlergije() {
+		return alergije;
+	}
+
+	public void setAlergije(String alergije) {
+		this.alergije = alergije;
+	}
+
+	public String getBolesti() {
+		return bolesti;
+	}
+
+	public void setBolesti(String bolesti) {
+		this.bolesti = bolesti;
+	}
+
+	public String getAnamneza() {
+		return anamneza;
+	}
+
+	public void setAnamneza(String anamneza) {
+		this.anamneza = anamneza;
+	}
 
 	public Korisnik() {
 	}
