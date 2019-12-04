@@ -10,6 +10,8 @@
 <title>Dijagnoze</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
  
 	<div role="navigation">
@@ -29,36 +31,125 @@
 		</div>
 	</div>
 	
-	<c:choose>
-	<c:when test="${mode=='ALL_DIJAGNOZE' }">
-			<div class="container text-center" id="tasksDiv">
+	
+	<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center">
+            <div class="card">
+                <div class="card-header">
 				<h3>DIJAGNOZE</h3>
-				<hr>
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered">
+				<div class="table-data__tool">
+                                    <div class="table-data_tool-right">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewDijagnoza">Dodaj dijagnozu</a></i></button>
+                                    </div>
+                                </div>
+				<div class="card card-body table-responsive">
+			<c:choose>
+				<c:when test="${mode=='ALL_DIJAGNOZE' }">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>Id</th>
 								<th>Sifra</th>
 								<th>Naziv</th>
-								<th>Opis</th>
+								<th>Dodatno</th>
+								<th colspan="2">Izmeni/Obrisi</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="dijagnoza" items="${dijagnoze}">
 								<tr>
-									<td>${dijagnoza.id}</td>
-									<td>${dijagnoza.sifra}</td>
-									<td>${dijagnoza.naziv}</td>
-									<td>${dijagnoza.dodatno}</td>
-									
+									<td><label>${dijagnoza.id}</label></td>
+									<td><label>${dijagnoza.sifra}</label>></td>
+									<td>
+										<label id="fnaziv_${dijagnoza.getId()}">
+											${dijagnoza.getNaziv()}
+										</label>
+										 <input required type="text" name="fnaziv" class="form-control"
+                                                   value="${dijagnoza.getNaziv()}"
+                                                   style="display: none;"
+                                                   id="text_fnaziv_${dijagnoza.getId()}">
+										
+									</td>
+									<td> <label id="fdodatno_${dijagnoza.getId()}">
+                                                    ${dijagnoza.getDodatno()}
+                                            </label>
+                                            <input required class="form-control" type="text" name="fdodatno"
+                                                   value="${dijagnoza.getDodatno()}"
+                                                   style="display: none;"
+                                                   id="text_fdodatno_${ dijagnoza.getId()}"></td>
+								
+									 <td>
+                                            <a href="/update" id="update_${dijagnoza.getId()}" class="updateData"
+                                               onclick="event.preventDefault();"><span class="btn-label"><img src="static/svg/tools.svg"></span></a>
+                                            <a href="/saveDijagnoza" id="save_${dijagnoza.getId()}" class="saveData"
+                                               onclick="event.preventDefault();saveData(${dijagnoza.getId()});"
+                                               style="display: none;"><span class="btn-label"><img src="static/svg/diff.svg"></span></a>
+                                        </td>
+                                        <td><a href="/deleteDijagnoza/${dijagnoza.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/trashcan.svg"></span></a>
+                                        </td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</c:when>
-</c:choose>
+				</c:when>
+		</c:choose>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</section>
+	<script>
+    function saveData(id) {
+        console.log('save Data -  ' + id)
+        var fnaziv = $('#text_fnaziv_' + id).val();
+        var fdodatno = $('#text_fdodatno_' + id).val();
+        if (fnaziv == "") {
+            $('#text_fnaziv_' + id).css('border-color', 'red');
+            return;
+        }
+        if (fdodatno == "") {
+            $('#text_fdodatno_' + id).css('border-color', 'red');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/saveDijagnoza",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({
+                id: id,
+                naziv: fnaziv,
+                dodatno: fdodatno
+            }),
+            success: function (data, textStatus, xhr) {
+                console.log("success  ---> ");
+                window.location = "/dijagnoze";
+
+            },
+            error: function (data, xhr, textStatus) {
+                console.log("failure ---> ");
+                console.log(JSON.stringify(xhr));
+            }
+        });
+
+    }
+
+    function hideContent() {
+        $('#loadingDiv').show();
+        $('#contentDiv').hide();
+    }
+
+    function showContent() {
+        $('#loadingDiv').hide();
+        $('#contentDiv').show();
+    }
+</script>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/app.js"></script>
+<script src="static/js/editDijagnoza.js"></script>
 </body>
 </html></html>

@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.Response;
+import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
 import rs.ac.uns.ftn.informatika.jpa.repository.DijagnozaRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.KlinikaRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.LekRepository;
-import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaService;
+import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
@@ -50,7 +51,7 @@ public class AdminController {
 	 private DijagnozaRepository dijagnozaRepository;
 	 
 	 @Autowired
-	 private DijagnozaService dijagnozaService;
+	 private DijagnozaServiceImpl dijagnozaService;
 
 	 	@Value("${max.result.per.page}")
 	    private int maxResults;
@@ -175,6 +176,29 @@ public class AdminController {
 	        return result;
 	    }
 	    
+	    @PostMapping("/novaDijagnoza")
+	    public String novaDijagnoza(@ModelAttribute Dijagnoza dijagnoza) {
+	        String result = "redirect:/";
+	        Dijagnoza dbDijagnoza=dijagnozaService.findBySifra(dijagnoza.getSifra());
+	        if(dijagnoza.getNaziv()==null || dijagnoza.getNaziv().trim().isEmpty()) {
+	        	result = "redirect:/addNewDijagnoza?error=Unesite naziv";
+	        }
+	        if (dijagnoza.getSifra() == null || dijagnoza.getSifra().trim().isEmpty()) {
+	            result = "redirect:/addNewDijagnoza?error=Unesite sifru";
+	        } else if (dijagnoza.getDodatno() == null || dijagnoza.getDodatno().trim().isEmpty()) {
+	            result = "redirect:/addNewDijagnoza?error=Enter valid last name";
+	        } 
+	        if (dbDijagnoza == null) {
+	            dijagnozaService.sacuvajDijagnozu(dijagnoza);
+	            result="redirect:/dijagnoze";
+	        } else {
+	            result = "redirect:/addNewDijagnoza?error=Dijagnoza vec postoji!";
+	        }
+
+	        return result;
+	    }
+	    
+	    
 	    @GetMapping("/zahteviRegistrovanje")
 	    public ModelAndView zahtevi(HttpServletRequest request) {
 	    	request.setAttribute("korisnici", korisnikService.pokaziSveKorisnike());
@@ -236,6 +260,23 @@ public class AdminController {
 	        lekService.obrisiLek(lekId); 
 	        return "redirect:/lekovi";
 	    }
+	    
+	    @ResponseBody
+	    @PostMapping("/saveDijagnoza")
+	    public Response updateDijagnoza(@RequestBody Dijagnoza dijagnoza) {
+	        Dijagnoza dbDijagnoza = dijagnozaService.findDijagnozaById(dijagnoza.getId());
+	        dbDijagnoza.setNaziv(dijagnoza.getNaziv()); 
+	        dbDijagnoza.setDodatno(dijagnoza.getDodatno());
+	        dijagnozaService.sacuvajDijagnozu(dbDijagnoza); 
+	        return new Response(302, AppConstant.SUCCESS, "redirect:/lekovi");
+	    }
+	    
+	    @GetMapping("/deleteDijagnoza/{dijagnozaId}")
+	    public String deleteDijagnoza(@PathVariable Long dijagnozaId) {
+	        dijagnozaService.obrisiDijagnozu(dijagnozaId);  
+	        return "redirect:/dijagnoze";
+	    }
+	    
 	    
 	  /*  @ResponseBody
 	    @PostMapping("/save")

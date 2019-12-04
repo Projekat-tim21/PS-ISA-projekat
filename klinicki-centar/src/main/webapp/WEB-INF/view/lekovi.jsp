@@ -12,10 +12,8 @@
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <link href="static/css/theme.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
- <section class="h-100">
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
@@ -34,29 +32,29 @@
 	</div>
 	
 	
-			<div class="container text-center" id="tasksDiv">
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center">
+            <div class="card">
+                <div class="card-header">
 				<h3 class="title-5 m-b-35">LEKOVI</h3>
                                 <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                       
-                                    </div>
-                                    <div class="table-data__tool-right">
+                                    <div class="table-data_tool-right">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i><a class="nav-link" href="/addNewLek">Dodaj lek</a></button>
+                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewLek">Dodaj lek</a></i></button>
                                     </div>
                                 </div>
-			<hr>
+			
 			<div class="card card-body table-responsive">
-	<c:choose>
-		<c:when test="${mode=='ALL_LEKOVI' }">
-				
-					<table class="table table-hover">
+				<c:choose>
+					<c:when test="${mode=='ALL_LEKOVI' }">
+						<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>Id</th>
 								<th>Sifra</th>
 								<th>Naziv</th>
-								<th>Opis</th>
+								<th>Dodatno</th>
 								<th colspan="2">Izmeni/Obrisi</th>
 							</tr>
 						</thead>
@@ -64,28 +62,28 @@
 							<c:forEach var="lek" items="${lekovi}">
 								<tr>
 									<td>
-										<label>${lek.id}</label>
+										<label>${lek.getId()}</label>
 									</td>
 									<td>
-										<label>${lek.sifra}</label>
+										<label>${lek.getSifra()}</label>
 									</td>
 									<td>
-										<label id="fnaziv_${lek.id}">
-											${lek.naziv}
+										<label id="fnaziv_${lek.getId()}">
+											${lek.getNaziv()}
 										</label>
 										 <input required type="text" name="fnaziv" class="form-control"
-                                                   value="${lek.naziv}"
+                                                   value="${lek.getNaziv()}"
                                                    style="display: none;"
-                                                   id="text_fnaziv_${lek.id}">
+                                                   id="text_fnaziv_${lek.getId()}">
 										
 									</td>
-									<td> <label id="fdodatno_${lek.id}">
-                                                    ${lek.dodatno}
+									<td> <label id="fdodatno_${lek.getId()}">
+                                                    ${lek.getDodatno()}
                                             </label>
                                             <input required class="form-control" type="text" name="fdodatno"
-                                                   value="${lek.dodatno}"
+                                                   value="${lek.getDodatno()}"
                                                    style="display: none;"
-                                                   id="text_fdodatno_${lek.id}"></td>
+                                                   id="text_fdodatno_${lek.getId()}"></td>
                                     <td>
                                             <a href="/update" id="update_${lek.getId()}" class="updateData"
                                                onclick="event.preventDefault();"><span class="btn-label"><img src="static/svg/tools.svg"></span></a>
@@ -93,17 +91,20 @@
                                                onclick="event.preventDefault();saveData(${lek.getId()});"
                                                style="display: none;"><span class="btn-label"><img src="static/svg/diff.svg"></span></a>
                                         </td>
-                                        <td><a href="/delete/${lek.id}" class="deleteData"><span class="btn-label"><img src="static/svg/trashcan.svg"></span></a>
+                                        <td><a href="/delete/${lek.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/trashcan.svg"></span></a>
                                         </td>       
 									
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</c:when>
-</c:choose>
+			</c:when>
+	</c:choose>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 </section>
 <script>
     function saveData(id) {

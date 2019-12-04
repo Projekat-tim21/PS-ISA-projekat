@@ -106,6 +106,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/delete/*").permitAll()
 		.antMatchers("/saveLek").permitAll()
 		.antMatchers("/update").permitAll()
+		.antMatchers("/addNewDijagnoza").permitAll()
+		.antMatchers("/novaDijagnoza").permitAll()
+		.antMatchers("/deleteDijagnoza/*").permitAll()
+		.antMatchers("/saveDijagnoza").permitAll()
+	
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();
