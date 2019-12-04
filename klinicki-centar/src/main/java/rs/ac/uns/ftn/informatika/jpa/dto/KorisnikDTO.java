@@ -18,7 +18,6 @@ public class KorisnikDTO {
 	private String password;
 	private String repeatPassword;
 	private String role;
-
 	private Boolean firstLogin;
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,

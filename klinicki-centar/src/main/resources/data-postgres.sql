@@ -18,7 +18,7 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Marsala Junaka 10', 'Srbija', 'cobi@gmail.com',  'Novi Sad', 'Cobi', '888432342', 'cobi', 'Cobi', '064553772', 'cobi','TRUE','ADMIN_KLINIKE');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Anica Dobra 1', 'Srbija', 'ana@gmail.com',  'Novi Sad', 'Ana', '858568888', 'ana', 'Ana', '064999858', 'ana','TRUE','ADMIN_KLINIKE');
 
-INSERT INTO administrator (user_id, first_login, predefinisani) VALUES ('6', true, true);
+INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);
 
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );

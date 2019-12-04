@@ -58,6 +58,16 @@ public class KorisnikService {
 		return korisnici;
 	}
 	
+	public List<Korisnik> pokaziAdmine() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("ADMIN")) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
+	}
+	
+	
 	//public Korisnik findAllData(Long id, String username, String ime, String prezime, String jedBrOsig, String email, String adresa, String grad, String drzava, String telefon, String password) {
 	//	return korisnikRepository.findAllData(id, username, ime, prezime, jedBrOsig, email, adresa, grad, drzava, telefon, password);
 	//}
@@ -92,6 +102,7 @@ public class KorisnikService {
 	public void deleteMyUser(Long id) {
 		korisnikRepository.deleteById(id);
 	}
+
 
 
 

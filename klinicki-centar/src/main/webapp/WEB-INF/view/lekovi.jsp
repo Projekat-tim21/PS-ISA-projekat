@@ -21,7 +21,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
-					<li><a href="/adminKlinike">Administratori klinika</a></li>
+					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
@@ -37,11 +37,14 @@
         <div class="row justify-content-md-center">
             <div class="card">
                 <div class="card-header">
-				<h3 class="title-5 m-b-35">LEKOVI</h3>
-                                <div class="table-data__tool">
+				<div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <h3>LEKOVI</h3>
+                                          </div>
+				
                                     <div class="table-data_tool-right">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewLek">Dodaj lek</a></i></button>
+                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewLek">DODAJ LEK</a></i></button>
                                     </div>
                                 </div>
 			

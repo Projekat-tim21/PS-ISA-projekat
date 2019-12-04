@@ -110,6 +110,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/novaDijagnoza").permitAll()
 		.antMatchers("/deleteDijagnoza/*").permitAll()
 		.antMatchers("/saveDijagnoza").permitAll()
+		.antMatchers("/pregledSvihAdmina").permitAll()
+		.antMatchers("/addNewAdminKC").permitAll()
 	
 		.anyRequest()
 		.authenticated();

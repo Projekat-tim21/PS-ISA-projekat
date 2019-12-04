@@ -19,7 +19,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
-					<li><a href="/adminKlinike">Administratori klinika</a></li>
+					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
 					<li><a href="/logout">Odjavi se</a></li>

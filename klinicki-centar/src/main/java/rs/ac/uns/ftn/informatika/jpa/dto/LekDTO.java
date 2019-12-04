@@ -9,7 +9,6 @@ public class LekDTO {
 	
 	public LekDTO(Long id, String sifra, String naziv, String dodatno) {
 		super();
-		this.id = id;
 		this.sifra = sifra;
 		this.naziv = naziv;
 		this.dodatno = dodatno;
