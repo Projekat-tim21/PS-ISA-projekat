@@ -18,10 +18,19 @@ insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa,
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Aria', 6 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
 
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, '27.12.2019', 'Jovan Jovic', '203', 'operacija ociju', '15min', '09:00');
 
-insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'operacija ociju', '1h', '09:00');
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00');
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '09:00');
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '09:00');
+
+insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'dermatolog', '1h', '09:00');
+insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (2000, '15.02.2020', 'Jovan Jovic', '2A', 'stomatolog', '1h', '09:00');
+insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1300, '25.12.2019', 'Jovan Jovic', '2A', 'ocno','2h' ,'09:00');
+insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (2300, '25.12.2019', 'Jovan Jovic', '2A', 'url','2h' ,'09:00');
 
 
 

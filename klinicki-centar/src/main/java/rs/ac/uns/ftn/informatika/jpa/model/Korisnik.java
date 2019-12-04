@@ -175,6 +175,37 @@ public class Korisnik {
 	public Korisnik() {
 	}
 
+	
+	
+	public Korisnik(Long id, String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
+			String grad, String drzava, String telefon, String password, Boolean isActive, String roleName,
+			String datum, String pol, String visina, String tezina, String kgrupa, String dioptrija, String alergije,
+			String bolesti, String anamneza) {
+		super();
+		this.id = id;
+		this.jedBrOsig = jedBrOsig;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.isActive = isActive;
+		this.roleName = roleName;
+		this.datum = datum;
+		this.pol = pol;
+		this.visina = visina;
+		this.tezina = tezina;
+		this.kgrupa = kgrupa;
+		this.dioptrija = dioptrija;
+		this.alergije = alergije;
+		this.bolesti = bolesti;
+		this.anamneza = anamneza;
+	}
+
 	public Korisnik(String jedBrOsig, String korIme, String ime, String prezime, String email, String adresa,
 			String grad, String drzava, String telefon, String sifra, String roleName) {
 		super();
@@ -300,13 +331,7 @@ public class Korisnik {
 		this.roleName = roleName;
 	}
 
-	@Override
-	public String toString() {
-		return "Korisnik [id=" + id + ", jedBrOsig=" + jedBrOsig + ", korIme=" + username + ", ime=" + ime + ", prezime="
-				+ prezime + ", email=" + email + ", adresa=" + adresa + ", grad=" + grad + ", drzava=" + drzava
-				+ ", telefon=" + telefon + ", sifra=" + password + "]";
-	}
-
+	
 	
 	
 
