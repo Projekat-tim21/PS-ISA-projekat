@@ -218,9 +218,11 @@ public class KorisnikContreller {
 	}
 
 	@PostMapping("/sacuvajupdateNaLogin") // korisnik povezan sa valuom iz js
-	public String UpdateKorisnik2(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
+	public String UpdateKorisnik2(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
-
+	
+		Korisnik izBaze=korisnikServis.findOne(id);
+		
 		Korisnik k = new Korisnik();
 		Long Idx = korisnikd.getId();
 		k.setId(korisnikd.getId());
@@ -235,6 +237,15 @@ public class KorisnikContreller {
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
 		k.setRoleName(Role.PACIJENT.name());
+		k.setDatum(izBaze.getDatum());
+		k.setPol(izBaze.getPol());
+		k.setVisina(izBaze.getVisina());
+		k.setTezina(izBaze.getTezina());
+		k.setKgrupa(izBaze.getKgrupa());
+		k.setDioptrija(izBaze.getDioptrija());
+		k.setAlergije(izBaze.getAlergije());
+		k.setBolesti(izBaze.getBolesti());
+		k.setAnamneza(izBaze.getAnamneza());
 		k.setId(Idx);
 		korisnikServis.saveMogKorisnika(k);
 
@@ -271,7 +282,8 @@ public class KorisnikContreller {
 	@RequestMapping("/kartonZ")
 	public String prikazZKartona(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
-		//Korisnik k=korisnikServis.findOne(id);
+		Korisnik k=korisnikServis.findOne(id);
+		System.out.println(k.getVisina());
 		request.setAttribute("mode", "MODE_ZKARTON");
 		
 		return "zdravstveniKartonPacijenta";
