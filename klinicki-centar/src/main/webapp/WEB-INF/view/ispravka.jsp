@@ -13,6 +13,14 @@
 <link href="static/css/style.css" rel="stylesheet">
 
 <style>
+
+body {
+  background-image: url("static/images/slika.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+
 .alert {
 	padding: 25px;
 	background-color: #f44336;

@@ -61,6 +61,15 @@
 //}
 </script>
 
+<style>
+body {
+  background-image: url("static/images/slika.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+</style>
+
 </head>
 <body >
 	<div role="navigation">
