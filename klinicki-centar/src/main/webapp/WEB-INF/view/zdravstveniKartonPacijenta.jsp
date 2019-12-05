@@ -11,6 +11,16 @@
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 
+<style type="text/css">
+body {
+  background-image: url("static/images/s.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+
+</style>
+
 </head>
 <body>
 

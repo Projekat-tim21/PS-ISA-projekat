@@ -13,6 +13,13 @@
 <link href="static/css/style.css" rel="stylesheet">
 <style>
 
+body {
+  background-image: url("static/images/s.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+
 #myInput {
   background-position: 10px 10px;
   background-repeat: no-repeat;
@@ -22,6 +29,7 @@
   border: 1px solid #ddd;
   margin-bottom: 12px;
 }
+
 
 </style>
 </head>

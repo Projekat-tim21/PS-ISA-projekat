@@ -10,6 +10,16 @@
 <title>Izmena Podataka</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<style>
+body {
+  background-image: url("static/images/slika.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+</style>
+
+</head>
 <body>
 
 	<div role="navigation">
