@@ -15,6 +15,11 @@ public class PreglediController {
 	private  PregledService pServis;
 	
 
+	@RequestMapping("/zakaziPregled1")
+	public String zakaziPregled() {
+		return "zakaziPregled";
+	}
+	
 	@RequestMapping("/preglediIoperacijePrikaz")
 	public String prikazStraniceListaPregledaIOperacija(HttpServletRequest request) {
 		return "listaPregledaIOperacija";

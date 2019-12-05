@@ -23,7 +23,7 @@ public class PregledService {
 		this.pregledRepo = pregledRepo;
 	}
 	
-	public List<Pregled> findAll(){
+	public List<Pregled> pokaziSvePreglede(){
 		List<Pregled> allP = new ArrayList<Pregled>();
 		for(Pregled pregled : pregledRepo.findAll()) {
 			allP.add(pregled);
@@ -31,11 +31,8 @@ public class PregledService {
 		return allP;
 	}
 	
-	public Pregled findById(Long id) {
-		
-		return pregledRepo.findOneById(id);
-	}
 	
+}
 	/*public Pregled findByDate(String date) {
 		
 		return pregledRepo.findByDate(date);

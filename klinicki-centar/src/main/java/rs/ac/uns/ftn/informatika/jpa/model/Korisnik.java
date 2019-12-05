@@ -62,12 +62,7 @@ public class Korisnik {
 	@Column(name="login", nullable=true)
 	private Boolean first_Login;
 	
-	public Boolean getFirst_Login() {
-		return first_Login;
-	}
-
-	public void setFirst_Login(Boolean first_Login) {
-		this.first_Login = first_Login;
+	
     
 	@Column(name = "datum", nullable = true)
 	private String datum;
@@ -367,6 +362,14 @@ public class Korisnik {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public Boolean getFirst_Login() {
+		return first_Login;
+	}
+
+	public void setFirst_Login(Boolean first_Login) {
+		this.first_Login = first_Login;
 	}
 
 	
