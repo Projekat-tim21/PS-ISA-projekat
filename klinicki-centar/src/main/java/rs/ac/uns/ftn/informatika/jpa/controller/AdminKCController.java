@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -132,6 +134,13 @@ public class AdminKCController {
 	    public ModelAndView addNewAdminKlinike() {
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("create-admin-kc");
+	        return modelAndView;
+	    }
+	    
+	    @GetMapping("/admin")
+	    public ModelAndView addmin() {
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("admin");
 	        return modelAndView;
 	    }
 	    
@@ -476,29 +485,43 @@ public class AdminKCController {
 	    }
 	    
 
-		@PreAuthorize("@currentUserServiceImpl.canAccess(principal, #id)")
-		@PostMapping("/editpassword/{id}")
-		public String putEditPassword(@ModelAttribute("korisnik") KorisnikDTO kor,@PathVariable Long id) {
+		@PostMapping("/editpassword")
+		public String putEditPassword(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,HttpServletRequest request) {
 		
-			Korisnik korisnik = korisnikService.findOne(id);
-			if(!korisnik.getPassword().equals(kor.getPassword())) {
-			System.out.println(korisnik.getUsername());
-		
-				korisnik.setPassword(kor.getPassword());
-				korisnik.setFirst_Login(false);
-				korisnikService.saveMogKorisnika(korisnik);
-				System.out.println(korisnik.getPassword());
+			request.setAttribute("korisnik", korisnikService.findOne(id));
+			Korisnik korisnik=korisnikService.findOne(id);
+			//Korisnik k=new Korisnik();
+			Long Idx=korisnikd.getId();
+			System.out.println("Pokupljen id iz fronta "+korisnikd.getId());
+			korisnik.setPassword(korisnikd.getPassword());
+			korisnik.setFirst_Login(false);
+			korisnikService.saveMogKorisnika(korisnik);
+			System.out.println(korisnik.getPassword());
 				//map.put("logged", korisnik);
-			}
-			else {
-				System.out.println("Morate promeniti lozinku!");
-				//map.put("info", "Morate promeniti lozinku!");
-				return "firstLogin";
-			}
 			
 			return "admin";
 		}
 	    
-	    
+		@PostMapping("/sacuvajNovaLozinka") // korisnik povezan sa valuom iz js
+		public String UpdateKorisnik2(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
+				HttpServletRequest request) {
+		
+			Korisnik izBaze=korisnikService.findOne(id);
+			
+			Korisnik k = new Korisnik();
+			Long Idx = korisnikd.getId();
+			k.setPassword(korisnikd.getPassword());
+			korisnikService.saveMogKorisnika(k);
+
+			try {
+				emailService.sendNotificaitionSync(k);
+			} catch (Exception e) {
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+
+			return "uspesnaIzmenaInfo";
+
+		}
+
 	
 }

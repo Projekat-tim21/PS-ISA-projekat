@@ -149,7 +149,7 @@ body,html {
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="static/bootstrap/js/bootstrap.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/app.js"></script>
 <script src="static/js/edit.js"></script>
 </body>
