@@ -34,6 +34,9 @@ insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (23
 
 
 
+insert into pregled (datum, satnica, sala, lekar, cena, tip) values ('2019-12-06', '10', '5', 'Jova', '3000.00', 'opsta praksa');
+insert into pregled (datum, satnica, sala, lekar, cena, tip) values ('2019-10-10', '11', '2', 'Marko', '2000.00', 'kardioloski pregled');
+
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');
 insert into course (name) values ('Objektno programiranje');

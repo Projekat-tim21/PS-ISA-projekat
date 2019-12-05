@@ -1,6 +1,40 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-public class AdminConroller {
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
+import rs.ac.uns.ftn.informatika.jpa.repository.AdminRepository;
+import rs.ac.uns.ftn.informatika.jpa.service.AdminService;
+import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
+
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	//private PregledService pregledSer;
+	
+	@Autowired
+	private AdminRepository adminRepo;
+
+/*	@RequestMapping("/zakazivanjePregleda")
+	public void zakaziPregled(@ModelAttribute PregledDTO pregled, HttpServletRequest request) {
+		
+		Pregled p = pregledSer.findByDate(pregled.getDatum());
+		
+		
+	}*/
+
+
 /*	
 	 @Autowired
 	    private KorisnikService userService;

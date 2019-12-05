@@ -11,6 +11,7 @@ import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 
 @Service
 @Transactional
@@ -18,6 +19,8 @@ public class KorisnikService {
 
 	private final KorisnikRepository korisnikRepository;
 	
+	
+	private PregledRepository pregledRepo;
 	
 	KorisnikDTO korDto;
 	
