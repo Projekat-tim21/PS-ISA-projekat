@@ -52,14 +52,16 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					
+					
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Izmeni">
+					</div>
+					
+			
 				</div>
 			</div>
 			
-	<!-- <div class="btn-group" >
- 			   <button type="button" class="btn btn-primary center-block">Prikazi</button>
- 			 </div>
-	 -->
-		
   		
 
 		</c:when>

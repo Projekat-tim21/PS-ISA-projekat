@@ -25,22 +25,19 @@ import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
-
 @Controller
 public class KorisnikContreller {
-	
+
 	private Logger logger = LoggerFactory.getLogger(KorisnikContreller.class);
-	
+
 	@Autowired
 	private EmailService emailService;
 
 	@Autowired
-	private  KorisnikService korisnikServis;
+	private KorisnikService korisnikServis;
 
 	@Autowired
 	private KorisnikRepository userRepository;
-
-	
 
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
@@ -50,15 +47,11 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 
-
 	@RequestMapping("/prikazOsnovnihInfo")
 	public String info(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
 		return "pocetna_stranica";
 	}
-
-	// logovanje
-	
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
@@ -79,33 +72,29 @@ public class KorisnikContreller {
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 
-		Korisnik k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
-		//if(!k.getRoleName().equals(Role.PACIJENT.name())) {
+		Korisnik k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
+		// if(!k.getRoleName().equals(Role.PACIJENT.name())) {
 
-		Korisnik k2=new Korisnik();
-		k=korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
+		Korisnik k2 = new Korisnik();
+		k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 		
 			//Korisnik =korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
-			//Korisnik idK=korisnikServis.findOne(korisnik.getId());
-			//System.out.println("id korisnika je: "+ k.getId()); 
+			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
+			// System.out.println("id korisnika je: "+ k.getId());
 			String username = request.getParameter("username");
-			//String id=request.getParameter("id");
-			//System.out.println("print1: "+request.getSession().getId()); //uzima id sesije
-			//String password = request.getParameter("password");
+			// String id=request.getParameter("id");
+			// System.out.println("print1: "+request.getSession().getId()); //uzima id
+			// sesije
+			// String password = request.getParameter("password");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-			//korisnikServis.findByUsername(username);
-			//Korisnik k=korisnikServis.findByUsername(username);
-			
-			System.out.println("OVDE " + k.getRoleName() +"  "+ k.getId());
-			
-			System.out.println("Koja je uloga u klasi"+Role.ADMIN.name());
-			System.out.println("Korisnikova uloga"+k.getRoleName()+"prvi login"+k.getFirst_Login());
-			
-			if(k.getRoleName().equals(Role.ADMIN.name())) {
+
+			System.out.println("OVDE " + session.getAttribute(username));
+			System.out.println(k.getRoleName());
+      if(k.getRoleName().equals(Role.ADMIN.name())) {
 				
 				if(k.getFirst_Login()==true) {
 					k.setFirst_Login(false);
@@ -114,40 +103,35 @@ public class KorisnikContreller {
 				}else {
 				return "admin";
 				}
-			}else if(k.getRoleName().equals(Role.LEKAR.name())) {
+			}else if (k.getRoleName().equals(Role.LEKAR.name())) {
 				return "lekarStranica";
-			}else{
-				return "login";
 			}
-			
-			
-			//return "";
-		}
-			
-
+			session.setAttribute("id", k.getId());
 			return "login";
-		//}
+		} else {
+			request.setAttribute("error", "Invalid Username or Password");
+			request.setAttribute("mode", "MODE_LOGIN");
+			return "welcomepage";
 		}
-		//return "ispravka";
+	}
 
-	
 
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_REGISTER");
 		return "welcomepage";
 	}
-	
+
 	@RequestMapping("/lekarStranica")
 	public String lekarStranica(HttpServletRequest request) {
-		//request.setAttribute("mode", "MODE_ALLUSER");
 		return "lekarStranica";
 	}
+	
+	
 
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
 	public String registerKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
-
 
 		Korisnik existingUser = userRepository.findByUsername(korisnikd.getUsername());
 
@@ -172,15 +156,15 @@ public class KorisnikContreller {
 			k.setRoleName(Role.PACIJENT.name());
 			System.out.println(k.getRoleName());
 			korisnikServis.saveMogKorisnika(k);
-			
+
 			try {
 				emailService.sendNotificaitionZaRegistraciju(k);
-			}catch( Exception e ){
+			} catch (Exception e) {
 				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 			}
-			
+
 			request.setAttribute("mode", "MODE_HOME");
-			
+
 			return "welcomepage";
 		}
 
@@ -207,15 +191,25 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "ALL_USERS");
 		return "pregledUseraSaLogina";
 	}
-	//JECA
-	
-	
+
 	@GetMapping("/pregledSvihPacijenataMetoda")
 	public String pokaziPacijente(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSvePacijente());
 		request.setAttribute("mode", "ALL_USERS");
-		
+
 		return "pregledSvihPacijenata";
+	}
+	
+	//JA DODALA VANJIN DEO
+	@GetMapping("/pacijenti")
+	public String pokaziKarton(HttpServletRequest request) {
+		return "pacijent";
+	}
+	
+	//STRANICA ZA ZAKAZIVANJE PREGLEDA
+	@GetMapping("/zakazivanjePregleda")
+	public String zakaziPregled() {
+		return "zakaziPregled";
 	}
 
 	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
@@ -255,9 +249,11 @@ public class KorisnikContreller {
 	}
 
 	@PostMapping("/sacuvajupdateNaLogin") // korisnik povezan sa valuom iz js
-	public String UpdateKorisnik2(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
+	public String UpdateKorisnik2(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
-
+	
+		Korisnik izBaze=korisnikServis.findOne(id);
+		
 		Korisnik k = new Korisnik();
 		Long Idx = korisnikd.getId();
 		k.setId(korisnikd.getId());
@@ -272,13 +268,21 @@ public class KorisnikContreller {
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
 		k.setRoleName(Role.PACIJENT.name());
+		k.setDatum(izBaze.getDatum());
+		k.setPol(izBaze.getPol());
+		k.setVisina(izBaze.getVisina());
+		k.setTezina(izBaze.getTezina());
+		k.setKgrupa(izBaze.getKgrupa());
+		k.setDioptrija(izBaze.getDioptrija());
+		k.setAlergije(izBaze.getAlergije());
+		k.setBolesti(izBaze.getBolesti());
+		k.setAnamneza(izBaze.getAnamneza());
 		k.setId(Idx);
 		korisnikServis.saveMogKorisnika(k);
-		// k.setId(Idx);
-		
+
 		try {
 			emailService.sendNotificaitionSync(k);
-		}catch( Exception e ){
+		} catch (Exception e) {
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
 
@@ -305,6 +309,17 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
 	}
+
+	@RequestMapping("/kartonZ")
+	public String prikazZKartona(@RequestParam Long id, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findOne(id));
+		Korisnik k=korisnikServis.findOne(id);
+		System.out.println(k.getVisina());
+		request.setAttribute("mode", "MODE_ZKARTON");
+		
+		return "zdravstveniKartonPacijenta";
+	}
+	
 	
 	@RequestMapping("/profilkaPregleduDrugi")
 	public String editUserProfilPregledDrugi(@RequestParam String username, HttpServletRequest request) {
@@ -312,15 +327,12 @@ public class KorisnikContreller {
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
 	}
-	
 
 	@RequestMapping("/izmenaPodatakaizBara")
 	public String editUserProfilIzBara(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
-		
-		
-		
+
 		return "login";
 	}
 
@@ -346,8 +358,6 @@ public class KorisnikContreller {
 	public String editUserProfil2(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
-		
-	
 		return "login";
 	}
 
@@ -372,8 +382,12 @@ public class KorisnikContreller {
 		korisnikd.getRole();
 
 		System.out.println(korisnikd.getId() + korisnikd.getIme());
-;
+		;
 		return "login";
 	}
 
+	
+	
+	
+	
 }

@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Dobrodosli</title>
+<title>Pregled informacija</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <body>
@@ -15,7 +15,6 @@
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-			<h2>Pregled korisnika</h2>
 				<ul class="nav navbar-nav">
 					<li><a href="/vratiSeNaPocetnu?username=${username}">Vrati se na pocetnu</a></li>
 					<li><a href="/logout">Odjavi se</a></li> 

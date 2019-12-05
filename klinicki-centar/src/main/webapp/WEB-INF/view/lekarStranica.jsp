@@ -15,14 +15,22 @@
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-			<h2>Pregled pacijenata</h2>
-				<ul class="nav navbar-nav">
-					<li><a href="/pregledSvihPacijenataMetoda">Prikazi pacijente</a></li>
+			<h1>Dobrodosli!</h1>
 				
-				</ul>
-
 			</div>
 		</div>
+		
+		<div>
+				<ul class="nav navbar-nav">
+					<li><a href="/pregledSvihPacijenataMetoda">Prikazi sve pacijente</a></li>
+					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
+					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
+				
+				</ul>
+		</div>
+		
+		
+		
 	</div>
 	
 
