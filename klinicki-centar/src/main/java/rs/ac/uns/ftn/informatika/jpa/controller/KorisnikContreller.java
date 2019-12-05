@@ -42,6 +42,8 @@ public class KorisnikContreller {
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
+		
+		
 		return "welcomepage";
 	}
 
@@ -54,6 +56,10 @@ public class KorisnikContreller {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_LOGIN");
+	
+		
+		
+		
 		return "welcomepage";
 	}
 
@@ -73,6 +79,8 @@ public class KorisnikContreller {
 		k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
+		
+			//Korisnik =korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
 			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
 			// System.out.println("id korisnika je: "+ k.getId());
@@ -86,8 +94,16 @@ public class KorisnikContreller {
 
 			System.out.println("OVDE " + session.getAttribute(username));
 			System.out.println(k.getRoleName());
-
-			if (k.getRoleName().equals(Role.LEKAR.name())) {
+      if(k.getRoleName().equals(Role.ADMIN.name())) {
+				
+				if(k.getFirst_Login()==true) {
+					k.setFirst_Login(false);
+					return "firstLogin";
+					
+				}else {
+				return "admin";
+				}
+			}else if (k.getRoleName().equals(Role.LEKAR.name())) {
 				return "lekarStranica";
 			}
 			session.setAttribute("id", k.getId());
@@ -98,6 +114,7 @@ public class KorisnikContreller {
 			return "welcomepage";
 		}
 	}
+
 
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {

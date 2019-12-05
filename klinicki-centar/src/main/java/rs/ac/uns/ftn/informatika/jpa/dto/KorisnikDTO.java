@@ -18,6 +18,8 @@ public class KorisnikDTO {
 	private String password;
 	private String repeatPassword;
 	private String role;
+	private Boolean firstLogin;
+	private Boolean isActive;
 	private String datum;
 	private String pol;
 	private String visina;
@@ -130,7 +132,9 @@ public class KorisnikDTO {
 	}
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
-			String adresa, String grad, String drzava, String telefon, String password, String role) {
+			String adresa, String grad, String drzava, String telefon, String password, String role,Boolean firstLogin) {
+		
+
 		super();
 		this.id = id;
 		this.username = username;
@@ -143,11 +147,15 @@ public class KorisnikDTO {
 		this.drzava = drzava;
 		this.telefon = telefon;
 		this.password = password;
+
+		this.role=role;
+		this.firstLogin=firstLogin;
 		this.role = Role.PACIJENT.name();
 	}
 
 	public String getRole() {
 		return role;
+
 	}
 
 	public void setRole(String role) {
@@ -155,10 +163,22 @@ public class KorisnikDTO {
 	}
 
 	public KorisnikDTO(Korisnik korisnik) {
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(),
-				korisnik.getJedBrOsig(), korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(),
-				korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(), korisnik.getRoleName());
+
+		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName(),korisnik.getFirst_Login());
 	}
+
+	
+	
+	public Boolean getFirstLogin() {
+		return firstLogin;
+	}
+
+
+	public void setFirstLogin(Boolean firstLogin) {
+		this.firstLogin = firstLogin;
+	}
+
+
 
 	public String getRepeatPassword() {
 		return repeatPassword;
@@ -258,6 +278,34 @@ public class KorisnikDTO {
 
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
+	}
+	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
+			String adresa, String grad, String drzava, String telefon, String password, String repeatPassword,
+			String role, Boolean firstLogin, Boolean isActive) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jedBrOsig = jedBrOsig;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.role = role;
+		this.firstLogin = firstLogin;
+		this.isActive = isActive;
 	}
 
 }

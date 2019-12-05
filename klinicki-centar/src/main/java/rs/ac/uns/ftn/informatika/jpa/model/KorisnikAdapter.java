@@ -12,7 +12,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class KorisnikAdapter implements UserDetails {
 
   
-    private Korisnik user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Korisnik user;
 
 
 

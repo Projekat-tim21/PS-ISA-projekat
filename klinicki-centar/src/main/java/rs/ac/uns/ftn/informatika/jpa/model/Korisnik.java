@@ -20,6 +20,7 @@ public class Korisnik {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Long id;
 	
 	@Column(name = "jedBrOsig", unique = true, nullable = false)
@@ -58,6 +59,16 @@ public class Korisnik {
 	@Column(name="role",nullable=true)
 	private String roleName;
 	
+	@Column(name="login", nullable=true)
+	private Boolean first_Login;
+	
+	public Boolean getFirst_Login() {
+		return first_Login;
+	}
+
+	public void setFirst_Login(Boolean first_Login) {
+		this.first_Login = first_Login;
+    
 	@Column(name = "datum", nullable = true)
 	private String datum;
 	
@@ -225,6 +236,28 @@ public class Korisnik {
 		this.password = sifra;
 		this.roleName=Role.PACIJENT.name();
 		
+	}
+	
+	
+
+	public Korisnik(Long id, String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
+			String grad, String drzava, String telefon, String password, Boolean isActive, String roleName,
+			Boolean first_Login) {
+		super();
+		this.id = id;
+		this.jedBrOsig = jedBrOsig;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.isActive = isActive;
+		this.roleName = roleName;
+		this.first_Login = first_Login;
 	}
 
 

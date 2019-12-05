@@ -56,5 +56,47 @@ public class EmailService {
 
 		System.out.println("Email poslat!");
 	}
+	
+	public void sendNotificaitionZaAdminaKC(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje emaila za admina kc");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Administrator KC");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nPostavljeni ste za administratora klinickog centra.");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+	
+	public void sendNotificaitionOdobrenaRegistracija(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje email potvrde registracije");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Administrator KC");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nVasa registracija je potvrdjena");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+	
+	public void sendNotificaitionOdbijenaRegistracija(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje email potvrde registracije");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Administrator KC");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nVasa registracija je odbijena");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
 
 }
