@@ -103,11 +103,17 @@ public class KorisnikContreller {
 			System.out.println("OVDE " + k.getRoleName() +"  "+ k.getId());
 			
 			System.out.println("Koja je uloga u klasi"+Role.ADMIN.name());
-			System.out.println("Korisnikova uloga"+k.getRoleName());
+			System.out.println("Korisnikova uloga"+k.getRoleName()+"prvi login"+k.getFirst_Login());
 			
 			if(k.getRoleName().equals(Role.ADMIN.name())) {
 				
+				if(k.getFirst_Login()==true) {
+					k.setFirst_Login(false);
+					return "firstLogin";
+					
+				}else {
 				return "admin";
+				}
 			}else if(k.getRoleName().equals(Role.LEKAR.name())) {
 				return "lekarStranica";
 			}else{

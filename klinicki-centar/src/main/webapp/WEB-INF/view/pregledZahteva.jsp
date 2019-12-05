@@ -17,6 +17,7 @@
 			<div class="navbar-collapse collapse">
 			<h2>ADMINISTRATOR</h2>
 				<ul class="nav navbar-nav">
+				<li><a href="/sviIzBaze">Pregled svih</a></li>
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
@@ -66,13 +67,9 @@
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
 									<td>
-                                            <a href="/update" id="update_${korisnik.getId()}" class="updateData"
-                                               onclick="event.preventDefault();"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
-                                            <a href="/save" id="save_${korisnik.getId()}" class="saveData"
-                                               onclick="event.preventDefault();saveData(${korisnik.getId()});"
-                                               style="display: none;"><span class="btn-label"><img src="static/svg/heart.svg"></span></a>
+                                        <a href="/enable/${korisnik.getId()}" class="saveData"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
                                         </td>
-                                        <td><a href="/delete/${korisnik.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
+                                        <td><a href="/disable/${korisnik.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
                                         </td>
 					<!--  				<td>${korisnik.password}</td>  -->
 								</tr>

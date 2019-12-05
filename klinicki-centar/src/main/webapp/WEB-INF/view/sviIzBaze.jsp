@@ -36,7 +36,7 @@ body,html {
 			<div class="navbar-collapse collapse">
 			<h2>ADMINISTRATOR</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/sviIzBaze">Pregled svih</a></li>
+				<li><a href="/sviIzBaze">Pregled svih</a></li>
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
@@ -49,7 +49,55 @@ body,html {
 		</div>
 	</div>
 	
- <div class="bg"></div>
+	<c:choose>
+	<c:when test="${mode=='ALL_USERS' }">
+			<div class="container text-center" id="tasksDiv">
+				<h3>Svi korisnici</h3>
+				<hr>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Korisnicko ime</th>
+								<th>Ime</th>
+								<th>Prezime</th>
+								<th>JBO</th>
+								<th>Email</th>
+								<th>Adresa</th>
+								<th>Grad</th>
+								<th>Drzava</th>
+								<th>Telefon</th>
+								<th>Stautus</th>
+						<!--		<th>Sifra</th>  -->
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="korisnik" items="${korisnici }">
+								<tr>
+									<td>${korisnik.id}</td>
+									<td>${korisnik.username}</td>
+									<td>${korisnik.ime}</td>
+									<td>${korisnik.prezime}</td>
+									<td>${korisnik.jedBrOsig}</td>
+									<td>${korisnik.email}</td>
+									<td>${korisnik.adresa}</td>
+									<td>${korisnik.grad}</td>
+									<td>${korisnik.drzava}</td>
+									<td>${korisnik.telefon}</td>
+									<td>${korisnik.isActive }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</c:when>
+</c:choose>
+	
+	
+	
+<!--  <div class="bg"></div>-->
 <div class="footer">
     Copyright &copy; 2019
 </div>

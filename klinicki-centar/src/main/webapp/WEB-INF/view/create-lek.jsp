@@ -17,6 +17,7 @@
 			<div class="navbar-collapse collapse">
 			<h2>ADMINISTRATOR</h2>
 				<ul class="nav navbar-nav">
+				<li><a href="/sviIzBaze">Pregled svih</a></li>
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
@@ -72,7 +73,7 @@
     </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="resources/js/app.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/app.js"></script>
 </body>
 </html>

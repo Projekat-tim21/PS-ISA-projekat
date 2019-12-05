@@ -100,7 +100,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/klinike").permitAll()
 		.antMatchers("/adminiKlinike").permitAll()
 		.antMatchers("/dijagnoze").permitAll()
-
+		.antMatchers("/editpassword/*").permitAll()
+		.antMatchers("/firstLogin/*").permitAll()
 		.antMatchers("/addNewLek").permitAll()
 		.antMatchers("/noviLek").permitAll()
 		.antMatchers("/delete/*").permitAll()
@@ -112,7 +113,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/saveDijagnoza").permitAll()
 		.antMatchers("/pregledSvihAdmina").permitAll()
 		.antMatchers("/addNewAdminKC").permitAll()
-	
+		.antMatchers("/noviAdminKC").permitAll()
+		.antMatchers("/disable/*").permitAll()
+		.antMatchers("/enable/*").permitAll()
+		.antMatchers("/sviIzBaze").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

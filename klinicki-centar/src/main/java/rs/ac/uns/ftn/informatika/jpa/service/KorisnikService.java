@@ -37,8 +37,20 @@ public class KorisnikService {
 			korisnici.add(korisnik);
 		}
 		return korisnici;
-	}	
+	}
 	
+	
+	
+	public List<Korisnik> pokaziSveZahteve() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("PACIJENT")) {
+			if(korisnik.getIsActive()==false) {
+				korisnici.add(korisnik);
+			}
+		}
+		return korisnici;
+	}
 	
 	public List<Korisnik> pokaziSvePacijente() {
 		// TODO Auto-generated method stub

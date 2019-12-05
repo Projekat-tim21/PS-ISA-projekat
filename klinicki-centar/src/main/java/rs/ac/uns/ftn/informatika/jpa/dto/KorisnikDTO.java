@@ -19,6 +19,8 @@ public class KorisnikDTO {
 	private String repeatPassword;
 	private String role;
 	private Boolean firstLogin;
+	private Boolean isActive;
+
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
 			String adresa, String grad, String drzava, String telefon, String password, String role,Boolean firstLogin) {
@@ -167,6 +169,34 @@ public class KorisnikDTO {
 
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
+	}
+	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
+			String adresa, String grad, String drzava, String telefon, String password, String repeatPassword,
+			String role, Boolean firstLogin, Boolean isActive) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jedBrOsig = jedBrOsig;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.role = role;
+		this.firstLogin = firstLogin;
+		this.isActive = isActive;
 	}
 
 }

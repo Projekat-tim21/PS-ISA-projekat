@@ -18,7 +18,9 @@
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 			<h2>ADMINISTRATOR</h2>
+			
 				<ul class="nav navbar-nav">
+				<li><a href="/sviIzBaze">Pregled svih</a></li>
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>

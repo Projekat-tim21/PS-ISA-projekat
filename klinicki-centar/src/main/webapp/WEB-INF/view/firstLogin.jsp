@@ -5,16 +5,16 @@
 <head>
 <meta charset="ISO-8859-1">
 		<title>Prvi put ulogovan administrator</title>
-		<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
 	</head>
 	<body>
 		
 		<div th:if = "${info}" class="alert alert-danger" th:text = "${info}"></div>
 		
-		<h1 th:text = "'Hello: ' + ${admin.name}"></h1>
-		<h1 th:text = "'Ovo je Vasa stara lozinka:' + ${admin.password}"></h1>
+		<h1 th:text = "'Hello: ' + ${korisnik.username}"></h1>
+		<h1 th:text = "'Ovo je Vasa stara lozinka:' + ${korisnik.password}"></h1>
 		<h1>Molimo Vas izmenite Vasu lozinku!</h1>
-		<form th:action="@{'/fanzone/profile/' + ${admin.id} + '/editpassword'}" th:object="${admin}" th:method="PUT">
+		<form th:action="@{'/editpassword'+${korisnik.id}}" th:object="${korisnik}" th:method="PUT">
 			<table>
 				
 				<tr>
@@ -29,6 +29,6 @@
 				</tr>
 			</table>
 		</form>
-		<script src="/scripts/jquery-3.2.1.min.js"></script>
-		<script src="/bootstrap-3.3.7/bootstrap.min.js"></script>
+		<script src="static/js/jquery-1.11.1.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
 	</body>

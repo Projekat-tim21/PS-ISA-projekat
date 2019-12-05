@@ -2,8 +2,11 @@ package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,11 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.DijagnozaDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.LekDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.Response;
 import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
+import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
+import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
@@ -26,6 +33,12 @@ import rs.uns.ac.ftn.informatika.jpa.constatns.AppConstant;
 
 @Controller
 public class AdminKCController {
+	
+
+	private Logger logger = LoggerFactory.getLogger(AdminKCController.class);
+	
+	@Autowired
+	private EmailService emailService;
 	
 	 @Autowired
 	    private KorisnikService korisnikService;
@@ -147,6 +160,10 @@ public class AdminKCController {
 	    public String noviLek(@ModelAttribute LekDTO lek) {
 	        String result = "redirect:/";
 	        Lek dbLek=lekService.findBySifra(lek.getSifra());
+	        Lek lekic=new Lek();
+	        lekic.setNaziv(lek.getNaziv());
+	        lekic.setDodatno(lek.getDodatno());
+	        lekic.setSifra(lek.getSifra());
 	        if(lek.getNaziv()==null || lek.getNaziv().trim().isEmpty()) {
 	        	result = "redirect:/addNewLek?error=Unesite naziv";
 	        }
@@ -156,12 +173,57 @@ public class AdminKCController {
 	            result = "redirect:/addNewLek?error=Enter valid last name";
 	        } 
 	        if (dbLek == null) {
-	            lekService.sacuvajLek(dbLek);
+	            lekService.sacuvajLek(lekic);
 	            result="redirect:/lekovi";
 	        } else {
 	            result = "redirect:/addNewLek?error=Lek vec postoji!";
 	        }
 
+	        return result;
+	    }
+	    
+	    @PostMapping("/noviAdminKC")
+	    public String noviAdminKC(@ModelAttribute KorisnikDTO korisnik) {
+	        String result = "redirect:/";
+	        Korisnik dbKorisnik=korisnikService.findByUsername(korisnik.getUsername());
+	        Korisnik novi=new Korisnik();
+	        novi.setUsername(korisnik.getUsername());
+	        novi.setIme(korisnik.getIme());
+	        System.out.println(novi.getIme());
+	        novi.setPrezime(korisnik.getPrezime());
+	        novi.setEmail(korisnik.getEmail());
+	        novi.setPassword(korisnik.getPassword());
+	        novi.setDrzava(korisnik.getDrzava());
+	        novi.setGrad(korisnik.getGrad());
+	        novi.setAdresa(korisnik.getAdresa());
+	        novi.setTelefon(korisnik.getTelefon());
+	        novi.setJedBrOsig(korisnik.getJedBrOsig());
+	        novi.setFirst_Login(true);
+	        novi.setIsActive(false);
+	        novi.setRoleName(Role.ADMIN.name());
+	        
+	    
+	        if(korisnik.getUsername()==null || korisnik.getUsername().trim().isEmpty()) {
+	        	result = "redirect:/addNewAdminKC?error=Unesite naziv";
+	        }
+	        if (korisnik.getPassword() == null || korisnik.getPassword().trim().isEmpty()) {
+	            result = "redirect:/addNewAdminKC?error=Unesite sifru";
+	        } else if (korisnik.getEmail() == null || korisnik.getEmail().trim().isEmpty()) {
+	            result = "redirect:/addNewAdminKC?error=Enter valid last name";
+	        } 
+	        if (dbKorisnik == null) {
+	            korisnikService.saveMogKorisnika(novi); 
+	            result="redirect:/pregledSvihAdmina";
+	        } else {
+	            result = "redirect:/addNewAdminKC?error=Lek vec postoji!";
+	        }
+
+	        try {
+				emailService.sendNotificaitionZaAdminaKC(novi);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
 	        return result;
 	    }
 	    
@@ -191,6 +253,10 @@ public class AdminKCController {
 	    public String novaDijagnoza(@ModelAttribute DijagnozaDTO dijagnoza) {
 	        String result = "redirect:/";
 	        Dijagnoza dbDijagnoza=dijagnozaService.findBySifra(dijagnoza.getSifra());
+	        Dijagnoza dijagnozaN=new Dijagnoza();
+	        dijagnozaN.setNaziv(dijagnoza.getNaziv());
+	        dijagnozaN.setDodatno(dijagnoza.getDodatno());
+	        dijagnozaN.setSifra(dijagnoza.getSifra());
 	        if(dijagnoza.getNaziv()==null || dijagnoza.getNaziv().trim().isEmpty()) {
 	        	result = "redirect:/addNewDijagnoza?error=Unesite naziv";
 	        }
@@ -200,7 +266,7 @@ public class AdminKCController {
 	            result = "redirect:/addNewDijagnoza?error=Enter valid last name";
 	        } 
 	        if (dbDijagnoza == null) {
-	            dijagnozaService.sacuvajDijagnozu(dbDijagnoza);
+	            dijagnozaService.sacuvajDijagnozu(dijagnozaN);
 	            result="redirect:/dijagnoze";
 	        } else {
 	            result = "redirect:/addNewDijagnoza?error=Dijagnoza vec postoji!";
@@ -212,13 +278,21 @@ public class AdminKCController {
 	    
 	    @GetMapping("/zahteviRegistrovanje")
 	    public ModelAndView zahtevi(HttpServletRequest request) {
-	    	request.setAttribute("korisnici", korisnikService.pokaziSveKorisnike());
+	    	request.setAttribute("korisnici", korisnikService.pokaziSveZahteve());
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("pregledZahteva");
 	        return modelAndView;
 	    }
 
+	    @GetMapping("/sviIzBaze")
+	    public ModelAndView svi(HttpServletRequest request) {
+	    	request.setAttribute("korisnici", korisnikService.pokaziSvePacijente());
+			request.setAttribute("mode", "ALL_USERS");
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("sviIzBaze");
+	        return modelAndView;
+	    }
 	    
 	    @GetMapping("/klinike")
 	    public ModelAndView klinike(HttpServletRequest request) {
@@ -298,6 +372,38 @@ public class AdminKCController {
 	        return "redirect:/dijagnoze";
 	    }
 	    
+	    @GetMapping("/disable/{korisnikId}")
+	    public String disable(@PathVariable Long korisnikId) {
+	        Korisnik k=korisnikService.findOne(korisnikId);
+	        k.setIsActive(true);
+	        k.setFirst_Login(false);
+	        korisnikService.saveMogKorisnika(k);
+	        
+	        try {
+				emailService.sendNotificaitionOdbijenaRegistracija(k);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
+	        return "redirect:/zahteviRegistrovanje";
+	    }
+	    
+	    @GetMapping("/enable/{korisnikId}")
+	    public String enable(@PathVariable Long korisnikId) {
+	        Korisnik k=korisnikService.findOne(korisnikId);
+	        k.setIsActive(true);
+	        k.setFirst_Login(true);
+	        korisnikService.saveMogKorisnika(k);
+	        
+	        try {
+				emailService.sendNotificaitionOdobrenaRegistracija(k);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
+	        return "redirect:/zahteviRegistrovanje";
+	    }
+	    
 	    
 	  /*  @ResponseBody
 	    @PostMapping("/save")
@@ -368,6 +474,31 @@ public class AdminKCController {
 	        modelAndView.setViewName("error");
 	        return modelAndView;
 	    }
+	    
+
+		@PreAuthorize("@currentUserServiceImpl.canAccess(principal, #id)")
+		@PostMapping("/editpassword/{id}")
+		public String putEditPassword(@ModelAttribute("korisnik") KorisnikDTO kor,@PathVariable Long id) {
+		
+			Korisnik korisnik = korisnikService.findOne(id);
+			if(!korisnik.getPassword().equals(kor.getPassword())) {
+			System.out.println(korisnik.getUsername());
+		
+				korisnik.setPassword(kor.getPassword());
+				korisnik.setFirst_Login(false);
+				korisnikService.saveMogKorisnika(korisnik);
+				System.out.println(korisnik.getPassword());
+				//map.put("logged", korisnik);
+			}
+			else {
+				System.out.println("Morate promeniti lozinku!");
+				//map.put("info", "Morate promeniti lozinku!");
+				return "firstLogin";
+			}
+			
+			return "admin";
+		}
+	    
 	    
 	
 }
