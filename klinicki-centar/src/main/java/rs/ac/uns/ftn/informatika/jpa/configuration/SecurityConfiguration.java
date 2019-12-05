@@ -102,7 +102,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/klinike").permitAll()
 		.antMatchers("/adminiKlinike").permitAll()
 		.antMatchers("/dijagnoze").permitAll()
-		.antMatchers("/editpassword/*").permitAll()
+		.antMatchers("/editpassword").permitAll()
 		.antMatchers("/firstLogin/*").permitAll()
 		.antMatchers("/addNewLek").permitAll()
 		.antMatchers("/noviLek").permitAll()
@@ -125,6 +125,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/naLogin").permitAll()
 		.antMatchers("/korakUnazadNaLogin").permitAll()
 		.antMatchers("/kartonZ").permitAll()	
+		.antMatchers("/admin").permitAll()	
+		.antMatchers("/sacuvajNovaLozinka").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();
