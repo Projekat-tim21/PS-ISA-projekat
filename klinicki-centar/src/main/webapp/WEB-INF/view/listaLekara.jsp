@@ -48,11 +48,34 @@ body {
 		<c:when test="${mode=='ALL_LEKARI' }">
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista lekara</h3>
-				<hr>
+				
 				<div class="table-responsive">
+					<h4>Pretrazite tabelu po sledecim kriterijumima:</h4>
+
+					<table class="table">
+						<tr>
+							<th><input  type="text" id="myInput1" onkeyup="myFunction1()"
+								placeholder="ime"></th>
+							<th><input  type="text" id="myInput2" onkeyup="myFunction2()"
+								placeholder="prezime"></th>
+							<th><input  type="text" id="myInput3" onkeyup="myFunction3()"
+								placeholder="tip pregleda"></th>
+							<th><input  type="text" id="myInput4" onkeyup="myFunction4()"
+								placeholder="ocena"></th>
+						</tr>
+					</table>
+<!--  
+
 					<input type="text" id="myInput" onkeyup="myFunction()"
-						placeholder="Pretrazi tabelu po tipu pregleda..">
+						placeholder="ime">
+					 <input type="text" id="myInput2"
+						onkeyup="myFunction2()" placeholder="prezime"> 
+					<input type="text" id="myInput3" onkeyup="myFunction3()"
+						placeholder="tip pregleda"> 
+					<input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="ocena">
+-->
 					<table id="indextable" class="table table-striped table-bordered">
+
 						<thead>
 							<tr>
 								<th>Id</th>
@@ -64,6 +87,7 @@ body {
 							</tr>
 						</thead>
 						<tbody>
+
 							<c:forEach var="lip" items="${lipi}">
 								<tr>
 									<td>${lip.id}</td>
@@ -71,20 +95,21 @@ body {
 									<td>${lip.prezime}</td>
 									<td>${lip.tipspecijalizacije}</td>
 									<td>${lip.ocena}</td>
-									<td><a href="/listaSvihTerminaPacijent?id=${lip.id}">Slobodni termini</a></td>
+									<td><a href="/listaSvihTerminaPacijent?id=${lip.id}">Slobodni
+											termini</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			
-	
+
+
 		</c:when>
-		
+
 		<c:when test="${mode=='ALL_TERMINI' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Lista slobodnih termina</h3>
+				<h3>Lista slobodnih termina    ${ime}</h3>
 				<hr>
 				<!-- 	<h4>Sortiraj klinike</h4>
 			<span class="form-group">	
@@ -117,21 +142,21 @@ body {
 			</div>
 
 		</c:when>
-		
-		
+
+
 	</c:choose>
 
 	<script>
-//za listu
-	function addItem(list, inputField) { 
-		  var list = document.getElementById(list);
-		  var listItem = document.createElement("li");
-		  listItem.innerText = inputField.value; // passed the field. 
-		  list.appendChild(listItem);
-		  return false; // stop submission
+		//za listu
+		function addItem(list, inputField) {
+			var list = document.getElementById(list);
+			var listItem = document.createElement("li");
+			listItem.innerText = inputField.value; // passed the field. 
+			list.appendChild(listItem);
+			return false; // stop submission
 		}
 
-//za sort
+		//za sort
 		var TableIDvalue = "indextable";
 
 		var TableLastSortedColumn = -1;
@@ -279,9 +304,47 @@ body {
 			return "" + String(y) + "" + String(m) + "" + String(d) + "";
 		} // function GetDateSortingKey()
 
-		function myFunction() {
+		function myFunction1() {
 			var input, filter, table, tr, td, i, txtValue;
-			input = document.getElementById("myInput");
+			input = document.getElementById("myInput1");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("indextable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+
+		function myFunction2() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput2");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("indextable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+
+		function myFunction3() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput3");
 			filter = input.value.toUpperCase();
 			table = document.getElementById("indextable");
 			tr = table.getElementsByTagName("tr");
@@ -298,18 +361,51 @@ body {
 			}
 		}
 
+		function myFunction5() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput5");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("indextable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[5];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
 
+		function myFunction4() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput4");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("indextable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[4];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
 
+		function getInputValue() {
+			// Selecting the input element and get its value 
+			var inputVal = document.getElementById("datumInput").value;
 
-		 function getInputValue(){
-	            // Selecting the input element and get its value 
-	            var inputVal = document.getElementById("datumInput").value;
-	            
-	            // Displaying the value
-	            alert(inputVal);
-	        }
-
-		
+			// Displaying the value
+			alert(inputVal);
+		}
 	</script>
 
 

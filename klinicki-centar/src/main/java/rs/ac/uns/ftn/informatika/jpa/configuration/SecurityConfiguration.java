@@ -133,6 +133,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/test").permitAll()
 		.antMatchers("/listaSvihTermina").permitAll()
 		.antMatchers("/listaSvihTerminaPacijent").permitAll()
+		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

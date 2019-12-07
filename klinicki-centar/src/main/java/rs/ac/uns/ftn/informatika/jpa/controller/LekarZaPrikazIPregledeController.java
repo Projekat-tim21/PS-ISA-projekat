@@ -62,7 +62,6 @@ public class LekarZaPrikazIPregledeController {
 	}
 	
 	@PostMapping("/sacuvajTermine2") // korisnik povezan sa valuom iz js
-	//@RequestMapping(value = "/sacuvajTermine2/{id}", method = RequestMethod.POST)
 	public String cuvajTermine(@ModelAttribute TerminiSaId termini, BindingResult bindingResult,
 			HttpServletRequest request) {
 		//System.out.println("id je" + id);
@@ -91,8 +90,6 @@ public class LekarZaPrikazIPregledeController {
 		long lekarId = Long.parseLong(idZaPoredjenje);
 		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
 		for(TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
-			System.out.println("hej hej");
-			System.out.println(termin.getLekarId() + termin.getTermin() + termin.getId());
 			termini.add(termin);
 		}
 		request.setAttribute("termini", termini);
@@ -110,8 +107,6 @@ public class LekarZaPrikazIPregledeController {
 		long lekarId = Long.parseLong(idZaPoredjenje);
 		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
 		for(TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
-			System.out.println("hej hej");
-			System.out.println(termin.getLekarId() + termin.getTermin() + termin.getId());
 			termini.add(termin);
 		}
 		request.setAttribute("termini", termini);
