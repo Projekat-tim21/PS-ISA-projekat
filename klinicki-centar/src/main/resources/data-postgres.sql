@@ -19,14 +19,11 @@ insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkic
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
 
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, '27.12.2019', 'Jovan Jovic', '203', 'operacija ociju', '15min', '09:00');
+insert into pregled(cena, datum, lekar, sala, tip, trajanje, vreme, zakazan) values (500, '27.12.2019.', 'Jovan Jovic', '203', 'operacija ociju', '15min', '09:00', TRUE);
+insert into pregled(cena, datum, lekar, sala, tip, trajanje, vreme, zakazan) values (3000, '25.10.2019.', 'Marko Markovic', '5', 'operacija krajnika', '30min', '14:00', FALSE);
 
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'operacija ociju', '1h', '09:00');
 
-
-
-insert into pregled (datum, satnica, sala, lekar, cena, tip) values ('2019-12-06', '10', '5', 'Jova', '3000.00', 'opsta praksa');
-insert into pregled (datum, satnica, sala, lekar, cena, tip) values ('2019-10-10', '11', '2', 'Marko', '2000.00', 'kardioloski pregled');
 
 insert into course (name) values ('Matematika');
 insert into course (name) values ('Osnove programiranja');

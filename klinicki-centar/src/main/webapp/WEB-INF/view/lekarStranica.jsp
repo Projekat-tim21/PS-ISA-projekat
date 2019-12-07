@@ -23,7 +23,7 @@
 		<div>
 				<ul class="nav navbar-nav">
 					<li><a href="/pregledSvihPacijenataMetoda">Prikazi sve pacijente</a></li>
-					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
+					<li><a href="/kartonZ">Prikazi profil pacijenta</a></li>
 					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 				
 				</ul>

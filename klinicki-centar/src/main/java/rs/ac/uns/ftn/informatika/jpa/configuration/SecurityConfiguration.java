@@ -94,7 +94,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sacuvaj").permitAll()
 		.antMatchers("/logout").permitAll()
 		.antMatchers("/prikazOsnovnihInfo").permitAll()
-		.antMatchers("/pacijenti").permitAll()
 		.antMatchers("/zakazivanjePregleda").permitAll()
 		.antMatchers("/listaSvihKlinika").permitAll()
 		.antMatchers("/preglediIoperacijePrikaz").permitAll()
@@ -102,7 +101,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/prikaziListuOperacija").permitAll()
 		.antMatchers("/naLogin").permitAll()
 		.antMatchers("/korakUnazadNaLogin").permitAll()
-		.antMatchers("/kartonZ").permitAll()	
+		.antMatchers("/kartonZ").permitAll()
+		.antMatchers("/zakazivanjePregledaOdobreno").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

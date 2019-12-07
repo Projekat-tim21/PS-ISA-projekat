@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 
@@ -19,7 +21,7 @@ public class KorisnikService {
 
 	private final KorisnikRepository korisnikRepository;
 	
-	
+	@Autowired
 	private PregledRepository pregledRepo;
 	
 	KorisnikDTO korDto;
@@ -86,6 +88,8 @@ public class KorisnikService {
 		korisnikRepository.deleteById(id);
 	}
 
+
+	
 
 
 	//public Korisnik findById(String id) {

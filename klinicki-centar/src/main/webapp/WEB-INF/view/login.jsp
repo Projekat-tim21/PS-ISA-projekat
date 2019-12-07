@@ -20,7 +20,8 @@
 					<li><a href="/izmenaPodatakaizBara?id=${id}">Izmena podataka</a></li>
 				 	<li><a href="/listaSvihKlinika">Lista klinika</a></li> 	
 				 	<li><a href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
-				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
+				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a></li>
+				 	<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			

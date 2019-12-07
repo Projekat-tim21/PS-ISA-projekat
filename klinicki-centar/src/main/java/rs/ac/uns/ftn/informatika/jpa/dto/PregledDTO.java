@@ -6,25 +6,35 @@ public class PregledDTO {
 	
 	private String id;
 	private String datum;
-	private String satnica;
+	private String vreme;
 	private String sala;
 	private String lekar;
 	private String cena;
-	//private String trajanjePregleda;
+	private String trajanje;
 	private String tip;
+	private Boolean zakazan;
 	
-	public PregledDTO(String id, String datum, String satnica, String sala, String lekar, String cena, String popust, String tip) {
+	public PregledDTO(String id, String datum, String vreme, String sala, String lekar, String cena, String trajanje, String tip, Boolean zakazan) {
 		super();
 		this.id = id;
 		this.datum = datum;
-		this.satnica = satnica;
+		this.vreme = vreme;
 		this.sala = sala;
 		this.lekar = lekar;
 		this.cena = cena;
-	//	this.trajanjePregleda = trajanjePregleda;
+		this.trajanje = trajanje;
 		this.tip = tip;
+		this.zakazan = zakazan;
 	}
 	
+	public Boolean getZakazan() {
+		return zakazan;
+	}
+
+	public void setZakazan(Boolean zakazan) {
+		this.zakazan = zakazan;
+	}
+
 	public PregledDTO() {
 		
 	}
@@ -45,12 +55,12 @@ public class PregledDTO {
 		this.datum = datum;
 	}
 
-	public String getSatnica() {
-		return satnica;
+	public String getVreme() {
+		return vreme;
 	}
 
-	public void setSatnica(String satnica) {
-		this.satnica = satnica;
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
 	}
 
 	public String getSala() {
@@ -77,13 +87,13 @@ public class PregledDTO {
 		this.cena = cena;
 	}
 
-	/*public String getTrajanjePregleda() {
-		return trajanjePregleda;
+	public String getTrajanje() {
+		return trajanje;
 	}
 
-	public void setTrajanjePregleda(String trajanjePregleda) {
-		this.trajanjePregleda = trajanjePregleda;
-	}*/
+	public void setTrajanje(String trajanje) {
+		this.trajanje = trajanje;
+	}
 
 	public String getTip() {
 		return tip;

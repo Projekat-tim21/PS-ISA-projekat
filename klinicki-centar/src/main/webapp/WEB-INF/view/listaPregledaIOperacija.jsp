@@ -20,6 +20,7 @@
 					<li><a href="/prikaziListuOperacija">Lista operacija</a></li>
 					<li><a href="/prikaziListuPregleda">Lista pregleda</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
+					
 				</ul>
 
 			</div>

@@ -1,15 +1,11 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -28,8 +24,8 @@ public class Pregled {
 	@JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
 	private String datum;
 	
-	@Column(name = "satnica", unique = true, nullable = false)
-	private String satnica;
+	@Column(name = "vreme", unique = true, nullable = false)
+	private String vreme;
 	
 	@Column(name = "sala", nullable = false)
 	private String sala;
@@ -40,20 +36,34 @@ public class Pregled {
 	@Column(name = "cena", nullable = false)
 	private int cena;
 	
-	//@Column(name = "trajanjePregleda", nullable = false)
-	//private String trajanjePregleda;
-	
 	@Column(name = "tip", nullable = false)
 	private String tip;
 
 	@Column(name="trajanje", nullable=false)
 	String trajanje;
 	
+	@Column(name = "zakazan", nullable = false)
+	Boolean zakazan;
 	
-	public long getId() {
-		return id;
+	public Boolean getZakazan() {
+		return zakazan;
 	}
 
+	public void setZakazan(Boolean zakazan) {
+		this.zakazan = zakazan;
+	}
+	
+/*	public Korisnik getZakazao() {
+		return zakazao;
+	}
+	
+	public void setZakazao(Korisnik zakazao) {
+		this.zakazao = zakazao;
+	}
+	*/
+	public Long getId() {
+		return id;
+	}
 
 
 	public void setId(long id) {
@@ -65,12 +75,12 @@ public class Pregled {
 		super();
 	}
 
-	public Pregled(Long id, String datum, String satnica, String tip, String trajanje, String sala, String lekar,
+	public Pregled(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
 			int cena) {
 		super();
 		this.id = id;
 		this.datum = datum;
-		this.satnica = satnica;
+		this.vreme = vreme;
 		this.tip = tip;
 		this.trajanje = trajanje;
 		this.sala = sala;
@@ -78,9 +88,6 @@ public class Pregled {
 		this.cena = cena;
 	}
 
-	public Long getId() {
-		return id;
-	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -95,14 +102,14 @@ public class Pregled {
 		this.datum = datum;
 	}
 
-	public String getSatnica() {
-		return satnica;
+	public String getVreme() {
+		return vreme;
 	}
 
 
 
-	public void setSatnica(String satnica) {
-		this.satnica = satnica;
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
 	}
 
 
