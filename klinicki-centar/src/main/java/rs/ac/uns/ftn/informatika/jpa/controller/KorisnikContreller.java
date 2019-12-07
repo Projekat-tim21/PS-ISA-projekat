@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
@@ -56,10 +57,6 @@ public class KorisnikContreller {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_LOGIN");
-	
-		
-		
-		
 		return "welcomepage";
 	}
 
@@ -91,7 +88,11 @@ public class KorisnikContreller {
 			// String password = request.getParameter("password");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-
+//samo privremeno da se mogu zakazati pregledi-username 3.12
+			if(k.getUsername().equals("ak") && k.getPassword().equals("ak")) {
+				return "adminZaPreglede";
+			}
+			
 			System.out.println("OVDE " + session.getAttribute(username));
 			System.out.println(k.getRoleName());
       if(k.getRoleName().equals(Role.ADMIN.name())) {
@@ -126,11 +127,6 @@ public class KorisnikContreller {
 		return "welcomepage";
 	}
 
-	@RequestMapping("/lekarStranica")
-	public String lekarStranica(HttpServletRequest request) {
-		return "lekarStranica";
-	}
-	
 	
 
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
@@ -173,7 +169,7 @@ public class KorisnikContreller {
 		}
 
 	}
-
+	
 	@GetMapping("/pokazi-korisnika")
 	public String pokaziSveKorisnike(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 
@@ -53,6 +54,7 @@ public class KorisnikService {
 		return korisnici;
 	}
 	
+
 	public List<Korisnik> pokaziSvePacijente() {
 		// TODO Auto-generated method stub
 		List<Korisnik> korisnici=new ArrayList<Korisnik>();
@@ -115,8 +117,14 @@ public class KorisnikService {
 	public void deleteMyUser(Long id) {
 		korisnikRepository.deleteById(id);
 	}
+/*
+	public void saveDatum(LekarIPregledi novidatum) {
+		// TODO Auto-generated method stub
+		korisnikRepository.saveDatum(novidatum);
+	}
+*/
 
-
+	
 
 
 	//public Korisnik findById(String id) {
