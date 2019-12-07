@@ -127,6 +127,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/kartonZ").permitAll()	
 		.antMatchers("/admin").permitAll()	
 		.antMatchers("/sacuvajNovaLozinka").permitAll()
+		.antMatchers("/radniKalendar").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

@@ -25,6 +25,7 @@
 					<li><a href="/pregledSvihPacijenataMetoda">Prikazi sve pacijente</a></li>
 					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
 					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
+					<li><a href="/radniKalendar">Radni kalendar</a></li>
 				
 				</ul>
 		</div>

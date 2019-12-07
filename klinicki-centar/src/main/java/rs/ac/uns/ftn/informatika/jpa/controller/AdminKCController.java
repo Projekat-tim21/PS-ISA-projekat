@@ -397,6 +397,22 @@ public class AdminKCController {
 	        return "redirect:/zahteviRegistrovanje";
 	    }
 	    
+	    @GetMapping("/reject/{korisnikId}")
+	    public String reject(@PathVariable Long korisnikId) {
+	        Korisnik k=korisnikService.findOne(korisnikId);
+	        k.setIsActive(true);
+	        k.setFirst_Login(false);
+	        korisnikService.saveMogKorisnika(k);
+	        
+	        try {
+				emailService.sendNotificaitionOdbijenaRegistracija(k);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
+	        return "redirect:/zahteviRegistrovanje";
+	    }
+	    
 	    @GetMapping("/enable/{korisnikId}")
 	    public String enable(@PathVariable Long korisnikId) {
 	        Korisnik k=korisnikService.findOne(korisnikId);
