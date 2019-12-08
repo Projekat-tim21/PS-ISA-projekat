@@ -18,9 +18,22 @@ public class KorisnikDTO {
 	private String password;
 	private String repeatPassword;
 	private String role;
+	private Boolean firstLogin;
+	private Boolean isActive;
+	private String datum;
+	private String pol;
+	private String visina;
+	private String tezina;
+	private String kgrupa;
+	private String dioptrija;
+	private String alergije;
+	private String bolesti;
+	private String anamneza;
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
-			String adresa, String grad, String drzava, String telefon, String password, String role) {
+			String adresa, String grad, String drzava, String telefon, String password, String repeatPassword,
+			String role, String datum, String pol, String visina, String tezina, String kgrupa, String dioptrija,
+			String alergije, String bolesti, String anamneza) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -33,11 +46,116 @@ public class KorisnikDTO {
 		this.drzava = drzava;
 		this.telefon = telefon;
 		this.password = password;
+		this.repeatPassword = repeatPassword;
+		this.role = role;
+		this.datum = datum;
+		this.pol = pol;
+		this.visina = visina;
+		this.tezina = tezina;
+		this.kgrupa = kgrupa;
+		this.dioptrija = dioptrija;
+		this.alergije = alergije;
+		this.bolesti = bolesti;
+		this.anamneza = anamneza;
+	}
+
+	public String getDatum() {
+		return datum;
+	}
+
+	public void setDatum(String datum) {
+		this.datum = datum;
+	}
+
+	public String getPol() {
+		return pol;
+	}
+
+	public void setPol(String pol) {
+		this.pol = pol;
+	}
+
+	public String getVisina() {
+		return visina;
+	}
+
+	public void setVisina(String visina) {
+		this.visina = visina;
+	}
+
+	public String getTezina() {
+		return tezina;
+	}
+
+	public void setTezina(String tezina) {
+		this.tezina = tezina;
+	}
+
+	public String getKgrupa() {
+		return kgrupa;
+	}
+
+	public void setKgrupa(String kgrupa) {
+		this.kgrupa = kgrupa;
+	}
+
+	public String getDioptrija() {
+		return dioptrija;
+	}
+
+	public void setDioptrija(String dioptrija) {
+		this.dioptrija = dioptrija;
+	}
+
+	public String getAlergije() {
+		return alergije;
+	}
+
+	public void setAlergije(String alergije) {
+		this.alergije = alergije;
+	}
+
+	public String getBolesti() {
+		return bolesti;
+	}
+
+	public void setBolesti(String bolesti) {
+		this.bolesti = bolesti;
+	}
+
+	public String getAnamneza() {
+		return anamneza;
+	}
+
+	public void setAnamneza(String anamneza) {
+		this.anamneza = anamneza;
+	}
+
+	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
+			String adresa, String grad, String drzava, String telefon, String password, String role,Boolean firstLogin) {
+		
+
+		super();
+		this.id = id;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jedBrOsig = jedBrOsig;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+
+		this.role=role;
+		this.firstLogin=firstLogin;
 		this.role = Role.PACIJENT.name();
 	}
 
 	public String getRole() {
 		return role;
+
 	}
 
 	public void setRole(String role) {
@@ -45,10 +163,22 @@ public class KorisnikDTO {
 	}
 
 	public KorisnikDTO(Korisnik korisnik) {
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(),
-				korisnik.getJedBrOsig(), korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(),
-				korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(), korisnik.getRoleName());
+
+		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName(),korisnik.getFirst_Login());
 	}
+
+	
+	
+	public Boolean getFirstLogin() {
+		return firstLogin;
+	}
+
+
+	public void setFirstLogin(Boolean firstLogin) {
+		this.firstLogin = firstLogin;
+	}
+
+
 
 	public String getRepeatPassword() {
 		return repeatPassword;
@@ -148,6 +278,34 @@ public class KorisnikDTO {
 
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
+	}
+	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
+			String adresa, String grad, String drzava, String telefon, String password, String repeatPassword,
+			String role, Boolean firstLogin, Boolean isActive) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jedBrOsig = jedBrOsig;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.role = role;
+		this.firstLogin = firstLogin;
+		this.isActive = isActive;
 	}
 
 }

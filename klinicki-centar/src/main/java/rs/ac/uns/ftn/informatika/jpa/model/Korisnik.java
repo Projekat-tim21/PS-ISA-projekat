@@ -1,8 +1,5 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
-import java.security.Timestamp;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +17,7 @@ public class Korisnik {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Long id;
 	
 	@Column(name = "jedBrOsig", unique = true, nullable = false)
@@ -58,6 +56,11 @@ public class Korisnik {
 	@Column(name="role",nullable=true)
 	private String roleName;
 	
+	@Column(name="login", nullable=true)
+	private Boolean first_Login;
+	
+	
+    
 	@Column(name = "datum", nullable = true)
 	private String datum;
 	
@@ -188,6 +191,37 @@ public class Korisnik {
 	public Korisnik() {
 	}
 
+	
+	
+	public Korisnik(Long id, String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
+			String grad, String drzava, String telefon, String password, Boolean isActive, String roleName,
+			String datum, String pol, String visina, String tezina, String kgrupa, String dioptrija, String alergije,
+			String bolesti, String anamneza) {
+		super();
+		this.id = id;
+		this.jedBrOsig = jedBrOsig;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.isActive = isActive;
+		this.roleName = roleName;
+		this.datum = datum;
+		this.pol = pol;
+		this.visina = visina;
+		this.tezina = tezina;
+		this.kgrupa = kgrupa;
+		this.dioptrija = dioptrija;
+		this.alergije = alergije;
+		this.bolesti = bolesti;
+		this.anamneza = anamneza;
+	}
+
 	public Korisnik(String jedBrOsig, String korIme, String ime, String prezime, String email, String adresa,
 			String grad, String drzava, String telefon, String sifra, String roleName) {
 		super();
@@ -203,6 +237,28 @@ public class Korisnik {
 		this.password = sifra;
 		this.roleName=Role.PACIJENT.name();
 		
+	}
+	
+	
+
+	public Korisnik(Long id, String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
+			String grad, String drzava, String telefon, String password, Boolean isActive, String roleName,
+			Boolean first_Login) {
+		super();
+		this.id = id;
+		this.jedBrOsig = jedBrOsig;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.isActive = isActive;
+		this.roleName = roleName;
+		this.first_Login = first_Login;
 	}
 
 
@@ -314,13 +370,15 @@ public class Korisnik {
 		this.roleName = roleName;
 	}
 
-	@Override
-	public String toString() {
-		return "Korisnik [id=" + id + ", jedBrOsig=" + jedBrOsig + ", korIme=" + username + ", ime=" + ime + ", prezime="
-				+ prezime + ", email=" + email + ", adresa=" + adresa + ", grad=" + grad + ", drzava=" + drzava
-				+ ", telefon=" + telefon + ", sifra=" + password + "]";
+	public Boolean getFirst_Login() {
+		return first_Login;
 	}
 
+	public void setFirst_Login(Boolean first_Login) {
+		this.first_Login = first_Login;
+	}
+
+	
 	
 	
 	

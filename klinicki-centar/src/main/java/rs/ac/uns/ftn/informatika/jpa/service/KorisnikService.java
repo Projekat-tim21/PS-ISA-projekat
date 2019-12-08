@@ -6,12 +6,16 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
-import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.PregledJ;
+
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepositoryJ;
 
@@ -41,9 +45,22 @@ public class KorisnikService {
 			korisnici.add(korisnik);
 		}
 		return korisnici;
-	}	
+	}
 	
 	
+	
+	public List<Korisnik> pokaziSveZahteve() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("PACIJENT")) {
+			if(korisnik.getIsActive()==false) {
+				korisnici.add(korisnik);
+			}
+		}
+		return korisnici;
+	}
+	
+
 	public List<Korisnik> pokaziSvePacijente() {
 		// TODO Auto-generated method stub
 		List<Korisnik> korisnici=new ArrayList<Korisnik>();
@@ -52,6 +69,25 @@ public class KorisnikService {
 		}
 		return korisnici;
 	}
+	
+	public List<Korisnik> pokaziAdmineKlinike() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("ADMIN_KLINIKE")) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
+	}
+	
+	public List<Korisnik> pokaziAdmine() {
+		// TODO Auto-generated method stub
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("ADMIN")) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
+	}
+	
 	
 	//public Korisnik findAllData(Long id, String username, String ime, String prezime, String jedBrOsig, String email, String adresa, String grad, String drzava, String telefon, String password) {
 	//	return korisnikRepository.findAllData(id, username, ime, prezime, jedBrOsig, email, adresa, grad, drzava, telefon, password);
@@ -87,7 +123,14 @@ public class KorisnikService {
 	public void deleteMyUser(Long id) {
 		korisnikRepository.deleteById(id);
 	}
+/*
+	public void saveDatum(LekarIPregledi novidatum) {
+		// TODO Auto-generated method stub
+		korisnikRepository.saveDatum(novidatum);
+	}
+*/
 
+	
 
 	
 
@@ -102,7 +145,9 @@ public class KorisnikService {
 	//}
 	
 	
-	
+	 /*   public Page<Korisnik> listUsers(Pageable pageable) {
+	        return korisnikRepository.findAll(pageable);
+	    }*/
 
 	
 

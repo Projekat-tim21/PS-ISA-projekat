@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
@@ -42,6 +43,8 @@ public class KorisnikContreller {
 	@RequestMapping("/")
 	public String Welcome(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
+		
+		
 		return "welcomepage";
 	}
 
@@ -73,6 +76,8 @@ public class KorisnikContreller {
 		k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
+		
+			//Korisnik =korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
 			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
 			// System.out.println("id korisnika je: "+ k.getId());
@@ -83,11 +88,23 @@ public class KorisnikContreller {
 			// String password = request.getParameter("password");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-
+//samo privremeno da se mogu zakazati pregledi-username 3.12
+			if(k.getUsername().equals("ak") && k.getPassword().equals("ak")) {
+				return "adminZaPreglede";
+			}
+			
 			System.out.println("OVDE " + session.getAttribute(username));
 			System.out.println(k.getRoleName());
-
-			if (k.getRoleName().equals(Role.LEKAR.name())) {
+      if(k.getRoleName().equals(Role.ADMIN.name())) {
+				
+				if(k.getFirst_Login()==true) {
+					k.setFirst_Login(false);
+					return "firstLogin";
+					
+				}else {
+				return "admin";
+				}
+			}else if (k.getRoleName().equals(Role.LEKAR.name())) {
 				return "lekarStranica";
 			}
 			session.setAttribute("id", k.getId());
@@ -99,17 +116,13 @@ public class KorisnikContreller {
 		}
 	}
 
+
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_REGISTER");
 		return "welcomepage";
 	}
 
-	@RequestMapping("/lekarStranica")
-	public String lekarStranica(HttpServletRequest request) {
-		return "lekarStranica";
-	}
-	
 	
 
 	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
@@ -152,7 +165,7 @@ public class KorisnikContreller {
 		}
 
 	}
-
+	
 	@GetMapping("/pokazi-korisnika")
 	public String pokaziSveKorisnike(HttpServletRequest request) {
 		request.setAttribute("korisnici", korisnikServis.pokaziSveKorisnike());
@@ -232,9 +245,11 @@ public class KorisnikContreller {
 	}
 
 	@PostMapping("/sacuvajupdateNaLogin") // korisnik povezan sa valuom iz js
-	public String UpdateKorisnik2(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
+	public String UpdateKorisnik2(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
-
+	
+		Korisnik izBaze=korisnikServis.findOne(id);
+		
 		Korisnik k = new Korisnik();
 		Long Idx = korisnikd.getId();
 		k.setId(korisnikd.getId());
@@ -249,6 +264,15 @@ public class KorisnikContreller {
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
 		k.setRoleName(Role.PACIJENT.name());
+		k.setDatum(izBaze.getDatum());
+		k.setPol(izBaze.getPol());
+		k.setVisina(izBaze.getVisina());
+		k.setTezina(izBaze.getTezina());
+		k.setKgrupa(izBaze.getKgrupa());
+		k.setDioptrija(izBaze.getDioptrija());
+		k.setAlergije(izBaze.getAlergije());
+		k.setBolesti(izBaze.getBolesti());
+		k.setAnamneza(izBaze.getAnamneza());
 		k.setId(Idx);
 		korisnikServis.saveMogKorisnika(k);
 
@@ -286,7 +310,8 @@ public class KorisnikContreller {
 	@RequestMapping("/kartonZ")
 	public String prikazZKartona(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
-		//Korisnik k=korisnikServis.findOne(id);
+		Korisnik k=korisnikServis.findOne(id);
+		System.out.println(k.getVisina());
 		request.setAttribute("mode", "MODE_ZKARTON");
 		
 		return "zdravstveniKartonPacijenta";

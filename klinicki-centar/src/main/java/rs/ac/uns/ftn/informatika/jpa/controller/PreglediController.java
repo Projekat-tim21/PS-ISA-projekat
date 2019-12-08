@@ -20,6 +20,11 @@ public class PreglediController {
 	private PregledRepositoryJ pregledRep;
 	
 
+	@RequestMapping("/zakaziPregled1")
+	public String zakaziPregled() {
+		return "zakaziPregled";
+	}
+	
 	@RequestMapping("/preglediIoperacijePrikaz")
 	public String prikazStraniceListaPregledaIOperacija(HttpServletRequest request) {
 		return "listaPregledaIOperacija";
@@ -38,7 +43,10 @@ public class PreglediController {
 		return "loginBezDobrodosli";
 	}
 	
-	
+	@RequestMapping("/zakaziPregledKojiJeDef")
+	public String linkkaZakaziPregledKojiJeUnapreDef(HttpServletRequest request) {
+		return "zaUnapredDefPreg";
+	}
 	
 	@RequestMapping("/zakazivanjePregleda")
 	public String zakaziPregled(HttpServletRequest request, Boolean zakazan) {

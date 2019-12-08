@@ -54,7 +54,9 @@ ul {
 
 button,
 input[type='button'] {
+
     cursor: hand; /*pointer*/
+
 }
 
 button:focus,
@@ -68,7 +70,7 @@ input, textarea {
 }
 
 button {
-   
+
     background: none;
 }
 
@@ -81,6 +83,20 @@ p {
     margin: 0;
 }
 /*
+
+    border: none;
+    background: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+p {
+    margin: 0;
+}
+
 .table-responsive {
     padding-right: 1px;
 }
@@ -96,9 +112,14 @@ p {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+
 */
 /* ----- Typography ----- */
 /*
+
+
+/* ----- Typography ----- */
+
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -153,6 +174,10 @@ strong {
     font-weight: 700;
 }
 
+/*-----------------------------------------------------*/
+/*                   ELEMENTS                          */
+/*-----------------------------------------------------*/
+/* ----- Title ----- */
 
 .title--sbold {
     font-weight: 600;
@@ -230,6 +255,12 @@ a {
     transition: all 0.3s ease;
 }
 
+
+/*-----------------------------------------------------*/
+/*                   OBJECTS                           */
+/*-----------------------------------------------------*/
+/* ----- Section----- */
+
 section {
     position: relative;
 }
@@ -258,12 +289,16 @@ section {
     padding: 0 35px;
 }
 
-
+/* ----- Page Wrapper----- */
+/*Override Grid Bootstrap*/
 @media (min-width: 1200px) {
     .container {
         max-width: 1320px;
     }
 }
+
+
+/*Page Objects*/
 
 .page-wrapper {
     overflow: hidden;
@@ -433,6 +468,12 @@ section {
     padding-bottom: 30px;
 }
 
+
+/*-----------------------------------------------------*/
+/*                   COMPONENTS                        */
+/*-----------------------------------------------------*/
+/* ----- Buttons----- */
+
 .au-btn {
     line-height: 45px;
     padding: 0 35px;
@@ -555,6 +596,8 @@ section {
 }
 
 
+/*Page Loader*/
+
 .page-loader {
     background: #f8f8f8;
     bottom: 0;
@@ -642,6 +685,8 @@ section {
 }
 
 
+/* ----- Form ----- */
+
 .form-header {
     display: -webkit-box;
     display: -webkit-flex;
@@ -672,32 +717,46 @@ section {
 }
 
 .form-header2 .au-input::-webkit-input-placeholder {
-   
+
+    /* WebKit, Blink, Edge */
+
     color: #999;
 }
 
 .form-header2 .au-input:-moz-placeholder {
-    
+
+  
+    /* Mozilla Firefox 4 to 18 */
+
     color: #999;
     opacity: 1;
 }
 
 .form-header2 .au-input::-moz-placeholder {
-   
+
+    /* Mozilla Firefox 19+ */
     color: #999;
     opacity: 1;
 }
 
 .form-header2 .au-input:-ms-input-placeholder {
-    
+
+    /* Internet Explorer 10-11 */
+
     color: #999;
 }
 
 .form-header2 .au-input:-ms-input-placeholder {
-    
+
     color: #999;
 }
 
+
+    /* Microsoft Edge */
+    color: #999;
+}
+
+/* ----- Input ----- */
 
 .au-input {
     line-height: 43px;
@@ -1169,6 +1228,7 @@ section {
 }
 
 
+/* ----- Header ----- */
 .header-desktop {
     background: #f5f5f5;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
@@ -3073,6 +3133,7 @@ section {
     }
 }
 
+/* ----- Overview ----- */
 
 .overview-wrap {
     display: -webkit-box;
@@ -3242,6 +3303,8 @@ section {
     width: 100%;
 }
 
+
+/* ----- Card ----- */
 
 .au-card {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
@@ -4009,6 +4072,8 @@ section {
 }
 
 
+/* ----- Charts ----- */
+
 #chartjs-tooltip {
     opacity: 1;
     position: absolute;
@@ -4210,6 +4275,8 @@ section {
     margin-right: 0;
 }
 
+
+/* ----- Table ----- */
 
 .table {
     margin: 0;
@@ -4726,6 +4793,8 @@ section {
     color: #fa4251;
 }
 
+
+/* ----- Footer ----- */
 .copyright {
     text-align: center;
     padding: 60px 0;
@@ -4740,6 +4809,8 @@ section {
     line-height: calc(24/14);
 }
 
+
+/* ----- Breadcrumb ----- */
 
 .au-breadcrumb {
     height: 75px;
@@ -4947,6 +5018,7 @@ section {
 }
 
 
+/* ----- Statistic ----- */
 .statistic {
     padding-top: 57px;
 }
@@ -5024,6 +5096,7 @@ section {
 }
 
 
+/* ----- Statistic 2 ----- */
 .statistic2 {
     padding-top: 50px;
 }
@@ -5046,7 +5119,7 @@ section {
     color: rgba(255, 255, 255, 0.6);
 }
 
-
+/* ----- Progress ----- */
 .au-progress .au-progress__bar {
     height: 10px;
     position: relative;
@@ -5088,6 +5161,8 @@ section {
     right: -15px;
 }
 
+
+/* ----- Alert ----- */
 
 .au-alert {
     border: 1px solid #fff;

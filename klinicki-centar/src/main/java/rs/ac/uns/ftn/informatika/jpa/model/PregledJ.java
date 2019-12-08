@@ -6,10 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+<<<<<<< HEAD:klinicki-centar/src/main/java/rs/ac/uns/ftn/informatika/jpa/model/PregledJ.java
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
 
 
 @Entity
@@ -20,15 +20,14 @@ public class PregledJ {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "datum", nullable = false)
-	@JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
-	private String datum;
-	
+	@Column(name="datum", nullable=false)
+	String datum;
+
 	@Column(name = "vreme", unique = true, nullable = false)
 	private String vreme;
 	
-	@Column(name = "sala", nullable = false)
-	private String sala;
+	@Column(name="tip", nullable=false)
+	String tip;
 	
 	@Column(name = "lekar", nullable = false)
 	private String lekar;
@@ -36,11 +35,14 @@ public class PregledJ {
 	@Column(name = "cena", nullable = false)
 	private int cena;
 	
-	@Column(name = "tip", nullable = false)
-	private String tip;
 
 	@Column(name="trajanje", nullable=false)
 	String trajanje;
+
+		
+	@Column(name="sala", nullable=false)
+	String sala;
+	
 	
 	@Column(name = "zakazan", nullable = false)
 	Boolean zakazan;
@@ -69,8 +71,9 @@ public class PregledJ {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
 
+
+	
 	public PregledJ() {
 		super();
 	}
@@ -93,7 +96,6 @@ public class PregledJ {
 		this.id = id;
 	}
 
-
 	public String getDatum() {
 		return datum;
 	}
@@ -106,13 +108,9 @@ public class PregledJ {
 		return vreme;
 	}
 
-
-
 	public void setVreme(String vreme) {
 		this.vreme = vreme;
 	}
-
-
 
 	public String getTip() {
 		return tip;
@@ -134,7 +132,6 @@ public class PregledJ {
 		return sala;
 	}
 
-
 	public void setSala(String sala) {
 		this.sala = sala;
 	}
@@ -151,11 +148,11 @@ public class PregledJ {
 		return cena;
 	}
 
-
-
 	public void setCena(int cena) {
 		this.cena = cena;
 	}
-
-
+	
+	
+	
+	
 }
