@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
+import rs.ac.uns.ftn.informatika.jpa.model.PregledJ;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
-import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepositoryJ;
 
 @Service
 @Transactional
@@ -22,7 +22,7 @@ public class KorisnikService {
 	private final KorisnikRepository korisnikRepository;
 	
 	@Autowired
-	private PregledRepository pregledRepo;
+	private PregledRepositoryJ pregledRepo;
 	
 	KorisnikDTO korDto;
 	

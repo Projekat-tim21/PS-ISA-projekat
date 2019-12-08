@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
 @Table(name="pregled")
-public class Pregled {
+public class PregledJ {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,11 +71,11 @@ public class Pregled {
 	}
 	
 
-	public Pregled() {
+	public PregledJ() {
 		super();
 	}
 
-	public Pregled(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
+	public PregledJ(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
 			int cena) {
 		super();
 		this.id = id;

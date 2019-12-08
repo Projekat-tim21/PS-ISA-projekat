@@ -7,17 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
-import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
+import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepositoryJ;
+import rs.ac.uns.ftn.informatika.jpa.service.PregledServiceJ;
 
 @Controller
 public class PreglediController {
 
 	@Autowired
-	private  PregledService pServis;
+	private  PregledServiceJ pServis;
 	
 	@Autowired
-	private PregledRepository pregledRep;
+	private PregledRepositoryJ pregledRep;
 	
 
 	@RequestMapping("/preglediIoperacijePrikaz")

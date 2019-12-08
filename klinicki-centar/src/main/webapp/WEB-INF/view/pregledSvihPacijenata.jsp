@@ -54,11 +54,22 @@
 					</table>
 					
 					
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary" value="Izmeni">
-					</div>
-					
+				
+			<label>Unesite ime:</label>
+			<input type = "text">
+			<label>Unesite prezime:</label>
+			<input type = "text">
+			<label>Unesite jmbg:</label>
+			<input type = "text">
 			
+			
+			
+			<div class="form-group ">
+			
+	     	  <input type="submit" class="btn btn-primary" value="Prikazi" />
+	       			
+	    	</div>
+				
 				</div>
 			</div>
 			

@@ -8,15 +8,15 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
-import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
+import rs.ac.uns.ftn.informatika.jpa.model.PregledJ;
+import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepositoryJ;
 
 @Service
 @Transactional
-public class PregledService {
+public class PregledServiceJ {
 	
 	@Autowired
-	private PregledRepository pregledRepo;
+	private PregledRepositoryJ pregledRepo;
 	
 	@Autowired 
 	private KorisnikService korisnikS;
@@ -24,13 +24,13 @@ public class PregledService {
 	@Autowired 
 	private AdminService adminS;
 	
-	public PregledService(PregledRepository pregledRepo) {
+	public PregledServiceJ(PregledRepositoryJ pregledRepo) {
 		this.pregledRepo = pregledRepo;
 	}
 	
-	public List<Pregled> findAll(){
-		List<Pregled> allP = new ArrayList<Pregled>();
-		for(Pregled pregled : pregledRepo.findAll()) {
+	public List<PregledJ> findAll(){
+		List<PregledJ> allP = new ArrayList<PregledJ>();
+		for(PregledJ pregled : pregledRepo.findAll()) {
 			allP.add(pregled);
 		}
 		return allP;
@@ -60,17 +60,17 @@ public class PregledService {
 		return svi;
 	}*/
 	
-	public Pregled findOneById(Long id) {
+	public PregledJ findOneById(Long id) {
 		
 		return pregledRepo.findOneById(id);
 	}
 	
-	public Pregled findByDatum(String datum) {
+	public PregledJ findByDatum(String datum) {
 		
 		return pregledRepo.findByDatum(datum);
 	}	
 	
-	public Pregled findByVreme(String vreme) {
+	public PregledJ findByVreme(String vreme) {
 		
 		return pregledRepo.findByVreme(vreme);
 	}
@@ -114,7 +114,7 @@ public class PregledService {
 		pregledRepo.deleteById(id);
 	}
 	
-	public void dodajPregled(Pregled p) {
+	public void dodajPregled(PregledJ p) {
 		
 		pregledRepo.save(p);
 	}

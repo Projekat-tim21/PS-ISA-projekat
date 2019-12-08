@@ -25,7 +25,7 @@
 					<li><a href="/pregledSvihPacijenataMetoda">Prikazi sve pacijente</a></li>
 					<li><a href="/kartonZ">Prikazi profil pacijenta</a></li>
 					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
-				
+					<li><a href="/pretragaPacijenta">Pretrazi pacijenta</a></li>
 				</ul>
 		</div>
 		

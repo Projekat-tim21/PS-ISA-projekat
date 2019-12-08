@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.informatika.jpa.dto;
 
 import java.util.Date;
 
-public class PregledDTO {
+public class PregledJDTO {
 	
 	private String id;
 	private String datum;
@@ -14,7 +14,7 @@ public class PregledDTO {
 	private String tip;
 	private Boolean zakazan;
 	
-	public PregledDTO(String id, String datum, String vreme, String sala, String lekar, String cena, String trajanje, String tip, Boolean zakazan) {
+	public PregledJDTO(String id, String datum, String vreme, String sala, String lekar, String cena, String trajanje, String tip, Boolean zakazan) {
 		super();
 		this.id = id;
 		this.datum = datum;
@@ -35,7 +35,7 @@ public class PregledDTO {
 		this.zakazan = zakazan;
 	}
 
-	public PregledDTO() {
+	public PregledJDTO() {
 		
 	}
 
