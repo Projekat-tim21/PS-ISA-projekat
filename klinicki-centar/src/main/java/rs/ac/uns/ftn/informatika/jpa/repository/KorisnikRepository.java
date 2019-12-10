@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
@@ -29,7 +30,9 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
             "LOWER(t.ime) LIKE LOWER(CONCAT('%',:searchTerm, '%')) OR " +
             "LOWER(t.prezime) LIKE LOWER(CONCAT('%',:searchTerm, '%'))")
     Page<Korisnik> searchByTerm(@Param("searchTerm") String searchTerm, Pageable pageable);
+
 	
+
 	 //Page<Korisnik> listUsers(Pageable pageable);
 
 	//public Korisnik findById(Long id);

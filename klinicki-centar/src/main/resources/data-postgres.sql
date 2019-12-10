@@ -19,6 +19,8 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Anica Dobra 155', 'Srbija', 'anai5@gmail.com',  'Novi Sad', 'Ananfi', '8587568488586', 'aadmin', 'Ana', '0649998584', 'aadmin',FALSE,'ADMIN',true);
 
 INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);
+/*ovo je admin klinike*/
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Anica Dobra 15', 'Srbija', 'andsfa5@gmail.com',  'Novi Sad', 'Ananfi', '8585658488586', 'ak', 'Ana', '0649998584', 'ak',FALSE,'PACIJENT');
 
 insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Bate Brkic 4','alergije', 'anamneza', 'bolesti', '25.04.1999.', '-1', 'B', 'muski', '70kg', '175cm', 'Srbija', 'marko22@gmail.com', 'Novi Sad', 'Marko', '227885846', 'markomarkovic', 'Markovic', '063528496', 'marko22',TRUE,'PACIJENT');
 insert into korisnik3( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Kralja Petra 2','', '', '', '', '', '', '', '', '', 'Srbija','sanja22@gmail.com', 'Novi Sad', 'Sanja', '2525586', 'sanjasanjic', 'Sanjic', '063222496', 'sanja22',TRUE,'PACIJENT');
@@ -35,6 +37,11 @@ insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9'
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
 
+
+insert into termini(lekar_id, termin) values (3, '2019-12-04T05:42');
+insert into termini(lekar_id, termin) values (2, '2019-10-04T06:50');
+insert into termini(lekar_id, termin) values (1, '2019-12-05T06:50');
+insert into termini(lekar_id, termin) values (2, '2019-11-04T05:30');
 
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00');
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '09:00');
@@ -54,6 +61,10 @@ insert into lek (sifra,naziv,dodatno) values ('RTYDASO','Probiotik', 'Prema defi
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWERFHN','Glavobolja','Glavobolja (Cephalea, Cephalalgia, grčka reč) je bol ili bolna senzacija u predelu glave i delova vratakoja, u odnosu na svoj nastanak i trajanje, može biti akutna ili hronična.');
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWEHGBC','Hipertenzija','Hipertenzija (visok krvni pritisak) je stanje u kome je krvni pritisak iznad 120/80 mmHg. Gornjipritisak(sistolni pritisak) zapravo je pritisak krvina zidove krvnih sudova u trenutkukada se srce kontrahuje, ');
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWRHGNC','Anemija', 'Anemija ili malokrvnost je stanje koje se karakteriše smanjenim nivoom hemoglobina u krvi i/ili smanjenim brojem eritrocita. Eritrociti su crvena krvna zrnca koja se stvaraju u koštanoj srži, a nakon sazrevanja cirkulišu u krvi.');
+
+insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Zoran', 'Zoric', 'ocno', 'LEKAR',8 );
+insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Mara', 'Maric', 'url', 'LEKAR',9 );
+insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Sara', 'Saric', 'dermatologija', 'LEKAR',6 );
 
 
 

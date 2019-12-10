@@ -1,8 +1,5 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
-import java.security.Timestamp;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,7 +87,7 @@ public class Korisnik {
 	
 	@Column(name = "anamneza", nullable = true)
 	private String anamneza;
-
+	
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
 			String tezina, String kgrupa, String dioptrija, String alergije, String bolesti, String anamneza) {
