@@ -96,6 +96,10 @@ public class KorisnikContreller {
 				
 				if(k.getFirst_Login()==true) {
 					k.setFirst_Login(false);
+					request.setAttribute("korisnik", korisnikServis.findOne(k.getId()));
+					Korisnik kori=korisnikServis.findOne(k.getId());
+					//System.out.println(k.getVisina());
+					request.setAttribute("mode", "MODE_LOGIN");
 					return "firstLogin";
 					
 				}else {
