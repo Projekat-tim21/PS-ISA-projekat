@@ -40,5 +40,8 @@ public class TerminSaIdService {
 		return termini;
 	}
 	
+	public TerminiSaId findOne(Long id) {
+		return tidRepo.findById(id).orElseGet(null);
+	}
 	
 }

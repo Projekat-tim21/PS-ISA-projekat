@@ -82,10 +82,7 @@ public class KorisnikContreller {
 			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
 			// System.out.println("id korisnika je: "+ k.getId());
 			String username = request.getParameter("username");
-			// String id=request.getParameter("id");
-			// System.out.println("print1: "+request.getSession().getId()); //uzima id
-			// sesije
-			// String password = request.getParameter("password");
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
 //samo privremeno da se mogu zakazati pregledi-username 3.12

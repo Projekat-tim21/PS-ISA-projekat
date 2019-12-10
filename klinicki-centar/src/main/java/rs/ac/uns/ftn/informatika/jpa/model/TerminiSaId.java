@@ -21,6 +21,8 @@ public class TerminiSaId {
 	
 	@Column(name="lekar_id")
 	private Long lekarId;
+	
+	
 
 
 	public TerminiSaId(Long id, String termin, Long lekarId) {

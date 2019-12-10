@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
+import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
+import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
 import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 
@@ -26,6 +30,9 @@ public class LekarZaPrikazIPregledeController {
 
 	@Autowired
 	private LekarZaPrikazIPregledeService lipServis;
+	
+	@Autowired
+	private KorisnikService korisnikServis;
 	
 	@Autowired
 	private TerminSaIdRepository tidRepo;
@@ -98,8 +105,9 @@ public class LekarZaPrikazIPregledeController {
 	}
 	
 	@RequestMapping("/listaSvihTerminaPacijent")
-	public String prikazListeTerminaPacijent(@ModelAttribute TerminiSaId t,@ModelAttribute LekarZaPrikazIPreglede lip,  BindingResult bindingResult,HttpServletRequest request) {
+	public String prikazListeTerminaPacijent(@RequestParam("idpac") int idpac,@ModelAttribute TerminiSaId t,@ModelAttribute LekarZaPrikazIPreglede lip,  BindingResult bindingResult,HttpServletRequest request) {
 		//uzeli smo id iz url-a
+		System.out.println(idpac);
 		String idZaPoredjenje = request.getParameter("id");
 		HttpSession session = request.getSession();
 		session.setAttribute("id", idZaPoredjenje);
@@ -109,12 +117,45 @@ public class LekarZaPrikazIPregledeController {
 		for(TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
 			termini.add(termin);
 		}
+		long pacijentId=idpac;
+		//List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		//for(Korisnik korisnik : korisnikServis.findOne(pacijentId)) {
+		//	termini.add(termin);
+		//}
+		Korisnik korisnici=korisnikServis.findOne(pacijentId);
+		request.setAttribute("korisnik", korisnici);
+		
 		request.setAttribute("termini", termini);
 		request.setAttribute("mode", "ALL_TERMINI");
 		return "listaLekara";
 	}
 	
+	@GetMapping("/zakazivanjePregledaIzaListeLekara")
+	public String editUserProfilPregled(@RequestParam("idpac") int idpac,@ModelAttribute TerminiSaId tt,@RequestParam Long id, HttpServletRequest request) {
 	
+		request.setAttribute("termini", tisServis.findOne(id));
+		TerminiSaId terminiSaId=tisServis.findOne(id);
+		long idLekara=terminiSaId.getLekarId();
+		//LekarZaPrikazIPreglede lekar=lipServis.findOne(idLekara);
+		//String idKorisnika = request.getParameter("id");
+		String pacijentId = request.getParameter("idHidden");
+		System.out.println(request.getParameter("lekarId"));
+		HttpSession session = request.getSession();
+		session.getAttribute("idHidden");
+		System.out.println("caos" + session.getAttribute("idHidden"));
+		System.out.println(pacijentId);
+		session.setAttribute("pacijentId", pacijentId);
+		TerminiSaId ttt=new TerminiSaId();
+		long pacijentIdnovi=idpac;
+		
+		Korisnik korisnici=korisnikServis.findOne(pacijentIdnovi);
+		request.setAttribute("korisnik", korisnici);
+		
+		//request.setAttribute("korisnik", korisnikServis.findOne(idKorisnika));
+		request.setAttribute("lipi", lipServis.findOne(idLekara));
+		request.setAttribute("mode", "ZAKAZI_PREGLED");
+		return "zahtevZaPregledom";
+	}
 	
 	
 	/*
