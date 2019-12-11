@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
+import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
 import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
@@ -29,11 +32,16 @@ import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 @Controller
 public class LekarZaPrikazIPregledeController {
 
+	private Logger logger = LoggerFactory.getLogger(LekarZaPrikazIPregledeController.class);
+	
 	@Autowired
 	private LekarZaPrikazIPregledeService lipServis;
 	
 	@Autowired
 	private KorisnikService korisnikServis;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@Autowired
 	private TerminSaIdRepository tidRepo;
@@ -113,9 +121,32 @@ public class LekarZaPrikazIPregledeController {
 	}
 	
 	
+	/*
+	@RequestMapping("/zakaziPregledKojiJeDef")
+	public String prikazListeZakazanihPregleda(HttpServletRequest request) {
+	
+		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
+		for(TerminiSaId termin : tidRepo.findByZakazan(false)) {
+			termini.add(termin);
+		}
+		
+		request.setAttribute("termini", termini);
+		request.setAttribute("mode", "ZAKAZANI_PREGLEDI2");
+		return "listaLekara";
+	}*/
+	
+	
+	
+	
+	//ovde ubaci za email
 	@RequestMapping("/uspesnoZakazanPregled")
-	public String uspesnoJePacijentZakazaoUnapredDefPregled(@RequestParam("id") long idTermina,@ModelAttribute TerminiSaId t, BindingResult bindingResult,HttpServletRequest request) {
-	System.out.println("id termina     "+idTermina);
+	public String uspesnoJePacijentZakazaoUnapredDefPregled(@RequestParam("id") long idkor,@RequestParam("idter") long idTermina,@ModelAttribute TerminiSaId t, BindingResult bindingResult,HttpServletRequest request) {
+	
+		long idKorisnika=idkor;
+		Korisnik k=korisnikServis.findOne(idKorisnika);
+		k.getUsername();
+		k.getIme();
+		k.getPrezime();
 		long idTerminaZakazi = idTermina;
 		TerminiSaId tip=new TerminiSaId();
 		tip=tisServis.findOne(idTerminaZakazi);
@@ -131,29 +162,51 @@ public class LekarZaPrikazIPregledeController {
 		ukojisipam.setSala(tip.getSala());
 		ukojisipam.setTermin(tip.getTermin());
 		ukojisipam.setTippregleda(tip.getTippregleda());
+		ukojisipam.setIdkorisnika(idKorisnika);
 		tisServis.saveMojTermin(ukojisipam);
-		System.out.println("sacuvan");
-		//tisServis.deleteMyTermin(idTerminaZakazi);
-		//System.out.println("obrisan");
-		//System.out.println("ovde je promenjen termin  "+tip.isZakazan());
+	
+		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
+		for(TerminiSaId termin : tidRepo.findByZakazan(true)) {
+			if(termin.getIdkorisnika()==idKorisnika) {
+				termini.add(termin);
+			}
+		}
+		
+		try {
+			emailService.sendNotificaitionZaZakazanePreglede(k);
+		} catch (Exception e) {
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+		}
 		
 		
-		//List <TerminiSaId> lista=new ArrayList<TerminiSaId>();
-		//lista=tidRepo.findByZakazan(true);
-		//boolean provera;
-		//List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
-		//for(TerminiSaId termin : tidRepo.findAll()) {
-		//	if(provera=termin.get) {
-				
-		//	}
-		//	termini.add(termin);
-		//}
+		request.setAttribute("termini", termini);
 		
-		
-		request.setAttribute("termini",tisServis.findOne(idTerminaZakazi));
+		//request.setAttribute("termini",tisServis.findOne(idTerminaZakazi));
 		request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
-		return "loginBezDobrodosli";
+		return "sviZakazaniPregledi";
 	}
+	
+	
+	
+	@RequestMapping("/listaZakazanihPregleda")
+	public String listaZakazanihPregleda(@RequestParam("id") long idkor,HttpServletRequest request) {
+	
+		long idKorisnika=idkor;
+		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
+		for(TerminiSaId termin : tidRepo.findByZakazan(true)) {
+			if(termin.getIdkorisnika()==idKorisnika) {
+			termini.add(termin);
+			}
+		}
+		
+		request.setAttribute("termini", termini);
+		
+		request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
+		return "sviZakazaniPregledi";
+	}
+	
+	
+	
 	
 	
 	
@@ -259,6 +312,27 @@ public class LekarZaPrikazIPregledeController {
 		return "zahtevZaPregledom";
 	}
 	
+	
+	@RequestMapping("/vratiSeNaLoginBezDobrodosli2")
+	public String vracanjenapocetak(HttpServletRequest request) {
+		
+	
+		//request.setAttribute("termini", termini);
+		//request.setAttribute("mode", "ALL_TERMINI");
+		return "loginBezDobrodosli2";
+	}
+	
+	@RequestMapping("/saljemoZahtevZaPregledom")
+	public String uspesnoPoslatZahtevAdminu(HttpServletRequest request) {
+		
+		//long idpacijenta=idpac;
+		//System.out.println("id pac         "+idpacijenta);
+		//request.setAttribute("termini", termini);
+		//request.setAttribute("mode", "VRACAJ_SE_NAZAD");
+		//return "zahtevZaPregledom";
+		//request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
+		return "loginBezDobrodosli2";
+	}
 	
 	/*
 	

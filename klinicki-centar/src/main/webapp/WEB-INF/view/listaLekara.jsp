@@ -65,7 +65,7 @@ body {
 						</tr>
 					</table>
 
-<input type="number" id="idHidden" name="idHidden">
+<input type="hidden" id="idHidden" name="idHidden">
 
 
 					<table id="indextable" class="table table-striped table-bordered">
@@ -214,7 +214,7 @@ body {
 									<td>${termin.sala}</td>
 									<td>${termin.cena}</td>
 									<td>${termin.popust}</td>
-									<td><a onclick="izbaciAlert()" href="/uspesnoZakazanPregled?id=${termin.id}">Zakazi pregled</a></td>
+									<td><a onclick="izbaciAlert(this)" href="/uspesnoZakazanPregled?idter=${termin.id}">Zakazi pregled</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -231,9 +231,7 @@ body {
 
 	<script>
 
-	function izbaciAlert(){
-		alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
-		}
+	
 	
 	var getUrlParameter = function getUrlParameter(sParam) {
 	    var sPageURL = window.location.search.substring(1),
@@ -251,6 +249,7 @@ body {
 	};
 
 	var idPacijenta = getUrlParameter('idpac');
+	var id2=getUrlParameter('id');
 	//var a = document.getElementById('id-pac-id');
 	//console.log('OVDEEEEEEEE    '+a.href+ "&idpac="+idPacijenta);
 
@@ -258,15 +257,19 @@ body {
 			element.href = element.href+"&idpac="+idPacijenta;
 		}
 
+	function izbaciAlert(element){
+		alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
+		element.href = element.href+"&id="+id2;
+		}
 	
 	//console.log(idPacijenta);
-	document.getElementById('idHidden').value = idPacijenta;
+	//document.getElementById('idHidden').value = idPacijenta;
 	//location.href = '@Url.Action("Display", "Customer")?uname=' + firstname + '&name=' + username;
 	
-        fn = document.getElementById('idHidden').value;
+        //fn = document.getElementById('idHidden').value;
         //console.log(fn);
      
-      document.getElementById('listaLekara').value = 'http://localhost:8081/zakazivanjePregledaIzaListeLekara?id=3' + fn;
+      //document.getElementById('listaLekara').value = 'http://localhost:8081/zakazivanjePregledaIzaListeLekara?id=3' + fn;
 	
 	
 	

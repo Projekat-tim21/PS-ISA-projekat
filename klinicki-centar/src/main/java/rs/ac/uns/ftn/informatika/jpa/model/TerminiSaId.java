@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
-import java.util.Random;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +44,35 @@ public class TerminiSaId {
 	@Column(name="zakazan", nullable=true)
 	private boolean zakazan;
 	
+	@Column(name="idkorisnika", nullable=true)
+	private long idkorisnika;
+	
+	
+	
+	public TerminiSaId(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
+			String sala, double cena, double popust, boolean zakazan, long idkorisnika) {
+		super();
+		this.id = id;
+		this.termin = termin;
+		this.lekarId = lekarId;
+		this.lekarime = lekarime;
+		this.lekarprezime = lekarprezime;
+		this.tippregleda = tippregleda;
+		this.sala = sala;
+		this.cena = cena;
+		this.popust = popust;
+		this.zakazan = zakazan;
+		this.idkorisnika = idkorisnika;
+	}
+
+	public long getIdkorisnika() {
+		return idkorisnika;
+	}
+
+	public void setIdkorisnika(long idkorisnika) {
+		this.idkorisnika = idkorisnika;
+	}
+
 	public TerminiSaId(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
 			String sala, double cena, double popust, boolean zakazan) {
 		super();

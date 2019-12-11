@@ -326,14 +326,14 @@ public class KorisnikContreller {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
 
-		return "login";
+		return "loginBezDobrodosli";  //bio je login
 	}
 
 	@RequestMapping("/profil")
 	public String editUserProfil(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
-		return "login";
+		return "loginBezDobrodosli";  //bio je login
 	}
 
 	@RequestMapping("/vratiSeNaPocetnu")
@@ -351,7 +351,7 @@ public class KorisnikContreller {
 	public String editUserProfil2(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
-		return "login";
+		return "loginBezDobrodosli";  //bio je login
 	}
 
 	@RequestMapping("/profil2")
@@ -376,7 +376,7 @@ public class KorisnikContreller {
 
 		System.out.println(korisnikd.getId() + korisnikd.getIme());
 		;
-		return "login";
+		return "loginBezDobrodosli"; //bio je login
 	}
 
 	
