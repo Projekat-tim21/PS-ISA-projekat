@@ -30,7 +30,7 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a onclick="addIdPac(this)" href="/profilkaPregledu">Profil</a></li>
 					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena podataka</a></li>
-					 	<li><a href="/listaSvihKlinika">Lista klinika</a></li> 	
+					 	<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista klinika</a></li> 	
 				 	<li><a onclick="addIdPac(this)" href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
 				 		<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni karton</a>
 				 		<li><a onclick="addIdPac2(this)" href="/prikaziListuLekara">Lista lekara</a>
