@@ -137,6 +137,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
 		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
 
+		.antMatchers("/listaSvihDefinisanihPregledaZaLekara").permitAll()
+		.antMatchers("/uspesnoZakazanPregled").permitAll()
+		.antMatchers("/vratiSeNaLoginBezDobrodosli2").permitAll()
+		.antMatchers("/saljemoZahtevZaPregledom").permitAll()
+		.antMatchers("/listaZakazanihPregleda").permitAll()
+
+
 		.antMatchers("/kartonZ").permitAll()	
 		.antMatchers("/admin").permitAll()	
 		.antMatchers("/sacuvajNovaLozinka").permitAll()

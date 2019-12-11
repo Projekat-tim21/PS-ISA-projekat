@@ -28,9 +28,8 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/login">Logovanje</a></li>
-					<li><a href="/registracija">Registruj se</a></li>
-					<!-- <a href="/pokazi-korisnika">Svi korisnici</a></li> -->
+					<li><a onclick="addIdPac(this)" href="/login">Logovanje</a></li>
+				
 				</ul>
 			
 			</div>
@@ -38,11 +37,20 @@ body {
 	</div>
 
 <c:choose>
+
+
+<c:when test="${mode=='VRACAJ_SE_NAZAD' }">
+		<a onclick="addIdPac(this)" href="/vratiSeNaLoginBezDobrodosli2">Vrati se nazad</a>
+		</c:when>
+
+
+
+
 	<c:when test="${mode=='ZAKAZI_PREGLED' }">
 			<div class="container text-center">
 				<h3>Posalji zahtev za pregled</h3>
 				<hr>
-				<form class="form-horizontal" method="GET" action="sacuvajupdate"   >
+				<form class="form-horizontal" method="GET" action="vratiSeNaLoginBezDobrodosli2"   >
 				
 					<div class="form-group">
 						<label class="control-label col-md-3">Termin</label>
@@ -108,10 +116,38 @@ body {
 					</div>
 				</form>
 			</div>
+			<a onclick="addIdPac(this)" href="/saljemoZahtevZaPregledom">Vrati se nazad</a>
 		</c:when>
 </c:choose>
 
+<script type="text/javascript">
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
 
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
 
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+var idPacijenta = getUrlParameter('idpac');
+console.log(idPacijenta);
+
+function addIdPac (element){
+	element.href = element.href+"?id="+idPacijenta;
+	console.log(element.href);
+}
+
+//window.onload = function() {
+//   var getInput = prompt("Hey type something here: ");
+//   localStorage.setItem("storageName",getInput);
+//}
+</script>
 </body>
 </html>
