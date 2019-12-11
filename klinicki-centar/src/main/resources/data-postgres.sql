@@ -1,4 +1,4 @@
-﻿insert into student (index_number, first_name, last_name) values ('ra1-2014', 'Marko', 'Marković');
+insert into student (index_number, first_name, last_name) values ('ra1-2014', 'Marko', 'Marković');
 insert into student (index_number, first_name, last_name) values ('ra2-2014', 'Milan', 'Milanović');
 insert into student (index_number, first_name, last_name) values ('ra3-2014', 'Ivana', 'Ivanović');
 insert into student (index_number, first_name, last_name) values ('ra4-2014', 'Bojan', 'Bojanović');
@@ -35,6 +35,8 @@ insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9'
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
 
+insert into sala(id, naziv, br, datum) values (1, 'Novo srce', 3, '21.10.2019.');
+insert into sala(id, naziv, br, datum) values (4, 'Deca', 2, '20.10.2019.');
 
 insert into termini(lekar_id, termin) values (3, '2019-12-04T05:42');
 insert into termini(lekar_id, termin) values (2, '2019-10-04T06:50');
@@ -42,8 +44,8 @@ insert into termini(lekar_id, termin) values (1, '2019-12-05T06:50');
 insert into termini(lekar_id, termin) values (2, '2019-11-04T05:30');
 
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00', TRUE);
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '09:00', TRUE);
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '09:00', TRUE);
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '10:00', TRUE);
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '08:00', TRUE);
 
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'dermatolog', '1h', '09:00');
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (2000, '15.02.2020', 'Jovan Jovic', '2A', 'stomatolog', '1h', '09:00');

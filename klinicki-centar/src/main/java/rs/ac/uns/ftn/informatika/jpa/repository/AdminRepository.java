@@ -3,7 +3,7 @@ package rs.ac.uns.ftn.informatika.jpa.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Admin;
-import rs.ac.uns.ftn.informatika.jpa.model.PregledJ;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 

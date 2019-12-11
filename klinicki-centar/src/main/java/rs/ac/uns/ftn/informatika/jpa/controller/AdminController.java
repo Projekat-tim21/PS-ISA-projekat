@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import rs.ac.uns.ftn.informatika.jpa.repository.AdminRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.AdminService;
-import rs.ac.uns.ftn.informatika.jpa.service.PregledServiceJ;
+import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
 
 @Controller
 public class AdminController {

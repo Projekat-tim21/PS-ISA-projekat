@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-<<<<<<< HEAD:klinicki-centar/src/main/java/rs/ac/uns/ftn/informatika/jpa/model/PregledJ.java
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -14,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
 @Table(name="pregled")
-public class PregledJ {
+public class Pregled {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +22,17 @@ public class PregledJ {
 	@Column(name="datum", nullable=false)
 	String datum;
 
-	@Column(name = "vreme", unique = true, nullable = false)
-	private String vreme;
+	@Column(name = "vreme", nullable = false)
+	String vreme;
 	
 	@Column(name="tip", nullable=false)
 	String tip;
 	
 	@Column(name = "lekar", nullable = false)
-	private String lekar;
+	String lekar;
 	
 	@Column(name = "cena", nullable = false)
-	private int cena;
+    int cena;
 	
 
 	@Column(name="trajanje", nullable=false)
@@ -74,11 +73,11 @@ public class PregledJ {
 
 
 	
-	public PregledJ() {
+	public Pregled() {
 		super();
 	}
 
-	public PregledJ(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
+	public Pregled(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
 			int cena) {
 		super();
 		this.id = id;
@@ -92,9 +91,6 @@ public class PregledJ {
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getDatum() {
 		return datum;

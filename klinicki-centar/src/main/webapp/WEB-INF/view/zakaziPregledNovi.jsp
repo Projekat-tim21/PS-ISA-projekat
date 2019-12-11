@@ -108,7 +108,9 @@
 	<!-- <select name="selectSm" id="SelectLm" class="form-control-sm form-control" style="width:205px;" >
                  <option value="0">Termini </option>
                  <option value="1"> </option>
-              
+               <div class="col-lg">
+                    <a style="padding-left: 40px" class="btn btn-link" href="/register.html" role="button">Register</a>
+                </div>
          </select> -->
          
          <input type = "text" class = "timepicker" value="${pregled.vreme}">
@@ -117,6 +119,10 @@
 		<div align = "center" >
 			<button type="submit" formaction="/zakazivanjePregledaOdobreno">Zakazi</button>
    		</div>
+   		
+   		
+   		
+   		
    	</div>
    	
    

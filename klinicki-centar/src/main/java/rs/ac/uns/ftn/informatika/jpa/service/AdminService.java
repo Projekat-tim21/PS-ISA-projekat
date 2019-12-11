@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.AdminDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Admin;
-import rs.ac.uns.ftn.informatika.jpa.model.PregledJ;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.repository.AdminRepository;
-import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepositoryJ;
+import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 
 @Service
 @Transactional
