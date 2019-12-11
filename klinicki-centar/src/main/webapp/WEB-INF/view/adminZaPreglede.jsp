@@ -63,7 +63,9 @@ body, html {
 								<th>Prezime</th>
 								<th>Tip pregleda</th>
 								<th>Ocena</th>
-								<th>Termin pregleda</th>
+								<th>Zakazivanje pregleda</th>
+								<th>Lista svih slobodnih termina</th>
+								<th>Lista svih definisanih pregleda</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -77,6 +79,44 @@ body, html {
 									<td><a href="/kreirajPregledZaLekara?id=${lip.id}">Zakazi
 											preglede</a></td>
 									<td><a href="/listaSvihTermina?id=${lip.id}">Slobodni termini</a></td>
+									<td><a href="/listaSvihDefinisanihPregledaZaLekara?id=${lip.id}">Definisani pregledi</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</c:when>
+
+
+
+
+<c:when test="${mode=='ALL_PREGLEDI_SA_ADMINA' }">
+			<div class="container text-center" id="tasksDiv">
+				<h3>Lista pregleda</h3>
+				<hr>
+				<div class="table-responsive">
+
+					<table id="indextable" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Termin</th>
+								<th>Sala</th>
+								<th>Cena</th>
+								<th>Popust</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="termin" items="${termini}">
+								<tr>
+									
+									<td>${termin.id}</td>
+									<td>${termin.termin}</td>
+									<td>${termin.sala}</td>
+									<td>${termin.cena}</td>
+									<td>${termin.popust}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -90,7 +130,7 @@ body, html {
 
 
 		<c:when test="${mode=='ALL_PRAVIMOO' }">
-			<h1>Kreiraj slobodne termine pregleda za lekara</h1>
+			<h3>Kreiraj pregled za lekara</h3>
 			<!-- 
 				<form onsubmit="return addItem('list', this.inputItem)">
 					<input type="datetime-local" id="inputItem"
@@ -103,13 +143,39 @@ body, html {
  -->
 
 			<form method="POST" action="sacuvajTermine2">
+			
 				<input type="datetime-local" name="termin" id="inputText"
 					value="${termini.termin}" />
 				<!-- 		<button onclick="pushData();">Show</button>   -->
-				<input type="hidden" id="lekarId" name="lekarId"
-					value="${termini.lekarId}"> <input type="submit"
-					name="zakazi" onclick="izbaciAlert();">
+				<input type="hidden" id="lekarId" name="lekarId" value="${termini.lekarId}"> 
+					
 				<p id="pText"></p>
+				<div>
+						<label>sala</label>
+						
+							<input type="text"  id="sala" name="sala"
+								value="${termini.sala }" required>
+								<span id="free"></span>
+					</div>
+					<div>
+						<label>cena pregleda</label>
+					
+							<input type="number" id="cena" name="cena"
+								value="${termini.cena }" required>
+								<span id="free"></span>
+						
+					</div>
+					<div>
+						<label >popust</label>
+						
+							<input type="number"   id="popust" name="popust"
+								value="${termini.popust}" required><label>%</label>
+								<span id="free"></span>
+					</div>
+				
+					<div>
+					<input type="submit" name="zakazi" onclick="izbaciAlert();">
+					</div>
 			</form>
 
 			<!-- ovaj button za sada nije potreban -->
@@ -166,6 +232,7 @@ body, html {
 	</c:choose>
 
 	<script>
+	//idTermina = document.getElementById('idHidden').value;
 	//var querystring = require('querystring');
 	//var qs = new Querystring();
 	//var v1 = querystring.get("id");
@@ -179,7 +246,7 @@ body, html {
 
 
 	function izbaciAlert(){
-		alert("Uspesno kreiran termin za izabranog lekara");
+		alert("Uspesno kreiran pregled za izabranog lekara");
 		}
 	
 	 var myArr = [];

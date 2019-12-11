@@ -43,5 +43,17 @@ public class TerminSaIdService {
 	public TerminiSaId findOne(Long id) {
 		return tidRepo.findById(id).orElseGet(null);
 	}
+
+
+	public void deleteMyTermin(long id) {
+		// TODO Auto-generated method stub
+		tidRepo.deleteById(id);
+	}
+
+
+	
+
+	
+	
 	
 }

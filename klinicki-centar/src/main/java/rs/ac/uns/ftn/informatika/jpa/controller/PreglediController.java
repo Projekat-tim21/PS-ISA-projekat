@@ -39,10 +39,10 @@ public class PreglediController {
 		return "loginBezDobrodosli";
 	}
 	
-	@RequestMapping("/zakaziPregledKojiJeDef")
+	/*@RequestMapping("/zakaziPregledKojiJeDef")
 	public String linkkaZakaziPregledKojiJeUnapreDef(HttpServletRequest request) {
 		return "zaUnapredDefPreg";
 	}
 	
-	
+	*/
 }

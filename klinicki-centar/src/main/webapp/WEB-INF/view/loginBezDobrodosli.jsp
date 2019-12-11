@@ -33,7 +33,7 @@ body {
 					 	<li><a href="/listaSvihKlinika">Lista klinika</a></li> 	
 				 	<li><a href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
 				 		<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
-				 		<li><a href="/prikaziListuLekara">Lista lekara</a>
+				 		<li><a href="/prikaziListuLekara?idpac=${id}">Lista lekara</a>
 				 		<li><a href="/zakaziPregledKojiJeDef">Zakazi pregled</a>
 			<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->	
 					<li><a href="/logout">Odjavi se</a></li>
@@ -42,6 +42,15 @@ body {
 			</div>
 		</div>
 	</div>
+
+<!--  ZAKAZANI_PREGLEDI  -->
+
+
+
+
+
+
+
 
 </body>
 </html>
