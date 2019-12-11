@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
@@ -43,11 +44,11 @@ public class PreglediController {
 		return "loginBezDobrodosli";
 	}
 	
-	@RequestMapping("/zakaziPregledKojiJeDef")
+	/*@RequestMapping("/zakaziPregledKojiJeDef")
 	public String linkkaZakaziPregledKojiJeUnapreDef(HttpServletRequest request) {
 		return "zaUnapredDefPreg";
 	}
-	
+
 	@RequestMapping("/zakazivanjePregleda")
 	public String zakaziPregled(HttpServletRequest request, Boolean zakazan) {
 		//request.setAttribute("datumi", pServis.ListaDatuma());
@@ -62,6 +63,7 @@ public class PreglediController {
 		return "zakazanPregled";
 	}
 	
-	
-	
+
+	*/
+
 }

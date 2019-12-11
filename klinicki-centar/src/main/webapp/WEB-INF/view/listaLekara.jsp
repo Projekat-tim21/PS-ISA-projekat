@@ -65,16 +65,10 @@ body {
 								placeholder="ocena"></th>
 						</tr>
 					</table>
-<!--  
 
-					<input type="text" id="myInput" onkeyup="myFunction()"
-						placeholder="ime">
-					 <input type="text" id="myInput2"
-						onkeyup="myFunction2()" placeholder="prezime"> 
-					<input type="text" id="myInput3" onkeyup="myFunction3()"
-						placeholder="tip pregleda"> 
-					<input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="ocena">
--->
+<input type="hidden" id="idHidden" name="idHidden">
+
+
 					<table id="indextable" class="table table-striped table-bordered">
 
 						<thead>
@@ -87,6 +81,7 @@ body {
 								<th>Termin pregleda</th>
 							</tr>
 						</thead>
+						
 						<tbody>
 
 							<c:forEach var="lip" items="${lipi}">
@@ -96,12 +91,15 @@ body {
 									<td>${lip.prezime}</td>
 									<td>${lip.tipspecijalizacije}</td>
 									<td>${lip.ocena}</td>
-									<td><a href="/listaSvihTerminaPacijent?id=${lip.id}">Slobodni
-											termini</a></td>
+									<td>
+										<a onclick="addIdPac(this)" href="/listaSvihTerminaPacijent?id=${lip.id}">Slobodni termini</a>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+				
+					
 				</div>
 			</div>
 
@@ -110,7 +108,7 @@ body {
 
 		<c:when test="${mode=='ALL_TERMINI' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Lista slobodnih termina    ${ime}</h3>
+				<h3>Lista slobodnih termina  </h3>
 				<hr>
 				<!-- 	<h4>Sortiraj klinike</h4>
 			<span class="form-group">	
@@ -118,7 +116,7 @@ body {
 			<button onclick="sortTablePoGradu()">Po gradu</button>   
 			</span>	 
 			 -->
-
+<input type="hidden" id="idHidden" name="idHidden">
 				<div class="table-responsive">
 					<table id="indextable" class="table table-striped table-bordered">
 						<thead>
@@ -134,6 +132,7 @@ body {
 									<td>${termini.id}</td>
 									<td>${termini.termin}</td>
 									<td>${termini.lekarId}</td>
+									<td><a onclick="addIdPac(this)" href="/zakazivanjePregledaIzaListeLekara?id=${termini.id}">Zakazi pregled</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -145,9 +144,140 @@ body {
 		</c:when>
 
 
+<c:when test="${mode=='ALL_TERMINI2' }">
+			<div class="container text-center" id="tasksDiv">
+				<h3>Lista slobodnih termina  </h3>
+				<hr>
+				<!-- 	<h4>Sortiraj klinike</h4>
+			<span class="form-group">	
+			<button onclick="sortTablePoNazivu()">Po nazivu</button>
+			<button onclick="sortTablePoGradu()">Po gradu</button>   
+			</span>	 
+			 -->
+<input type="hidden" id="idHidden" name="idHidden">
+				<div class="table-responsive">
+					<table id="indextable" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th><a href="javascript:SortTable(6,'N');">Id</a></th>
+								<th><a href="javascript:SortTable(1,'D','mdy');">Termin</a></th>
+								<th><a href="javascript:SortTable(6,'N');">Id lekara</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="termini" items="${termini}">
+								<tr>
+									<td>${termini.id}</td>
+									<td>${termini.termin}</td>
+									<td>${termini.lekarId}</td>
+									<td><a onclick="addIdPac(this)" href="/zakazivanjePregledaIzaListeLekara?id=${termini.id}">Zakazi pregled</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<h2>Nema slobodnih termina za izabranog lekara</h2>
+				</div>
+
+			</div>
+
+		</c:when>
+
+
+
+<c:when test="${mode=='ALL_PREGLEDI_SA_LOGINA' }">
+			<div class="container text-center" id="tasksDiv">
+				<h3>Lista pregleda</h3>
+				<hr>
+				<div class="table-responsive">
+
+					<table id="indextable" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id pregleda</th>
+								<th>Ime lekara</th>
+								<th>Prezime lekara</th>
+								<th>Tip pregleda</th>
+								<th>Termin</th>
+								<th>Sala</th>
+								<th>Cena</th>
+								<th>Popust</th>
+								<th>Zakazi pregled</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="termin" items="${termini}">
+								<tr>
+									<td>${termin.id}</td>
+									<td>${termin.lekarime}</td>
+									<td>${termin.lekarprezime}</td>
+									<td>${termin.tippregleda }</td>
+									<td>${termin.termin}</td>
+									<td>${termin.sala}</td>
+									<td>${termin.cena}</td>
+									<td>${termin.popust}</td>
+									<td><a onclick="izbaciAlert(this)" href="/uspesnoZakazanPregled?idter=${termin.id}">Zakazi pregled</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</c:when>
+
+
+
+
 	</c:choose>
 
 	<script>
+
+	
+	
+	var getUrlParameter = function getUrlParameter(sParam) {
+	    var sPageURL = window.location.search.substring(1),
+	        sURLVariables = sPageURL.split('&'),
+	        sParameterName,
+	        i;
+
+	    for (i = 0; i < sURLVariables.length; i++) {
+	        sParameterName = sURLVariables[i].split('=');
+
+	        if (sParameterName[0] === sParam) {
+	            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+	        }
+	    }
+	};
+
+	var idPacijenta = getUrlParameter('idpac');
+	var id2=getUrlParameter('id');
+	//var a = document.getElementById('id-pac-id');
+	//console.log('OVDEEEEEEEE    '+a.href+ "&idpac="+idPacijenta);
+
+	function addIdPac (element){
+			element.href = element.href+"&idpac="+idPacijenta;
+		}
+
+	function izbaciAlert(element){
+		alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
+		element.href = element.href+"&id="+id2;
+		}
+	
+	//console.log(idPacijenta);
+	//document.getElementById('idHidden').value = idPacijenta;
+	//location.href = '@Url.Action("Display", "Customer")?uname=' + firstname + '&name=' + username;
+	
+        //fn = document.getElementById('idHidden').value;
+        //console.log(fn);
+     
+      //document.getElementById('listaLekara').value = 'http://localhost:8081/zakazivanjePregledaIzaListeLekara?id=3' + fn;
+	
+	
+	
+	
+	
+	
+	
 		//za listu
 		function addItem(list, inputField) {
 			var list = document.getElementById(list);

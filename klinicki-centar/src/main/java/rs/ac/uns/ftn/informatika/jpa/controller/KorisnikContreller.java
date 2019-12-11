@@ -82,10 +82,7 @@ public class KorisnikContreller {
 			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
 			// System.out.println("id korisnika je: "+ k.getId());
 			String username = request.getParameter("username");
-			// String id=request.getParameter("id");
-			// System.out.println("print1: "+request.getSession().getId()); //uzima id
-			// sesije
-			// String password = request.getParameter("password");
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
 //samo privremeno da se mogu zakazati pregledi-username 3.12
@@ -99,6 +96,10 @@ public class KorisnikContreller {
 				
 				if(k.getFirst_Login()==true) {
 					k.setFirst_Login(false);
+					request.setAttribute("korisnik", korisnikServis.findOne(k.getId()));
+					Korisnik kori=korisnikServis.findOne(k.getId());
+					//System.out.println(k.getVisina());
+					request.setAttribute("mode", "MODE_LOGIN");
 					return "firstLogin";
 					
 				}else {
@@ -330,14 +331,14 @@ public class KorisnikContreller {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
 
-		return "login";
+		return "loginBezDobrodosli";  //bio je login
 	}
 
 	@RequestMapping("/profil")
 	public String editUserProfil(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
-		return "login";
+		return "loginBezDobrodosli";  //bio je login
 	}
 
 	@RequestMapping("/vratiSeNaPocetnu")
@@ -355,7 +356,7 @@ public class KorisnikContreller {
 	public String editUserProfil2(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
-		return "login";
+		return "loginBezDobrodosli";  //bio je login
 	}
 
 	@RequestMapping("/profil2")
@@ -380,7 +381,7 @@ public class KorisnikContreller {
 
 		System.out.println(korisnikd.getId() + korisnikd.getIme());
 		;
-		return "login";
+		return "loginBezDobrodosli"; //bio je login
 	}
 
 	

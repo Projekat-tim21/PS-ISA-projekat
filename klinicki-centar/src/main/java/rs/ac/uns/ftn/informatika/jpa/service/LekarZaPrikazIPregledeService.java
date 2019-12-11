@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
+import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.LekarZaPrikazIPregledeRepository;
@@ -34,6 +35,9 @@ public class LekarZaPrikazIPregledeService {
 		return lipi;
 	}
 	
+	public LekarZaPrikazIPreglede findOne(Long id) {
+		return lipRepo.findById(id).orElseGet(null);
+	}
 	
 
 	
