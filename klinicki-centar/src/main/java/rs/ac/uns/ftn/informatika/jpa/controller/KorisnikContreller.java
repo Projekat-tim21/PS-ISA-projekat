@@ -216,6 +216,9 @@ public class KorisnikContreller {
 	public String UpdateKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 
+		
+		
+		
 		Korisnik k = new Korisnik();
 		Long Idx = korisnikd.getId();
 
@@ -245,6 +248,12 @@ public class KorisnikContreller {
 	public String UpdateKorisnik2(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 	
+		String id2 = request.getParameter("id");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("id", id2);
+		
+		
 		Korisnik izBaze=korisnikServis.findOne(id);
 		
 		Korisnik k = new Korisnik();

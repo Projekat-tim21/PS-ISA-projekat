@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Dobrodosli</title>
+<title>Izmena podataka</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 
@@ -28,17 +28,8 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac(this)" href="/profilkaPregledu">Profil</a></li>
-					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena podataka</a></li>
-					 	<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista klinika</a></li> 	
-				 	<li><a onclick="addIdPac(this)" href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
-				 		<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni karton</a>
-				 		<li><a onclick="addIdPac2(this)" href="/prikaziListuLekara">Lista lekara</a>
-				 		<li><a onclick="addIdPac(this)" href="/zakaziPregledKojiJeDef">Zakazi pregled</a>
-				 		<li><a onclick="addIdPac(this)" href="/listaZakazanihPregleda">Zakazani pregledi</a>
-				 		
-			<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->	
-					<li><a href="/logout">Odjavi se</a></li>
+					<li><a onclick="addIdPac(this)" href="/korakUnazadNaLogin">Vrati se nazad</a></li>	
+					<li><a href="/logout">Odjavi se</a></li> 
 				</ul>
 			
 			</div>
@@ -51,8 +42,7 @@ body {
 			<div class="container text-center">
 				<h3>Pregled podataka</h3>
 				<hr>
-				<form class="form-horizontal" method="POST"   action="sacuvajupdateNaLogin">
-				
+				<form class="form-horizontal" method="POST"  onclick="addIdPac(this)" action="sacuvajupdateNaLogin">
 					<div class="form-group">
 						<label class="control-label col-md-3">Id</label>
 						<div class="col-md-6">
@@ -136,7 +126,7 @@ body {
 					</div>
 				
 					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="Izmeni">
+						<a onclick="addIdPac(this)" href='/sacuvajupdateNaLogin'><input type="submit"  class="btn btn-primary" value="Izmeni"></a>
 					</div>
 				</form>
 			</div>
@@ -165,16 +155,9 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 var idPacijenta = getUrlParameter('id');
-//console.log(idPacijenta);
-//<a onclick="addIdPac(this)" href="/sacuvajupdateNaLogin">
-
-
-	//location.href = "http://localhost:8081/sacuvajupdateNaLogin" + "?id="+ idPacijenta;
-	//console.log(element.href);
-
+console.log(idPacijenta);
 
 function addIdPac (element){
-	console.log("proba");
 	element.href = element.href+"?id="+idPacijenta;
 	console.log(element.href);
 }
