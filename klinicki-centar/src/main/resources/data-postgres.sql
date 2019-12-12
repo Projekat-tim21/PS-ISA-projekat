@@ -42,8 +42,10 @@ insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa,
 
 
 
-insert into sala(id, naziv, br, datum) values (1, 'Novo srce', 3, '21.10.2019.');
-insert into sala(id, naziv, br, datum) values (4, 'Deca', 2, '20.10.2019.');
+insert into sala(id, naziv, br, datum, rezervisana) values (1, 'Novo srce', 3, '21.10.2019.', 'false');
+insert into sala(id, naziv, br, datum, rezervisana) values (4, 'Deca', 2, '20.10.2019.', 'false');
+insert into sala(id, naziv, br, datum, rezervisana) values (2, 'Za prijem', 4, '22.12.2019.', 'true');
+insert into sala(id, naziv, br, datum, rezervisana) values (5, 'Deca', 10, '9.3.2020.', 'true');
 
 insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (3, '2019-12-04T05:42', '2B', 1000, 10 , 'Sara', 'Saric','dermatologija','false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',3);

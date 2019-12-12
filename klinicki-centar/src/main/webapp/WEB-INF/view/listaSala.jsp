@@ -29,6 +29,18 @@ body {
 </head>
 <body>
 
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/naPocetnu">Vrati se nazad</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
 <c:choose>
 	<c:when test="${mode=='ALL_SALE' }">
 			<div class="container text-center" id="tasksDiv">
@@ -57,8 +69,8 @@ body {
 								<th>Naziv</th>
 								<th>Br</th>
 								<th>Datum</th>
-								<th>Zauzece sale</th>
-								
+								<th>Slobodne sale</th>
+		
 							</tr>
 						</thead>
 						<tbody>
@@ -69,32 +81,62 @@ body {
 									<td>${sala.br}</td>
 									<td>${sala.datum}</td>
 									<td><a href = "/prikazKalendaraSala"> Kalendar sala</a></td>
+					
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					
-					
-					
 			
-			
-			
-			
-			<div class="form-group ">
-			
-	     	  <input type="submit" class="btn btn-primary" value="Rezervisi" />
-	       			
-	    	</div>
-				
 				</div>
 			</div>
 			
   		
 
 		</c:when>
+		
+		<c:when test="${mode=='SVE_SLOBODNE_SALE'}">
+		
+		<div class="container text-center" id="tasksDiv">
+				<h3>Lista slobodnih sala</h3>
+				<hr>
+				<div class="table-responsive">
+
+					<table id="myTable" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Naziv</th>
+								<th>Br sale</th>
+								<th>Datum</th>	
+								<th>Rezervisi salu</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="sala" items="${sale}">
+								<tr>
+									<td>${sala.id}</td>
+									<td>${sala.naziv}</td>
+									<td>${sala.br}</td>
+									<td>${sala.datum}</td>	
+									<td><a onclick="izbaciAlert(this)" >Rezervisi salu</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</c:when>
+		
+		
 </c:choose>
 
 <script>
+
+function izbaciAlert(element){
+	alert("Uspesno ste rezervisali salu.");
+	
+}
 
 function myFunction1() {
 	var input, filter, table, tr, td, i, txtValue;
