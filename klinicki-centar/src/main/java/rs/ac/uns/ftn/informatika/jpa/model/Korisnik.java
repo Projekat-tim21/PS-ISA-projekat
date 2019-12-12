@@ -1,12 +1,15 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -87,6 +90,9 @@ public class Korisnik {
 	
 	@Column(name = "anamneza", nullable = true)
 	private String anamneza;
+	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Klinika klinika;
 	
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
@@ -367,6 +373,14 @@ public class Korisnik {
 
 	public void setFirst_Login(Boolean first_Login) {
 		this.first_Login = first_Login;
+	}
+
+	public Klinika getKlinika() {
+		return klinika;
+	}
+
+	public void setKlinika(Klinika klinika) {
+		this.klinika = klinika;
 	}
 
 	

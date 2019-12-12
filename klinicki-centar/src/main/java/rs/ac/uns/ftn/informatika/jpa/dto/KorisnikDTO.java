@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.informatika.jpa.dto;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 
@@ -29,6 +30,7 @@ public class KorisnikDTO {
 	private String alergije;
 	private String bolesti;
 	private String anamneza;
+	private static KlinikaDTO klinika;
 
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
 			String adresa, String grad, String drzava, String telefon, String password, String repeatPassword,
@@ -59,6 +61,8 @@ public class KorisnikDTO {
 		this.anamneza = anamneza;
 	}
 
+	
+	
 	public String getDatum() {
 		return datum;
 	}
@@ -164,7 +168,7 @@ public class KorisnikDTO {
 
 	public KorisnikDTO(Korisnik korisnik) {
 
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName(),korisnik.getFirst_Login());
+		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName(),korisnik.getFirst_Login(),klinika=new KlinikaDTO(korisnik.getKlinika()));
 	}
 
 	
@@ -308,4 +312,39 @@ public class KorisnikDTO {
 		this.isActive = isActive;
 	}
 
+
+
+	public KorisnikDTO(Long id2, String username2, String ime2, String prezime2, String jedBrOsig2, String email2,
+			String adresa2, String grad2, String drzava2, String telefon2, String password2, String roleName,
+			Boolean first_Login, KlinikaDTO klinika2) {
+		// TODO Auto-generated constructor stub
+		this.id = id2;
+		this.username = username2;
+		this.ime = ime2;
+		this.prezime = prezime2;
+		this.jedBrOsig = jedBrOsig2;
+		this.email = email2;
+		this.adresa = adresa2;
+		this.grad = grad2;
+		this.drzava = drzava2;
+		this.telefon = telefon2;
+		this.password = password2;
+		this.role = roleName;
+		this.firstLogin = firstLogin;
+		this.klinika=klinika2;
+	}
+
+
+
+	public static KlinikaDTO getKlinika() {
+		return klinika;
+	}
+
+
+
+	public static void setKlinika(KlinikaDTO klinika) {
+		KorisnikDTO.klinika = klinika;
+	}
+		
+	
 }

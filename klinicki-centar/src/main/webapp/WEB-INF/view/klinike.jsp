@@ -10,6 +10,8 @@
 <title>Klinike</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
  
 	<div role="navigation">
@@ -21,6 +23,7 @@
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
@@ -30,13 +33,28 @@
 		</div>
 	</div>
 	
+	<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center">
+            <div class="card">
+                <div class="card-header">
+	<div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <h3>KLINIKE</h3>
+                                          </div>
+				
+                                    <div class="table-data_tool-right">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewKlinika">DODAJ NOVU KLINIKU</a></i></button>
+                                    </div>
+                                </div>
+	
 	<c:choose>
 	<c:when test="${mode=='ALL_KLINIKE' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>KLINIKE</h3>
 				<hr>
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>Id</th>
@@ -45,8 +63,6 @@
 								<th>Drzava</th>
 								<th>Ocena</th>
 								<th>Adresa</th>
-								<th>Adresa</th>
-								<th>Cena</th>
 						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
@@ -59,7 +75,6 @@
 									<td>${klinika.drzava}</td>
 									<td>${klinika.ocena}</td>
 									<td>${klinika.adresa}</td>
-									<td>${klinika.cena}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -68,5 +83,13 @@
 			</div>
 		</c:when>
 </c:choose>
+</div>
+</div>
+</div>
+</div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/app.js"></script>
 </body>
 </html>

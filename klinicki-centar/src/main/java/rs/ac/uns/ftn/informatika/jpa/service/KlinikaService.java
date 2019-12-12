@@ -28,5 +28,16 @@ public class KlinikaService {
 		}
 		return klinike;
 	}
+
+	public Klinika findByNaziv(String naziv) {
+		// TODO Auto-generated method stub
+		return klinikaRepository.findByNaziv(naziv);
+	}
+
+	public void sacuvajKliniku(Klinika klinikaN) {
+		// TODO Auto-generated method stub
+		klinikaRepository.save(klinikaN);
+		
+	}
 	
 }

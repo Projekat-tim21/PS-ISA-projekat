@@ -110,6 +110,8 @@ public class KorisnikContreller {
 				}
 			}else if (k.getRoleName().equals(Role.LEKAR.name())) {
 				return "lekarStranica";
+			}else if(k.getRoleName().equals(Role.SESTRA.name())) {
+				return "medSestraPocetna";
 			}
 			session.setAttribute("id", k.getId());
 			return "login";

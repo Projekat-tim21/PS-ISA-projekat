@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Admin</title>
+<title>Sestra</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
@@ -34,15 +34,9 @@ body,html {
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-			<h2>ADMINISTRATOR</h2>
+			<h2>MEDICINSKA SESTRA</h2>
 				<ul class="nav navbar-nav">
-				<li><a href="/sviIzBaze">Pregled svih</a></li>
-					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
-					<li><a href="/klinike">Klinike</a></li>
-					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
-					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
-					<li><a href="/lekovi">Lekovi</a></li>
-					<li><a href="/dijagnoze">Dijagnoze</a></li>
+				<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
@@ -53,7 +47,7 @@ body,html {
 	<c:choose>
 	<c:when test="${mode=='ALL_USERS' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Svi korisnici</h3>
+				<h3>Svi Pacijenti</h3>
 				<hr>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered">
@@ -69,7 +63,7 @@ body,html {
 								<th>Grad</th>
 								<th>Drzava</th>
 								<th>Telefon</th>
-								<th>Stautus</th>
+								<th>Detaljnije</th>
 						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
@@ -86,7 +80,7 @@ body,html {
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-									<td>${korisnik.isActive }</td>
+									<td><a href="/vidijos/${korisnik.getId()}" >Vidi jos</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
