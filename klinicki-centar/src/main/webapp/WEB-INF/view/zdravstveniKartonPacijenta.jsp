@@ -30,7 +30,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac(this)" href="/naLogin">Vrati se nazad</a></li>
+					<li><a href="/naLogin?id=${id}">Vrati se nazad</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 
@@ -45,7 +45,7 @@ body {
 			<div class="container text-center">
 				<h3>Zdravstveni karton</h3>
 				<hr>
-				<form class="form-horizontal" name="forma" method="POST" modelAttribute="korisnik">
+				<form class="form-horizontal" name="forma" >
 					<div class="form-group">
 	 					<label class="control-label col-md-3">Id</label>
 						<div class="col-md-6">
@@ -147,7 +147,9 @@ body {
 					
 				
 					<div class="form-group ">
-						<button type="submit" onclick="addIdPac(this)" formaction="/idiNaLoginBezDobrodosli">Pocetna</button>
+				<!-- 	<button type="submit" formaction="/idiNaLoginBezDobrodosli">Pocetna</button>   -->	
+				<!-- 	<input type="submit" class="btn btn-primary" value="Pocetna">  -->	
+				<h3>		<a href="/naLogin?id=${id}">Vrati se nazad</a> </h3>
 					</div>
 				</form>
 			</div>
@@ -161,7 +163,7 @@ body {
 
 	</c:choose>
 
-	
+
 
 <script type="text/javascript">
 var alergijee ='${korisnik.alergije}';
