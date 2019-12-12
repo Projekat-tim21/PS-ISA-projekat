@@ -7,12 +7,34 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Dobrodosli</title>
+<title>Izmena podataka</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 
+<style>
+body {
+  background-image: url("static/images/slika.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+</style>
+
 </head>
+
 <body>
+
+	<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a onclick="addIdPac(this)" href="/korakUnazadNaLogin">Vrati se nazad</a></li>	
+					<li><a href="/logout">Odjavi se</a></li> 
+				</ul>
+			
+			</div>
+		</div>
+	</div>
 
 
 
