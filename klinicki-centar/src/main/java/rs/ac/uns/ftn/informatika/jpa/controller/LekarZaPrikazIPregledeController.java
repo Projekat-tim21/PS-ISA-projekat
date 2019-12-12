@@ -205,10 +205,27 @@ public class LekarZaPrikazIPregledeController {
 		return "sviZakazaniPregledi";
 	}
 	
+	@RequestMapping("/pregled")
+	public String zakaziPregledLekar(HttpServletRequest request) {
+		
+		return "zapocniPregled";
+	}
+	
+	@RequestMapping("/naPocetnu")
+	public String vratiSeNazad(HttpServletRequest request) {
+		return "naStranicuLekara";
+	}
 	
 	
-	
-	
+	@RequestMapping("/zKartonLekar")
+	public String prikazZKartona(@RequestParam Long id, HttpServletRequest request) {
+		request.setAttribute("korisnik", korisnikServis.findOne(id));
+		Korisnik k=korisnikServis.findOne(id);
+		System.out.println(k.getVisina());
+		request.setAttribute("mode", "MODE_ZKARTON");
+		
+		return "zKartonLekar";
+	}
 	
 	
 	@RequestMapping("/listaSvihDefinisanihPregledaZaLekara")
