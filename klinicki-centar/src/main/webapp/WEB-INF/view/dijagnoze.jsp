@@ -23,6 +23,7 @@
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
 					<li><a href="/logout">Odjavi se</a></li>

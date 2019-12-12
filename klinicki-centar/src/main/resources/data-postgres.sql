@@ -8,15 +8,25 @@ insert into student (index_number, first_name, last_name) values ('ra7-2014', 'B
 insert into student (index_number, first_name, last_name) values ('ra8-2014', 'Milana', 'Milanović');
 insert into student (index_number, first_name, last_name) values ('ra9-2014', 'Jovana', 'Jovanić');
 
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Aria', 6 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
+insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
 
-insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Branka Radicevica 5', 'Srbija', 'miki@gmail.com',  'Novi Sad', 'Miki', '586623556', 'miki', 'Miki', '067528856', 'miki','TRUE','ADMIN_KLINIKE');
-insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Marsala Junaka 10', 'Srbija', 'cobi@gmail.com',  'Novi Sad', 'Cobi', '8898432342', 'cobi', 'Cobi', '064553772', 'cobi','TRUE','ADMIN_KLINIKE');
-insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Anica Dobra 1', 'Srbija', 'ana@gmail.com',  'Novi Sad', 'Ana', '8585608888', 'ana', 'Ana', '064999858', 'ana','TRUE','ADMIN_KLINIKE');
+
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,klinika_id ) values ('Branka Radicevica 5', 'Srbija', 'miki@gmail.com',  'Novi Sad', 'Miki', '586623556', 'miki', 'Miki', '067528856', 'miki','TRUE','ADMIN_KLINIKE',1);
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,klinika_id ) values ('Marsala Junaka 10', 'Srbija', 'cobi@gmail.com',  'Novi Sad', 'Cobi', '8898432342', 'cobi', 'Cobi', '064553772', 'cobi','TRUE','ADMIN_KLINIKE',2);
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,klinika_id ) values ('Anica Dobrica 1', 'Srbija', 'anali@gmail.com',  'Novi Sad', 'Anali', '8485608888', 'anali', 'Anali', '064955858', 'anali','TRUE','ADMIN_KLINIKE',3);
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,klinika_id ) values ('Anica Dobra 1', 'Srbija', 'ana@gmail.com',  'Novi Sad', 'Ana', '8585608888', 'ana', 'Ana', '064999858', 'ana','TRUE','ADMIN_KLINIKE',3);
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Branka Radicevica 55', 'Srbija', 'miki5@gmail.com',  'Novi Sad', 'Mikii', '5662355766', 'mikii', 'Miki', '0675288564', 'mikii',FALSE,'PACIJENT');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Marsala Junaka 105', 'Srbija', 'cobi5@gmail.com',  'Novi Sad', 'Cobii', '88843235426', 'cobii', 'Cobi', '0645537724', 'cobii',FALSE,'PACIJENT');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Anica Dobra 15', 'Srbija', 'ana5@gmail.com',  'Novi Sad', 'Ananfi', '858568488586', 'anai', 'Ana', '0649998584', 'anai',FALSE,'PACIJENT');
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Marsala Junaka 1055', 'Srbija', 'cobii5@gmail.com',  'Novi Sad', 'Cobii', '788843235426', 'addmin', 'Cobi', '0645537724', 'addmin',FALSE,'ADMIN',false);
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Anica Dobra 155', 'Srbija', 'anai5@gmail.com',  'Novi Sad', 'Ananfi', '8587568488586', 'aadmin', 'Ana', '0649998584', 'aadmin',FALSE,'ADMIN',true);
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Sestra 155', 'Srbija', 'sestra@gmail.com',  'Novi Sad', 'Sestra', '777458488586', 'sestra', 'Sestra', '0649998587', 'sestra',FALSE,'SESTRA',true);
+
 
 INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);
 /*ovo je admin klinike*/
@@ -31,12 +41,6 @@ insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa,
 insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Bate Brkic 4','', '', '', '', '', '', '', '', '', 'Srbija', 'marko22@gmail.com', 'Novi Sad', 'Marko', '21584546', 'ak', 'Markovic', '063528496', 'ak',TRUE,'PACIJENT');
 
 
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Aria', 6 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
 
 insert into sala(id, naziv, br, datum, rezervisana) values (1, 'Novo srce', 3, '21.10.2019.', 'false');
 insert into sala(id, naziv, br, datum, rezervisana) values (4, 'Deca', 2, '20.10.2019.', 'false');

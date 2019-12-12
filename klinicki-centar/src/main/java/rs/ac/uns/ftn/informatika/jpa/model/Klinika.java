@@ -1,10 +1,17 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +40,8 @@ public class Klinika {
 		@Column(name = "cena", nullable = false)
 		private int cena;
 
+		@OneToMany(mappedBy = "klinika", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+		private Set<Korisnik> admini = new HashSet<Korisnik>();
 		
 		public Klinika() {
 			super();
@@ -105,6 +114,37 @@ public class Klinika {
 
 		public void setCena(int cena) {
 			this.cena = cena;
+		}
+
+
+		public Set<Korisnik> getAdmini() {
+			return admini;
+		}
+
+
+		public void setAdmini(Set<Korisnik> admini) {
+			this.admini = admini;
+		}
+		
+		@Override
+		public int hashCode() {
+			return Objects.hashCode(id);
+		}
+
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			Klinika s = (Klinika) o;
+			if (s.id == null || id == null) {
+				return false;
+			}
+			return Objects.equals(id, s.id);
 		}
 		
 		

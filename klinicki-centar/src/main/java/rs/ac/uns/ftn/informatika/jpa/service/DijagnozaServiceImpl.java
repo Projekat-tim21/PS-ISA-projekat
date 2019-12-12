@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.DijagnozaDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
+import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.repository.DijagnozaRepository;
 
 @Service
@@ -47,4 +48,6 @@ public class DijagnozaServiceImpl {
 	public void obrisiDijagnozu(Long id) {
 		dijagnozaRepository.deleteById(id);;
 	}
+
+	
 }

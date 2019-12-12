@@ -23,6 +23,7 @@
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
@@ -64,7 +65,6 @@
 								<th>Grad</th>
 								<th>Drzava</th>
 								<th>Telefon</th>
-								<th colspan="2">Prihvati/Odbij</th>
 						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
@@ -81,15 +81,6 @@
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-									<td>
-                                            <a href="/update" id="update_${korisnik.getId()}" class="updateData"
-                                               onclick="event.preventDefault();"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
-                                            <a href="/save" id="save_${korisnik.getId()}" class="saveData"
-                                               onclick="event.preventDefault();saveData(${korisnik.getId()});"
-                                               style="display: none;"><span class="btn-label"><img src="static/svg/heart.svg"></span></a>
-                                        </td>
-                                        <td><a href="/delete/${korisnik.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
-                                        </td>
 					<!--  				<td>${korisnik.password}</td>  -->
 								</tr>
 							</c:forEach>

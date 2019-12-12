@@ -10,6 +10,9 @@
 <title>Administratori klinike</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
  
 	<div role="navigation">
@@ -20,7 +23,8 @@
 				<li><a href="/sviIzBaze">Pregled svih</a></li>
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/klinike">Klinike</a></li>
-					<li><a href="/adminKlinike">Administratori klinika</a></li>
+					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
@@ -30,13 +34,28 @@
 		</div>
 	</div>
 	
+	<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center">
+            <div class="card">
+                <div class="card-header">
+	<div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <h3>ADMINISTRATORI KLINIKA</h3>
+                                          </div>
+				
+                                    <div class="table-data_tool-right">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewAdminKlinike">DODAJ NOVOG ADMINISTRATORA</a></i></button>
+                                    </div>
+                                </div>
+	
 	<c:choose>
 	<c:when test="${mode=='ALL_ADMINI_KLINIKE' }">
-			<div class="container text-center" id="tasksDiv">
-				<h3>Administratori klinike</h3>
+	<div class="container text-center" id="tasksDiv">
 				<hr>
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>Id</th>
@@ -49,12 +68,12 @@
 								<th>Grad</th>
 								<th>Drzava</th>
 								<th>Telefon</th>
-								<th colspan="2">Prihvati/Odbij</th>
+								<th>Klinika</th>
 						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="korisnik" items="${adminiKlinike }">
+							<c:forEach var="korisnik"  items="${korisnici}">
 								<tr>
 									<td>${korisnik.id}</td>
 									<td>${korisnik.username}</td>
@@ -66,15 +85,7 @@
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-									<td>
-                                            <a href="/update" id="update_${korisnik.getId()}" class="updateData"
-                                               onclick="event.preventDefault();"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
-                                            <a href="/save" id="save_${korisnik.getId()}" class="saveData"
-                                               onclick="event.preventDefault();saveData(${korisnik.getId()});"
-                                               style="display: none;"><span class="btn-label"><img src="static/svg/heart.svg"></span></a>
-                                        </td>
-                                        <td><a href="/delete/${korisnik.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
-                                        </td>
+									<td>${korisnik.klinika.naziv}</td>									
 					<!--  				<td>${korisnik.password}</td>  -->
 								</tr>
 							</c:forEach>
@@ -84,5 +95,13 @@
 			</div>
 		</c:when>
 </c:choose>
+</div>
+</div>
+</div>
+</div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/app.js"></script>
 </body>
 </html>

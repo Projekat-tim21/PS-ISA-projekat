@@ -30,7 +30,7 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a onclick="addIdPac(this)" href="/profilkaPregledu">Profil</a></li>
 					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena podataka</a></li>
-					 	<li><a href="/listaSvihKlinika">Lista klinika</a></li> 	
+					 	<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista klinika</a></li> 	
 				 	<li><a onclick="addIdPac(this)" href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
 				 		<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni karton</a>
 				 		<li><a onclick="addIdPac2(this)" href="/prikaziListuLekara">Lista lekara</a>
@@ -51,7 +51,7 @@ body {
 			<div class="container text-center">
 				<h3>Pregled podataka</h3>
 				<hr>
-				<form class="form-horizontal" method="POST" modelAttribute="korisnik" action="sacuvajupdateNaLogin">
+				<form class="form-horizontal" method="POST"   action="sacuvajupdateNaLogin">
 				
 					<div class="form-group">
 						<label class="control-label col-md-3">Id</label>
@@ -165,9 +165,16 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 var idPacijenta = getUrlParameter('id');
-console.log(idPacijenta);
+//console.log(idPacijenta);
+//<a onclick="addIdPac(this)" href="/sacuvajupdateNaLogin">
+
+
+	//location.href = "http://localhost:8081/sacuvajupdateNaLogin" + "?id="+ idPacijenta;
+	//console.log(element.href);
+
 
 function addIdPac (element){
+	console.log("proba");
 	element.href = element.href+"?id="+idPacijenta;
 	console.log(element.href);
 }

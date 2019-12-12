@@ -6,4 +6,6 @@ import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 
 public interface KlinikaRepository extends JpaRepository<Klinika, Long> {
 
+	public Klinika findByNaziv(String naziv);
+
 }

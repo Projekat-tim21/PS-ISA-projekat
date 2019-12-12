@@ -33,20 +33,26 @@ body {
 </head>
 <body>
 
-	<div role="navigation">
+	
+	<c:choose>
+	
+	
+		<c:when test="${mode=='ALL_LEKARI' }">
+		
+		
+		<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/naLogin">Vrati se nazad</a></li>
+					<li><a onclick="addIdPac2(this)" href="/naLogin">Vrati se nazad</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 
 			</div>
 		</div>
 	</div>
-
-	<c:choose>
-		<c:when test="${mode=='ALL_LEKARI' }">
+		
+	
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista lekara</h3>
 				
@@ -107,6 +113,21 @@ body {
 		</c:when>
 
 		<c:when test="${mode=='ALL_TERMINI' }">
+		
+		
+		<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a onclick="addIdPac2(this)" href="/naLogin">Vrati se nazad</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+		
+		
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista slobodnih termina  </h3>
 				<hr>
@@ -185,6 +206,22 @@ body {
 
 
 <c:when test="${mode=='ALL_PREGLEDI_SA_LOGINA' }">
+
+
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a onclick="addIdPac3(this)" href="/naLogin">Vrati se nazad</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+
+
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista pregleda</h3>
 				<hr>
@@ -258,24 +295,20 @@ body {
 			element.href = element.href+"&idpac="+idPacijenta;
 		}
 
+	function addIdPac2 (element){
+		element.href = element.href+"?id="+idPacijenta;
+	}
+
+	function addIdPac3 (element){
+		element.href = element.href+"?id="+id2;
+	}
+	
 	function izbaciAlert(element){
 		alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
 		element.href = element.href+"&id="+id2;
 		}
 	
-	//console.log(idPacijenta);
-	//document.getElementById('idHidden').value = idPacijenta;
-	//location.href = '@Url.Action("Display", "Customer")?uname=' + firstname + '&name=' + username;
-	
-        //fn = document.getElementById('idHidden').value;
-        //console.log(fn);
-     
-      //document.getElementById('listaLekara').value = 'http://localhost:8081/zakazivanjePregledaIzaListeLekara?id=3' + fn;
-	
-	
-	
-	
-	
+
 	
 	
 		//za listu

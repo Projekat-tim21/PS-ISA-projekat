@@ -1,12 +1,15 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,10 +24,10 @@ public class Korisnik {
 	private Long id;
 	
 	@Column(name = "jedBrOsig", unique = true, nullable = false)
-	String jedBrOsig;
+	private String jedBrOsig;
 
 	@Column(name = "username", unique = true, nullable = false)
-	String username;
+	 private String username;
 	
 	@Column(name = "ime", nullable = false)
 	private String ime;
@@ -88,6 +91,8 @@ public class Korisnik {
 	@Column(name = "anamneza", nullable = true)
 	private String anamneza;
 	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Klinika klinika;
 
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
@@ -240,6 +245,20 @@ public class Korisnik {
 	}
 	
 	
+	
+
+	public Korisnik(String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
+			String grad, String drzava) {
+		super();
+		this.jedBrOsig = jedBrOsig;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+	}
 
 	public Korisnik(Long id, String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
 			String grad, String drzava, String telefon, String password, Boolean isActive, String roleName,
@@ -376,6 +395,14 @@ public class Korisnik {
 
 	public void setFirst_Login(Boolean first_Login) {
 		this.first_Login = first_Login;
+	}
+
+	public Klinika getKlinika() {
+		return klinika;
+	}
+
+	public void setKlinika(Klinika klinika) {
+		this.klinika = klinika;
 	}
 
 	

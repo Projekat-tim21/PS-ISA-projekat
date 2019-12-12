@@ -33,6 +33,12 @@ body {
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
+
+					<li><a href="/kartonZ">Prikazi profil pacijenta</a></li>
+					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
+
+					<li><a href="/radniKalendar">Radni kalendar</a></li>
+
 					<li><a href="/pretragaSale">Pregled sala</a></li>
 					<li><a>Radni kalendar</a></li>
 					<li><a>Kreiraj zahtev za odmor</a></li>
