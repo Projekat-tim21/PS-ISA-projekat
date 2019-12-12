@@ -13,10 +13,10 @@
 
 <style>
 body {
-  background-image: url("static/images/slika.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: bottom right; 
+	background-image: url("static/images/slika.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: bottom right;
 }
 </style>
 
@@ -24,49 +24,56 @@ body {
 
 <body>
 
+
+
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a onclick="addIdPac(this)" href="/profilkaPregledu">Profil</a></li>
-					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena podataka</a></li>
-					 	<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista klinika</a></li> 	
-				 	<li><a onclick="addIdPac(this)" href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
-				 		<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni karton</a>
-				 		<li><a onclick="addIdPac2(this)" href="/prikaziListuLekara">Lista lekara</a>
-				 		<li><a onclick="addIdPac(this)" href="/zakaziPregledKojiJeDef">Zakazi pregled</a>
-				 		<li><a onclick="addIdPac(this)" href="/listaZakazanihPregleda">Zakazani pregledi</a>
-				 		
-			<!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->	
+					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena
+							podataka</a></li>
+					<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista
+							klinika</a></li>
+					<li><a onclick="addIdPac(this)"
+						href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
+					<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni
+							karton</a>
+					<li><a onclick="addIdPac2(this)" href="/prikaziListuLekara">Lista
+							lekara</a>
+					<li><a onclick="addIdPac(this)" href="/zakaziPregledKojiJeDef">Zakazi
+							pregled</a>
+					<li><a onclick="addIdPac(this)" href="/listaZakazanihPregleda">Zakazani
+							pregledi</a> <!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
-			
+
 			</div>
 		</div>
 	</div>
 
-
 <c:choose>
+	
 		<c:when test="${mode=='MODE_PREGLED' }">
 			<div class="container text-center">
 				<h3>Pregled podataka</h3>
 				<hr>
-				<form class="form-horizontal" method="POST"   action="sacuvajupdateNaLogin">
-				
+				<form class="form-horizontal" method="POST"
+					action="sacuvajupdateNaLogin">
+
 					<div class="form-group">
 						<label class="control-label col-md-3">Id</label>
 						<div class="col-md-6">
-							<input type="text"  class="form-control" id="id" name="id"
-								value="${korisnik.id }" readonly>
-								<span id="free"></span>
+							<input type="text" class="form-control" id="id" name="id"
+								value="${korisnik.id }" readonly> <span id="free"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="username" name="username"
-								value="${korisnik.username }" required>
-								<span id="free"></span>
+							<input type="text" class="form-control" id="username"
+								name="username" value="${korisnik.username }" required>
+							<span id="free"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -134,56 +141,65 @@ body {
 								name="password" value="${korisnik.password}" required>
 						</div>
 					</div>
-				
+
 					<div class="form-group ">
 						<input type="submit" class="btn btn-primary" value="Izmeni">
 					</div>
 				</form>
 			</div>
+
+
 		</c:when>
-		
-		
+
+
+		<c:when test="${mode=='MODE'}">
+<h2>Uspesno ste izmenili svoje podatke.  <a href="/vratiSeNaPocetnu?id=${id}">Vrati se na pocetnu</a>   </h2>
+		</c:when>
+
+
+
 	</c:choose>
 
 
 
 
-<script type="text/javascript">
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-    }
-};
-
-var idPacijenta = getUrlParameter('id');
-//console.log(idPacijenta);
-//<a onclick="addIdPac(this)" href="/sacuvajupdateNaLogin">
 
 
-	//location.href = "http://localhost:8081/sacuvajupdateNaLogin" + "?id="+ idPacijenta;
-	//console.log(element.href);
+	<script type="text/javascript">
+		var getUrlParameter = function getUrlParameter(sParam) {
+			var sPageURL = window.location.search.substring(1), sURLVariables = sPageURL
+					.split('&'), sParameterName, i;
 
+			for (i = 0; i < sURLVariables.length; i++) {
+				sParameterName = sURLVariables[i].split('=');
 
-function addIdPac (element){
-	console.log("proba");
-	element.href = element.href+"?id="+idPacijenta;
-	console.log(element.href);
-}
+				if (sParameterName[0] === sParam) {
+					return sParameterName[1] === undefined ? true
+							: decodeURIComponent(sParameterName[1]);
+				}
+			}
+		};
 
-function addIdPac2 (element){
-	element.href = element.href+"?idpac="+idPacijenta;
-	console.log(element.href);
-}
-</script>
+		var idPacijenta = getUrlParameter('id');
+
+		function addIdPac(element) {
+			console.log("proba");
+			element.href = element.href + "?id=" + idPacijenta;
+			console.log(element.href);
+		}
+
+		function addIdPac2(element) {
+			element.href = element.href + "?idpac=" + idPacijenta;
+			console.log(element.href);
+		}
+
+		function checkredirect() {
+			window.location = 'http://localhost:8081/sacuvajupdateNaLogin?id='
+					+ napokooon;
+			console.log(window.location);
+			return false;
+		}
+	</script>
 
 
 </body>
