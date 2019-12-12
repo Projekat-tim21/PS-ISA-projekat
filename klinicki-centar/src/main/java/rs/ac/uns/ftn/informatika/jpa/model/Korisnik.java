@@ -21,10 +21,10 @@ public class Korisnik {
 	private Long id;
 	
 	@Column(name = "jedBrOsig", unique = true, nullable = false)
-	String jedBrOsig;
+	private String jedBrOsig;
 
 	@Column(name = "username", unique = true, nullable = false)
-	String username;
+	 private String username;
 	
 	@Column(name = "ime", nullable = false)
 	private String ime;
@@ -240,6 +240,20 @@ public class Korisnik {
 	}
 	
 	
+	
+
+	public Korisnik(String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
+			String grad, String drzava) {
+		super();
+		this.jedBrOsig = jedBrOsig;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+	}
 
 	public Korisnik(Long id, String jedBrOsig, String username, String ime, String prezime, String email, String adresa,
 			String grad, String drzava, String telefon, String password, Boolean isActive, String roleName,

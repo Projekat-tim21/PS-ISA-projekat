@@ -39,11 +39,18 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
+
 					<li><a href="/naLogin">Vrati se nazad</a></li>
 					<li><a href="/prikaziListuOperacija">Lista operacija</a></li>
 					<li><a href="/prikaziListuPregleda">Lista pregleda</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 					
+
+					<li><a onclick="addIdPac(this)" href="/naLogin">Vrati se nazad</a></li>
+					<li><a onclick="addIdPac(this)" href="/prikaziListuOperacija">Lista operacija</a></li>
+					<li><a onclick="addIdPac(this)" href="/prikaziListuPregleda">Lista pregleda</a></li>
+					<li><a onclick="addIdPac(this)" href="/logout">Odjavi se</a></li>
+
 				</ul>
 
 			</div>
@@ -129,6 +136,31 @@ body {
 	</c:choose>
 
 <script>
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+var idPacijenta = getUrlParameter('id');
+console.log(idPacijenta);
+
+function addIdPac (element){
+	element.href = element.href+"?id="+idPacijenta;
+	console.log(element.href);
+}
+
+
+
 			var TableIDvalue = "indextable";
 
 			var TableLastSortedColumn = -1;
