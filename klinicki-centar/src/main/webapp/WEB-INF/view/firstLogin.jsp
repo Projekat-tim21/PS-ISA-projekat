@@ -37,6 +37,7 @@
 						<label class="control-label col-md-3">Nova lozinka</label>
 						<div class="col-md-6">
 							<input type="password" class="form-control" name="password"
+
 								value="${korisnik.password }" required>
 						</div>
 					</div>

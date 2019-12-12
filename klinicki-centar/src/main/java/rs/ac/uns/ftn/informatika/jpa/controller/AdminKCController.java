@@ -144,7 +144,7 @@ public class AdminKCController {
 	        modelAndView.setViewName("create-admin-klinike");
 	        return modelAndView;
 	    }
-	    
+
 	    @GetMapping("/admin")
 	    public ModelAndView addmin() {
 	        ModelAndView modelAndView = new ModelAndView();

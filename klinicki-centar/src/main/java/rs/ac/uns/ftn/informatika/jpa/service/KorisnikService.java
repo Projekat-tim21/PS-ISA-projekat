@@ -5,10 +5,16 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
+
 import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
@@ -19,7 +25,7 @@ public class KorisnikService {
 
 	private final KorisnikRepository korisnikRepository;
 	
-	
+	@Autowired
 	private PregledRepository pregledRepo;
 	
 	KorisnikDTO korDto;
@@ -123,6 +129,8 @@ public class KorisnikService {
 		korisnikRepository.saveDatum(novidatum);
 	}
 */
+
+	
 
 	
 

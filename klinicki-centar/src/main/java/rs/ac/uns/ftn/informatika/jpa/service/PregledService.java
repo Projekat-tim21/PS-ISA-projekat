@@ -32,6 +32,30 @@ public class PregledService {
 	}
 	
 	
+	public void obrisi(Long id) {
+		pregledRepo.deleteById(id);
+	}
+	
+	public void dodajPregled(Pregled p) {
+		
+		pregledRepo.save(p);
+	}
+	
+	public Pregled findOneById(Long id) {
+		
+		return pregledRepo.findOneById(id);
+	}
+	
+	public Pregled findByDatum(String datum) {
+		
+		return pregledRepo.findByDatum(datum);
+	}	
+	
+	public Pregled findByVreme(String vreme) {
+		
+		return pregledRepo.findByVreme(vreme);
+	}
+	
 }
 	/*public Pregled findByDate(String date) {
 		

@@ -94,7 +94,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sacuvaj").permitAll()
 		.antMatchers("/logout").permitAll()
 		.antMatchers("/prikazOsnovnihInfo").permitAll()
-		.antMatchers("/pacijenti").permitAll()
 		.antMatchers("/zakazivanjePregleda").permitAll()
 		.antMatchers("/listaSvihKlinika").permitAll()
 		.antMatchers("/zahteviRegistrovanje").permitAll()
@@ -129,6 +128,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sacuvajNovaLozinka").permitAll()
 		.antMatchers("/radniKalendar").permitAll()
 		.antMatchers("/kartonZ").permitAll()
+		.antMatchers("/zakazivanjePregledaOdobreno").permitAll()
 		.antMatchers("/prikaziListuLekara").permitAll()
 		.antMatchers("/AdminPraviPreglede").permitAll()
 		.antMatchers("/kreirajPregledZaLekara").permitAll()
@@ -146,6 +146,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sviSestraPacijenti").permitAll()
 		.antMatchers("/vidijos/*").permitAll()
 		.antMatchers("/razlogOdbijanja/*").permitAll()
+		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
+
+		.antMatchers("/pretragaSale").permitAll()
+		.antMatchers("/lekarStranica").permitAll()
+		.antMatchers("/prikazKalendaraSala").permitAll()
+
+		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
+
+		.antMatchers("/listaSvihDefinisanihPregledaZaLekara").permitAll()
+		.antMatchers("/uspesnoZakazanPregled").permitAll()
+		.antMatchers("/vratiSeNaLoginBezDobrodosli2").permitAll()
+		.antMatchers("/saljemoZahtevZaPregledom").permitAll()
+		.antMatchers("/listaZakazanihPregleda").permitAll()
+
+
+		.antMatchers("/kartonZ").permitAll()	
+		.antMatchers("/admin").permitAll()	
+		.antMatchers("/sacuvajNovaLozinka").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

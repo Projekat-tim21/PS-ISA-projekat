@@ -57,6 +57,25 @@ public class EmailService {
 		System.out.println("Email poslat!");
 	}
 	
+	
+	
+	public void sendNotificaitionZaZakazanePreglede(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje emaila za zakazane preglede...");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Uspesno ste zakazali pregled");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nUspesno ste zakzali pregled.");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+	
+	
+	
+	
 	public void sendNotificaitionZaAdminaKC(Korisnik k) throws MailException, InterruptedException {
 
 		System.out.println("Slanje emaila za admina kc");
