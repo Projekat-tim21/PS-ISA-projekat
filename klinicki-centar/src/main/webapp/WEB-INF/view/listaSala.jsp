@@ -8,10 +8,11 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="ISO-8859-1">
-<title>Pregled</title>
+<title>Pregled sala</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
+
 body {
 	background-image: url("static/images/loupe.png");
 	background-repeat: no-repeat;
@@ -24,16 +25,14 @@ body {
   padding: 12px; /* Add padding */
 }
 
-
 </style>
 </head>
 <body>
 
-
 <c:choose>
-	<c:when test="${mode=='ALL_USERS' }">
+	<c:when test="${mode=='ALL_SALE' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Svi korisnici</h3>
+				<h3>Sve sale</h3>
 				
 					
 			<div class="table-responsive">
@@ -42,11 +41,11 @@ body {
 					<table class="table">
 						<tr>
 							<th><input  type="text" id="myInput1" onkeyup="myFunction1()"
-								placeholder="Pretrazite po imenu..."></th>
+								placeholder="Pretrazite po nazivu..."></th>
 							<th><input  type="text" id="myInput2" onkeyup="myFunction2()"
-								placeholder="Pretrazite po prezimenu..."></th>
+								placeholder="Pretrazite po broju sale.."></th>
 							<th><input  type="text" id="myInput3" onkeyup="myFunction3()"
-								placeholder="Pretrazite po jedinstvenom broju..."></th>
+								placeholder="Pretrazite po datumu..."></th>
 							
 						</tr>
 					</table>
@@ -55,18 +54,21 @@ body {
 						<thead>
 							<tr>
 								<th>Id</th>
-								<th>Ime</th>
-								<th>Prezime</th>
-								<th>Jedinstveni br. osiguranika</th>
+								<th>Naziv</th>
+								<th>Br</th>
+								<th>Datum</th>
+								<th>Zauzece sale</th>
+								
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="korisnik" items="${korisnici }">
+							<c:forEach var="sala" items="${sale }">
 								<tr>
-									<td>${korisnik.id}</td>
-									<td>${korisnik.ime}</td>
-									<td>${korisnik.prezime}</td>
-									<td>${korisnik.jedBrOsig}</td>
+									<td>${sala.id}</td>
+									<td>${sala.naziv}</td>
+									<td>${sala.br}</td>
+									<td>${sala.datum}</td>
+									<td><a href = "/prikazKalendaraSala"> Kalendar sala</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -76,18 +78,13 @@ body {
 					
 			
 			
-			<!--<div class="form-group ">
 			
-	     	  <input type="submit" class="btn btn-primary" value="Prikazi" />
+			
+			<div class="form-group ">
+			
+	     	  <input type="submit" class="btn btn-primary" value="Rezervisi" />
 	       			
-	  
-	    	</div>-->
-			
-			
-	    	
-	    	<div class="col-lg">
-                    <a style="padding-left: 40px" class="btn btn-link" href="/profilkaPregledu" role="button">Prikazi</a>
-                </div>
+	    	</div>
 				
 				</div>
 			</div>
@@ -98,8 +95,6 @@ body {
 </c:choose>
 
 <script>
-
-
 
 function myFunction1() {
 	var input, filter, table, tr, td, i, txtValue;
@@ -157,8 +152,6 @@ function myFunction3() {
 		}
 	}
 }
-
-
 </script>
 
 </body>

@@ -14,6 +14,7 @@
 <style>
 body {
 	background-image: url("static/images/s.png");
+	background-position: 10px 12px;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: bottom right;

@@ -54,7 +54,9 @@ ul {
 
 button,
 input[type='button'] {
-    cursor: pointer;
+
+    cursor: hand; /*pointer*/
+
 }
 
 button:focus,
@@ -68,6 +70,20 @@ input, textarea {
 }
 
 button {
+
+    background: none;
+}
+
+/*img {
+    max-width: 100%;
+    height: auto;
+}
+*/
+p {
+    margin: 0;
+}
+/*
+
     border: none;
     background: none;
 }
@@ -97,7 +113,13 @@ p {
     border-radius: 3px;
 }
 
+*/
 /* ----- Typography ----- */
+/*
+
+
+/* ----- Typography ----- */
+
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -156,6 +178,7 @@ strong {
 /*                   ELEMENTS                          */
 /*-----------------------------------------------------*/
 /* ----- Title ----- */
+
 .title--sbold {
     font-weight: 600;
 }
@@ -212,7 +235,7 @@ strong {
     margin-bottom: 10px;
 }
 
-/* ----- Links ----- */
+
 a {
     display: inline-block;
 }
@@ -232,10 +255,12 @@ a {
     transition: all 0.3s ease;
 }
 
+
 /*-----------------------------------------------------*/
 /*                   OBJECTS                           */
 /*-----------------------------------------------------*/
 /* ----- Section----- */
+
 section {
     position: relative;
 }
@@ -272,7 +297,9 @@ section {
     }
 }
 
+
 /*Page Objects*/
+
 .page-wrapper {
     overflow: hidden;
     background: #e5e5e5;
@@ -441,10 +468,12 @@ section {
     padding-bottom: 30px;
 }
 
+
 /*-----------------------------------------------------*/
 /*                   COMPONENTS                        */
 /*-----------------------------------------------------*/
 /* ----- Buttons----- */
+
 .au-btn {
     line-height: 45px;
     padding: 0 35px;
@@ -566,7 +595,9 @@ section {
     font-size: 14px;
 }
 
+
 /*Page Loader*/
+
 .page-loader {
     background: #f8f8f8;
     bottom: 0;
@@ -653,7 +684,9 @@ section {
     }
 }
 
+
 /* ----- Form ----- */
+
 .form-header {
     display: -webkit-box;
     display: -webkit-flex;
@@ -684,33 +717,47 @@ section {
 }
 
 .form-header2 .au-input::-webkit-input-placeholder {
+
     /* WebKit, Blink, Edge */
+
     color: #999;
 }
 
 .form-header2 .au-input:-moz-placeholder {
+
+  
     /* Mozilla Firefox 4 to 18 */
+
     color: #999;
     opacity: 1;
 }
 
 .form-header2 .au-input::-moz-placeholder {
+
     /* Mozilla Firefox 19+ */
     color: #999;
     opacity: 1;
 }
 
 .form-header2 .au-input:-ms-input-placeholder {
+
     /* Internet Explorer 10-11 */
+
     color: #999;
 }
 
 .form-header2 .au-input:-ms-input-placeholder {
+
+    color: #999;
+}
+
+
     /* Microsoft Edge */
     color: #999;
 }
 
 /* ----- Input ----- */
+
 .au-input {
     line-height: 43px;
     border: 1px solid #e5e5e5;
@@ -1179,6 +1226,7 @@ section {
     -moz-border-radius: .25rem;
     border-radius: .25rem;
 }
+
 
 /* ----- Header ----- */
 .header-desktop {
@@ -3086,6 +3134,7 @@ section {
 }
 
 /* ----- Overview ----- */
+
 .overview-wrap {
     display: -webkit-box;
     display: -webkit-flex;
@@ -3254,7 +3303,9 @@ section {
     width: 100%;
 }
 
+
 /* ----- Card ----- */
+
 .au-card {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
@@ -4020,7 +4071,9 @@ section {
     font-size: 14px;
 }
 
+
 /* ----- Charts ----- */
+
 #chartjs-tooltip {
     opacity: 1;
     position: absolute;
@@ -4222,7 +4275,9 @@ section {
     margin-right: 0;
 }
 
+
 /* ----- Table ----- */
+
 .table {
     margin: 0;
 }
@@ -4738,6 +4793,7 @@ section {
     color: #fa4251;
 }
 
+
 /* ----- Footer ----- */
 .copyright {
     text-align: center;
@@ -4753,7 +4809,9 @@ section {
     line-height: calc(24/14);
 }
 
+
 /* ----- Breadcrumb ----- */
+
 .au-breadcrumb {
     height: 75px;
     background: #fff;
@@ -4959,6 +5017,7 @@ section {
     color: #808080;
 }
 
+
 /* ----- Statistic ----- */
 .statistic {
     padding-top: 57px;
@@ -5036,6 +5095,7 @@ section {
     background: #fa4251;
 }
 
+
 /* ----- Statistic 2 ----- */
 .statistic2 {
     padding-top: 50px;
@@ -5101,7 +5161,9 @@ section {
     right: -15px;
 }
 
+
 /* ----- Alert ----- */
+
 .au-alert {
     border: 1px solid #fff;
     background: #fff;
@@ -5158,7 +5220,7 @@ section {
     }
 }
 
-/* Switch */
+
 .switch.switch-default {
     position: relative;
     display: inline-block;

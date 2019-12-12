@@ -8,6 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
 <title>Zdravstveni Karton</title>
+
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 
@@ -142,6 +143,8 @@ body {
 							<textarea rows="4" cols="80" class="form-control" id="anamneza" name="anamneza" readonly></textarea>
 						</div>
 					</div>
+					
+					
 				
 					<div class="form-group ">
 						<button type="submit" onclick="addIdPac(this)" formaction="/idiNaLoginBezDobrodosli">Pocetna</button>

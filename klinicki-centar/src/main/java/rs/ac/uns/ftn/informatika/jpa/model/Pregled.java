@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
+
 @Entity
 @Table(name="pregled")
 public class Pregled {
@@ -18,25 +22,58 @@ public class Pregled {
 	
 	@Column(name="datum", nullable=false)
 	String datum;
-	
-	@Column(name="vreme", nullable=false)
+
+	@Column(name = "vreme", nullable = false)
 	String vreme;
 	
 	@Column(name="tip", nullable=false)
 	String tip;
 	
+	@Column(name = "lekar", nullable = false)
+	String lekar;
+	
+	@Column(name = "cena", nullable = false)
+    int cena;
+	
+
 	@Column(name="trajanje", nullable=false)
 	String trajanje;
-	
+
+		
 	@Column(name="sala", nullable=false)
 	String sala;
 	
-	@Column(name="lekar", nullable=false)
-	String lekar;
 	
-	@Column(name="cena", nullable=false)
-	int cena;
+	@Column(name = "zakazan", nullable = false)
+	Boolean zakazan;
+	
+	public Boolean getZakazan() {
+		return zakazan;
+	}
 
+	public void setZakazan(Boolean zakazan) {
+		this.zakazan = zakazan;
+	}
+	
+/*	public Korisnik getZakazao() {
+		return zakazao;
+	}
+	
+	public void setZakazao(Korisnik zakazao) {
+		this.zakazao = zakazao;
+	}
+	*/
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	
 	public Pregled() {
 		super();
 	}
@@ -54,13 +91,7 @@ public class Pregled {
 		this.cena = cena;
 	}
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getDatum() {
 		return datum;

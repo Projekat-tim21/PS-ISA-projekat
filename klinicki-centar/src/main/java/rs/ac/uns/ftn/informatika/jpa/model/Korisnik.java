@@ -88,6 +88,7 @@ public class Korisnik {
 	@Column(name = "anamneza", nullable = true)
 	private String anamneza;
 	
+
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
 			String tezina, String kgrupa, String dioptrija, String alergije, String bolesti, String anamneza) {
@@ -107,6 +108,14 @@ public class Korisnik {
 		this.anamneza = anamneza;
 	}
 
+/*	public List<Pregled> getPregledi(){
+		return pregledi;
+	}
+	
+	public void setPregledi(List<Pregled> pregledi) {
+		this.pregledi = pregledi;
+	}*/
+	
 	public String getDatum() {
 		return datum;
 	}
@@ -385,8 +394,6 @@ public class Korisnik {
 
 	
 	
-	
-
 	
 	
 }

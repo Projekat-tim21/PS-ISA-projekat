@@ -38,15 +38,17 @@ insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9'
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
 insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
 
+insert into sala(id, naziv, br, datum) values (1, 'Novo srce', 3, '21.10.2019.');
+insert into sala(id, naziv, br, datum) values (4, 'Deca', 2, '20.10.2019.');
 
 insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (3, '2019-12-04T05:42', '2B', 1000, 10 , 'Sara', 'Saric','dermatologija','false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',3);
 
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00');
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '09:00');
-insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '09:00');
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00', TRUE);
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '10:00', TRUE);
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '08:00', TRUE);
 
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'dermatolog', '1h', '09:00');
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme) values (2000, '15.02.2020', 'Jovan Jovic', '2A', 'stomatolog', '1h', '09:00');
@@ -59,6 +61,7 @@ nastajanje krvnih ugrušaka (tromba) – inhibicija agregacije trombocita.
 insert into lek (sifra,naziv,dodatno) values ('BRFSASO','Brufen','Lek BRUFEN, 100 mg/ 5 mL, sirup pripada grupi antiinflamatornih lekova protiv bolova.');
 insert into lek (sifra,naziv,dodatno) values ('RTYDASO','Probiotik', 'Prema definiciji Svetske zdravstvene organizacije to su živi mikroorganizmi (bakterije i kvasnice) koje pružaju zdravstvenu korist domaćinu ako se unose u adekvatnim količinama.');
 
+
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWERFHN','Glavobolja','Glavobolja (Cephalea, Cephalalgia, grčka reč) je bol ili bolna senzacija u predelu glave i delova vratakoja, u odnosu na svoj nastanak i trajanje, može biti akutna ili hronična.');
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWEHGBC','Hipertenzija','Hipertenzija (visok krvni pritisak) je stanje u kome je krvni pritisak iznad 120/80 mmHg. Gornjipritisak(sistolni pritisak) zapravo je pritisak krvina zidove krvnih sudova u trenutkukada se srce kontrahuje, ');
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWRHGNC','Anemija', 'Anemija ili malokrvnost je stanje koje se karakteriše smanjenim nivoom hemoglobina u krvi i/ili smanjenim brojem eritrocita. Eritrociti su crvena krvna zrnca koja se stvaraju u koštanoj srži, a nakon sazrevanja cirkulišu u krvi.');
@@ -66,7 +69,6 @@ insert into dijagnoza (sifra,naziv,dodatno) values ('DWRHGNC','Anemija', 'Anemij
 insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Zoran', 'Zoric', 'ocno', 'LEKAR',8 );
 insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Mara', 'Maric', 'url', 'LEKAR',9 );
 insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Sara', 'Saric', 'dermatologija', 'LEKAR',6 );
-
 
 
 insert into course (name) values ('Matematika');

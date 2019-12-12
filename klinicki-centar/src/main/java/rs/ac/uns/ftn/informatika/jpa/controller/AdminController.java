@@ -1,16 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
-import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.repository.AdminRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.AdminService;
 import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
@@ -21,10 +13,32 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	//private PregledService pregledSer;
+
 	
 	@Autowired
 	private AdminRepository adminRepo;
+	
+	/*@RequestMapping("/zakazivanjePregleda/odobreno")
+	public String zakaziPregled(@ModelAttribute PregledDTO pregled, HttpServletRequest request) {
+
+		Pregled p = pregledSer.findByVremeDatum(pregled.getDatum(), pregled.getVreme());
+		// if(!k.getRoleName().equals(Role.PACIJENT.name())) {
+
+		Pregled p2 = new Pregled();
+		//k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
+
+		if (pregledSer.findByVremeDatum(pregled.getDatum(), pregled.getVreme()) != null) {
+			request.setAttribute("message", "Uspesno ste zakazali pregled!");
+			String datum = request.getParameter("datum");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("datum", datum);
+		}
+		
+		return "zakazivanjePregleda";
+	}*/
+	
+	
 
 /*	@RequestMapping("/zakazivanjePregleda")
 	public void zakaziPregled(@ModelAttribute PregledDTO pregled, HttpServletRequest request) {

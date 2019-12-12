@@ -29,12 +29,23 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a href="/profilkaPregledu?id=${id}">Profil</a></li>
 					<li><a href="/izmenaPodatakaizBara?id=${id}">Izmena podataka</a></li>
+
+				 	<li><a href="/listaSvihKlinika">Lista klinika</a></li> 	
+				 	<li><a href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
+				 	<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
+
+				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
+				 	<li><a href="/prikaziListuLekara">Lista lekara</a>
+				 	<li><a href="/zakaziPregledKojiJeDef">Zakazi pregled</a>
+
+
 				 	<li><a href="/listaSvihKlinika?id=${id}">Lista klinika</a></li> 	
 				 	<li><a href="/preglediIoperacijePrikaz?id=${id}">Lista pregleda i operacija</a></li>
 				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
 				 	<li><a href="/prikaziListuLekara?idpac=${id}">Lista lekara</a>
 				 	<li><a href="/zakaziPregledKojiJeDef?id=${id}">Zakazi pregled</a>
 				 	<li><a href="/listaZakazanihPregleda?id=${id}">Zakazani pregledi</a>
+
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
