@@ -147,8 +147,6 @@ body {
 					
 				
 					<div class="form-group ">
-				<!-- 	<button type="submit" formaction="/idiNaLoginBezDobrodosli">Pocetna</button>   -->	
-				<!-- 	<input type="submit" class="btn btn-primary" value="Pocetna">  -->	
 				<h3>		<a href="/naLogin?id=${id}">Vrati se nazad</a> </h3>
 					</div>
 				</form>
