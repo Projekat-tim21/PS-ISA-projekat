@@ -33,6 +33,9 @@ body {
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
 					<li><a href="/kartonZ">Prikazi profil pacijenta</a></li>
 					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
+
+					<li><a href="/radniKalendar">Radni kalendar</a></li>
+
 					<li><a href="/pretragaSale">Pregled sala</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>

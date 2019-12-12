@@ -118,4 +118,34 @@ public class EmailService {
 		System.out.println("Email poslat!");
 	}
 
+	public void sendNotificaitionZaAdminaKlinike(Korisnik k) {
+		// TODO Auto-generated method stub
+		System.out.println("Slanje emaila za admina kc");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Administrator Klinike");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nPostavljeni ste za administratora klinike.");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+		
+	}
+
+	public void sendNotificaitionRazlogOdbijanja(Korisnik k, String s) {
+		// TODO Auto-generated method stub
+		System.out.println("Slanje email odbijanje registacije" + k.getIme() + s);
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Odbijanje registracije");
+		mail.setText("Pozdrav " + k.getIme() + "  "+ s);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+		
+	}
+
 }

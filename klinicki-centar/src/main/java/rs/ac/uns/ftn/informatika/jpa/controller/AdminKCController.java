@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.DijagnozaDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.KlinikaDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.LekDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.Response;
 import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
+import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
@@ -131,12 +132,19 @@ public class AdminKCController {
 
 
 	    @GetMapping("/addNewAdminKC")
-	    public ModelAndView addNewAdminKlinike() {
+	    public ModelAndView addNewAdminKC() {
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("create-admin-kc");
 	        return modelAndView;
 	    }
 	    
+	    @GetMapping("/addNewAdminKlinike")
+	    public ModelAndView addNewAdminKlinike() {
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("create-admin-klinike");
+	        return modelAndView;
+	    }
+
 	    @GetMapping("/admin")
 	    public ModelAndView addmin() {
 	        ModelAndView modelAndView = new ModelAndView();
@@ -236,6 +244,57 @@ public class AdminKCController {
 	        return result;
 	    }
 	    
+	    @PostMapping("/noviAdminKlinike")
+	    public String noviAdminKlinike(@ModelAttribute KorisnikDTO korisnik,HttpServletRequest request) {
+	        String result = "redirect:/";
+	        
+	        Korisnik dbKorisnik=korisnikService.findByUsername(korisnik.getUsername());
+	        Korisnik novi=new Korisnik();
+	        novi.setUsername(korisnik.getUsername());
+	        novi.setIme(korisnik.getIme());
+	        System.out.println(novi.getIme());
+	        novi.setPrezime(korisnik.getPrezime());
+	        novi.setEmail(korisnik.getEmail());
+	        novi.setPassword(korisnik.getPassword());
+	        novi.setDrzava(korisnik.getDrzava());
+	        novi.setGrad(korisnik.getGrad());
+	        novi.setAdresa(korisnik.getAdresa());
+	        novi.setTelefon(korisnik.getTelefon());
+	        novi.setJedBrOsig(korisnik.getJedBrOsig());
+	        novi.setFirst_Login(true);
+	        novi.setIsActive(false);
+	        novi.setRoleName(Role.ADMIN_KLINIKE.name());
+	        String naziv=request.getParameter("odabrana");
+	        Klinika clinic=klinikaService.findByNaziv(naziv);
+	        System.out.println("KLINIKA "+ clinic.getNaziv());
+	        //Klinika nova=new Klinika();
+	        novi.setKlinika(clinic);
+	        
+	    
+	        if(korisnik.getUsername()==null || korisnik.getUsername().trim().isEmpty()) {
+	        	result = "redirect:/addNewAdminKlinike?error=Unesite naziv";
+	        }
+	        if (korisnik.getPassword() == null || korisnik.getPassword().trim().isEmpty()) {
+	            result = "redirect:/addNewAdminKlinike?error=Unesite sifru";
+	        } else if (korisnik.getEmail() == null || korisnik.getEmail().trim().isEmpty()) {
+	            result = "redirect:/addNewAdminKlinike?error=Enter valid last name";
+	        } 
+	        if (dbKorisnik == null) {
+	            korisnikService.saveMogKorisnika(novi); 
+	            result="redirect:/pregledSvihAdminaKlinike";
+	        } else {
+	            result = "redirect:/addNewAdminKlinike?error=Admin vec postoji!";
+	        }
+
+	        try {
+				emailService.sendNotificaitionZaAdminaKlinike(novi);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
+	        return result;
+	    }
+	    
 	  /*  @PostMapping("/noviAdminKC")
 	    public String noviAdminKC(@ModelAttribute Korisnik lek) {
 	        String result = "redirect:/";
@@ -284,6 +343,28 @@ public class AdminKCController {
 	        return result;
 	    }
 	    
+	    @PostMapping("/novaKlinika")
+	    public String novaKlinika(@ModelAttribute KlinikaDTO klinika) {
+	        String result = "redirect:/";
+	        Klinika dbKlinika=klinikaService.findByNaziv(klinika.getNaziv());
+	        Klinika klinikaN=new Klinika();
+	        klinikaN.setNaziv(klinika.getNaziv());
+	        klinikaN.setGrad(klinika.getGrad());
+	        klinikaN.setDrzava(klinika.getDrzava());
+	        klinikaN.setAdresa(klinika.getAdresa());
+	        if(klinika.getNaziv()==null || klinika.getNaziv().trim().isEmpty()) {
+	        	result = "redirect:/addNewKlinika?error=Unesite naziv";
+	        }
+	        if (dbKlinika == null) {
+	            klinikaService.sacuvajKliniku(klinikaN);
+	            result="redirect:/klinike";
+	        } else {
+	            result = "redirect:/addNewKlinika?error=Klinika vec postoji!";
+	        }
+
+	        return result;
+	    }
+	    
 	    
 	    @GetMapping("/zahteviRegistrovanje")
 	    public ModelAndView zahtevi(HttpServletRequest request) {
@@ -313,11 +394,21 @@ public class AdminKCController {
 	    }
 	    
 	    @GetMapping("/pregledSvihAdmina")
-		public ModelAndView pokaziPacijente(HttpServletRequest request) {
+		public ModelAndView pokaziAdmineKC(HttpServletRequest request) {
 			request.setAttribute("korisnici", korisnikService.pokaziAdmine());
 			request.setAttribute("mode", "ALL_ADMINI");
 			ModelAndView modelAndView = new ModelAndView();
 		    modelAndView.setViewName("adminiKC");
+		    return modelAndView;
+		
+		}
+	    
+	    @GetMapping("/pregledSvihAdminaKlinike")
+		public ModelAndView pokaziAdmineKlinike(HttpServletRequest request) {
+			request.setAttribute("korisnici", korisnikService.pokaziAdmineKlinike());
+			request.setAttribute("mode", "ALL_ADMINI_KLINIKE");
+			ModelAndView modelAndView = new ModelAndView();
+		    modelAndView.setViewName("adminiKlinike");
 		    return modelAndView;
 		
 		}
@@ -382,7 +473,31 @@ public class AdminKCController {
 	    }
 	    
 	    @GetMapping("/disable/{korisnikId}")
-	    public String disable(@PathVariable Long korisnikId) {
+	    public ModelAndView disable(@PathVariable Long korisnikId,HttpServletRequest request) {
+	        Korisnik k=korisnikService.findOne(korisnikId);
+	        k.setIsActive(true);
+	        k.setFirst_Login(false);
+	        korisnikService.saveMogKorisnika(k);
+	        
+	      /*  try {
+				emailService.sendNotificaitionOdbijenaRegistracija(k);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
+	        return "redirect:/zahteviRegistrovanje";*/
+	        request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
+			request.setAttribute("mode", "ODBIJANJE");
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("razlogOdbijanja");
+	        return modelAndView;
+	    }
+	    
+	  
+	    
+	    
+	    @GetMapping("/reject/{korisnikId}")
+	    public String reject(@PathVariable Long korisnikId) {
 	        Korisnik k=korisnikService.findOne(korisnikId);
 	        k.setIsActive(true);
 	        k.setFirst_Login(false);
@@ -523,5 +638,31 @@ public class AdminKCController {
 
 		}
 
+		 @PostMapping("/razlogOdbijanja/{korisnikId}")
+		    public String mejlOdbijanja(@PathVariable Long korisnikId,
+					HttpServletRequest request) {
+		        Korisnik k=korisnikService.findOne(korisnikId);
+		       /* k.setId(korisnikd.getId());
+		        k.setIme(korisnikd.getIme());
+		        k.setPrezime(korisnikd.getPrezime());
+		        k.setAdresa(korisnikd.getAdresa());
+		        k.setDrzava(korisnikd.getDrzava());
+		        k.setEmail(korisnikd.getEmail());
+		        k.setGrad(korisnikd.getGrad());
+		        k.setJedBrOsig(korisnikd.getJedBrOsig());
+		        k.setUsername(korisnikd.getUsername());*/
+		        String s=request.getParameter("razlog");
+		       // String ss=request.getParameter("mail");
+		      ///  System.out.println(ss);
+		        
+		        try {
+					emailService.sendNotificaitionRazlogOdbijanja(k,s);
+				}catch( Exception e ){
+					logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+				}
+		        
+		        return "redirect:/zahteviRegistrovanje";
+		        
+		    }
 	
 }
