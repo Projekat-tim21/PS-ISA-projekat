@@ -158,31 +158,8 @@ $(function() {
     events: events.concat(trivia_nights)
   });
 });
+    </script>
 
-
-$(document).ready(function() {
-	$('#calendar').fullCalendar({
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		defaultDate: '2019-06-01',
-		editable: true,
-		eventLimit: true, // allow "more" link when too many events
-		events: {
-	        url: '/lekaruu',
-	        type: 'GET',
-	        error: function() {
-	            alert('there was an error while fetching events!');
-	        },
-	        //color: 'blue',   // a non-ajax option
-	        //textColor: 'white' // a non-ajax option
-	    }
-	});
-});
-
-</script>
 </body>
 
 </html>
