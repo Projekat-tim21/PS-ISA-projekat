@@ -283,7 +283,8 @@ public class KorisnikContreller {
 		} catch (Exception e) {
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
-
+		
+		//request.setAttribute("mode", "MODE");
 		return "uspesnaIzmenaInfo";
 
 	}
@@ -297,7 +298,10 @@ public class KorisnikContreller {
 
 	@RequestMapping("/idiNaLoginBezDobrodosli")
 	public String idiNaLoginBezDobrodosliFunc(@RequestParam Long id, HttpServletRequest request) {
-
+		String id2 = request.getParameter("id");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("id", id2);
 		return "loginBezDobrodosli";
 	}
 
@@ -318,6 +322,10 @@ public class KorisnikContreller {
 
 	@RequestMapping("/kartonZ")
 	public String prikazZKartona(@RequestParam Long id, HttpServletRequest request) {
+		String id2 = request.getParameter("id");
+		System.out.println(id);
+		HttpSession session = request.getSession();
+		session.setAttribute("id", id2);
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		Korisnik k=korisnikServis.findOne(id);
 		System.out.println(k.getVisina());

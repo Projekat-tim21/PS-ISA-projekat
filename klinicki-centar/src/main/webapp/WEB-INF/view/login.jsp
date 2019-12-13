@@ -29,12 +29,7 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a href="/profilkaPregledu?id=${id}">Profil</a></li>
 					<li><a href="/izmenaPodatakaizBara?id=${id}">Izmena podataka</a></li>
-
-				 	
-
 				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
-
-
 				 	<li><a href="/listaSvihKlinika?id=${id}">Lista klinika</a></li> 	
 				 	<li><a href="/preglediIoperacijePrikaz?id=${id}">Lista pregleda i operacija</a></li>
 				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>

@@ -26,8 +26,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac(this)" href="/vratiSeNaPocetnu">Vrati se na pocetnu</a></li>
-					<!-- 		<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->
+					<li><a href="/vratiSeNaPocetnu?id=${id}">Vrati se na pocetnu</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 
@@ -36,9 +35,10 @@ body {
 	</div>
 	<h2>Uspesno ste izmenili svoje podatke.</h2>
 	
-	
+
 	
 	<script>
+	
 	var getUrlParameter = function getUrlParameter(sParam) {
 	    var sPageURL = window.location.search.substring(1),
 	        sURLVariables = sPageURL.split('&'),
@@ -55,8 +55,7 @@ body {
 	};
 
 	var idPacijenta = getUrlParameter('id');
-	console.log(idPacijenta);
-
+	
 	function addIdPac (element){
 		element.href = element.href+"?id="+idPacijenta;
 		console.log(element.href);

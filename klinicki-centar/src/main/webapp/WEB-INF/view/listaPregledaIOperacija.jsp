@@ -40,12 +40,7 @@ body {
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 
-					<li><a href="/naLogin">Vrati se nazad</a></li>
-					<li><a href="/prikaziListuOperacija">Lista operacija</a></li>
-					<li><a href="/prikaziListuPregleda">Lista pregleda</a></li>
-					<li><a href="/logout">Odjavi se</a></li>
-					
-
+				
 					<li><a onclick="addIdPac(this)" href="/naLogin">Vrati se nazad</a></li>
 					<li><a onclick="addIdPac(this)" href="/prikaziListuOperacija">Lista operacija</a></li>
 					<li><a onclick="addIdPac(this)" href="/prikaziListuPregleda">Lista pregleda</a></li>
