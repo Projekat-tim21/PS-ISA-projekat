@@ -118,7 +118,6 @@
     $(function() {
     	  // for now, there is something adding a click handler to 'a'
     	  var tues = moment().day(2).hour(19);
-
     	  // build trival night events for example data
     	  var events = [
     	    {
@@ -142,12 +141,9 @@
         	      url: '/zapocniOperacijeP'
         	    }
     	    
-
     	  ];
-
     	 var trivia_nights = []
 		 
-
    	  for(var i = 1; i <= 4; i++) {
     	    var n = tues.clone().add(i, 'weeks');
     	    console.log("isoString: " + n.toISOString());
@@ -158,7 +154,6 @@
     	      url: '#'
     	    });
     	  }
-
    	$.ajax({
               url: '/getCalendar?id=${id}',
               type: "GET",
@@ -207,8 +202,6 @@
                             for(var i=0; i<rare; i++){
                             console.log("TERMINI JESU LI PRAZNI? :"+termini[i]);
                             }
-
-
                       		console.log("VREDNOSTI U TERMINI "+termini.length)
                       		 $('#calendar').fullCalendar({
                          	    header: {
@@ -236,7 +229,6 @@
     	 
     	});
     
-
     </script>
 
 </body>

@@ -126,7 +126,6 @@ public class KorisnikContreller {
 		}
 	}
 
-
 	@RequestMapping("/registracija")
 	public String registration(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_REGISTER");

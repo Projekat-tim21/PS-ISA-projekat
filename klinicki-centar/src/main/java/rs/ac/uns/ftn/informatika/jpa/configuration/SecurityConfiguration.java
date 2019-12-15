@@ -178,6 +178,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/naPregledSala").permitAll()
 	    .antMatchers("/zakaziPregledNovi").permitAll()
 
+	    
+	    .antMatchers("/getCalendar/*").permitAll()
+	    .antMatchers("/radniKalendar/*").permitAll()
+	    .antMatchers("/zapocniOperacijeP").permitAll()
 
 	    .antMatchers("/pregled").permitAll()
 
