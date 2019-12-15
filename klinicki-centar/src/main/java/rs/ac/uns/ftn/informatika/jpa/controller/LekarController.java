@@ -2,6 +2,9 @@ package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
@@ -44,8 +49,16 @@ public class LekarController {
 	 private TerminSaIdService terService;
 
 	 @GetMapping("/radniKalendar")
-	    public ModelAndView kalendar() {
-	        ModelAndView modelAndView = new ModelAndView();
+	    public ModelAndView kalendar(@RequestParam Long id, HttpServletRequest request) {
+		 String id2 = request.getParameter("id");
+			System.out.println(id);
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id2);
+			request.setAttribute("korisnik", korisnikService.findOne(id));
+			Korisnik k=korisnikService.findOne(id);
+			System.out.println(k.getVisina());
+			request.setAttribute("mode", "MODE_ZKARTON");
+		 	ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("radniKalendar");
 	        return modelAndView;
 	    }
@@ -54,4 +67,11 @@ public class LekarController {
 		public List<TerminiSaId> events() {
 			return terService.pokaziSveTermine();
 		}
+	 
+	 @GetMapping("/zapocniOperacijeP")
+	    public ModelAndView addmin() {
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("ne");
+	        return modelAndView;
+	    }
 }

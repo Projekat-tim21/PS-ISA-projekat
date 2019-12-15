@@ -155,6 +155,8 @@ public class KorisnikDTO {
 		this.role=role;
 		this.firstLogin=firstLogin;
 		this.role = Role.PACIJENT.name();
+		this.isActive=true;
+		this.firstLogin=false;
 	}
 
 	public String getRole() {
