@@ -50,7 +50,7 @@ body {
 			<div class="container text-center">
 				<h3>Posalji zahtev za pregled</h3>
 				<hr>
-				<form class="form-horizontal" method="GET" action="vratiSeNaLoginBezDobrodosli2"   >
+				<form class="form-horizontal" method="POST" action="posaljiZahtevZaPregledom?id=${idpac}"   >
 				
 					<div class="form-group">
 						<label class="control-label col-md-3">Termin</label>
@@ -63,16 +63,16 @@ body {
 					<div class="form-group">
 						<label class="control-label col-md-3">Ime lekara</label>
 						<div class="col-md-6">
-							<input type="text"  class="form-control" id="ime" name="ime"
-								value="${lipi.ime }" readonly>
+							<input type="text"  class="form-control" id="imelek" name="imelek"
+								value="${lipi.imelek }" readonly>
 								<span id="free"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Prezime lekara</label>
 						<div class="col-md-6">
-							<input type="text"  class="form-control" id="prezime" name="prezime"
-								value="${lipi.prezime }" readonly>
+							<input type="text"  class="form-control" id="prezimelek" name="prezimelek"
+								value="${lipi.prezimelek }" readonly>
 								<span id="free"></span>
 						</div>
 					</div>
@@ -103,7 +103,7 @@ body {
 					<div class="form-group">
 						<label class="control-label col-md-3">Jedinstrveni broj osiguranika</label>
 						<div class="col-md-6">
-							<input type="text"  class="form-control" id="prezimepac" name="prezime"
+							<input type="text"  class="form-control" id="jedBrOsig" name="jedBrOsig"
 								value="${korisnik.jedBrOsig }" readonly>
 								<span id="free"></span>
 						</div>
@@ -112,7 +112,7 @@ body {
 					
 				
 					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="posalji">
+						<input id="clickMe" type="submit"  class="btn btn-primary" value="posalji">
 					</div>
 				</form>
 			</div>
@@ -121,6 +121,14 @@ body {
 </c:choose>
 
 <script type="text/javascript">
+
+document.getElementById("clickMe").onclick = function () { alert('Vas zahtev je uspesno prosledjen administratoru klinike!');};
+
+function alertzazahtev(){
+	alert("Vas zahtev je uspesno prosledjen administratoru klinike");
+}
+
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),

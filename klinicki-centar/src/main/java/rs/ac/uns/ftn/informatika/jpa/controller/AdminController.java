@@ -173,37 +173,7 @@ public class AdminController {
 
 
 
-	    @GetMapping("/delete/{userId}")
-	    public String delete(@PathVariable Long userId) {
-	        userService.removeById(userId);
-	        return "redirect:/";
-	    }
 
-
-
-	    @ResponseBody
-	    @GetMapping("/removeAll")
-	    public Boolean removeAll() {
-	        return userService.removeAll();
-	    }
-
-
-
-	    @GetMapping("/403")
-	    public ModelAndView accessDenied() {
-	        ModelAndView modelAndView = new ModelAndView();
-	        modelAndView.setViewName("403");
-	        return modelAndView;
-	    }
-
-
-
-	    @GetMapping("/error")
-	    public ModelAndView error() {
-	        ModelAndView modelAndView = new ModelAndView();
-	        modelAndView.setViewName("error");
-	        return modelAndView;
-	    }
 */
 	
 	

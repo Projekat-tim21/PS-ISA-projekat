@@ -29,9 +29,10 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
 					<li><a href="/pretragaSale">Pregled sala</a></li>
+					<li><a href="/zakaziPregledNovi">Zakazi pregled</a></li>
+					<li><a href="/zapocniPregled">Zapocni pregled</a></li>
 					<li><a>Radni kalendar</a></li>
 					<li><a>Kreiraj zahtev za odmor</a></li>
-					<li><a>Zakazi pregled</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 			
 				</ul>

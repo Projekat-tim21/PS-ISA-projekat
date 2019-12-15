@@ -95,15 +95,17 @@ body,html {
 			</div>
 		</c:when>
 </c:choose>
-	
-	
-	
-<!--  <div class="bg"></div>-->
-<div class="footer">
-    Copyright &copy; 2019
-</div>
 
-<script>
+	
+
+<script type="text/javascript">
+$(function(){
+
+	$('tr:has(td:contains("true"))').addClass('obradjen');
+	$('tr:has(td:contains("false"))').addClass('neobradjen');
+
+	    });
+
     function saveData(id) {
         console.log('save Data -  ' + id)
         var fname = $('#text_fname_' + id).val();

@@ -118,6 +118,10 @@
     $(function() {
     	  // for now, there is something adding a click handler to 'a'
     	  var tues = moment().day(2).hour(19);
+<<<<<<< HEAD
+=======
+
+>>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
     	  // build trival night events for example data
     	  var events = [
     	    {
@@ -141,9 +145,18 @@
         	      url: '/zapocniOperacijeP'
         	    }
     	    
+<<<<<<< HEAD
     	  ];
     	 var trivia_nights = []
 		 
+=======
+
+    	  ];
+
+    	 var trivia_nights = []
+		 
+
+>>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
    	  for(var i = 1; i <= 4; i++) {
     	    var n = tues.clone().add(i, 'weeks');
     	    console.log("isoString: " + n.toISOString());
@@ -154,6 +167,10 @@
     	      url: '#'
     	    });
     	  }
+<<<<<<< HEAD
+=======
+
+>>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
    	$.ajax({
               url: '/getCalendar?id=${id}',
               type: "GET",
@@ -202,6 +219,11 @@
                             for(var i=0; i<rare; i++){
                             console.log("TERMINI JESU LI PRAZNI? :"+termini[i]);
                             }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
                       		console.log("VREDNOSTI U TERMINI "+termini.length)
                       		 $('#calendar').fullCalendar({
                          	    header: {
@@ -221,12 +243,21 @@
               },error: function (result) {
                       console.log("AJAX error");
               }
+<<<<<<< HEAD
+=======
+          
+           
+>>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
       
     }) 
     	  // setup a few events
     	 
     	});
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
     </script>
 
 </body>

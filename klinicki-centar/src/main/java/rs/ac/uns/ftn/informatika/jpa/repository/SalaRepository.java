@@ -12,5 +12,6 @@ public interface SalaRepository extends JpaRepository<Sala, Long> {
 	public Sala findOneById(Long id);
 	public List<Sala> findByRezervisana(boolean s);
 	public List<Sala> findByDatum(String datum);
+	public List<Sala> findByNaziv(String naziv);
 
 }

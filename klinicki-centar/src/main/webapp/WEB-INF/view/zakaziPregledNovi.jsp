@@ -37,17 +37,28 @@
   
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<style>
+body {
+  background-image: url("static/images/s.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+</style>
 </head>
 <body>
 
-<!-- <div>
-  
- 		 <h1 align = "center">Zakazite pregled</h1>
+	<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/naPocetnu">Vrati se nazad</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
+
+			</div>
+		</div>
 	</div>
-	
-	<div>
-	<table border = "1" align = "center">
-	 -->
 
 
 	<!-- <thead>
@@ -68,13 +79,16 @@
 		</tbody> -->
 		
 		
-		
+	<div>
 		<div  align = "center">
 		<label> Izaberite datum pregleda: </label>
 		
 	  <input type = "text" id = "datepicker" value = "${pregled.datum}">
+	  </div>
+	  
+	  <div align = "center">
 	 
-	 	<label>Izaberite termin pregleda: </label>
+	 	<label>Izaberite vreme pregleda: </label>
 	 	
 	 	<!--<c:choose>
 	<c:when test="${mode=='ALL_DATUMI' }">
@@ -115,21 +129,22 @@
          
          <input type = "text" class = "timepicker" value="${pregled.vreme}">
                
-          
+          </div>
 		<div align = "center" >
-			<button type="submit" formaction="/zakazivanjePregledaOdobreno">Zakazi</button>
+			<button type="submit" onclick="izbaciAlert(this)">Zakazi</button>
    		</div>
    		
    		
    		
    		
    	</div>
-   	
    
-	<!-- <div align = "center" class = "form-group">
-		<button type = "submit" style="background-color:light-blue;margin:auto;display:block" width = "20" height = "10" > Zakazi </button>
-	</div> -->
+<script>
+function izbaciAlert(element){
+	alert("Uspesno ste zakazali pregled.");
 	
+}
+</script>
 
 </body>
 </html>

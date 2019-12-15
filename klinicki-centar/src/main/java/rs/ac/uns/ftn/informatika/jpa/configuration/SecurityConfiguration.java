@@ -94,7 +94,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sacuvaj").permitAll()
 		.antMatchers("/logout").permitAll()
 		.antMatchers("/prikazOsnovnihInfo").permitAll()
-		//.antMatchers("/zakazivanjePregleda").permitAll()
 		.antMatchers("/listaSvihKlinika").permitAll()
 		.antMatchers("/zahteviRegistrovanje").permitAll()
 		.antMatchers("/lekovi").permitAll()
@@ -117,6 +116,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/noviAdminKC").permitAll()
 		.antMatchers("/disable/*").permitAll()
 		.antMatchers("/enable/*").permitAll()
+		.antMatchers("/enable2/*").permitAll()
 		.antMatchers("/sviIzBaze").permitAll()
 		.antMatchers("/preglediIoperacijePrikaz").permitAll()
 		.antMatchers("/prikaziListuPregleda").permitAll()
@@ -147,13 +147,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/vidijos/*").permitAll()
 		.antMatchers("/razlogOdbijanja/*").permitAll()
 		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
-
 		.antMatchers("/pretragaSale").permitAll()
 		.antMatchers("/lekarStranica").permitAll()
 		.antMatchers("/prikazKalendaraSala").permitAll()
-
 		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
-
+		.antMatchers("/radniKalendar").permitAll()
+		.antMatchers("/pretragaSale").permitAll()
+		.antMatchers("/lekarStranica").permitAll()
+		.antMatchers("/prikazKalendaraSala").permitAll()
+		.antMatchers("/getCalendar").permitAll()
+		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
+		.antMatchers("/zapocniOperacijeP").permitAll()
 		.antMatchers("/listaSvihDefinisanihPregledaZaLekara").permitAll()
 		.antMatchers("/uspesnoZakazanPregled").permitAll()
 		.antMatchers("/vratiSeNaLoginBezDobrodosli2").permitAll()
@@ -162,17 +166,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/kartonZ").permitAll()	
 		.antMatchers("/admin").permitAll()	
 		.antMatchers("/sacuvajNovaLozinka").permitAll()
-
+		.antMatchers("/posaljiZahtevZaPregledom").permitAll()
+		.antMatchers("/zahteviZaPregledom").permitAll()
 		.antMatchers("/rezervacija").permitAll()
 		.antMatchers("/profilPacijenta").permitAll()
 	    .antMatchers("/zKartonLekar").permitAll()
 	    .antMatchers("/naPocetnu").permitAll()
-	    .antMatchers("/pregled").permitAll()
+
+	    .antMatchers("/zapocniPregled").permitAll()
+	    .antMatchers("/naPregled").permitAll()
+	    .antMatchers("/naPregledSala").permitAll()
+	    .antMatchers("/zakaziPregledNovi").permitAll()
 
 	    
 	    .antMatchers("/getCalendar").permitAll()
 	    .antMatchers("/radniKalendar").permitAll()
 
+	    .antMatchers("/pregled").permitAll()
 
 		.anyRequest()
 		.authenticated();

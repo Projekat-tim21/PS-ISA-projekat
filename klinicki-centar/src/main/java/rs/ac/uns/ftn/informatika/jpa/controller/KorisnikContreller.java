@@ -92,7 +92,7 @@ public class KorisnikContreller {
 			
 			System.out.println("OVDE " + session.getAttribute(username));
 			System.out.println(k.getRoleName());
-      if(k.getRoleName().equals(Role.ADMIN.name())) {
+			if(k.getRoleName().equals(Role.ADMIN.name())) {
 				
 				if(k.getFirst_Login()==true) {
 					k.setFirst_Login(false);
@@ -159,6 +159,8 @@ public class KorisnikContreller {
 			k.setUsername(korisnikd.getUsername());
 			k.setPassword(korisnikd.getPassword());
 			k.setRoleName(Role.PACIJENT.name());
+			k.setIsActive(false);
+			k.setFirst_Login(false);
 			System.out.println(k.getRoleName());
 			korisnikServis.saveMogKorisnika(k);
 

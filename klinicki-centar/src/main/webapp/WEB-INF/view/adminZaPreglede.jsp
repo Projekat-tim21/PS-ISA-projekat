@@ -4,31 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<!-- ovo je samo da bi student 1 odradio tacku 3.12 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Za def pregleda</title>
+<title>Admin</title>
 
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
 body, html {
-	height: 100%;
+	/*height: 100%;*/
+	background-image: url(static/images/adminHome.png);
+	background-repeat: no-repeat;
+	backround-position: bottom-right;
+	backround-position: 10px, 12px;
+	
 }
 
-.bg {
-	/* The image used */
-	background-image: url(static/images/hhh.jpg);
-	/* Full height */
-	height: 100%;
-	/* Center and scale the image nicely */
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-}
+
 </style>
 </head>
 <body>
@@ -37,9 +32,10 @@ body, html {
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-				<h2>ADMIN-privremeno krenirano zbog definisanja pregleda</h2>
+				<h2>Admin klinike</h2>
 				<ul class="nav navbar-nav">
 					<li><a href="/AdminPraviPreglede">Prikaz lekara</a></li>
+					<li><a href="/zahteviZaPregledom">Odobravanje zahteva</a></li>
 					<li><a href="/vratiSe?id=${lip.id}">Vrati se</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -72,8 +68,8 @@ body, html {
 							<c:forEach var="lip" items="${lipi}">
 								<tr>
 									<td>${lip.id}</td>
-									<td>${lip.ime}</td>
-									<td>${lip.prezime}</td>
+									<td>${lip.imelek}</td>
+									<td>${lip.prezimelek}</td>
 									<td>${lip.tipspecijalizacije}</td>
 									<td>${lip.ocena}</td>
 									<td><a href="/kreirajPregledZaLekara?id=${lip.id}">Zakazi
@@ -88,6 +84,62 @@ body, html {
 				</div>
 			</div>
 		</c:when>
+
+
+
+<c:when test="${mode=='ALL_ZAHTEVI' }">
+			<div class="container text-center" id="tasksDiv">
+				<h3>Pristigli zahtevi</h3>
+				<hr>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Termin</th>
+								<th>Ime lekara</th>
+								<th>Prezime lekara</th>
+								<th>Tip pregleda</th>
+								<th>Ime pacijenta</th>
+								<th>Prezime pacijenta</th>
+								<th>JBO</th>
+								<th>Cena pregleda</th>
+								<th>Popust</th>
+								<th>Sala</th>
+								<th colspan="2">Prihvati/Odbij</th>
+						<!--		<th>Sifra</th>  -->
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="op" items="${opi }">
+								<tr>
+									<td>${op.id}</td>
+									<td>${op.terminzahtev}</td>
+									<td>${op.imelekara}</td>
+									<td>${op.prezimelekara}</td>
+									<td>${op.tipspecijalizacije}</td>
+									<td>${op.imepacijenta}</td>
+									<td>${op.prezimepacijenta}</td>
+									<td>${op.jedbrosigpac}</td>
+									<td>${op.cenaop}</td>
+									<td>${op.popustop}</td>
+									<td>${op.salaop}</td>
+									
+									<td>
+                                        <a href="/enable2/${op.getId()}" class="saveData"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
+                                        </td>
+                                        <td><a href="/disable2/${op.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
+                                        </td>
+					
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</c:when>
+
+
 
 
 

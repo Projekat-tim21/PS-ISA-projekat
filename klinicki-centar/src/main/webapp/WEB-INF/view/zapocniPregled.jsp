@@ -8,44 +8,129 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
 <title>Pregled</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  
-  <link rel="stylesheet" href="static/css/themeS.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-  <script>
-  $(document).ready(function(){
-	    $('input.timepicker').timepicker({
-	        interval: 60,
-	        minTime: '8',
-	        maxTime: '8:00pm',
-	        startTime: '10:00',
-	        dropdown: true,
-	        scrollbar: true
-	    });   
- 	});
- 
-	
-  </script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
-  
+
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+
+<style type="text/css">
+body {
+  background-image: url("static/images/s.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right; 
+}
+
+</style>
 </head>
 <body>
 
-<div  align = "center">
-		<label> Izaberite datum pregleda: </label>
-		
-	  <input type = "text" id = "datepicker" value = "${pregled.datum}">
-	 
-	 	<label>Izaberite termin pregleda: </label>
+	<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/profilPacijenta">Vrati se nazad</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
 
+			</div>
+		</div>
+	</div>
+	<c:choose>
+	<c:when test="${mode=='HOME_PAGE_LEKAR' }">
+			<div class="container" id="homediv">
+				<div class="jumbotron text-center">
+					<h1>Stranica lekara</h1>
+				</div>
+			</div>
+
+		</c:when>
+	<c:when test="${mode=='ZAPOCNI_PREGLED' }">
+			<div class="container text-center">
+				<hr>
+				<!--onsubmit="return checkForm(this);"-->
+				<form name="forma" class="form-horizontal" method="POST">
+				<div class="form-group">
+						<label class="control-label col-md-3">Ime:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+								<span id="free"></span>
+						</div>
+				</div>
+				<div class="form-group">
+						<label class="control-label col-md-3">Prezime:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+  				<div class="form-group">
+						<label class="control-label col-md-3">Datum rodjenja:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Jedinstveni broj osiguranika:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+				<div class="form-group">
+						<label class="control-label col-md-3">Pol:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Visina:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Tezina:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Krvna grupa:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Dioptrija:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Alergije na lek:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Istorija bolesti:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group">
+						<label class="control-label col-md-3">Porodicna anamneza:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" required>
+						</div>
+				</div>
+	 			<div class="form-group ">
+						<input type="submit" class="btn btn-primary" value="Sacuvaj">
+				</div>
+
+				</form>
+			</div>
+		</c:when> 
+	
+	</c:choose>
+	
 </body>
 </html>
