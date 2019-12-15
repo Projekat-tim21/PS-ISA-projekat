@@ -18,7 +18,7 @@ body,html {
 
 .bg {
   /* The image used */
-  background-image: url(static/images/hahah.jpg);
+  background-image: url(static/images/sestra.jpg);
 
   /* Full height */
   height: 100%; 

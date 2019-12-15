@@ -1,0 +1,35 @@
+Web sockets
+Publish subscriber mechanisam - dve stvari klijent koji se subscribuje , npr youtube salje notifikaciju da je objavljen novi video...
+Svaki put kada se nesto objavi , automatski stize obavestenje
+Web socket se zasniva na mehanizmu tom publish subscriber...
+Chat u realnom vremenu dobijam podatke koje salje, jos jedan primer
+u pozadini da salje zahtev serveru, ajax ali to je puno zahteva...
+SockJS biblioteku treba instalirati ako zelis da koristis ovo cudo...
+Toast za notifikacije, interesting 
+send using rest controller gadja metodu sendMessage, u nekom trenutku simpleMessagee.... Prvo se salje poruka subscribovanim klijnetima na rutu openSi=ocket
+dodje do return new response entity trigeruje se callback console.log(res)
+Web sockt komunikacija zasovana na porukama i fazon je imam poruke koje se cuvaju u memoriji servera ako server padne izgubimo poruke,
+Rest end point ako dobijem 10 zahteva na isti end point svi se cuvaju u memoriji
+Ako server padne, podaci u memoriji izgube se.
+
+Prosirenje web socket protokola, -redovi poruka-, *message que* 
+Komunikacija zasnovana na redovima,
+Red struktura podataka FIFO
+Kako dodajem elemente u red na kraj citam s pocetka
+Moja aplikacija nece da rai na http zahtevi se cuvaju u memoriji 
+Razmena poruka, kao klijent saljem poruku al ne ocekujem odgovor, moze se i to definisati ,hocu da posaljem poruku serveru al ne ocekujem nikakav odgovor
+iskorisitm web socket i mapiram moju metodu sa message mapping, primim neke podatke al nemam povratnu poruku
+Kod mq moja aplikacije klijent/server nece direktno komunicirati, Server kreira poruku, sta dalje s njom radi push-uje je na neki red, sta radi klijnet 
+on cita poruke koje su pristigle s pocetka reda, sta se time dobija? MQ je posrednik izmedu sta se moze uraditi dodati vise servera koji ce biti 
+ucesnici u komunikaciji, time se lako prosiruje sistem 
+Sta garantuju message que-ovi svaka poruka seobradi tacno jednom od strane klijenta, ako imam vise razlicitih klijenata ili jedan ili drugi...
+MQ poruke koje pristignu u red se trajno cuvaju dok se ne obrade.
+oni koji salju poruke su publisher-i a oni koji citaju su subscriber ili consumer.
+Kod message quea nema zagusenja jer se obraduju jedna po jedna poruka, da resim brzinu moze se ukljucit vise klijenata da ih obradjuju.
+
+Za Rabbit mq console
+localhost:15672 guest guest sifra i username
+
+CloudAMQP mozemo sa tim isprobavati...
+ 
+
