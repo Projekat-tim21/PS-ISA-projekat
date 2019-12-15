@@ -93,8 +93,8 @@ body {
 							<c:forEach var="lip" items="${lipi}">
 								<tr>
 									<td>${lip.id}</td>
-									<td>${lip.ime}</td>
-									<td>${lip.prezime}</td>
+									<td>${lip.imelek}</td>
+									<td>${lip.prezimelek}</td>
 									<td>${lip.tipspecijalizacije}</td>
 									<td>${lip.ocena}</td>
 									<td>

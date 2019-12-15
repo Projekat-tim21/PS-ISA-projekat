@@ -2,7 +2,6 @@ package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,19 +13,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
+import rs.ac.uns.ftn.informatika.jpa.model.OdobravanjePregleda;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
+import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
+import rs.ac.uns.ftn.informatika.jpa.service.OdobravanjePregledaService;
 import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 
 @Controller
@@ -39,6 +41,12 @@ public class LekarZaPrikazIPregledeController {
 	
 	@Autowired
 	private KorisnikService korisnikServis;
+	
+	@Autowired
+	private KorisnikRepository repoKorisnik;
+	
+	@Autowired
+	private OdobravanjePregledaService opServis;
 	
 	@Autowired
 	private EmailService emailService;
@@ -92,9 +100,9 @@ public class LekarZaPrikazIPregledeController {
 		LekarZaPrikazIPreglede lekar=lipServis.findOne(lekarId2);
 		
 		TerminiSaId t = new TerminiSaId();
-		t.setLekarime(lekar.getIme());
+		t.setLekarime(lekar.getImelek());
 		t.setTippregleda(lekar.getTipspecijalizacije());
-		t.setLekarprezime(lekar.getPrezime());
+		t.setLekarprezime(lekar.getPrezimelek());
 		t.setCena(termini.getCena());
 		t.setPopust(termini.getPopust());
 		t.setSala(termini.getSala());
@@ -267,15 +275,7 @@ public class LekarZaPrikazIPregledeController {
 			
 		}
 		long pacijentId=idpac;
-		//List<Korisnik> korisnici=new ArrayList<Korisnik>();
-		//for(Korisnik korisnik : korisnikServis.findOne(pacijentId)) {
-		//	termini.add(termin);
-		//}
-		//List<TerminiSaId> termini2=new ArrayList<TerminiSaId>();
-		//System.out.println("hej2 hej2");
-		//for(TerminiSaId termin2 : tidRepo.findByZakazan(false)) {
-		//	termini2.add(termin2);
-		//}
+	
 		
 		Korisnik korisnici=korisnikServis.findOne(pacijentId);
 		request.setAttribute("korisnik", korisnici);
@@ -285,26 +285,119 @@ public class LekarZaPrikazIPregledeController {
 		return "listaLekara";
 	}
 	
+	
+	
+	@PostMapping("/posaljiZahtevZaPregledom")
+	public String ZahtevZaPregledom(@ModelAttribute TerminiSaId termini,@ModelAttribute Korisnik korisnik, @ModelAttribute LekarZaPrikazIPreglede lipi, HttpServletRequest request) {
+	
+		OdobravanjePregleda op=new OdobravanjePregleda();
+		HttpSession session = request.getSession();
+		session.getAttribute("imepac");
+		//sada upisujemo podatke u novu klasu kako bi slali zahtev adminu
+		op.setImelekara(lipi.getImelek());
+		op.setPrezimelekara(lipi.getPrezimelek());
+		op.setTipspecijalizacije(lipi.getTipspecijalizacije());
+		op.setImepacijenta(korisnik.getIme());
+		op.setPrezimepacijenta(korisnik.getPrezime());
+		op.setJedbrosigpac(korisnik.getJedBrOsig());
+		op.setTerminzahtev(termini.getTermin());
+		TerminiSaId ter=new TerminiSaId();
+		ter=tidRepo.findByTermin(termini.getTermin());
+		op.setCenaop(ter.getCena());
+		op.setPopustop(ter.getPopust());
+		op.setSalaop(ter.getSala());
+		op.setIdtermina(ter.getId());
+		op.setLekaridop(ter.getLekarId());
+		
+		
+		opServis.sacuvaj(op);
+		
+		//request.setAttribute("korisnik", korisnikServis.findOne(idKorisnika));
+		//request.setAttribute("lipi", lipServis.findOne(idLekara));
+		//request.setAttribute("mode", "ZAKAZI_PREGLED");
+		return "loginBezDobrodosli";
+	}
+	
+	
+	@RequestMapping("/zahteviZaPregledom")
+	public String zahteviKodAdmina(HttpServletRequest request) {
+		request.setAttribute("opi", opServis.pokaziSveZahteveZaPregledom());
+		request.setAttribute("mode", "ALL_ZAHTEVI");
+        return "adminZaPreglede";
+	}
+	
+	
+	
+	  @GetMapping("/enable2/{opiId}")
+	    public String enable(@PathVariable Long opiId) {
+		  OdobravanjePregleda op=opServis.findOne(opiId);
+	        TerminiSaId t=new TerminiSaId();
+	        t.setCena(op.getCenaop());
+	        t.setId(op.getIdtermina());
+	        t.setLekarime(op.getImelekara());
+	        t.setLekarprezime(op.getPrezimelekara());
+	        t.setTippregleda(op.getTipspecijalizacije());
+	        t.setTermin(op.getTerminzahtev());
+	        t.setSala(op.getSalaop());
+	        t.setCena(op.getCenaop());
+	        t.setPopust(op.getPopustop());
+	        t.setZakazan(true);
+	        t.setLekarId(op.getLekaridop());
+	        tisServis.saveMojTermin(t);
+	        
+	        
+	        Korisnik k=repoKorisnik.findByJedBrOsig(op.getJedbrosigpac());
+	        
+	        //t.setPacijentjbo(op.getJedbrosigpac());
+	        //t.setPacijentprz(op.getPrezimepacijenta());
+	        //t.setZakazan(true);
+	        //t.setCena(cena);
+	        
+	        try {
+				emailService.sendNotificaitionOdobrenTermin(k);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        
+	        return "redirect:/zahteviZaPregledom";
+	    }
+	
+	
 	@GetMapping("/zakazivanjePregledaIzaListeLekara")
 	public String editUserProfilPregled(@RequestParam("idpac") int idpac,@ModelAttribute TerminiSaId tt,@RequestParam Long id, HttpServletRequest request) {
 	
+		OdobravanjePregleda op=new OdobravanjePregleda();
+		
+		String ida = request.getParameter("id");
+		HttpSession session = request.getSession();
+		session.setAttribute("id", ida);
+		session.setAttribute("idpac", idpac);
+		
 		request.setAttribute("termini", tisServis.findOne(id));
 		TerminiSaId terminiSaId=tisServis.findOne(id);
 		long idLekara=terminiSaId.getLekarId();
 		//LekarZaPrikazIPreglede lekar=lipServis.findOne(idLekara);
 		//String idKorisnika = request.getParameter("id");
 		String pacijentId = request.getParameter("idHidden");
-		System.out.println(request.getParameter("lekarId"));
-		HttpSession session = request.getSession();
+		//System.out.println(request.getParameter("lekarId"));
+		//HttpSession session = request.getSession();
 		session.getAttribute("idHidden");
-		System.out.println("caos" + session.getAttribute("idHidden"));
-		System.out.println(pacijentId);
+		//System.out.println("caos" + session.getAttribute("idHidden"));
+		//System.out.println(pacijentId);
 		session.setAttribute("pacijentId", pacijentId);
 		TerminiSaId ttt=new TerminiSaId();
 		long pacijentIdnovi=idpac;
 		
 		Korisnik korisnici=korisnikServis.findOne(pacijentIdnovi);
 		request.setAttribute("korisnik", korisnici);
+		
+		//sada upisujemo podatke u novu klasu kako bi slali zahtev adminu
+		op.setImelekara(terminiSaId.getLekarime());
+		op.setPrezimelekara(terminiSaId.getLekarprezime());
+		op.setTipspecijalizacije(terminiSaId.getTippregleda());
+		op.setImepacijenta(korisnici.getIme());
+		op.setPrezimepacijenta(korisnici.getPrezime());
+		op.setJedbrosigpac(korisnici.getJedBrOsig());
 		
 		//request.setAttribute("korisnik", korisnikServis.findOne(idKorisnika));
 		request.setAttribute("lipi", lipServis.findOne(idLekara));

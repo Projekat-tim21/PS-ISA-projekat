@@ -18,11 +18,11 @@ public class LekarZaPrikazIPreglede {
 	@Column(name = "lekar_id")
 	private Long id;
 	
-	@Column(name="ime")
-	private String ime;
+	@Column(name="imelek")
+	private String imelek;
 	
-	@Column(name="prezime")
-	private String prezime;
+	@Column(name="prezimelek")
+	private String prezimelek;
 	
 	@Column(name="tipspecijalizacije")
 	private String tipspecijalizacije;
@@ -41,20 +41,22 @@ public class LekarZaPrikazIPreglede {
 		this.id = id;
 	}
 
-	public String getIme() {
-		return ime;
+	
+
+	public String getImelek() {
+		return imelek;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
+	public void setImelek(String imelek) {
+		this.imelek = imelek;
 	}
 
-	public String getPrezime() {
-		return prezime;
+	public String getPrezimelek() {
+		return prezimelek;
 	}
 
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
+	public void setPrezimelek(String prezimelek) {
+		this.prezimelek = prezimelek;
 	}
 
 	public String getTipspecijalizacije() {
@@ -81,14 +83,16 @@ public class LekarZaPrikazIPreglede {
 		this.ocena = ocena;
 	}
 
-	public LekarZaPrikazIPreglede(Long id, String ime, String prezime, String tipspecijalizacije, String uloga,
+
+
+	public LekarZaPrikazIPreglede(Long id, String imelek, String prezimelek, String tipspecijalizacije, String uloga,
 			double ocena) {
 		super();
 		this.id = id;
-		this.ime = ime;
-		this.prezime = prezime;
+		this.imelek = imelek;
+		this.prezimelek = prezimelek;
 		this.tipspecijalizacije = tipspecijalizacije;
-		this.uloga = Role.LEKAR.name();
+		this.uloga = uloga;
 		this.ocena = ocena;
 	}
 

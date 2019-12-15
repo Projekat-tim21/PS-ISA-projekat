@@ -70,9 +70,9 @@ insert into dijagnoza (sifra,naziv,dodatno) values ('DWERFHN','Glavobolja','Glav
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWEHGBC','Hipertenzija','Hipertenzija (visok krvni pritisak) je stanje u kome je krvni pritisak iznad 120/80 mmHg. Gornjipritisak(sistolni pritisak) zapravo je pritisak krvina zidove krvnih sudova u trenutkukada se srce kontrahuje, ');
 insert into dijagnoza (sifra,naziv,dodatno) values ('DWRHGNC','Anemija', 'Anemija ili malokrvnost je stanje koje se karakteriše smanjenim nivoom hemoglobina u krvi i/ili smanjenim brojem eritrocita. Eritrociti su crvena krvna zrnca koja se stvaraju u koštanoj srži, a nakon sazrevanja cirkulišu u krvi.');
 
-insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Zoran', 'Zoric', 'ocno', 'LEKAR',8 );
-insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Mara', 'Maric', 'url', 'LEKAR',9 );
-insert into lekarIPregledi (ime, prezime, tipspecijalizacije, uloga, ocena) values ('Sara', 'Saric', 'dermatologija', 'LEKAR',6 );
+insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Zoran', 'Zoric', 'ocno', 'LEKAR',8 );
+insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Mara', 'Maric', 'url', 'LEKAR',9 );
+insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Sara', 'Saric', 'dermatologija', 'LEKAR',6 );
 
 
 insert into course (name) values ('Matematika');

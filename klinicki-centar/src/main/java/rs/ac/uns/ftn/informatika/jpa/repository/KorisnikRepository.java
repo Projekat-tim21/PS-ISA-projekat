@@ -31,6 +31,8 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
             "LOWER(t.prezime) LIKE LOWER(CONCAT('%',:searchTerm, '%'))")
     Page<Korisnik> searchByTerm(@Param("searchTerm") String searchTerm, Pageable pageable);
 
+	public Korisnik findByJedBrOsig(String jedbrosigpac);
+
 	
 
 	 //Page<Korisnik> listUsers(Pageable pageable);
