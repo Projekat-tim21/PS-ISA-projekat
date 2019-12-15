@@ -34,17 +34,10 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
 					<li><a href="/pretragaSale">Pregled sala</a></li>
-<<<<<<< HEAD
-					<li><a href="radniKalendar?id=${id}"">Radni kalednar</a></li>
-=======
 
+					<li><a href="radniKalendar?id=${id}">Radni kalednar</a></li>
 					<li><a href="/zakaziPregledNovi">Zakazi pregled</a></li>
 					<li><a href="/zapocniPregled">Zapocni pregled</a></li>
-					<li><a>Radni kalendar</a></li>
-
-					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
-
->>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
 					<li><a>Kreiraj zahtev za odmor</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
