@@ -29,10 +29,10 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/pregled">Zapocni pregled</a></li>
+					<li><a href="/zapocniPregled">Zapocni pregled</a></li>
 					<li><a href="/zKartonLekar">Zdravstveni karton</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
-					<li><a href="/naPocetnu">Vrati se nazad</a></li>
+					<li><a href="/naPregled">Vrati se nazad</a></li>
 				</ul>
 			</div>
 		</div>

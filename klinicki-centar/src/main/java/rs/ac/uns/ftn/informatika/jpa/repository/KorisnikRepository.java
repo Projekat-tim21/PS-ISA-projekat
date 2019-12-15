@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
@@ -21,7 +20,8 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
 	public Korisnik findOneById(Long id);
 
-
+	//public Korisnik sacuvajUKarton(Korisnik korisnik);
+	
 	public List<Korisnik> findByRoleName(String roleName);
 
 	public Optional<Korisnik> findById(Long id);

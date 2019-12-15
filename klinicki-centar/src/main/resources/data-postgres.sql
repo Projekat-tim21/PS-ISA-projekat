@@ -39,13 +39,16 @@ insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa,
 insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Jovana Subotica 10','', '', '', '', '', '', '', '', '', 'Srbija', 'lekar11@gmail.com',  'Novi Sad', 'Jovan', '88826432', 'leka1111', 'Jovic', '064553772', 'jova','TRUE','LEKAR');
 insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Bate Brkic 4','', '', '', '', '', '', '', '', '', 'Srbija', 'marko22@gmail.com', 'Novi Sad', 'Marko', '2158456', 'asdasd', 'Markovic', '063528496', 'test',TRUE,'PACIJENT');
 insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ( 'Bate Brkic 4','', '', '', '', '', '', '', '', '', 'Srbija', 'marko22@gmail.com', 'Novi Sad', 'Marko', '21584546', 'ak', 'Markovic', '063528496', 'ak',TRUE,'PACIJENT');
-
+insert into korisnik3 ( adresa,alergije,anamneza,bolesti,datum,dioptrija,kgrupa, pol, tezina,visina, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Bulevar Oslobodjenja 3','', '', '', '', '', '', '', '', '', 'Srbija', 'zoran2@gmail.com',  'Novi Sad', 'Zoran', '8232712', 'zoki2', 'Simic', '061662893', 'zoki','TRUE','LEKAR');
 
 
 insert into sala(id, naziv, br, datum, rezervisana) values (1, 'Novo srce', 3, '21.10.2019.', 'false');
 insert into sala(id, naziv, br, datum, rezervisana) values (4, 'Deca', 2, '20.10.2019.', 'false');
 insert into sala(id, naziv, br, datum, rezervisana) values (2, 'Za prijem', 4, '22.12.2019.', 'true');
-insert into sala(id, naziv, br, datum, rezervisana) values (5, 'Deca', 10, '9.3.2020.', 'true');
+insert into sala(id, naziv, br, datum, rezervisana) values (5, 'Deca', 10, '9.3.2020.', 'false');
+insert into sala(id, naziv, br, datum, rezervisana) values (3, 'Deca', 5, '1.1.2020.', 'true');
+insert into sala(id, naziv, br, datum, rezervisana) values (10, 'Novo srce', 9, '12.12.2019.', 'true');
+insert into sala(id, naziv, br, datum, rezervisana) values (7, 'Novo srce', 11, '5.12.2019.', 'false');
 
 insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (3, '2019-12-04T05:42', '2B', 1000, 10 , 'Sara', 'Saric','dermatologija','false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',3);

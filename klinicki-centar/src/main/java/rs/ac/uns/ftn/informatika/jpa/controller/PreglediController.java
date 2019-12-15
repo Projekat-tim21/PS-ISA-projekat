@@ -21,10 +21,6 @@ public class PreglediController {
 	private PregledRepository pregledRep;
 	
 
-	@RequestMapping("/zakaziPregled1")
-	public String zakaziPregled() {
-		return "zakaziPregled";
-	}
 	
 	@RequestMapping("/preglediIoperacijePrikaz")
 	public String prikazStraniceListaPregledaIOperacija(HttpServletRequest request) {
@@ -49,12 +45,7 @@ public class PreglediController {
 		return "zaUnapredDefPreg";
 	}
 
-	@RequestMapping("/zakazivanjePregleda")
-	public String zakaziPregled(HttpServletRequest request, Boolean zakazan) {
-		//request.setAttribute("datumi", pServis.ListaDatuma());
-	//	request.setAttribute("mode", "ALL_DATUMI");
-		return "zakaziPregledNovi";
-	}
+	
 	
 	@RequestMapping("/zakazivanjePregledaOdobreno")
 	public String odobrenoZakazivanje(HttpServletRequest request) {

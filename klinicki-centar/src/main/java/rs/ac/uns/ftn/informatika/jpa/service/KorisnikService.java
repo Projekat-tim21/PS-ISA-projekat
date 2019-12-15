@@ -6,16 +6,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
-
-import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 
@@ -37,6 +31,10 @@ public class KorisnikService {
 	public void saveMogKorisnika(Korisnik korisnik) {
 		korisnikRepository.save(korisnik);
 	}
+	
+/*	public void sacuvajKarton(Korisnik korisnik) {
+		korisnikRepository.sacuvajUKarton(korisnik);
+	}*/
 
 	public List<Korisnik> pokaziSveKorisnike() {
 		// TODO Auto-generated method stub

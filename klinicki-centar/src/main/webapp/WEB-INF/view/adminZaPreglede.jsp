@@ -4,31 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<!-- ovo je samo da bi student 1 odradio tacku 3.12 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Za def pregleda</title>
+<title>Admin</title>
 
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
 body, html {
-	height: 100%;
+	/*height: 100%;*/
+	background-image: url(static/images/adminHome.png);
+	background-repeat: no-repeat;
+	backround-position: bottom-right;
+	backround-position: 10px, 12px;
+	
 }
 
-.bg {
-	/* The image used */
-	background-image: url(static/images/hhh.jpg);
-	/* Full height */
-	height: 100%;
-	/* Center and scale the image nicely */
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-}
+
 </style>
 </head>
 <body>
@@ -37,7 +32,7 @@ body, html {
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-				<h2>ADMIN-privremeno krenirano zbog definisanja pregleda</h2>
+				<h2>Admin klinike</h2>
 				<ul class="nav navbar-nav">
 					<li><a href="/AdminPraviPreglede">Prikaz lekara</a></li>
 					<li><a href="/vratiSe?id=${lip.id}">Vrati se</a></li>

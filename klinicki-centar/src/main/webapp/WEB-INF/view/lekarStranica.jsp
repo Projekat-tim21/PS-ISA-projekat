@@ -33,13 +33,12 @@ body {
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
-
 					<li><a href="/pretragaSale">Pregled sala</a></li>
+					<li><a href="/zakaziPregledNovi">Zakazi pregled</a></li>
+					<li><a href="/zapocniPregled">Zapocni pregled</a></li>
 					<li><a>Radni kalendar</a></li>
 					<li><a>Kreiraj zahtev za odmor</a></li>
-					<li><a>Zakazi pregled</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
-			
 				</ul>
 			</div>
 		</div>
@@ -47,7 +46,7 @@ body {
 		
 	</div>
 	
-	<h2>Dobrodosli ! Uspesno ste se ulogovali.</h2>
+	<h2>Dobrodosli ${username} ! Uspesno ste se ulogovali.</h2>
 	
 
 </body>

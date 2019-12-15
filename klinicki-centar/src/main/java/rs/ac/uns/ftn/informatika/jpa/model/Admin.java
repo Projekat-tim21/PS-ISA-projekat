@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,20 +57,11 @@ public class Admin extends Korisnik {
 		this.password = password;
 	}
 
-	//private List<Pregled> pregledi;
 	
 	public Admin() {
 		super();
 	}
 	
-	/*public List<Pregled> getPregledi(){
-		return pregledi;
-	}
-	
-	public void setPregledi(List<Pregled> pregledi) {
-		
-		this.pregledi = pregledi;
-	}*/
 	
 	
 }

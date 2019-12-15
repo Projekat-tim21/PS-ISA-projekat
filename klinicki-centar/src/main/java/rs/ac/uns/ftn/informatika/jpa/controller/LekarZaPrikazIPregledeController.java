@@ -22,6 +22,7 @@ import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
@@ -205,9 +206,9 @@ public class LekarZaPrikazIPregledeController {
 		return "sviZakazaniPregledi";
 	}
 	
-	@RequestMapping("/pregled")
-	public String zakaziPregledLekar(HttpServletRequest request) {
-		
+	@RequestMapping("/zapocniPregled")
+	public String zapocniPregledLekar(HttpServletRequest request) {
+		request.setAttribute("mode", "ZAPOCNI_PREGLED");
 		return "zapocniPregled";
 	}
 	
@@ -216,9 +217,51 @@ public class LekarZaPrikazIPregledeController {
 		return "naStranicuLekara";
 	}
 	
+	//JECA
+	/*@PostMapping("/sacuvajUKarton")
+	public String sacuvajUZKarton(@ModelAttribute KorisnikDTO kdto, BindingResult bindingResult,
+			HttpServletRequest request) {
+		
+		Korisnik korisnik = new Korisnik();
+		korisnik.setId(kdto.getId());
+		korisnik.setIme(kdto.getIme());
+		korisnik.setPrezime(kdto.getPrezime());
+		korisnik.setDatum(kdto.getDatum());
+		korisnik.setJedBrOsig(kdto.getJedBrOsig());
+		korisnik.setPol(kdto.getPol());
+		korisnik.setVisina(kdto.getVisina());
+		korisnik.setTezina(kdto.getTezina());
+		korisnik.setKgrupa(kdto.getKgrupa());
+		korisnik.setDioptrija(kdto.getDioptrija());
+		korisnik.setAlergije(kdto.getAlergije());
+		korisnik.setBolesti(kdto.getBolesti());
+		korisnik.setAnamneza(kdto.getAnamneza());
+		korisnik.setRoleName(Role.PACIJENT.name());
+		korisnikServis.sacuvajKarton(korisnik);
+
+
+		request.setAttribute("mode", "HOME_PAGE_LEKAR");
+		
+		return "lekarStranica";
+	}
+	*/
+	
+	@RequestMapping("/naPregled")
+	public String vratiSeNaPretragu(HttpServletRequest request) {
+		request.setAttribute("korisnici", korisnikServis.pokaziSvePacijente());
+		request.setAttribute("mode", "ALL_USERS");
+		return "naPregledPacijenata";
+	}
+	
+	@RequestMapping("/zakaziPregledNovi")
+	public String zakaziPregled(HttpServletRequest request, Boolean zakazan) {
+		//request.setAttribute("datumi", pServis.ListaDatuma());
+	//	request.setAttribute("mode", "ALL_DATUMI");
+		return "zakaziPregledNovi";
+	}
 	
 	@RequestMapping("/zKartonLekar")
-	public String prikazZKartona(@RequestParam Long id, HttpServletRequest request) {
+	public String prikazZKartona(@RequestParam("id") Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		Korisnik k=korisnikServis.findOne(id);
 		System.out.println(k.getVisina());

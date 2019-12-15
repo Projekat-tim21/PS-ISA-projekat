@@ -7,13 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.Sala;
-import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.SalaRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
 import rs.ac.uns.ftn.informatika.jpa.service.SalaService;
@@ -37,23 +34,30 @@ public class SalaController {
 		return "listaSala";
 	}
 	
-	
-	//KAKO DA MI PRIKAZE PO ISTOM IMENU ??????????
-	//if(sala.getNaziv() == s.getNaziv()) 
-	@RequestMapping("/prikazKalendaraSala")
-	public String prikaziKalendar(HttpServletRequest request) {
-
-		List<Sala> sale = new ArrayList<Sala>();
-		for(Sala sala : salaRepo.findByRezervisana(false)) {
+	 
+	@RequestMapping(value = "/prikazKalendaraSala")
+	public String prikaziKalendar(HttpServletRequest request, @RequestParam("naziv") String naziv) {
 		
-			sale.add(sala);
+		String nazivSale = naziv;
+        List<Sala> sale = new ArrayList<Sala>();
+        for(Sala sala : salaRepo.findByNaziv(nazivSale)) {
+        	if(sala.isRezervisana() == false) {
+				sale.add(sala);
+        	}
 		}
-		
-		request.setAttribute("sale", sale);
+        
+        request.setAttribute("sale", sale);
 		request.setAttribute("mode", "SVE_SLOBODNE_SALE");
 		return "listaSala";
-		
-		
+        
+	
+	}
+	
+	@RequestMapping("/naPregledSala")
+	public String vratiSeNaPregledSala(HttpServletRequest request) {
+		request.setAttribute("sale", salaS.pokaziSveSale());
+		request.setAttribute("mode", "ALL_SALE");
+		return "naPregledSala";
 	}
 	
 	@RequestMapping("/rezervacija")
