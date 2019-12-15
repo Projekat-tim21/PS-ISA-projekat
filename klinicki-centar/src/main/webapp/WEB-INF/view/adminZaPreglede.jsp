@@ -40,6 +40,7 @@ body, html {
 				<h2>ADMIN-privremeno krenirano zbog definisanja pregleda</h2>
 				<ul class="nav navbar-nav">
 					<li><a href="/AdminPraviPreglede">Prikaz lekara</a></li>
+					<li><a href="/zahteviZaPregledom">Odobravanje zahteva</a></li>
 					<li><a href="/vratiSe?id=${lip.id}">Vrati se</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -72,8 +73,8 @@ body, html {
 							<c:forEach var="lip" items="${lipi}">
 								<tr>
 									<td>${lip.id}</td>
-									<td>${lip.ime}</td>
-									<td>${lip.prezime}</td>
+									<td>${lip.imelek}</td>
+									<td>${lip.prezimelek}</td>
 									<td>${lip.tipspecijalizacije}</td>
 									<td>${lip.ocena}</td>
 									<td><a href="/kreirajPregledZaLekara?id=${lip.id}">Zakazi
@@ -88,6 +89,62 @@ body, html {
 				</div>
 			</div>
 		</c:when>
+
+
+
+<c:when test="${mode=='ALL_ZAHTEVI' }">
+			<div class="container text-center" id="tasksDiv">
+				<h3>Pristigli zahtevi</h3>
+				<hr>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Termin</th>
+								<th>Ime lekara</th>
+								<th>Prezime lekara</th>
+								<th>Tip pregleda</th>
+								<th>Ime pacijenta</th>
+								<th>Prezime pacijenta</th>
+								<th>JBO</th>
+								<th>Cena pregleda</th>
+								<th>Popust</th>
+								<th>Sala</th>
+								<th colspan="2">Prihvati/Odbij</th>
+						<!--		<th>Sifra</th>  -->
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="op" items="${opi }">
+								<tr>
+									<td>${op.id}</td>
+									<td>${op.terminzahtev}</td>
+									<td>${op.imelekara}</td>
+									<td>${op.prezimelekara}</td>
+									<td>${op.tipspecijalizacije}</td>
+									<td>${op.imepacijenta}</td>
+									<td>${op.prezimepacijenta}</td>
+									<td>${op.jedbrosigpac}</td>
+									<td>${op.cenaop}</td>
+									<td>${op.popustop}</td>
+									<td>${op.salaop}</td>
+									
+									<td>
+                                        <a href="/enable2/${op.getId()}" class="saveData"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
+                                        </td>
+                                        <td><a href="/disable2/${op.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
+                                        </td>
+					
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</c:when>
+
+
 
 
 

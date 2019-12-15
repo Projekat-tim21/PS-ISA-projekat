@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
 public interface TerminSaIdRepository extends JpaRepository<TerminiSaId, Long> {
@@ -14,6 +15,6 @@ public interface TerminSaIdRepository extends JpaRepository<TerminiSaId, Long> {
 
 	public List<TerminiSaId> findByZakazan(boolean b);
 
-	
+	public TerminiSaId findByTermin(String termin);
 	
 }

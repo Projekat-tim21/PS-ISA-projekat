@@ -117,6 +117,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/noviAdminKC").permitAll()
 		.antMatchers("/disable/*").permitAll()
 		.antMatchers("/enable/*").permitAll()
+		.antMatchers("/enable2/*").permitAll()
 		.antMatchers("/sviIzBaze").permitAll()
 		.antMatchers("/preglediIoperacijePrikaz").permitAll()
 		.antMatchers("/prikaziListuPregleda").permitAll()
@@ -147,6 +148,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/vidijos/*").permitAll()
 		.antMatchers("/razlogOdbijanja/*").permitAll()
 		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
+		.antMatchers("/pretragaSale").permitAll()
+		.antMatchers("/lekarStranica").permitAll()
+		.antMatchers("/prikazKalendaraSala").permitAll()
+		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
 		.antMatchers("/radniKalendar").permitAll()
 		.antMatchers("/pretragaSale").permitAll()
 		.antMatchers("/lekarStranica").permitAll()
@@ -162,15 +167,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/kartonZ").permitAll()	
 		.antMatchers("/admin").permitAll()	
 		.antMatchers("/sacuvajNovaLozinka").permitAll()
-
+		.antMatchers("/posaljiZahtevZaPregledom").permitAll()
+		.antMatchers("/zahteviZaPregledom").permitAll()
 		.antMatchers("/rezervacija").permitAll()
 		.antMatchers("/profilPacijenta").permitAll()
 	    .antMatchers("/zKartonLekar").permitAll()
 	    .antMatchers("/naPocetnu").permitAll()
 	    .antMatchers("/pregled").permitAll()
-
-
-
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

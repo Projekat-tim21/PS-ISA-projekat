@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
 @Service
 public class EmailService {
@@ -89,6 +90,24 @@ public class EmailService {
 
 		System.out.println("Email poslat!");
 	}
+	
+	
+	public void sendNotificaitionOdobrenTermin(Korisnik k ) throws MailException, InterruptedException {
+
+		System.out.println("Slanje email potvrda zahteva za pregledom");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Administrator KC");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nVas zahtev za pregledom je potvrdjen");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+	
+	
+	
 	
 	public void sendNotificaitionOdobrenaRegistracija(Korisnik k) throws MailException, InterruptedException {
 

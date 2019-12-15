@@ -48,7 +48,7 @@ public class TerminiSaId {
 	private long idkorisnika;
 	
 	
-	
+
 	public TerminiSaId(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
 			String sala, double cena, double popust, boolean zakazan, long idkorisnika) {
 		super();
