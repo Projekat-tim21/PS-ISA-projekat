@@ -35,6 +35,7 @@ body {
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
 
 					<li><a href="/pretragaSale">Pregled sala</a></li>
+					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a>Kreiraj zahtev za odmor</a></li>
 					<li><a>Zakazi pregled</a></li>
 					<li><a href="/logout">Odjavi se</a></li>

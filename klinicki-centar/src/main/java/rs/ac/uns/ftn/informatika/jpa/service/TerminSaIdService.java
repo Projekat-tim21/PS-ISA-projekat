@@ -50,7 +50,13 @@ public class TerminSaIdService {
 		tidRepo.deleteById(id);
 	}
 
-
+	public List<TerminiSaId> getTerminiByLekarId(Long id) {
+		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
+		for(TerminiSaId t : tidRepo.findByLekarId(id)) {
+			termini.add(t);
+		}
+		return termini;
+	}
 	
 
 	

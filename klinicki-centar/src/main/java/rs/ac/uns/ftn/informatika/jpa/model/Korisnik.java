@@ -241,6 +241,8 @@ public class Korisnik {
 		this.telefon = telefon;
 		this.password = sifra;
 		this.roleName=Role.PACIJENT.name();
+		this.isActive=true;
+		this.first_Login=false;
 		
 	}
 	

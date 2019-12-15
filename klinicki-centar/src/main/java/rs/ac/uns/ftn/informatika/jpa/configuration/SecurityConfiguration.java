@@ -147,13 +147,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/vidijos/*").permitAll()
 		.antMatchers("/razlogOdbijanja/*").permitAll()
 		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
-
+		.antMatchers("/radniKalendar").permitAll()
 		.antMatchers("/pretragaSale").permitAll()
 		.antMatchers("/lekarStranica").permitAll()
 		.antMatchers("/prikazKalendaraSala").permitAll()
-
+		.antMatchers("/getCalendar").permitAll()
 		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
-
+		.antMatchers("/zapocniOperacijeP").permitAll()
 		.antMatchers("/listaSvihDefinisanihPregledaZaLekara").permitAll()
 		.antMatchers("/uspesnoZakazanPregled").permitAll()
 		.antMatchers("/vratiSeNaLoginBezDobrodosli2").permitAll()
