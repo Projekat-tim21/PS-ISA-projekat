@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import flexjson.JSONSerializer;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
-import rs.ac.uns.ftn.informatika.jpa.model.Calendar;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.CalendarService;
