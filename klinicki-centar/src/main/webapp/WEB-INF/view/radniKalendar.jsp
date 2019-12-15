@@ -243,21 +243,11 @@
               },error: function (result) {
                       console.log("AJAX error");
               }
-<<<<<<< HEAD
-=======
-          
-           
->>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
-      
     }) 
     	  // setup a few events
     	 
     	});
-    
-<<<<<<< HEAD
-=======
 
->>>>>>> aa30baf59bd820050233859efa5ba69b970a7629
     </script>
 
 </body>
