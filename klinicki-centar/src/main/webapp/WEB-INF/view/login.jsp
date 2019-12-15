@@ -32,7 +32,6 @@ body {
 				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
 				 	<li><a href="/listaSvihKlinika?id=${id}">Lista klinika</a></li> 	
 				 	<li><a href="/preglediIoperacijePrikaz?id=${id}">Lista pregleda i operacija</a></li>
-				 	<li><a href="/kartonZ?id=${id}">Zdravstveni karton</a>
 				 	<li><a href="/prikaziListuLekara?idpac=${id}">Lista lekara</a>
 				 	<li><a href="/zakaziPregledKojiJeDef?id=${id}">Zakazi pregled</a>
 				 	<li><a href="/listaZakazanihPregleda?id=${id}">Zakazani pregledi</a>

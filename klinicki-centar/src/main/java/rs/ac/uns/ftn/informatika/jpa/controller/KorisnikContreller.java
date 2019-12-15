@@ -106,11 +106,18 @@ public class KorisnikContreller {
 				return "admin";
 				}
 			}else if (k.getRoleName().equals(Role.LEKAR.name())) {
+				session.setAttribute("id", k.getId());
 				return "lekarStranica";
+				
 			}else if(k.getRoleName().equals(Role.SESTRA.name())) {
 				return "medSestraPocetna";
 			}
 			session.setAttribute("id", k.getId());
+			if(k.getFirst_Login()==false && k.getIsActive()==true) {
+				return "neuspesnaRegistracija";
+			}else if(k.getIsActive()==false) {
+				return "neobradjenaRegistracija";
+			}
 			return "login";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
@@ -153,6 +160,8 @@ public class KorisnikContreller {
 			k.setUsername(korisnikd.getUsername());
 			k.setPassword(korisnikd.getPassword());
 			k.setRoleName(Role.PACIJENT.name());
+			k.setIsActive(false);
+			k.setFirst_Login(false);
 			System.out.println(k.getRoleName());
 			korisnikServis.saveMogKorisnika(k);
 
@@ -199,17 +208,7 @@ public class KorisnikContreller {
 		return "pregledSvihPacijenata";
 	}
 	
-/*	//JA DODALA VANJIN DEO
-	@GetMapping("/pacijenti")
-	public String pokaziKarton(HttpServletRequest request) {
-		return "pacijent";
-	}
-	*/
-	//STRANICA ZA ZAKAZIVANJE PREGLEDA
-	/*@GetMapping("/zakazivanjePregleda")
-	public String zakaziPregled() {
-		return "zakaziPregled";
-	}*/
+
 
 	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
 	public String edit(@PathVariable("id") Long id, Map<String, Object> map) {
@@ -321,6 +320,13 @@ public class KorisnikContreller {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
+	}
+	
+	@RequestMapping("/profilPacijenta")
+	public String prikaziProfilPacijenta(HttpServletRequest request) {
+		
+		request.setAttribute("mode", "ALL_USERS");
+		return "profilPacijenta";
 	}
 
 	@RequestMapping("/kartonZ")

@@ -23,18 +23,32 @@ public class Sala {
 	
 	@Column(name="datum", nullable=false)
 	String datum;
+	
+	@Column(name="rezervisana", nullable=true)
+	private boolean rezervisana;
+
+	public boolean isRezervisana() {
+		return rezervisana;
+	}
+
+
+	public void setRezervisana(boolean rezervisana) {
+		this.rezervisana = rezervisana;
+	}
+
 
 	public Sala() {
 		
 	}
 	
 	
-	public Sala(Long id, String naziv, int br, String datum) {
+	public Sala(Long id, String naziv, int br, String datum, boolean rezervisana) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
 		this.br = br;
 		this.datum = datum;
+		this.rezervisana = rezervisana;
 	}
 
 	public Long getId() {

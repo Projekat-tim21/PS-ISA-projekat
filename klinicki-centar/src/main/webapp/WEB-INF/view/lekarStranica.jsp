@@ -26,18 +26,20 @@ body {
 </head>
 <body>
 
+	
+
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/pregledSvihPacijenataMetoda">Pregled pacijenata</a></li>
-					<li><a href="/kartonZ">Prikazi profil pacijenta</a></li>
-					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
-
-					<li><a href="/radniKalendar">Radni kalendar</a></li>
 
 					<li><a href="/pretragaSale">Pregled sala</a></li>
+					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
+					<li><a>Kreiraj zahtev za odmor</a></li>
+					<li><a>Zakazi pregled</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
+			
 				</ul>
 			</div>
 		</div>
@@ -45,7 +47,7 @@ body {
 		
 	</div>
 	
-	<h2>Dobrodosli ${ime}   ! Uspesno ste se ulogovali.</h2>
+	<h2>Dobrodosli ! Uspesno ste se ulogovali.</h2>
 	
 
 </body>
