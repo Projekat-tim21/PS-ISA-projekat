@@ -38,6 +38,9 @@ body {
 					<li><a href="radniKalendar?id=${id}">Radni kalednar</a></li>
 					<li><a href="/zakaziPregledNovi">Zakazi pregled</a></li>
 					<li><a href="/zapocniPregled">Zapocni pregled</a></li>
+
+					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
+
 					<li><a>Kreiraj zahtev za odmor</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
