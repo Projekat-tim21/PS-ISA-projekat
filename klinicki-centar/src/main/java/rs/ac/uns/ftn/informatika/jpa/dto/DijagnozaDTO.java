@@ -15,6 +15,10 @@ public class DijagnozaDTO {
 		this.dodatno = dodatno;
 	}
 
+	public DijagnozaDTO(){
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}

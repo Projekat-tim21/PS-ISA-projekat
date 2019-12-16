@@ -14,6 +14,10 @@ public class LekDTO {
 		this.dodatno = dodatno;
 	}
 
+	public LekDTO() {
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
