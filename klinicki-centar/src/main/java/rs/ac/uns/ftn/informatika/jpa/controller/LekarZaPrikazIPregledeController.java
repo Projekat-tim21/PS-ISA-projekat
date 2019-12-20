@@ -28,6 +28,7 @@ import rs.ac.uns.ftn.informatika.jpa.model.OdobravanjePregleda;
 
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.OdobravanjePregledaRepozitorijum;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
@@ -51,6 +52,8 @@ public class LekarZaPrikazIPregledeController {
 	
 	@Autowired
 	private OdobravanjePregledaService opServis;
+	
+	@Autowired OdobravanjePregledaRepozitorijum opRepo;
 	
 	@Autowired
 	private EmailService emailService;
@@ -199,7 +202,7 @@ public class LekarZaPrikazIPregledeController {
 	}
 	
 	
-	
+	//ovdeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 	@RequestMapping("/listaZakazanihPregleda")
 	public String listaZakazanihPregleda(@RequestParam("id") long idkor,HttpServletRequest request) {
 	
@@ -371,13 +374,21 @@ public class LekarZaPrikazIPregledeController {
 		op.setSalaop(ter.getSala());
 		op.setIdtermina(ter.getId());
 		op.setLekaridop(ter.getLekarId());
+		op.setIdpacijenta(korisnik.getId());
+		System.out.println("id pac+    "+korisnik.getId());
 		
 		
 		opServis.sacuvaj(op);
 		
-		//request.setAttribute("korisnik", korisnikServis.findOne(idKorisnika));
-		//request.setAttribute("lipi", lipServis.findOne(idLekara));
-		//request.setAttribute("mode", "ZAKAZI_PREGLED");
+		Korisnik k2=korisnikServis.findByUsername("ak");		
+		 try {
+				emailService.slanjePorukeAdminuOZahtevuZaPregledom(k2);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+		
+		
+		
 		return "loginBezDobrodosli";
 	}
 	
@@ -389,7 +400,39 @@ public class LekarZaPrikazIPregledeController {
         return "adminZaPreglede";
 	}
 	
-	
+	 @GetMapping("/disable2/{opiId}")
+	    public String disable(@PathVariable Long opiId,HttpServletRequest request) {
+		 	OdobravanjePregleda op=opServis.findOne(opiId);
+		 	TerminiSaId t=new TerminiSaId();
+	        t.setCena(op.getCenaop());
+	        t.setId(op.getIdtermina());
+	        t.setLekarime(op.getImelekara());
+	        t.setLekarprezime(op.getPrezimelekara());
+	        t.setTippregleda(op.getTipspecijalizacije());
+	        t.setTermin(op.getTerminzahtev());
+	        t.setSala(op.getSalaop());
+	        t.setCena(op.getCenaop());
+	        t.setPopust(op.getPopustop());
+	        t.setZakazan(false);
+	        t.setLekarId(op.getLekaridop());
+	        
+	        t.setIdkorisnika(op.getIdpacijenta());
+	        
+	      
+	        
+	        Korisnik k=korisnikServis.findOne(op.getIdpacijenta());
+	        tisServis.saveMojTermin(t);
+	        //opRepo.delete(op);
+	        //Korisnik k=repoKorisnik.findByJedBrOsig(op.getJedbrosigpac());
+	        //request.setAttribute("termini", tisServis.findOne(t.getIdkorisnika()));
+			//request.setAttribute("mode", "ODBIJANJE");
+	        //System.out.println("korisnikk id  "+k.getId());
+	        request.setAttribute("korisnik", k);
+	        request.setAttribute("termin", t);
+	        request.setAttribute("opi", op);
+			//request.setAttribute("mode", "ODBIJANJE_PREGLEDA");
+			return "odbijanjePregleda";
+	    }
 	
 	  @GetMapping("/enable2/{opiId}")
 	    public String enable(@PathVariable Long opiId) {
@@ -406,16 +449,11 @@ public class LekarZaPrikazIPregledeController {
 	        t.setPopust(op.getPopustop());
 	        t.setZakazan(true);
 	        t.setLekarId(op.getLekaridop());
+	        t.setIdkorisnika(op.getIdpacijenta());
 	        tisServis.saveMojTermin(t);
-	        
-	        
+	        opRepo.delete(op);
 	        Korisnik k=repoKorisnik.findByJedBrOsig(op.getJedbrosigpac());
-	        
-	        //t.setPacijentjbo(op.getJedbrosigpac());
-	        //t.setPacijentprz(op.getPrezimepacijenta());
-	        //t.setZakazan(true);
-	        //t.setCena(cena);
-	        
+	     
 	        try {
 				emailService.sendNotificaitionOdobrenTermin(k);
 			}catch( Exception e ){
@@ -425,6 +463,37 @@ public class LekarZaPrikazIPregledeController {
 	        return "redirect:/zahteviZaPregledom";
 	    }
 	
+	  
+	  @PostMapping("/razlogOdbijanjaPregleda/{opiId}")
+	    public String mejlOdbijanja(@PathVariable Long opiId,HttpServletRequest request) {
+		  OdobravanjePregleda op=opServis.findOne(opiId);
+		  
+	        Korisnik k=korisnikServis.findOne(op.getIdpacijenta());
+		  
+	       // Termini
+	       /* k.setId(korisnikd.getId());
+	        k.setIme(korisnikd.getIme());
+	        k.setPrezime(korisnikd.getPrezime());
+	        k.setAdresa(korisnikd.getAdresa());
+	        k.setDrzava(korisnikd.getDrzava());
+	        k.setEmail(korisnikd.getEmail());
+	        k.setGrad(korisnikd.getGrad());
+	        k.setJedBrOsig(korisnikd.getJedBrOsig());
+	        k.setUsername(korisnikd.getUsername());*/
+	        String s=request.getParameter("razlog2");
+	       // String ss=request.getParameter("mail");
+	      ///  System.out.println(ss);
+	      
+	        try {
+				emailService.sendNotificaitionRazlogOdbijanjaTermina(k,s);
+			}catch( Exception e ){
+				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+			}
+	        opRepo.delete(op);
+	        return "redirect:/zahteviZaPregledom";
+	        
+	    }
+	  
 	
 	@GetMapping("/zakazivanjePregledaIzaListeLekara")
 	public String editUserProfilPregled(@RequestParam("idpac") int idpac,@ModelAttribute TerminiSaId tt,@RequestParam Long id, HttpServletRequest request) {
@@ -487,6 +556,8 @@ public class LekarZaPrikazIPregledeController {
 		//request.setAttribute("mode", "VRACAJ_SE_NAZAD");
 		//return "zahtevZaPregledom";
 		//request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
+		
+		
 		return "loginBezDobrodosli2";
 	}
 	

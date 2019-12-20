@@ -128,7 +128,7 @@ body {
 							<button type="submit" formaction="/izmenaPodataka">Izmeni</button>
 					</div>
 					<div class="form-group ">
-						<button type="submit" formaction="/idiNaLoginBezDobrodosli">Pocetna</button>
+						<button type="submit" formaction="/idiNaLoginBezDobrodosli?id=${id}">Pocetna</button>
 
 					</div>
 				</form>
@@ -160,11 +160,11 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 var idPacijenta = getUrlParameter('id');
-console.log(idPacijenta);
+//console.log(idPacijenta);
 
 function addIdPac (element){
 	element.href = element.href+"?id="+idPacijenta;
-	console.log(element.href);
+	//console.log(element.href);
 }
 
 

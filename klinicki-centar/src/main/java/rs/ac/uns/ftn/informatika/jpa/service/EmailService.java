@@ -1,15 +1,24 @@
 package rs.ac.uns.ftn.informatika.jpa.service;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.InternetHeaders;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.sun.xml.fastinfoset.sax.Properties;
+
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
 @Service
 public class EmailService {
@@ -92,21 +101,38 @@ public class EmailService {
 	}
 	
 	
+	
 	public void sendNotificaitionOdobrenTermin(Korisnik k ) throws MailException, InterruptedException {
 
+		
 		System.out.println("Slanje email potvrda zahteva za pregledom");
+		//String link = "<a href=\"/logout\">Odjavi se</a>";
+		//String confirmationUrl = "/registrationConfirm?token=" + k.getId();
 
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(k.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
 		mail.setSubject("Administrator KC");
 		mail.setText("Pozdrav " + k.getIme() + ",\n\nVas zahtev za pregledom je potvrdjen");
+		//mail.setText(link);
 		javaMailSender.send(mail);
 
 		System.out.println("Email poslat!");
 	}
 	
-	
+	public void slanjePorukeAdminuOZahtevuZaPregledom(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje adminu zahteva za pregledom");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Klinicki centar");
+		mail.setText("Pozdrav " + ",\n\nNa mail Vam je prosledjen zahtev za pregledom od strane pacijenta");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
 	
 	
 	public void sendNotificaitionOdobrenaRegistracija(Korisnik k) throws MailException, InterruptedException {
@@ -167,4 +193,19 @@ public class EmailService {
 		
 	}
 
+	public void sendNotificaitionRazlogOdbijanjaTermina(Korisnik k, String s) {
+		// TODO Auto-generated method stub
+		System.out.println("Slanje email odbijanje termina" + k.getIme() + s);
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Odbijanje zahteva za pregled");
+		mail.setText("Pozdrav " + k.getIme() + "  " + "Vas zahtev za pregledom je odbijen zbog: "     + s);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+		
+	}
+	
 }

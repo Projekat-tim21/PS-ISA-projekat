@@ -51,7 +51,6 @@ body {
 			</div>
 		</div>
 	</div>
-
 <c:choose>
 	
 		<c:when test="${mode=='MODE_PREGLED' }">
