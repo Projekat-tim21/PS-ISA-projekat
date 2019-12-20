@@ -115,6 +115,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/addNewAdminKC").permitAll()
 		.antMatchers("/noviAdminKC").permitAll()
 		.antMatchers("/disable/*").permitAll()
+		.antMatchers("/disable2/*").permitAll()
 		.antMatchers("/enable/*").permitAll()
 		.antMatchers("/enable2/*").permitAll()
 		.antMatchers("/sviIzBaze").permitAll()
@@ -172,13 +173,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/profilPacijenta").permitAll()
 	    .antMatchers("/zKartonLekar").permitAll()
 	    .antMatchers("/naPocetnu").permitAll()
-
+	    .antMatchers("/razlogOdbijanjaPregleda").permitAll()
 	    .antMatchers("/zapocniPregled").permitAll()
 	    .antMatchers("/naPregled").permitAll()
 	    .antMatchers("/naPregledSala").permitAll()
 	    .antMatchers("/zakaziPregledNovi").permitAll()
-
-	    
+	    .antMatchers("/razlogOdbijanjaPregleda/*").permitAll()
 	    .antMatchers("/getCalendar/*").permitAll()
 	    .antMatchers("/radniKalendar/*").permitAll()
 	    .antMatchers("/zapocniOperacijeP").permitAll()
