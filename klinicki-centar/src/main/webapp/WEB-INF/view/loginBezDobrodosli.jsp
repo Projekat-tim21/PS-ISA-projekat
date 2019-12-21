@@ -43,8 +43,8 @@ body {
 							lekara</a>
 					<li><a onclick="addIdPac(this)" href="/zakaziPregledKojiJeDef">Zakazi
 							pregled</a>
-					<li><a onclick="addIdPac(this)" href="/listaZakazanihPregleda">Zakazani
-							pregledi</a> <!-- 	<li><a href="/pokazikorisnikaSaLogina">Svi korisnici</a></li> 	 -->
+					<li><a onclick="addIdPac(this)" href="/listaZakazanihPregleda">Zakazani pregledi</a> 
+					<li><a onclick="addIdPac(this)" href="/odobreniZahteviKodPacijenta">Odobreni zahtevi</a>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 

@@ -47,7 +47,27 @@ public class TerminiSaId {
 	@Column(name="idkorisnika", nullable=true)
 	private long idkorisnika;
 	
-	
+	@Column(name="odobrenpregled", nullable=true)
+	private boolean odobrenpregled;
+
+	@Column(name="prikaz", nullable=true)
+	private boolean prikaz;
+
+	public boolean isPrikaz() {
+		return prikaz;
+	}
+
+	public void setPrikaz(boolean prikaz) {
+		this.prikaz = prikaz;
+	}
+
+	public boolean isOdobrenpregled() {
+		return odobrenpregled;
+	}
+
+	public void setOdobrenpregled(boolean odobrenpregled) {
+		this.odobrenpregled = odobrenpregled;
+	}
 
 	public TerminiSaId(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
 			String sala, double cena, double popust, boolean zakazan, long idkorisnika) {

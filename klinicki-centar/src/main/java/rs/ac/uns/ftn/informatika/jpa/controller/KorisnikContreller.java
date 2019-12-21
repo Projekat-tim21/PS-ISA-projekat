@@ -118,6 +118,7 @@ public class KorisnikContreller {
 			}else if(k.getIsActive()==false) {
 				return "neobradjenaRegistracija";
 			}
+			request.setAttribute("mode", "DOBRODOSLI");
 			return "login";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
