@@ -12,22 +12,15 @@
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
-body,html {
-  height: 100%;
-}
 
-.bg {
-  /* The image used */
-  background-image: url(static/images/sestra.jpg);
-
+body {
+  background-image: url("static/images/msestra.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
   /* Full height */
   height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
+ }
 </style>
 </head>
 <body class="my-login-page">
@@ -37,6 +30,7 @@ body,html {
 			<h2>MEDICINSKA SESTRA</h2>
 				<ul class="nav navbar-nav">
 					<li><a href="sviSestraPacijenti">Svi Pacijenti</a></li>
+					<li><a href="/zahtevZaOdsustvo?id=${id}">Odsustvo/Odmor</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
@@ -45,9 +39,7 @@ body,html {
 	</div>
 	
  <div class="bg"></div>
-<div class="footer">
-    Copyright &copy; 2019
-</div>
+
 
 <script>
     function saveData(id) {

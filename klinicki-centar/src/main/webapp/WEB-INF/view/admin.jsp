@@ -12,22 +12,14 @@
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
-body,html {
-  height: 100%;
-}
-
-.bg {
-  /* The image used */
-  background-image: url(static/images/hhh.jpg);
-
+body {
+  background-image: url("static/images/cool.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
   /* Full height */
   height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
+ }
 </style>
 </head>
 <body class="my-login-page">
