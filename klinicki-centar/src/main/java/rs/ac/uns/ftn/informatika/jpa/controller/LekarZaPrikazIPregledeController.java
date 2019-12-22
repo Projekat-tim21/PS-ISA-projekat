@@ -395,15 +395,10 @@ public class LekarZaPrikazIPregledeController {
 
 		Korisnik k = korisnikServis.findOne(op.getIdpacijenta());
 		tisServis.saveMojTermin(t);
-		// opRepo.delete(op);
-		// Korisnik k=repoKorisnik.findByJedBrOsig(op.getJedbrosigpac());
-		// request.setAttribute("termini", tisServis.findOne(t.getIdkorisnika()));
-		// request.setAttribute("mode", "ODBIJANJE");
-		// System.out.println("korisnikk id "+k.getId());
+		
 		request.setAttribute("korisnik", k);
 		request.setAttribute("termin", t);
 		request.setAttribute("opi", op);
-		// request.setAttribute("mode", "ODBIJANJE_PREGLEDA");
 		return "odbijanjePregleda";
 	}
 
