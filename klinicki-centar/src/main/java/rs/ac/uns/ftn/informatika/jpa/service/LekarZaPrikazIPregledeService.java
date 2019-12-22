@@ -7,12 +7,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
-import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.LekarZaPrikazIPregledeRepository;
-import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
 
 @Service
 @Transactional
@@ -40,5 +37,27 @@ public class LekarZaPrikazIPregledeService {
 	}
 	
 
-	
+	public void saveMojLekar(LekarZaPrikazIPreglede lip) {
+		lipRepo.save(lip);
+	}
+
+
+	public void saveOcenaLekara(double prosek,long lekarid) {
+		// TODO Auto-generated method stub
+		
+		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
+		for(LekarZaPrikazIPreglede lip : lipRepo.findAll()) {
+			if(lip.getId()==lekarid) {
+				LekarZaPrikazIPreglede lip2=new LekarZaPrikazIPreglede();
+				lip2.setId(lekarid);
+				lip2.setOcena(prosek);
+				lip2.setImelek(lip.getImelek());
+				lip2.setPrezimelek(lip.getPrezimelek());
+				lip2.setTipspecijalizacije(lip.getTipspecijalizacije());
+				lip2.setUloga(lip.getUloga());
+				lipRepo.save(lip2);
+				
+			}
+		}
+	}
 }

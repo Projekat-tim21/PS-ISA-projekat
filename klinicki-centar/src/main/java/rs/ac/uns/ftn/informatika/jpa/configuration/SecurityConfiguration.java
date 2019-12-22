@@ -149,6 +149,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sviSestraPacijenti").permitAll()
 		.antMatchers("/vidijos/*").permitAll()
 		.antMatchers("/razlogOdbijanja/*").permitAll()
+		.antMatchers("/ocenaLekaraPregled/*/*/*").permitAll()
+		.antMatchers("/ocenaLekaraOperacije/*/*/*").permitAll()
 		.antMatchers("/zakaziPregledKojiJeDef").permitAll()
 		.antMatchers("/pretragaSale").permitAll()
 		.antMatchers("/lekarStranica").permitAll()
@@ -165,6 +167,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/uspesnoZakazanPregled").permitAll()
 		.antMatchers("/vratiSeNaLoginBezDobrodosli2").permitAll()
 		.antMatchers("/saljemoZahtevZaPregledom").permitAll()
+		.antMatchers("/oceniLekaraPregled").permitAll()
 		.antMatchers("/listaZakazanihPregleda").permitAll()
 		.antMatchers("/kartonZ").permitAll()	
 		.antMatchers("/admin").permitAll()	
@@ -186,6 +189,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/zapocniOperacijeP").permitAll()
 	    .antMatchers("/odobreniZahteviKodPacijenta").permitAll()
 	    .antMatchers("/idiNaLoginPoslePotvrde").permitAll()
+	    .antMatchers("/oceniLekaraOperacija").permitAll()
 
 	    .antMatchers("/pregled").permitAll()
 
