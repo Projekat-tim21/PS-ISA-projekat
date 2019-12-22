@@ -322,6 +322,9 @@ body {
 	</c:choose>
 
 	<script>
+function a(){}
+
+	
 function alertzaocenu(){
 	alert("Uspesno ste ostavili ocenu za izabranog lekara");
 }
