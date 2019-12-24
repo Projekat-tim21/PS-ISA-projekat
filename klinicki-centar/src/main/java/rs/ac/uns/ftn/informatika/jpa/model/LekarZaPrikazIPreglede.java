@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity  //ovo je klasa za lekara 
 @Table(name="lekarIPregledi")
 public class LekarZaPrikazIPreglede {
 
@@ -33,6 +33,8 @@ public class LekarZaPrikazIPreglede {
 	@Column(name="ocena", nullable=true)
 	private double ocena;
 
+	
+	
 	public Long getId() {
 		return id;
 	}

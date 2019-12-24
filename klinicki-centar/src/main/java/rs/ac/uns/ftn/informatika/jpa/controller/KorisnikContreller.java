@@ -120,6 +120,7 @@ public class KorisnikContreller {
 			}else if(k.getIsActive()==false) {
 				return "neobradjenaRegistracija";
 			}
+			request.setAttribute("mode", "DOBRODOSLI");
 			return "login";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
@@ -309,7 +310,6 @@ public class KorisnikContreller {
 	@RequestMapping("/idiNaLoginBezDobrodosli")
 	public String idiNaLoginBezDobrodosliFunc(@RequestParam Long id, HttpServletRequest request) {
 		String id2 = request.getParameter("id");
-		
 		HttpSession session = request.getSession();
 		session.setAttribute("id", id2);
 		return "loginBezDobrodosli";

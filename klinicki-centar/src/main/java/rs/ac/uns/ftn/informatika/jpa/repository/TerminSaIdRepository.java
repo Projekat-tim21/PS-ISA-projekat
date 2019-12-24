@@ -16,5 +16,7 @@ public interface TerminSaIdRepository extends JpaRepository<TerminiSaId, Long> {
 	public List<TerminiSaId> findByZakazan(boolean b);
 
 	public TerminiSaId findByTermin(String termin);
+
+	public List<TerminiSaId> findByOdobrenpregled(boolean odobren);
 	
 }

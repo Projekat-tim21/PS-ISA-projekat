@@ -35,6 +35,7 @@ body {
 				 	<li><a href="/prikaziListuLekara?idpac=${id}">Lista lekara</a>
 				 	<li><a href="/zakaziPregledKojiJeDef?id=${id}">Zakazi pregled</a>
 				 	<li><a href="/listaZakazanihPregleda?id=${id}">Zakazani pregledi</a>
+				 	<li><a href="/odobreniZahteviKodPacijenta?id=${id}">Odobreni zahtevi</a>
 
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -42,7 +43,15 @@ body {
 			</div>
 		</div>
 	</div>
+	
+	<c:choose>
+		<c:when test="${mode=='DOBRODOSLI' }">
 	<h2>Dobrodosli ${username}   ! Uspesno ste se ulogovali.</h2>
+	
+		</c:when>
+	</c:choose>
+	
+
 	
 	
 

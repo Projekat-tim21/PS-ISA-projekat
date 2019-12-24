@@ -1,15 +1,23 @@
 package rs.ac.uns.ftn.informatika.jpa.service;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
 @Service
 public class EmailService {
@@ -92,21 +100,55 @@ public class EmailService {
 	}
 	
 	
+	
 	public void sendNotificaitionOdobrenTermin(Korisnik k ) throws MailException, InterruptedException {
 
+		
 		System.out.println("Slanje email potvrda zahteva za pregledom");
+	
+		String host="smtp.mailtrap.io";
+		Properties p=new Properties();
+		p.put("mail.smtp.auth", "true");
+		p.put("mail.smtp.starttls.enable", "true");
+		p.put("mail.smtp.host", host);
+		p.put("mail.smtp.port", 587);
+		
+		
+		Session session=Session.getDefaultInstance(p, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("94d2ddc5c603db", "3a0e729a44a2bf");
+			}
+		});
+		
+		try {
+			MimeMessage m=new MimeMessage(session);
+			m.setFrom(new InternetAddress(env.getProperty("spring.mail.username")));
+			m.addRecipient(Message.RecipientType.TO,new InternetAddress(k.getEmail()));
+			m.setSubject("Odobren zahtev za pregledom");
+			m.setContent("Pozdrav " + k.getIme() +",\n\nPotvrdite/odbijte svoj pregled klikom na sledeci link  " +"<a href='http://localhost:8081/odobreniZahteviKodPacijenta'>Klinki ovde</a>", "text/html");
+			Transport.send(m);
+			System.out.println("poslaliiii");
+			
+		}catch(MessagingException mex) {
+			mex.printStackTrace();
+		}
+		
+		System.out.println("Email poslat!");
+	}
+	
+	public void slanjePorukeAdminuOZahtevuZaPregledom(Korisnik k) throws MailException, InterruptedException {
+
+		System.out.println("Slanje adminu zahteva za pregledom");
 
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(k.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("Administrator KC");
-		mail.setText("Pozdrav " + k.getIme() + ",\n\nVas zahtev za pregledom je potvrdjen");
+		mail.setSubject("Klinicki centar");
+		mail.setText("Pozdrav " + ",\n\nNa mail Vam je prosledjen zahtev za pregledom od strane pacijenta");
 		javaMailSender.send(mail);
 
 		System.out.println("Email poslat!");
 	}
-	
-	
 	
 	
 	public void sendNotificaitionOdobrenaRegistracija(Korisnik k) throws MailException, InterruptedException {
@@ -167,4 +209,19 @@ public class EmailService {
 		
 	}
 
+	public void sendNotificaitionRazlogOdbijanjaTermina(Korisnik k, String s) {
+		// TODO Auto-generated method stub
+		System.out.println("Slanje email odbijanje termina" + k.getIme() + s);
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Odbijanje zahteva za pregled");
+		mail.setText("Pozdrav " + k.getIme() + "  " + "Vas zahtev za pregledom je odbijen zbog: "     + s);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+		
+	}
+	
 }

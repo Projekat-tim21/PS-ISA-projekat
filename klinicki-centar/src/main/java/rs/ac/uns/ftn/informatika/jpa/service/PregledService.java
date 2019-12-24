@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 
@@ -30,6 +31,7 @@ public class PregledService {
 		}
 		return allP;
 	}
+	
 	
 	
 	public void obrisi(Long id) {
@@ -57,30 +59,4 @@ public class PregledService {
 	}
 	
 }
-	/*public Pregled findByDate(String date) {
-		
-		return pregledRepo.findByDate(date);
-	}
-/*
-@Service
-@Transactional
-public class PregledService {
-
-		private final PregledRepository prepo;
-		
-		public PregledService(PregledRepository prepo) {
-			this.prepo=prepo;
-		}
-		
-		public List<Pregled> pokaziSvePreglede() {
-			// TODO Auto-generated method stub
-			List<Pregled> pregledi=new ArrayList<Pregled>();
-			for(Pregled pregled : prepo.findAll()) {
-				pregledi.add(pregled);
-			}
-			return pregledi;
-		}
 	
-
-}
-*/
