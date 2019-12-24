@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import flexjson.JSONSerializer;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.CalendarService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
@@ -91,6 +92,29 @@ public class CalendarController {
 		 
 		System.out.println(map);
 	     return map;*/
+	 }
+	 
+	 @RequestMapping(value = "/getCalendarSestra",method = RequestMethod.GET, produces="application/json; charset=utf-8")
+	 @ResponseBody
+	 public ResponseEntity<String> getCalendarSestra(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,HttpServletRequest request) {
+		 request.setAttribute("korisnik", korisnikService.findOne(id));
+		 request.setAttribute("mode", "MODE_LOGIN");	
+		 Korisnik korisnik=korisnikService.findOne(id);
+			//Korisnik k=new Korisnik();
+			Long Idx=korisnikd.getId();
+			System.out.println("Pokupljen id iz fronta "+korisnikd.getId());
+			Map<String, Object> map = new HashMap<String, Object>();
+		 List<Odsustvo> odsustvo = calendarService.getOdsustvoBySestraId(id);
+		 System.out.println("Size: "+ odsustvo.size());
+		 
+		 HttpHeaders headers = new HttpHeaders();
+		    headers.add("Content-Type", "application/json; charset=utf-8");
+		    if (odsustvo.size() > 0)
+		    {
+		        return new ResponseEntity<String>(new JSONSerializer().include("pocetak","kraj").exclude("*").serialize(odsustvo), headers, HttpStatus.OK);
+		    }
+		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
+		
 	 }
 }
 	 

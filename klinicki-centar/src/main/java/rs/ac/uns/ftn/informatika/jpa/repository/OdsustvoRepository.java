@@ -8,6 +8,6 @@ public interface OdsustvoRepository extends JpaRepository<Odsustvo,Long>{
 	
 	public Odsustvo findByPocetak(String pocetak);
 	public Odsustvo findByKraj(String kraj);
-	public Odsustvo findByIdkorisnika(String id);
+	public Odsustvo findByIdkorisnika(Long id);
 	
 }
