@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset='utf-8' />
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
 <link href='/static/fullcalendar.css' rel='stylesheet' />
 <link href='/static/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='/static/lib/moment.min.js'></script>
@@ -105,11 +107,10 @@
                          	      center: 'title',
                          	      right: 'year,month,agendaWeek,agendaDay,listWeek'
                          	    },
-                         	   firstMonth: 8, // september
+                         	   firstMonth: 1, // september
                    			//firstMonth: 0,
                    			//lastMonth: 6,
-                   			defaultDate: '2019-11-12',
-                   			defaultView: 'year',
+                   			
                    			selectable: true,
                    			selectHelper: true,
                          	       events: events.concat(termini)
@@ -154,6 +155,21 @@
 </style>
 </head>
 <body>
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+			<h2>LEKAR</h2>
+				<ul class="nav navbar-nav">
+					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
+					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
+					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
+					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
+			
+			</div>
+		</div>
+	</div>
 
 	<div id='calendar'></div>
 
