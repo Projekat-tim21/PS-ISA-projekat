@@ -168,5 +168,20 @@ public class MedSestraController {
 			return "redirect:/profilSestra?id={id}";
 
 		}
+	 
+	 @GetMapping("/radniKalendarSestre")
+	    public ModelAndView kalendar(@RequestParam Long id, HttpServletRequest request) {
+		 String id2 = request.getParameter("id");
+			System.out.println(id);
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id2);
+			request.setAttribute("korisnik", korisnikService.findOne(id));
+			Korisnik k=korisnikService.findOne(id);
+			System.out.println(k.getVisina());
+			request.setAttribute("mode", "MODE_ZKARTON");
+		 	ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("radniKalendarSestre");
+	        return modelAndView;
+	    }
 }
 
