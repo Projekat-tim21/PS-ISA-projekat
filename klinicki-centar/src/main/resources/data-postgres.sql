@@ -47,7 +47,7 @@ insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime,
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',3);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',3);
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika) values (15, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',3);
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika) values (16, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',3);
 
 insert into odsustvo(idkorisnika,pocetak,kraj,odobren) values(10,'2019-11-04','2019-12-05',true);
 
