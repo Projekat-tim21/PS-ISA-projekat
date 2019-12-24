@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.Response;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
+import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
@@ -116,6 +121,52 @@ public class MedSestraController {
 			odsustvoSerevice.saveOdsutvo(o);
 			return "redirect:/medSestraPocetna";
 		}
+	 
+	 @RequestMapping("/profilSestra")
+		public String editUserProfilPregled(@RequestParam Long id, HttpServletRequest request) {
+			request.setAttribute("korisnik", korisnikService.findOne(id));
+			request.setAttribute("mode", "MODE_PREGLED");
+			return "profilSestra";
+		}
+	 
+	 @RequestMapping("/izmenaPodatakaSestre/{id}")
+		public String editUserProfil2(@PathVariable(value="id") Long id, HttpServletRequest request) {
+			request.setAttribute("korisnik", korisnikService.findOne(id));
+			request.setAttribute("mode", "MODE_PREGLED");
+			return "izmenaPodatakaSestre";  //bio je login
+		}
 		
+	 @PostMapping("/sacuvajIzmeneProfila/{id}") // korisnik povezan sa valuom iz js
+		public String UpdateKorisnik2(@PathVariable(value="id") Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
+				HttpServletRequest request) {
+		
+			String id2 = request.getParameter("id");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id2);
+			
+			
+			Korisnik izBaze=korisnikService.findOne(id);
+			
+			Korisnik k = new Korisnik();
+			Long Idx = korisnikd.getId();
+			k.setId(korisnikd.getId());
+			k.setIme(korisnikd.getIme());
+			k.setPrezime(korisnikd.getPrezime());
+			k.setJedBrOsig(korisnikd.getJedBrOsig());
+			k.setEmail(korisnikd.getEmail());
+			k.setAdresa(korisnikd.getAdresa());
+			k.setDrzava(korisnikd.getDrzava());
+			k.setGrad(korisnikd.getGrad());
+			k.setTelefon(korisnikd.getTelefon());
+			k.setUsername(korisnikd.getUsername());
+			k.setPassword(korisnikd.getPassword());
+			k.setRoleName(Role.SESTRA.name());
+			
+			korisnikService.saveMogKorisnika(k);
+			//request.setAttribute("mode", "MODE");
+			return "redirect:/profilSestra?id={id}";
+
+		}
 }
 

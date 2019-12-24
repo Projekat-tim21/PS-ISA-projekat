@@ -18,6 +18,7 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Marsala Junaka 1055', 'Srbija', 'cobii5@gmail.com',  'Novi Sad', 'Cobii', '788843235426', 'addmin', 'Cobi', '0645537724', 'addmin',FALSE,'ADMIN',false);
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Anica Dobra 155', 'Srbija', 'anai5@gmail.com',  'Novi Sad', 'Ananfi', '8587568488586', 'aadmin', 'Ana', '0649998584', 'aadmin',FALSE,'ADMIN',true);
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Sestra 155', 'Srbija', 'sestra@gmail.com',  'Novi Sad', 'Sestra', '777458488586', 'sestra', 'Sestra', '0649998587', 'sestra',FALSE,'SESTRA',true);
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Sestra 1555', 'Srbija', 'sestra1@gmail.com',  'Novi Sad', 'Sestra1', '7771458488586', 'sestra1', 'Sestra1', '06491998587', 'sestra1',FALSE,'SESTRA',true);
 
 
 INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);

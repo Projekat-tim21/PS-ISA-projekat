@@ -29,8 +29,9 @@ body {
 			<div class="navbar-collapse collapse">
 			<h2>MEDICINSKA SESTRA</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="sviSestraPacijenti">Svi Pacijenti</a></li>
+					<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
 					<li><a href="/zahtevZaOdsustvo?id=${id}">Odsustvo/Odmor</a></li>
+					<li><a href="/profilSestra?id=${id}">Profil</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
