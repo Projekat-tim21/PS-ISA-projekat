@@ -21,6 +21,8 @@
 			<h2>MEDICINSKA SESTRA</h2>
 				<ul class="nav navbar-nav">
 				<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
+					<li><a href="/zahtevZaOdsustvo?id=${id}">Odsustvo/Odmor</a></li>
+					<li><a href="/profilSestra?id=${id}">Profil</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
@@ -33,7 +35,7 @@
 			<div class="container text-center">
 				<h3>Zdravstveni karton</h3>
 				<hr>
-				<form class="form-horizontal" name="forma" method="POST" modelAttribute="korisnik">
+				<form class="form-horizontal" name="forma" modelAttribute="korisnik">
 					<div>
 						<h4>Licni podaci</h4>
 						<hr>
@@ -104,25 +106,24 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Alergije na lek</label>
 						<div class="col-md-6">
-							<textarea rows="4" cols="80" class="form-control" id="alergije" name="alergije" ></textarea>
+							<textarea rows="4" cols="80" class="form-control" id="alergije" name="alergije" readonly></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Istorija bolesti</label>
 						<div class="col-md-6">
-							<textarea rows="4" cols="80" class="form-control" id="bolesti" name="bolesti"></textarea>
+							<textarea rows="4" cols="80" class="form-control" id="bolesti" name="bolesti" readonly></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Porodicna anamneza</label>
 						<div class="col-md-6">
-							<textarea rows="4" cols="80" class="form-control" id="anamneza" name="anamneza" ></textarea>
+							<textarea rows="4" cols="80" class="form-control" id="anamneza" name="anamneza" readonly></textarea>
 						</div>
 					</div>
 				
-					<div class="form-group ">
-						<button type="submit" formaction="/idiNaLoginBezDobrodosli">Pocetna</button>
-					</div>
+			
+			
 				</form>
 			</div>
 		</c:when>

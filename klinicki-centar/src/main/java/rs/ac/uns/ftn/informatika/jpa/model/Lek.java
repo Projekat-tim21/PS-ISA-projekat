@@ -22,7 +22,7 @@ public class Lek {
 	@Column(name="naziv",unique=true,nullable=false)
 	String naziv;
 	
-	@Column(name="dodatno",unique=true,nullable=true)
+	@Column(name="dodatno")
 	String dodatno;
 
 	public Lek() {
