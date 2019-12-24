@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.informatika.jpa.dto;
 
-import java.util.Date;
-
 public class PregledJDTO {
 	
 	private String id;
@@ -13,7 +11,16 @@ public class PregledJDTO {
 	private String trajanje;
 	private String tip;
 	private Boolean zakazan;
+	private boolean obavljenpregled;
 	
+	public boolean isObavljenpregled() {
+		return obavljenpregled;
+	}
+
+	public void setObavljenpregled(boolean obavljenpregled) {
+		this.obavljenpregled = obavljenpregled;
+	}
+
 	public PregledJDTO(String id, String datum, String vreme, String sala, String lekar, String cena, String trajanje, String tip, Boolean zakazan) {
 		super();
 		this.id = id;

@@ -18,32 +18,113 @@ public class Pregled {
 	
 	
 	@Column(name="datum", nullable=false)
-	String datum;
+	private String datum;   //ovo se ne koristi vise
 
 	@Column(name = "vreme", nullable = false)
-	String vreme;
+	private String vreme;   //ovo se ne koristi vise
+	
+	@Column(name="terminpregled", nullable=true)
+	private String terminpregled;
 	
 	@Column(name="tip", nullable=false)
-	String tip;
+	private String tip;
+	
+	@Column(name="lekarimepregled", nullable=true)
+	private String lekarimepregled;
+	
+	@Column(name="lekarprezimepregled", nullable=true)
+	private String lekarprezimepregled;
+	
+	@Column(name="idlekarpregled", nullable=false)
+	private String idlekarpregled;
+	
+	@Column(name="idpacijenta", nullable=true)
+	private Long idpacijenta;
 	
 	@Column(name = "lekar", nullable = false)
-	String lekar;
+	private String lekar;  //ovo se ne koristi vise
 	
 	@Column(name = "cena", nullable = false)
-    int cena;
+	private int cena;
 	
+	@Column(name="ocenapregleda", nullable=true)
+	private double ocenapregleda;
 
 	@Column(name="trajanje", nullable=false)
-	String trajanje;
+	private String trajanje;
 
 		
 	@Column(name="sala", nullable=false)
-	String sala;
+	private String sala;
 	
 	
 	@Column(name = "zakazan", nullable = false)
-	Boolean zakazan;
+	private Boolean zakazan;
 	
+	@Column(name="obavljenpregled", nullable=true)
+	private boolean obavljenpregled;
+	
+	
+	public double getOcenapregleda() {
+		return ocenapregleda;
+	}
+
+	public void setOcenapregleda(double ocenapregleda) {
+		this.ocenapregleda = ocenapregleda;
+	}
+
+	public Long getIdpacijenta() {
+		return idpacijenta;
+	}
+
+	public void setIdpacijenta(Long idpacijenta) {
+		this.idpacijenta = idpacijenta;
+	}
+
+	public String getTerminpregled() {
+		return terminpregled;
+	}
+
+	public void setTerminpregled(String terminpregled) {
+		this.terminpregled = terminpregled;
+	}
+
+	public String getLekarimepregled() {
+		return lekarimepregled;
+	}
+
+	public void setLekarimepregled(String lekarimepregled) {
+		this.lekarimepregled = lekarimepregled;
+	}
+
+	public String getLekarprezimepregled() {
+		return lekarprezimepregled;
+	}
+
+	public void setLekarprezimepregled(String lekarprezimepregled) {
+		this.lekarprezimepregled = lekarprezimepregled;
+	}
+
+	public String getIdlekarpregled() {
+		return idlekarpregled;
+	}
+
+	public void setIdlekarpregled(String idlekarpregled) {
+		this.idlekarpregled = idlekarpregled;
+	}
+
+	public boolean isObavljenpregled() {
+		return obavljenpregled;
+	}
+
+	public void setObavljenpregled(boolean obavljenpregled) {
+		this.obavljenpregled = obavljenpregled;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Boolean getZakazan() {
 		return zakazan;
 	}
@@ -51,6 +132,8 @@ public class Pregled {
 	public void setZakazan(Boolean zakazan) {
 		this.zakazan = zakazan;
 	}
+	
+	
 	
 /*	public Korisnik getZakazao() {
 		return zakazao;

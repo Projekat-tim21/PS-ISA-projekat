@@ -16,25 +16,114 @@ public class Operacija {
 	private Long id;
 	
 	@Column(name="datum", nullable=false)
-	String datum;
+	String datum; //ovo se ne koristi vise
 	
 	@Column(name="vreme", nullable=false)
-	String vreme;
+	String vreme; //ovo se ne koristi vise
+	
+	@Column(name="terminoperacija", nullable=true)
+	private String terminoperacija;
+	
+	@Column(name="lekarimeoperacija", nullable=true)
+	private String lekarimeoperacija;
+	
+	@Column(name="lekarprezimeoperacija", nullable=true)
+	private String lekarprezimeoperacija;
+	
+	@Column(name="idlekaroperacija", nullable=false)
+	private Long idlekaroperacija;
+	
+	@Column(name="idpacijenta", nullable=true)
+	private Long idpacijenta;
 	
 	@Column(name="tip", nullable=false)
-	String tip;
+	private String tip;
+	
+	@Column(name="ocenaoperacije", nullable=true)
+	private double ocenaoperacije;
+
+	@Column(name="obavljenaoperacija", nullable=true)
+	private boolean obavljenaoperacija;
+	
+	@Column(name = "zakazan", nullable = false)
+	private Boolean zakazan;
 	
 	@Column(name="trajanje", nullable=false)
-	String trajanje;
+	private String trajanje;
 	
 	@Column(name="sala", nullable=false)
-	String sala;
+	private String sala;
 	
 	@Column(name="lekar", nullable=false)
-	String lekar;
+	String lekar;  //ovo se ne koristi
 	
 	@Column(name="cena", nullable=false)
 	int cena;
+
+	
+	public String getTerminoperacija() {
+		return terminoperacija;
+	}
+
+	public void setTerminoperacija(String terminoperacija) {
+		this.terminoperacija = terminoperacija;
+	}
+
+	public String getLekarimeoperacija() {
+		return lekarimeoperacija;
+	}
+
+	public void setLekarimeoperacija(String lekarimeoperacija) {
+		this.lekarimeoperacija = lekarimeoperacija;
+	}
+
+	public String getLekarprezimeoperacija() {
+		return lekarprezimeoperacija;
+	}
+
+	public void setLekarprezimeoperacija(String lekarprezimeoperacija) {
+		this.lekarprezimeoperacija = lekarprezimeoperacija;
+	}
+
+	public Long getIdlekaroperacija() {
+		return idlekaroperacija;
+	}
+
+	public void setIdlekaroperacija(Long idlekaroperacija) {
+		this.idlekaroperacija = idlekaroperacija;
+	}
+
+	public Long getIdpacijenta() {
+		return idpacijenta;
+	}
+
+	public void setIdpacijenta(Long idpacijenta) {
+		this.idpacijenta = idpacijenta;
+	}
+
+	public double getOcenaoperacije() {
+		return ocenaoperacije;
+	}
+
+	public void setOcenaoperacije(double ocenaoperacije) {
+		this.ocenaoperacije = ocenaoperacije;
+	}
+
+	public boolean isObavljenaoperacija() {
+		return obavljenaoperacija;
+	}
+
+	public void setObavljenaoperacija(boolean obavljenaoperacija) {
+		this.obavljenaoperacija = obavljenaoperacija;
+	}
+
+	public Boolean getZakazan() {
+		return zakazan;
+	}
+
+	public void setZakazan(Boolean zakazan) {
+		this.zakazan = zakazan;
+	}
 
 	public Operacija(Long id, String datum, String vreme, String tip, String trajanje, String sala, String lekar,
 			int cena) {

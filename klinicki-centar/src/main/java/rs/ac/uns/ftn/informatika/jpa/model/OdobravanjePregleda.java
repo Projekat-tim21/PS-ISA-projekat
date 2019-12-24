@@ -30,6 +30,9 @@ public class OdobravanjePregleda {
 	@Column(name="imepacijenta")
 	private String imepacijenta;
 	
+	@Column(name="idpacijenta")
+	private Long idpacijenta;
+	
 	@Column(name="prezimepacijenta")
 	private String prezimepacijenta;
 	
@@ -51,8 +54,68 @@ public class OdobravanjePregleda {
 	@Column(name="lekaridop")
 	private Long lekaridop;
 	
+	@Column(name="odobrenpregledop")
+	private boolean odobrenpregledop;
 	
 	
+	public OdobravanjePregleda(Long id, String terminzahtev, String imelekara, String prezimelekara,
+			String tipspecijalizacije, String imepacijenta, Long idpacijenta, String prezimepacijenta,
+			String jedbrosigpac, String salaop, double cenaop, double popustop, Long idtermina, Long lekaridop,
+			boolean odobrenpregledop) {
+		super();
+		this.id = id;
+		this.terminzahtev = terminzahtev;
+		this.imelekara = imelekara;
+		this.prezimelekara = prezimelekara;
+		this.tipspecijalizacije = tipspecijalizacije;
+		this.imepacijenta = imepacijenta;
+		this.idpacijenta = idpacijenta;
+		this.prezimepacijenta = prezimepacijenta;
+		this.jedbrosigpac = jedbrosigpac;
+		this.salaop = salaop;
+		this.cenaop = cenaop;
+		this.popustop = popustop;
+		this.idtermina = idtermina;
+		this.lekaridop = lekaridop;
+		this.odobrenpregledop = odobrenpregledop;
+	}
+
+	public boolean isOdobrenpregledop() {
+		return odobrenpregledop;
+	}
+
+	public void setOdobrenpregledop(boolean odobrenpregledop) {
+		this.odobrenpregledop = odobrenpregledop;
+	}
+
+	public OdobravanjePregleda(Long id, String terminzahtev, String imelekara, String prezimelekara,
+			String tipspecijalizacije, String imepacijenta, Long idpacijenta, String prezimepacijenta,
+			String jedbrosigpac, String salaop, double cenaop, double popustop, Long idtermina, Long lekaridop) {
+		super();
+		this.id = id;
+		this.terminzahtev = terminzahtev;
+		this.imelekara = imelekara;
+		this.prezimelekara = prezimelekara;
+		this.tipspecijalizacije = tipspecijalizacije;
+		this.imepacijenta = imepacijenta;
+		this.idpacijenta = idpacijenta;
+		this.prezimepacijenta = prezimepacijenta;
+		this.jedbrosigpac = jedbrosigpac;
+		this.salaop = salaop;
+		this.cenaop = cenaop;
+		this.popustop = popustop;
+		this.idtermina = idtermina;
+		this.lekaridop = lekaridop;
+	}
+
+	public Long getIdpacijenta() {
+		return idpacijenta;
+	}
+
+	public void setIdpacijenta(Long idpacijenta) {
+		this.idpacijenta = idpacijenta;
+	}
+
 	public long getLekaridop() {
 		return lekaridop;
 	}
