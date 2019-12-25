@@ -23,7 +23,14 @@ body {
 </head>
 <body>
   
-  	<div role="navigation">
+  	
+  
+  
+	<c:choose>
+	
+		<c:when test="${mode=='ALL_KLINIKE' }">  
+		
+		   <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -34,19 +41,8 @@ body {
 			</div>
 		</div>
 	</div>
-  
-  
-<!-- ne brisatiiiiiiiiiiiiiiiiiiiiii
-<th><a href="javascript:SortTable(0,'T');">Author</a></th>
-<th><a href="javascript:SortTable(1,'T');">Title</a></th>
-<th><a href="javascript:SortTable(2,'N');">Rating</a></th>
-<th><a href="javascript:SortTable(3,'D','mdy');">Review Date</a></th>
-</tr>
-</thead>
- -->
-
-	<c:choose>
-		<c:when test="${mode=='ALL_KLINIKE' }">     
+		   
+		   
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista klinika</h3>
 				<hr>
@@ -120,6 +116,18 @@ body {
 		
 		<c:when test="${mode=='ALL_LEKARI_2' }">
 		
+	<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a onclick="addIdPac10(this)" href="/korakUnazadNaListuKlinika">Vrati se nazad</a></li>	
+					<li><a onclick="addIdPac(this)" href="/logout">Odjavi se</a></li> 
+				</ul>
+
+			</div>
+		</div>
+	</div>
+	
 	
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista lekara</h3>
@@ -183,6 +191,18 @@ body {
 		
 		<c:when test="${mode=='ALL_TERMINI_2' }">
 
+
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a  href="/korakUnazadNaListuKlinika?id=${idpac}">Vrati se nazad</a></li>	
+					<li><a onclick="addIdPac(this)" href="/logout">Odjavi se</a></li> 
+				</ul>
+
+			</div>
+		</div>
+	</div>
 
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista pregleda</h3>
@@ -262,6 +282,11 @@ function addIdPac (element){
 
 function addIdPac3 (element){
 	element.href = element.href+"&idpac="+idPacijenta2;
+	console.log(element.href);
+}
+
+function addIdPac10 (element){
+	element.href = element.href+"?id="+idPacijenta2;
 	console.log(element.href);
 }
 

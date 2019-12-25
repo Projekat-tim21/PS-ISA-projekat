@@ -192,8 +192,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/oceniLekaraOperacija").permitAll()
 	    .antMatchers("/lekariUKlinici").permitAll()
 	    .antMatchers("/terminiUKlinici").permitAll()
-	    
+	    .antMatchers("/korakUnazadNaListuKlinika").permitAll()
 	    .antMatchers("/pregled").permitAll()
+	    .antMatchers("/korakUnazadNaLisuLekara").permitAll()
 
 		.anyRequest()
 		.authenticated();

@@ -56,6 +56,57 @@ public class KlinikaController {
 		return "loginBezDobrodosli";
 	}
 	
+	@RequestMapping("/korakUnazadNaListuKlinika")
+	public String korakUnazadNaListuKlinika(HttpServletRequest request) {
+		request.setAttribute("klinike", klinikaServis.pokaziSveKlinike());
+		request.setAttribute("mode", "ALL_KLINIKE");
+		return "listaKlinika";
+	}
+	
+	@RequestMapping("/korakUnazadNaLisuLekara")
+	public String korakUnazadNaLisuLekara(@RequestParam("idklinike") long idklinike,@RequestParam("id") long idpac,HttpServletRequest request) {
+	
+		long idKlinike=idklinike;
+		System.out.println("id pac  "+idpac+"  idKlinike   "+idklinike);
+		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
+		Klinika k=new Klinika();
+		HttpSession session = request.getSession();
+		session.setAttribute("idpac", idpac);
+		session.setAttribute("idklinike", idklinike);
+		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
+		List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
+		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		for(ZaposleniUKlinikama zaposlen : zRepo.findByIdklinike(idKlinike)) {
+			zaposleni.add(zaposlen);
+			long idlekara=zaposlen.getIdlekara();
+			for(LekarZaPrikazIPreglede lip :  lipServis.pokaziSveKorisnikeKojiSuLekari()) {
+				if(zaposlen.getIdlekara()==lip.getId()) {
+					lipi.add(lip);
+				}
+				
+					
+			}
+		}
+		
+		
+		for(LekarZaPrikazIPreglede lip2 :  lipi) {
+			for (TerminiSaId termin : tisServis.nadjiSlobodneTermineZaOveLekare()) {
+				if(lip2.getId()==termin.getLekarId()) {
+					termini.add(termin);
+				}
+				
+			}
+				
+		}
+		
+		request.setAttribute("zaposleni", zaposleni);
+		request.setAttribute("lipi", lipi);
+		request.setAttribute("termini", termini);
+		request.setAttribute("mode", "ALL_TERMINI_2");
+		return "listaKlinika";
+	}
+	
+	
 	@RequestMapping("/lekariUKlinici")
 	public String pokaziSveLekare(@RequestParam("idklinike") long idklinike,@RequestParam("idpac") long idpac,HttpServletRequest request) {
 	
@@ -96,8 +147,8 @@ public class KlinikaController {
 		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
 		Klinika k=new Klinika();
 		HttpSession session = request.getSession();
-		session.setAttribute("id", idpac);
-	
+		session.setAttribute("idpac", idpac);
+		session.setAttribute("idklinike", idklinike);
 		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
 		List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
 		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
