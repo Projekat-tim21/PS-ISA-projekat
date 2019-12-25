@@ -10,7 +10,7 @@ public class KlinikaDTO {
 	private String drzava;
 	private int ocena;
 	private String adresa;
-	private int cena;
+	private String tip;
 	private KorisnikDTO admin;
 	
 
@@ -21,7 +21,7 @@ public class KlinikaDTO {
 		grad=klinika.getGrad();
 		drzava=klinika.getDrzava();
 		ocena=klinika.getOcena();
-		cena=klinika.getCena();
+		tip=klinika.getTip();
 	}
 
 
@@ -85,13 +85,13 @@ public class KlinikaDTO {
 	}
 
 
-	public int getCena() {
-		return cena;
+	public String getTip() {
+		return tip;
 	}
 
 
-	public void setCena(int cena) {
-		this.cena = cena;
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
 

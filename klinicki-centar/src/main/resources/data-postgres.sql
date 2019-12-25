@@ -1,11 +1,12 @@
 
 
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 1000, 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 1500, 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Aria', 6 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Zimer', 9 );
-insert into klinika(adresa, cena, drzava, grad,naziv,ocena) values ( 'Atinska 9', 1300, 'Srbija', 'Kragujevac', 'Cestion', 7 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Bate Brkica 5', 'dermatologija', 'Srbija', 'Novi Sad', 'KlinikaABC', 7 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Miloša Crnjanskog 2', 'dermatologija', 'Srbija', 'Sremska Mitrovica', 'Zdravlje', 8 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Mare Ilic 9', 'dermatologija', 'Srbija', 'Kragujevac', 'Klinika Mara', 6 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Atinska 9', 'ocno', 'Srbija', 'Nis', 'Aria', 6 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Atinska 9', 'ocno', 'Srbija', 'Novi Sad', 'Zimer', 9 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Kostova 9', 'url', 'Srbija', 'Novi Sad', 'Cestion', 7 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Njegoseva 9', 'url', 'Srbija', 'Kragujevac', 'Cestion', 10 );
 
 
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,klinika_id,login ) values ('Branka Radicevica 5', 'Srbija', 'miki@gmail.com',  'Novi Sad', 'Miki', '586623556', 'miki', 'Miki', '067528856', 'miki','TRUE','ADMIN_KLINIKE',1,true);
@@ -48,7 +49,15 @@ insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime,
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',3,'false', 'true');
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',3, 'false', 'true');
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',3, 'false', 'true');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (4, '2019-12-05T06:50', '2B', 1500, 20, 'Kata', 'Katic', 'ocno', 'false',3, 'false', 'true');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (5, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',3, 'false', 'true');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (6, '2019-12-05T06:50', '2B', 1500, 20, 'Pedja', 'Matic', 'dermatologija', 'false',3, 'false', 'true');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (4, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'false',3, 'false', 'true');
 
+
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled, terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00', TRUE, 'true', '2019-12-04T09:42', 'Sara', 'Saric',3,11,0);
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled,terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '10:00', TRUE, 'true','2019-11-04T05:42', 'Mara', 'Maric',2,11,0);
+insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled,terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '08:00', TRUE, 'true','2019-10-04T15:42', 'Zoran', 'Zoric',1,12,0);
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled, terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00', TRUE, 'true', '2019-12-04T09:42', 'Sara', 'Saric',3,11,0);
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled,terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (700, '01.02.2020', 'Jovan Jovic', '204', 'ocno', '30min', '10:00', TRUE, 'true','2019-11-04T05:42', 'Mara', 'Maric',2,11,0);
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled,terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '08:00', TRUE, 'true','2019-10-04T15:42', 'Zoran', 'Zoric',1,12,0);
@@ -75,5 +84,17 @@ insert into dijagnoza (sifra,naziv,dodatno) values ('DWRHGNC','Anemija', 'Anemij
 insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Zoran', 'Zoric', 'ocno', 'LEKAR',8 );
 insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Mara', 'Maric', 'url', 'LEKAR',9 );
 insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Sara', 'Saric', 'dermatologija', 'LEKAR',6 );
+insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Kata', 'Katic', 'ocno', 'LEKAR',5 );
+insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Mira', 'Mitrovic', 'url', 'LEKAR',10 );
+insert into lekarIPregledi (imelek, prezimelek, tipspecijalizacije, uloga, ocena) values ('Pedja', 'Matic', 'dermatologija', 'LEKAR',8 );
 
-
+insert into zaposleni(idklinike, idlekara) values (1,3);
+insert into zaposleni(idklinike, idlekara) values (1,6);
+insert into zaposleni(idklinike, idlekara) values (2,3);
+insert into zaposleni(idklinike, idlekara) values (2,6);
+insert into zaposleni(idklinike, idlekara) values (3,3);
+insert into zaposleni(idklinike, idlekara) values (4,1);
+insert into zaposleni(idklinike, idlekara) values (4,4);
+insert into zaposleni(idklinike, idlekara) values (5,4);
+insert into zaposleni(idklinike, idlekara) values (6,2);
+insert into zaposleni(idklinike, idlekara) values (7,5);
