@@ -30,11 +30,14 @@ public class LekarZaPrikazIPreglede {
 	@Column(name="uloga")
 	private String uloga;
 	
+
+	
 	@Column(name="ocena", nullable=true)
 	private double ocena;
 
 	
-	
+
+
 	public Long getId() {
 		return id;
 	}
