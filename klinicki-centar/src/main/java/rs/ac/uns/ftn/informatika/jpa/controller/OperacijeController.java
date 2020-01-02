@@ -14,17 +14,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
+import rs.ac.uns.ftn.informatika.jpa.model.OcenaKlinike;
 import rs.ac.uns.ftn.informatika.jpa.model.OcenaLekara;
 import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
+import rs.ac.uns.ftn.informatika.jpa.model.ZaposleniUKlinikama;
+import rs.ac.uns.ftn.informatika.jpa.repository.KlinikaRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.LekarZaPrikazIPregledeRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.OperacijeRepository;
+import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
+import rs.ac.uns.ftn.informatika.jpa.service.OcenaKlinikeService;
 import rs.ac.uns.ftn.informatika.jpa.service.OcenaLekaraServis;
 import rs.ac.uns.ftn.informatika.jpa.service.OperacijeService;
+import rs.ac.uns.ftn.informatika.jpa.service.ZaposleniUKlinikamaService;
 
 @Controller
 public class OperacijeController {
@@ -36,6 +43,15 @@ public class OperacijeController {
 	private LekarZaPrikazIPregledeRepository lipRepo;
 	
 	@Autowired
+	private KlinikaRepository klinRepo;
+	
+	@Autowired
+	private ZaposleniUKlinikamaService zipService;
+	
+	@Autowired
+	private OcenaKlinikeService okServis;
+	
+	@Autowired
 	private KorisnikService korisnikServis;
 	
 	@Autowired
@@ -44,6 +60,9 @@ public class OperacijeController {
 	@Autowired
 	private OperacijeService oServis;
 
+	@Autowired
+	private KlinikaService klinServis;
+	
 	@Autowired
 	private OperacijeRepository oRepo;;
 	
@@ -78,9 +97,72 @@ public class OperacijeController {
 		return "listaPregledaIOperacija";
 	}
 	
+	@RequestMapping("/oceniKlinikuOperacija")
+	public String oceniKlinikuIzListeOperacija(@RequestParam("idoperacije") int idoperacije,@RequestParam("idpacijenta") int idpac,@RequestParam("idlekar") int idlekar,HttpServletRequest request) {
+	
+		long idpacijenta=idpac;
+		long idLekara=idlekar;
+		long idOperacije=idoperacije;
+		ZaposleniUKlinikama zuk=zipService.findOne(idLekara);
+		long idKlinikeKojuOcenjujem=zuk.getIdklinike(); //ovo mi treba
+		LekarZaPrikazIPreglede lip=lipServis.findOne(idLekara);
+		Korisnik k=korisnikServis.findOne(idpacijenta);
+		Operacija o=oServis.findOneById(idOperacije);
+		request.setAttribute("operacija", o);
+		request.setAttribute("korisnik", k);
+		request.setAttribute("lip", lip);
+		//request.setAttribute("klinika", zuk);
+		Klinika klin=klinServis.findOne(idKlinikeKojuOcenjujem);
+		request.setAttribute("klinika",klin);
+		request.setAttribute("mode", "OCENA_KLINIKE_SEKCIJA_OPERACIJA");
+		return "listaPregledaIOperacija";
+	}
+	
+	
+	@PostMapping("/ocenaKlinikeOperacija/{operacijaId}/{lekarid}/{korisnikid}")
+	public String ocenaKlinikeOperacije(@ModelAttribute Operacija operacija,@PathVariable Long operacijaId,@PathVariable Long lekarid,@PathVariable Long korisnikid, HttpServletRequest request) {
+System.out.println("heeeeeeeeeeeej");
+		ZaposleniUKlinikama zuk=zipService.findOne(lekarid);
+		long idKorisnika=korisnikid;
+		long idKlinikeKojuOcenjujem=zuk.getIdklinike(); //ovo mi treba
+		OcenaKlinike ol=new OcenaKlinike();
+		ol.setKorisnikid(idKorisnika);
+		ol.setLekarid(lekarid);
+		ol.setPregledid(operacijaId);
+		ol.setKlinikaid(idKlinikeKojuOcenjujem); 
+		okServis.saveOcenaKlinike(ol);
+		
+		double suma=0;
+		double prosek=0;
+		
+		for(Klinika klin : klinRepo.findAll()) {
+			if(klin.getId()==idKlinikeKojuOcenjujem) {
+				suma=klin.getOcena()+operacija.getOcenaoperacije();
+				prosek=suma/2;
+			}
+			klin.setOcena(prosek);  
+			klinServis.saveOcenaKlinike(prosek, idKlinikeKojuOcenjujem); 
+		}
+		System.out.println("prosek klinike"+prosek);
+		
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("id", idKorisnika);
+		session.setAttribute("idlek", lekarid);
+		//session.setAttribute("idoperacije", operacijaId);
+		//session.setAttribute("idklinike", idKlinikeKojuOcenjujem);
+		
+		
+		return "redirect:/idiNaLoginPoslePotvrde";
+
+	}
+	
+	
+	
+	
 	
 	@PostMapping("/ocenaLekaraOperacije/{operacijaId}/{lekarid}/{korisnikid}")
-	public String mejlOdbijanja(@ModelAttribute Operacija operacija,@PathVariable Long korisnikid,@PathVariable Long operacijaId,@PathVariable Long lekarid, HttpServletRequest request) {
+	public String ocenalekaraOperacije(@ModelAttribute Operacija operacija,@PathVariable Long korisnikid,@PathVariable Long operacijaId,@PathVariable Long lekarid, HttpServletRequest request) {
 
 		OcenaLekara ol=new OcenaLekara();
 		ol.setKorisnikid(korisnikid);

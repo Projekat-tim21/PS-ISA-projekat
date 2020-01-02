@@ -28,6 +28,47 @@ body {
 	border: 1px solid #ddd;
 	margin-bottom: 12px;
 }
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
 </style>
 </head>
 <body>
@@ -75,6 +116,7 @@ body {
 								<th>Id pacijenta</th>
 								<th><a href="javascript:SortTable(7,'N');">Cena</a></th>
 								<th>Oceni lekara</th>
+								<th>Oceni kliniku</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -93,6 +135,9 @@ body {
 									<td><a
 										href="/oceniLekaraPregled?idlekar=${pregled.idlekarpregled}&idpacijenta=${pregled.idpacijenta}&idpregleda=${pregled.id}">Oceni
 											lekara</a></td>
+									<td><a
+										href="/oceniKlinikuPregled?idlekar=${pregled.idlekarpregled}&idpacijenta=${pregled.idpacijenta}&idpregleda=${pregled.id}">Oceni
+											kliniku</a></td>
 
 								</tr>
 
@@ -204,6 +249,7 @@ body {
 								<th>Id pacijenta</th>
 								<th><a href="javascript:SortTable(7,'N');">Cena</a></th>
 								<th>Oceni lekara</th>
+								<th>Oceni kliniku</th>
 							
 							</tr>
 						</thead>
@@ -223,7 +269,9 @@ body {
 									<td><a
 										href="/oceniLekaraOperacija?idlekar=${operacija.idlekaroperacija}&idpacijenta=${operacija.idpacijenta}&idoperacije=${operacija.id}">Oceni
 											lekara</a></td>
-
+									<td><a
+										href="/oceniKlinikuOperacija?idlekar=${operacija.idlekaroperacija}&idpacijenta=${operacija.idpacijenta}&idoperacije=${operacija.id}">Oceni
+											kliniku</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -313,10 +361,161 @@ body {
 		</c:when>
 		
 		
+		<c:when test="${mode=='OCENA_KLINIKE_SEKCIJA_OPERACIJA' }">
+			<section class="h-100">
+				<div class="container h-100">
+					<div class="row justify-content-md-center">
+						<div class="card">
+							<div class="card-header">
+
+								<div class="container text-center">
+									<h3>Ocenite kliniku na osnovu obavljenog pregleda</h3>
+									<hr>
+
+									<form class="form-horizontal" name="forma" method="POST"
+										action="/ocenaKlinikeOperacija/${operacija.id}/${lip.getId()}/${korisnik.id}">
+										
+										<div class="form-group">
+											<label class="control-label col-md-3">Ime Klinike</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="imeklin"
+													name="imeklin" value="${klinika.naziv }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-md-3">Ime lekara</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="imelek"
+													name="imelek" value="${lip.imelek }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-md-3">Prezime
+												lekara</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="prezimelek"
+													name="prezimelek" value="${lip.prezimelek }" readonly>
+												<span id="free"></span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-3">Ocena</label>
+											<div  class="col-md-6 ">
+												<input type="number" class="form-control tooltiptext" id="ocenaoperacije" name="ocenaoperacije"
+													value="${operacija.ocenaoperacije}" required>
+											</div>
+										</div>
+									<div class="form-group">
+											<div class="col-md-6">
+												<input type="hidden" class="form-control" id="idk"
+													name="idk" value="${korisnik.id }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<input type="hidden" class="form-control" id="idp"
+													name="idp" value="${operacija.id }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+
+										<div class="form-group ">
+											<input type="submit" onclick="alertzaocenu()" class="btn btn-primary" value="Oceni">
+										</div>
+									</form>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</c:when>
 		
 		
 		
-		
+		<c:when test="${mode=='OCENA_KLINIKE_SEKCIJA_PREGLED' }">
+			<section class="h-100">
+				<div class="container h-100">
+					<div class="row justify-content-md-center">
+						<div class="card">
+							<div class="card-header">
+
+								<div class="container text-center">
+									<h3>Ocenite kliniku na osnovu obavljenog pregleda</h3>
+									<hr>
+
+									<form class="form-horizontal" name="forma" method="POST"
+										action="/ocenaKlinikePregled/${pregled.id}/${lip.getId()}/${korisnik.id}">
+										
+										<div class="form-group">
+											<label class="control-label col-md-3">Ime Klinike</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="imeklin"
+													name="imeklin" value="${klinika.naziv }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-md-3">Ime lekara</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="imelek"
+													name="imelek" value="${lip.imelek }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-md-3">Prezime
+												lekara</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="prezimelek"
+													name="prezimelek" value="${lip.prezimelek }" readonly>
+												<span id="free"></span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-3">Ocena</label>
+											<div  class="col-md-6 ">
+												<input type="number" class="form-control tooltiptext" id="ocenaoperacije" name="ocenaoperacije"
+													value="${pregled.ocenapregleda}" required>
+											</div>
+										</div>
+									<div class="form-group">
+											<div class="col-md-6">
+												<input type="hidden" class="form-control" id="idk"
+													name="idk" value="${korisnik.id }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<input type="hidden" class="form-control" id="idp"
+													name="idp" value="${pregled.id }" readonly> <span
+													id="free"></span>
+											</div>
+										</div>
+
+										<div class="form-group ">
+											<input type="submit" onclick="alertzaocenu()" class="btn btn-primary" value="Oceni">
+										</div>
+									</form>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</c:when>
 		
 		
 	</c:choose>

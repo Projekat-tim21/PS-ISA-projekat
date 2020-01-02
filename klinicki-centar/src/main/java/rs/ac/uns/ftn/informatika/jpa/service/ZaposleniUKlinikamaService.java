@@ -27,6 +27,14 @@ public class ZaposleniUKlinikamaService {
 		}
 
 
+		public ZaposleniUKlinikama findOne(long idlekara) {
+			return zRepo.findById(idlekara).orElseGet(null);
+		}
+		
+
+		
+
+
 /*
 		public List<ZaposleniUKlinikama> pokaziSveZaposleneLekareUTojKlinici(long idKlinike) {
 			List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
