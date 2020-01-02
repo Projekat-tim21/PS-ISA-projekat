@@ -33,7 +33,7 @@ public class Klinika {
 		private String drzava;
 
 		@Column(name = "ocena", nullable = true)
-		private int ocena;
+		private double ocena;
 	
 		@Column(name = "adresa", nullable = false)
 		private String adresa;
@@ -51,7 +51,7 @@ public class Klinika {
 		}
 
 		
-		public Klinika(Long id, String naziv, String grad, String drzava, int ocena, String adresa,
+		public Klinika(Long id, String naziv, String grad, String drzava, double ocena, String adresa,
 				String tip) {
 			super();
 			this.id = id;
@@ -95,11 +95,11 @@ public class Klinika {
 			this.drzava = drzava;
 		}
 
-		public int getOcena() {
+		public double getOcena() {
 			return ocena;
 		}
 
-		public void setOcena(int ocena) {
+		public void setOcena(double ocena) {
 			this.ocena = ocena;
 		}
 
