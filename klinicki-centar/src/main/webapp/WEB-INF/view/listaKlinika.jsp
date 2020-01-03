@@ -234,7 +234,7 @@ body {
 									<td>${termin.sala}</td>
 									<td>${termin.cena}</td>
 									<td>${termin.popust}</td>
-									<td><a onclick="izbaciAlert(this)" href="/uspesnoZakazanPregled?idter=${termin.id}">Zakazi pregled</a></td>
+									<td><a onclick="izbaciAlert2(this)" href="/uspesnoZakazanPregled2?id=${termin.id}">Zakazi pregled</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -299,6 +299,11 @@ function addIdPac5 (element){
 	element.href = element.href+"&id="+idPacijenta;
 	console.log(element.href);
 }
+
+function izbaciAlert2(element){
+	//	alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
+		element.href = element.href+"&idpac="+id2;
+		}
 
 function izbaciAlert(element){
 	alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");

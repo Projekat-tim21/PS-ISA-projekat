@@ -109,8 +109,9 @@ body {
 						</div>
 					</div>
 					
-					
-				
+							<input type="hidden"  class="form-control" id="idtermina" name="idtermina"
+								value="${termini.id }" readonly>
+							
 					<div class="form-group ">
 						<input id="clickMe" type="submit"  class="btn btn-primary" value="posalji">
 					</div>
