@@ -59,7 +59,7 @@ public class LekarController {
 			System.out.println(k.getVisina());
 			request.setAttribute("mode", "MODE_ZKARTON");
 		 	ModelAndView modelAndView = new ModelAndView();
-	        modelAndView.setViewName("radniKalendar");
+	        modelAndView.setViewName("radniKalendarProba");
 	        return modelAndView;
 	    }
 	

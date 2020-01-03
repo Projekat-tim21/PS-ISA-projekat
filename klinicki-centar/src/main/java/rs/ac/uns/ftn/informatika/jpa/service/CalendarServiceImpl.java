@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Calendar;
+import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.CalendarRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.OdsustvoRepository;
 @Service
 public class CalendarServiceImpl implements CalendarService{
 
@@ -24,6 +26,9 @@ public class CalendarServiceImpl implements CalendarService{
 	
 	@Autowired
 	private TerminSaIdRepository terminiRepository;
+	
+	@Autowired
+	private OdsustvoRepository odsustvoRepository;
 	
 	@Override
 	public Object save(Calendar calendar) {
@@ -88,6 +93,18 @@ public class CalendarServiceImpl implements CalendarService{
 			termini.add(t);
 		}
 		return termini;
+	}
+
+	@Override
+	public List<Odsustvo> getOdsustvoBySestraId(Long id) {
+		
+		List<Odsustvo> odsustva=new ArrayList<Odsustvo>();
+		for(Odsustvo o : odsustvoRepository.findAll()) {
+			if(o.getIdkorisnika()==id) {
+			odsustva.add(o);
+			}
+		}
+		return odsustva;
 	}
 	
 }
