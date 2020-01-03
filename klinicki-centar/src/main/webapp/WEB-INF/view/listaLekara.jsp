@@ -224,7 +224,7 @@ body {
 
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista pregleda</h3>
-				<hr>
+				
 				<div class="table-responsive">
 
 					<table id="indextable" class="table table-striped table-bordered">
@@ -242,17 +242,17 @@ body {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="termin" items="${termini}">
+							<c:forEach var="termini" items="${termini}">
 								<tr>
-									<td>${termin.id}</td>
-									<td>${termin.lekarime}</td>
-									<td>${termin.lekarprezime}</td>
-									<td>${termin.tippregleda }</td>
-									<td>${termin.termin}</td>
-									<td>${termin.sala}</td>
-									<td>${termin.cena}</td>
-									<td>${termin.popust}</td>
-									<td><a onclick="izbaciAlert(this)" href="/uspesnoZakazanPregled?idter=${termin.id}">Zakazi pregled</a></td>
+									<td>${termini.id}</td>
+									<td>${termini.lekarime}</td>
+									<td>${termini.lekarprezime}</td>
+									<td>${termini.tippregleda }</td>
+									<td>${termini.termin}</td>
+									<td>${termini.sala}</td>
+									<td>${termini.cena}</td>
+									<td>${termini.popust}</td>
+									<td><a onclick="izbaciAlert(this)" href="/uspesnoZakazanPregled2?id=${termini.id}">Zakazi pregled</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -293,6 +293,7 @@ body {
 
 	function addIdPac (element){
 			element.href = element.href+"&idpac="+idPacijenta;
+			consolelog(element.href);
 		}
 
 	function addIdPac2 (element){
@@ -304,8 +305,8 @@ body {
 	}
 	
 	function izbaciAlert(element){
-		alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
-		element.href = element.href+"&id="+id2;
+	//	alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
+		element.href = element.href+"&idpac="+id2;
 		}
 	
 

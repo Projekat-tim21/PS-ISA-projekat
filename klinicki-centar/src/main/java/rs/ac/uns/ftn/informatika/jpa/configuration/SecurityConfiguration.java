@@ -149,6 +149,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/novaKlinika").permitAll()
 		.antMatchers("/medSestraPoc").permitAll()
 		.antMatchers("/sviSestraPacijenti").permitAll()
+		.antMatchers("/uspesnoZakazanPregled2").permitAll()
 		.antMatchers("/vidijos/*").permitAll()
 		.antMatchers("/razlogOdbijanja/*").permitAll()
 		.antMatchers("/ocenaLekaraPregled/*/*/*").permitAll()
