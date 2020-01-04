@@ -63,7 +63,7 @@ public class CalendarController {
 		    headers.add("Content-Type", "application/json; charset=utf-8");
 		    if (termini.size() > 0)
 		    {
-		        return new ResponseEntity<String>(new JSONSerializer().include("termin","sala","cena").exclude("*").serialize(termini), headers, HttpStatus.OK);
+		        return new ResponseEntity<String>(new JSONSerializer().include("termin","sala","cena","idkorisnika","odbrenpregled").exclude("*").serialize(termini), headers, HttpStatus.OK);
 		    }
 		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
 		/* for(int i=0; i<termini.size();i++) {
