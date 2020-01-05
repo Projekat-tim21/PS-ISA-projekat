@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,6 +29,7 @@ public class InformacijeOpregledu {
 	@Column(name="pacijent_id")
 	private Long pacijentId;
 	
+	@Lob
 	@Column(name="informacije")
 	private String informacije;
 	
@@ -37,7 +39,25 @@ public class InformacijeOpregledu {
 	@ManyToMany
 	@JoinTable(name = "leks", joinColumns = @JoinColumn(name = "lek_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "informacijepregled_id", referencedColumnName = "id"))
 	private Set<Lek> leks = new HashSet<Lek>();
+	
+	@Column(name="overen")
+	private Boolean overen;
 
+	public Set<Lek> getLeks() {
+		return leks;
+	}
+
+	public void setLeks(Set<Lek> leks) {
+		this.leks = leks;
+	}
+
+	public Boolean getOveren() {
+		return overen;
+	}
+
+	public void setOveren(Boolean overen) {
+		this.overen = overen;
+	}
 
 	public Long getId() {
 		return id;
@@ -116,13 +136,6 @@ public class InformacijeOpregledu {
 		this.dijagnozaId = dijagnozaId;
 	}
 
-	public Set<Lek> getLekovi() {
-		return leks;
-	}
-
-	public void setLekovi(Set<Lek> lekovi) {
-		this.leks = lekovi;
-	}
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -138,4 +151,16 @@ public class InformacijeOpregledu {
 		return Objects.equals(id, c.id);
 	}
 
+	public InformacijeOpregledu(Long lekarId, Long pacijentId, String informacije, String dijagnozaId, Set<Lek> leks,
+			Boolean overen) {
+		super();
+		this.lekarId = lekarId;
+		this.pacijentId = pacijentId;
+		this.informacije = informacije;
+		this.dijagnozaId = dijagnozaId;
+		this.leks = leks;
+		this.overen = overen;
+	}
+
+	
 }
