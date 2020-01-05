@@ -94,7 +94,7 @@ public class LekarController {
 			request.setAttribute("mode", "MODE_ZKARTON");
 		 
 		 	LinkedList<String> list = getList();
-	        ModelAndView map = new ModelAndView("ne");
+	        ModelAndView map = new ModelAndView("pregled");
 	        map.addObject("lists", list);
 	        return map;
 	    }

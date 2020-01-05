@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%
-response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-response.setHeader("Pragma","no-cache"); //HTTP 1.0
-response.setDateHeader ("Expires", 0);
-//prevents caching at the proxy server
-%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -191,7 +186,7 @@ response.setDateHeader ("Expires", 0);
                                       start:startDate.toISOString(),
                                       description: sala,
                                       allDay: false,
-                                      url:'/zapocniOperacijeP/'+idkorisnika
+                                      url:'/zapocniOperacijeP/${idkorisnika}'
                                       };
                               
                               termini.push({
@@ -199,7 +194,7 @@ response.setDateHeader ("Expires", 0);
                                   start:startDate.toISOString(),
                                   description: sala,
                                   allDay: false,
-                                  url:'/zapocniOperacijeP/'+idkorisnika
+                                  url:'/zapocniOperacijeP/${idkorisnika}'
                                   });
 
                               eventRender: function(event, element) {
