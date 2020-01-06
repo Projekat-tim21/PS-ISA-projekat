@@ -167,20 +167,34 @@ Connection connection =
             <div class="card-wrapper">
                 <div class="card fat">
                     <div class="card-body">
+                    <c:choose>
+		<c:when test="${mode=='MODE_ZKARTON' }">
+			<div class="container text-center">
+				<h3>Pacijent: ${korisnik.ime } ${korisnik.prezime } </h3>
+				<hr>
+			</div>
+		</c:when>
+	</c:choose>
+	
+	   <c:choose>
+		<c:when test="${mode=='MODE_LEKAR' }">
+			
+		</c:when>
+	</c:choose>
                         <h4 align="center">PREGLED</h4>
                         <hr>
-                        <form action="/noviPregeld" method="POST">
+                        <form action="/noviPregled/${lekar.id }/${korisnik.id }" method="POST">
 					<div class="form-group">
 						<label>Informacije o pregledu</label>
 						<div >
-							<textarea rows="10" cols="100" class="form-control" id="pregled" name="pregled" ></textarea>
+							<textarea rows="10" cols="100" class="form-control" id="informacije" name="informacije" ></textarea>
 						</div>
 					</div>
                             
                              <div class="form-group">
-                                <label for="dijagnoza">Dijagnoza</label>
+                                <label for="dijagnozaId">Dijagnoza</label>
                                 <hr>
-                                <select name=odabrana>
+                                <select name=didi>
        								 <%  while(resultset.next()){ %>
           							  <option><%= resultset.getString(3)%></option>
       									  <% } %>

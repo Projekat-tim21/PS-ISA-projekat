@@ -1,6 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class InformacijeOpregleduDTO {
@@ -10,7 +12,7 @@ public class InformacijeOpregleduDTO {
 	private Long pacijentId;
 	private String informacije;;
 	private String dijagnozaId;
-	private Set<Lek> leks = new HashSet<Lek>();
+	private List<String> leks = new ArrayList<String>();
 	private Boolean overen;
 	public Long getId() {
 		return id;
@@ -42,10 +44,10 @@ public class InformacijeOpregleduDTO {
 	public void setDijagnozaId(String dijagnozaId) {
 		this.dijagnozaId = dijagnozaId;
 	}
-	public Set<Lek> getLeks() {
+	public List<String> getLeks() {
 		return leks;
 	}
-	public void setLeks(Set<Lek> leks) {
+	public void setLeks(List<String> leks) {
 		this.leks = leks;
 	}
 	public Boolean getOveren() {
@@ -54,7 +56,7 @@ public class InformacijeOpregleduDTO {
 	public void setOveren(Boolean overen) {
 		this.overen = overen;
 	}
-	public InformacijeOpregleduDTO(Long lekarId, Long pacijentId, String informacije, String dijagnozaId, Set<Lek> leks,
+	public InformacijeOpregleduDTO(Long lekarId, Long pacijentId, String informacije, String dijagnozaId, List<String> leks,
 			Boolean overen) {
 		super();
 		this.lekarId = lekarId;

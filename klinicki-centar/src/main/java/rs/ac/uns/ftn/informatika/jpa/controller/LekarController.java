@@ -1,8 +1,10 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
+import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
+import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
+import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
@@ -54,7 +59,7 @@ public class LekarController {
 	 private LekServiceImpl lekService;
 	 
 	 @Autowired
-	 private InformacijeOpergleduService infoService;
+	 private InformacijeOpregleduService infoService;
 	 
 	 @Autowired
 	 private DijagnozaServiceImpl dijagnozaService;
@@ -94,69 +99,55 @@ public class LekarController {
 		    return list;
 		}
 	 
-	 @GetMapping("/zapocniOperacijeP/{korisnikId}")
-	    public ModelAndView addmin(@PathVariable Long korisnikId,HttpServletRequest request) {
+	 @GetMapping("/zapocniOperacijeP/{lekarId}/{korisnikId}")
+	    public ModelAndView addmin(@PathVariable Long lekarId,@PathVariable Long korisnikId,HttpServletRequest request) {
 		 	
 		 	request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
 			Korisnik k=korisnikService.findOne(korisnikId);
-			System.out.println(k.getVisina());
+			System.out.println(k.getIme());
 			request.setAttribute("mode", "MODE_ZKARTON");
-		 
+			request.setAttribute("lekar", korisnikService.findOne(lekarId));
+			Korisnik kk=korisnikService.findOne(lekarId);
+			System.out.println(k.getIme());
+			request.setAttribute("mode", "MODE_LEKAR");
 		 	LinkedList<String> list = getList();
 	        ModelAndView map = new ModelAndView("pregled");
 	        map.addObject("lists", list);
 	        return map;
 	    }
 	 
-	 @PostMapping("/noviPregled")
-	    public String noviAdminKlinike(@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
-	        String result = "redirect:/";
-	        
-	        InformacijeOpregledu dbInfo=
-	        Korisnik dbKorisnik=korisnikService.findByUsername(korisnik.getUsername());
-	        Korisnik novi=new Korisnik();
-	        novi.setUsername(korisnik.getUsername());
-	        novi.setIme(korisnik.getIme());
-	        System.out.println(novi.getIme());
-	        novi.setPrezime(korisnik.getPrezime());
-	        novi.setEmail(korisnik.getEmail());
-	        novi.setPassword(korisnik.getPassword());
-	        novi.setDrzava(korisnik.getDrzava());
-	        novi.setGrad(korisnik.getGrad());
-	        novi.setAdresa(korisnik.getAdresa());
-	        novi.setTelefon(korisnik.getTelefon());
-	        novi.setJedBrOsig(korisnik.getJedBrOsig());
-	        novi.setFirst_Login(true);
-	        novi.setIsActive(false);
-	        novi.setRoleName(Role.ADMIN_KLINIKE.name());
-	        String naziv=request.getParameter("odabrana");
-	        Klinika clinic=klinikaService.findByNaziv(naziv);
-	        System.out.println("KLINIKA "+ clinic.getNaziv());
-	        //Klinika nova=new Klinika();
-	        novi.setKlinika(clinic);
-	        
-	    
-	        if(korisnik.getUsername()==null || korisnik.getUsername().trim().isEmpty()) {
-	        	result = "redirect:/addNewAdminKlinike?error=Unesite naziv";
-	        }
-	        if (korisnik.getPassword() == null || korisnik.getPassword().trim().isEmpty()) {
-	            result = "redirect:/addNewAdminKlinike?error=Unesite sifru";
-	        } else if (korisnik.getEmail() == null || korisnik.getEmail().trim().isEmpty()) {
-	            result = "redirect:/addNewAdminKlinike?error=Enter valid last name";
-	        } 
-	        if (dbKorisnik == null) {
-	            korisnikService.saveMogKorisnika(novi); 
-	            result="redirect:/pregledSvihAdminaKlinike";
-	        } else {
-	            result = "redirect:/addNewAdminKlinike?error=Admin vec postoji!";
-	        }
+	 @PostMapping("/noviPregled/{lekarId}/{korisnikId}")
+	    public String noviAdminKlinike(@PathVariable Long lekarId,@PathVariable Long korisnikId,
+				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
+	        String result = "redirect://radniKalendar";
+	        HttpSession session = request.getSession();
+			session.setAttribute("id", korisnikId);
+			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
+			request.setAttribute("mode", "MODE_ZKARTON");
+			System.out.println("JFFFFFFFFFFF= "+korisnikId);
+			InformacijeOpregledu infor=new InformacijeOpregledu();
+			String naziv=request.getParameter("didi");
+			Dijagnoza d=dijagnozaService.findByNaziv(naziv);
+			System.out.println("ID DIJAGNOZE "+d.getNaziv());
+			infor.setDijagnozaId(d.getNaziv());
 
-	        try {
-				emailService.sendNotificaitionZaAdminaKlinike(novi);
-			}catch( Exception e ){
-				logger.info("Greska prilikom slanja emaila: " + e.getMessage());
-			}
-	        
+	        infor.setInformacije(info.getInformacije());
+	        System.out.println(info.getInformacije());
+	        infor.setLekarId(lekarId);
+	        System.out.println(lekarId);
+	        Set<Lek> leks = new HashSet<Lek>();
+	        String[] lekici = request.getParameterValues("database1");
+	    
+	        for(int i=0;i<lekici.length;i++) {
+	        	Lek nov=lekService.findByNaziv(lekici[i]);
+	        	System.out.println(nov.getNaziv());
+	        	leks.add(nov);
+	        }
+	        infor.setLeks(leks);
+	        infor.setPacijentId(korisnikId);
+	        System.out.println(korisnikId);
+	        infor.setOveren(false);
+	        infoService.saveInformacije(infor);
 	        return result;
 	    }
 }

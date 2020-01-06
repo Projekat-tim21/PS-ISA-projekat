@@ -62,7 +62,7 @@
                                       start:startDate.toISOString(),
                                       allDay: false,
                                      
-                                      url:'/zapocniOperacijeP/'+idkorisnika
+                                      url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika
                       
                                       };
                               
@@ -70,7 +70,7 @@
                                   title:'TERMINI--'+'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                   start:startDate.toISOString(),
                                   allDay: false,
-                                  url:'/zapocniOperacijeP/'+idkorisnika
+                                  url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika
                                   });
 
                               
@@ -167,7 +167,14 @@
 			</div>
 		</div>
 	</div>
-
+<c:choose>
+		<c:when test="${mode=='MODE_ZKARTON' }">
+			<div class="container text-center">
+				<h3>dr ${korisnik.ime } ${korisnik.prezime }</h3>
+				<hr>
+			</div>
+		</c:when>
+	</c:choose>
 	<div id='calendar'></div>
 
 </body>
