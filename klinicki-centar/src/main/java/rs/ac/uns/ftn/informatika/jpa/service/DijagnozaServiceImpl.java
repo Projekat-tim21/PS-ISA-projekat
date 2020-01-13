@@ -46,7 +46,12 @@ public class DijagnozaServiceImpl {
 	}
 	
 	public void obrisiDijagnozu(Long id) {
-		dijagnozaRepository.deleteById(id);;
+		dijagnozaRepository.deleteById(id);
+	}
+
+	public Dijagnoza findByNaziv(String dijagnozaId) {
+		// TODO Auto-generated method stub
+		return dijagnozaRepository.findByNaziv(dijagnozaId);
 	}
 
 	

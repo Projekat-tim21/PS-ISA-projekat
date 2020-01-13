@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import flexjson.JSONSerializer;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
+import rs.ac.uns.ftn.informatika.jpa.model.TerminDAO;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.CalendarService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
@@ -58,12 +60,26 @@ public class CalendarController {
 			Map<String, Object> map = new HashMap<String, Object>();
 		 List<TerminiSaId> termini = calendarService.getTerminiByLekarId(id);
 		 System.out.println("Size: "+ termini.size());
+		 List<TerminDAO> tt=new ArrayList<TerminDAO>();
+		 for(int i=0; i<termini.size();i++) {
+			 TerminDAO novi=new TerminDAO();
+			 novi.setTermin(termini.get(i).getTermin());
+			 Korisnik k=korisnikService.findOne(termini.get(i).getId());
+			 novi.setPacijentime(k.getIme());
+			 novi.setPacijentprezime(k.getPrezime());
+			 novi.setTippregleda(termini.get(i).getTippregleda());;
+			 novi.setSala(termini.get(i).getSala());
+			 novi.setZakazan(termini.get(i).isZakazan());
+			novi.setIdkorisnika(termini.get(i).getId());
+			tt.add(novi);
+			 
+		 }
 		 
 		 HttpHeaders headers = new HttpHeaders();
 		    headers.add("Content-Type", "application/json; charset=utf-8");
 		    if (termini.size() > 0)
 		    {
-		        return new ResponseEntity<String>(new JSONSerializer().include("termin","sala","cena").exclude("*").serialize(termini), headers, HttpStatus.OK);
+		        return new ResponseEntity<String>(new JSONSerializer().include("termin","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika").exclude("*").serialize(tt), headers, HttpStatus.OK);
 		    }
 		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
 		/* for(int i=0; i<termini.size();i++) {

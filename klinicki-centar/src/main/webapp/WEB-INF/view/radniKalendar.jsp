@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,7 @@
     <meta name="description" content="au theme template">
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
-	<link rel="shortcut icon" href="#" />
-	
+
     <!-- Title Page-->
     <title>Calendar</title>
 
@@ -18,6 +18,7 @@
     <!-- Bootstrap CSS-->
 	<link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<link rel="shortcut icon" href="favicon.ico">
     <!-- Vendor CSS-->
   
     <link href="/static/js/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
@@ -123,7 +124,7 @@
     	    {
     	      title: "Pregled",
     	      start: moment().format('YYYY-MM-DD'),
-    	      url: '/zapocniOperacijeP'
+    	      url: '/zapocniOperacijeP})'
     	    },
     	    {
     	      title: "Operacija",
@@ -173,23 +174,44 @@
                               console.log(result[i]);
                               var termin=result[i].termin;
                               var startDate = new Date(termin);
-                              console.log("startDate :"+termin);
-                              console.log("isoString: " + startDate.toISOString());
                               var sala=result[i].sala;
+                              var idkorisnika=result[i].idkorisnika;
+                              var odobrenpregled=result[i].odobrenpregled;
+                              console.log("startDate :"+idkorisnika);
+                             
+                              console.log("isoString: " + startDate.toISOString());
                               var cena=result[i].cena;
                               var event={
-                                      title:'Unapred definisan termin', 
+                                      title:'Unapred definisan termin'+  '<br />' +'Ljuvbavvvvvvvvvvvvvv', 
                                       start:startDate.toISOString(),
+                                      description: sala,
                                       allDay: false,
-                                      url:'/zapocniOperacijeP'
+                                      url:'/zapocniOperacijeP/${idkorisnika}'
                                       };
                               
                               termini.push({
-                                  title:"Unapred definisan termin", 
+                                  title:"Unapred definisan termin" +  '<br />' +'Ljuvbavvvvvvvvvvvvvv', 
                                   start:startDate.toISOString(),
+                                  description: sala,
                                   allDay: false,
-                                  url:'/zapocniOperacijeP'
+                                  url:'/zapocniOperacijeP/${idkorisnika}'
                                   });
+
+                              eventRender: function(event, element) {
+                                  element.qtip({
+                                      content: event.description + '<br />' + event.start,
+                                      style: {
+                                          background: 'black',
+                                          color: '#FFFFFF'
+                                      },
+                                      position: {
+                                          corner: {
+                                              target: 'center',
+                                              tooltip: 'bottomMiddle'
+                                          }
+                                      }
+                                  });
+                              }
                                  
                           }
                           console.log("Postoji li nesto ovde? :"+termini.length);

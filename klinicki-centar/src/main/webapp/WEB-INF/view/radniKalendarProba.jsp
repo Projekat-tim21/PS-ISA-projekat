@@ -1,9 +1,41 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+    <%@ page import="java.sql.*" %>
+<%ResultSet resultset =null;%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <html>
 <head>
+<style>
+.btn-group button {
+  background-color: #D3D3D3; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 30px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: center; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+</style>
 <meta charset='utf-8' />
+<link rel="shortcut icon" href="#">
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <link href='/static/fullcalendar.css' rel='stylesheet' />
@@ -12,46 +44,14 @@
 <script src='/static/lib/jquery.min.js'></script>
 <script src='/static/fullcalendar.min.js'></script>
     <script type="text/javascript">
+  
     var termini=[]
     $(function() {
     	  // for now, there is something adding a click handler to 'a'
     	  var tues = moment().day(2).hour(19);
     	  // build trival night events for example data
-    	  var events = [
-    	    {
-    	      title: "Pregled",
-    	      start: moment().format('YYYY-MM-DD'),
-    	      url: '/zapocniOperacijeP'
-    	    },
-    	    {
-    	      title: "Operacija",
-    	      start: moment().hour(9).add(2, 'days').toISOString(),
-    	      url: '/zapocniOperacijeP'
-    	    },
-    	    {
-      	      title: "Operacija",
-      	      start: "2019-12-19T10:30:00",
-      	      url: '/zapocniOperacijeP'
-      	    },
-      	  {
-        	      title: "Pregled",
-        	      start: "2019-12-18T07:30:00",
-        	      url: '/zapocniOperacijeP'
-        	    }
-    	    
-    	  ];
-    	 var trivia_nights = []
-		 
-   	  for(var i = 1; i <= 4; i++) {
-    	    var n = tues.clone().add(i, 'weeks');
-    	    console.log("isoString: " + n.toISOString());
-    	    trivia_nights.push({
-    	      title: 'Trival Night @ Pub XYZ',
-    	      start: n.toISOString(),
-    	      allDay: false,
-    	      url: '#'
-    	    });
-    	  }
+    	  var events = [ ];
+    	
    	$.ajax({
               url: '/getCalendar?id=${id}',
               type: "GET",
@@ -71,24 +71,35 @@
                               console.log(result[i]);
                               var termin=result[i].termin;
                               var startDate = new Date(termin);
-                              console.log("startDate :"+termin);
+                              var idkorisnika=result[i].idkorisnika;
+                              var odobrenpregled=result[i].odobrenpregled;
+                              var ime=result[i].pacijentime;
+                              var prezime=result[i].pacijentprezime;
+                              var tip=result[i].tippregleda;
+                              console.log("startDate :"+idkorisnika);
                               console.log("isoString: " + startDate.toISOString());
                               var sala=result[i].sala;
                               var cena=result[i].cena;
+                           
+                              
                               var event={
-                                      title:'Unapred definisan termin', 
+                                      
+                                      title:'TERMINI--'+'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                       start:startDate.toISOString(),
                                       allDay: false,
-                                      url:'/zapocniOperacijeP'
+                                     
+                                      url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika
+                      
                                       };
                               
                               termini.push({
-                                  title:"Unapred definisan termin", 
+                                  title:'TERMINI--'+'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                   start:startDate.toISOString(),
                                   allDay: false,
-                                  url:'/zapocniOperacijeP'
+                                  url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika
                                   });
-                                 
+
+                              
                           }
                           console.log("Postoji li nesto ovde? :"+termini.length);
 							var rare=termini.length;
@@ -96,6 +107,8 @@
 								
                             events: events.concat(termini[i]);
 							}
+
+							
                             console.log("NAKON SPAJANJA JE L' IMA STO :"+events.length);
                             for(var i=0; i<rare; i++){
                             console.log("TERMINI JESU LI PRAZNI? :"+termini[i]);
@@ -164,6 +177,7 @@
 </style>
 </head>
 <body>
+
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
@@ -179,7 +193,20 @@
 			</div>
 		</div>
 	</div>
-
+<c:choose>
+		<c:when test="${mode=='MODE_ZKARTON' }">
+			<div class="container text-center">
+				<h3>dr ${korisnik.ime } ${korisnik.prezime }</h3>
+				<hr>
+			</div>
+		</c:when>
+	</c:choose>
+	
+	<div class="btn-group" style="width:80%">
+  <button style="width:40%"><a href="/zakazivanjePregleda">Zakazi pregled</a></button>
+  <button style="width:40%"><a href="/zakazivanjeOperacije">Zakazi operaciju</a></button>
+</div>
+	
 	<div id='calendar'></div>
 
 </body>
