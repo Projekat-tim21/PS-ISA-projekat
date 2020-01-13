@@ -57,6 +57,16 @@ public class TerminSaIdService {
 		}
 		return termini;
 	}
+
+
+	public List<TerminiSaId> nadjiSlobodneTermineZaOveLekare() {
+		// TODO Auto-generated method stub
+		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
+		for(TerminiSaId t : tidRepo.findByZakazan(false)) {
+			termini.add(t);
+		}
+		return termini;
+	}
 	
 
 

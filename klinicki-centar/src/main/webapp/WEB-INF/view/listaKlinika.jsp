@@ -23,7 +23,14 @@ body {
 </head>
 <body>
   
-  	<div role="navigation">
+  	
+  
+  
+	<c:choose>
+	
+		<c:when test="${mode=='ALL_KLINIKE' }">  
+		
+		   <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -34,19 +41,8 @@ body {
 			</div>
 		</div>
 	</div>
-  
-  
-<!-- ne brisatiiiiiiiiiiiiiiiiiiiiii
-<th><a href="javascript:SortTable(0,'T');">Author</a></th>
-<th><a href="javascript:SortTable(1,'T');">Title</a></th>
-<th><a href="javascript:SortTable(2,'N');">Rating</a></th>
-<th><a href="javascript:SortTable(3,'D','mdy');">Review Date</a></th>
-</tr>
-</thead>
- -->
-
-	<c:choose>
-		<c:when test="${mode=='ALL_KLINIKE' }">     
+		   
+		   
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista klinika</h3>
 				<hr>
@@ -57,6 +53,28 @@ body {
 			</span>	 
 			 -->
 				<div class="table-responsive">
+				
+				<table class="table">
+						<tr>
+							<th><input  type="text" id="myInput1" onkeyup="myFunction1()"
+								placeholder="ime klinike"></th>
+							<th><input  type="text" id="myInput2" onkeyup="myFunction2()"
+								placeholder="adresa"></th>
+							<th><input  type="text" id="myInput3" onkeyup="myFunction3()"
+								placeholder="tip pregleda"></th>
+							<th><input  type="text" id="myInput5" onkeyup="myFunction5()"
+								placeholder="grad"></th>
+							<th><input  type="text" id="myInput6" onkeyup="myFunction6()"
+								placeholder="drzava"></th>
+							<th><input  type="text" id="myInput4" onkeyup="myFunction4()"
+								placeholder="ocena"></th>
+								
+						</tr>
+					</table>
+				
+				
+				
+				
 					<table id="indextable" class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -65,8 +83,10 @@ body {
 								<th><a href="javascript:SortTable(2,'T');">Adresa</a></th>
 								<th><a href="javascript:SortTable(3,'T');">Grad</a></th>
 								<th><a href="javascript:SortTable(4,'T');">Drzava</a></th>
-								<th><a href="javascript:SortTable(5,'N');">Cena</a></th>
+								<th><a href="javascript:SortTable(5,'T');">Tip pregleda</a></th>
 								<th><a href="javascript:SortTable(6,'N');">Ocena</a></th>
+								<th>Zaposleni</th>
+								<th>Zakazivanje</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -77,8 +97,14 @@ body {
 									<td>${klinika.adresa}</td>
 									<td>${klinika.grad}</td>
 									<td>${klinika.drzava}</td>
-									<td>${klinika.cena}</td>
+									<td>${klinika.tip}</td>
 									<td>${klinika.ocena}</td>
+									<td>
+										<a onclick="addIdPac2(this)" href="/lekariUKlinici?idklinike=${klinika.id}">Lista zaposlenih</a>
+									</td>
+									<td>
+										<a onclick="addIdPac5(this)" href="/terminiUKlinici?idklinike=${klinika.id}">Slobodni termini</a>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -86,12 +112,151 @@ body {
 				</div>
 			</div>
 
-			<!-- <div class="btn-group" >
- 			   <button type="button" class="btn btn-primary center-block">Prikazi</button>
- 			 </div>
-	 -->
-<script>
+		</c:when>
+		
+		<c:when test="${mode=='ALL_LEKARI_2' }">
+		
+	<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a onclick="addIdPac10(this)" href="/korakUnazadNaListuKlinika">Vrati se nazad</a></li>	
+					<li><a onclick="addIdPac(this)" href="/logout">Odjavi se</a></li> 
+				</ul>
 
+			</div>
+		</div>
+	</div>
+	
+	
+			<div class="container text-center" id="tasksDiv">
+				<h3>Lista lekara</h3>
+				
+				<div class="table-responsive">
+					<h4>Pretrazite tabelu po sledecim kriterijumima:</h4>
+
+					<table class="table">
+						<tr>
+							<th><input  type="text" id="myInput1" onkeyup="myFunction1()"
+								placeholder="ime"></th>
+							<th><input  type="text" id="myInput10" onkeyup="myFunction10()"
+								placeholder="prezime"></th>
+							<th><input  type="text" id="myInput11" onkeyup="myFunction11()"
+								placeholder="tip pregleda"></th>
+							<th><input  type="text" id="myInput12" onkeyup="myFunction12()"
+								placeholder="ocena"></th>
+						</tr>
+					</table>
+
+<input type="hidden" id="idHidden" name="idHidden">
+
+
+					<table id="indextable" class="table table-striped table-bordered">
+
+						<thead>
+							<tr>
+								<th><a href="javascript:SortTable(0,'N');">Id</a></th>
+								<th><a href="javascript:SortTable(1,'T');">Ime</a></th>
+								<th><a href="javascript:SortTable(2,'T');">Prezime</a></th>
+								<th><a href="javascript:SortTable(3,'T');">Tip pregleda</a></th>
+								<th><a href="javascript:SortTable(4,'N');">Ocena</a></th>
+								<th>Termin pregleda</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+
+							<c:forEach var="lip" items="${lipi}">
+								<tr>
+									<td>${lip.id}</td>
+									<td>${lip.imelek}</td>
+									<td>${lip.prezimelek}</td>
+									<td>${lip.tipspecijalizacije}</td>
+									<td>${lip.ocena}</td>
+									<td>
+										<a onclick="addIdPac3(this)" href="/listaSvihTerminaPacijent?id=${lip.id}">Slobodni termini</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				
+					
+				</div>
+			</div>
+
+
+		</c:when>
+		
+		
+		<c:when test="${mode=='ALL_TERMINI_2' }">
+
+
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a  href="/korakUnazadNaListuKlinika?id=${idpac}">Vrati se nazad</a></li>	
+					<li><a onclick="addIdPac(this)" href="/logout">Odjavi se</a></li> 
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+			<div class="container text-center" id="tasksDiv">
+				<h3>Lista pregleda</h3>
+				<hr>
+				<div class="table-responsive">
+
+					<table id="indextable" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id pregleda</th>
+								<th>Ime lekara</th>
+								<th>Prezime lekara</th>
+								<th>Tip pregleda</th>
+								<th>Termin</th>
+								<th>Sala</th>
+								<th>Cena</th>
+								<th>Popust</th>
+								<th>Zakazi pregled</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="termin" items="${termini}">
+								<tr>
+									<td>${termin.id}</td>
+									<td>${termin.lekarime}</td>
+									<td>${termin.lekarprezime}</td>
+									<td>${termin.tippregleda }</td>
+									<td>${termin.termin}</td>
+									<td>${termin.sala}</td>
+									<td>${termin.cena}</td>
+									<td>${termin.popust}</td>
+									<td><a onclick="izbaciAlert2(this)" href="/uspesnoZakazanPregled2?id=${termin.id}">Zakazi pregled</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</c:when>
+		
+		
+		
+		
+		
+		
+		
+		
+		</c:choose>
+	<script>
+
+
+
+	
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
@@ -106,17 +271,44 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-
+var idPacijenta2 = getUrlParameter('idpac');
 var idPacijenta = getUrlParameter('id');
 console.log(idPacijenta);
-
+var id2=getUrlParameter('id');
 function addIdPac (element){
 	element.href = element.href+"?id="+idPacijenta;
 	console.log(element.href);
 }
 
+function addIdPac3 (element){
+	element.href = element.href+"&idpac="+idPacijenta2;
+	console.log(element.href);
+}
 
+function addIdPac10 (element){
+	element.href = element.href+"?id="+idPacijenta2;
+	console.log(element.href);
+}
 
+function addIdPac2 (element){
+	element.href = element.href+"&idpac="+idPacijenta;
+	console.log(element.href);
+}
+
+function addIdPac5 (element){
+	element.href = element.href+"&id="+idPacijenta;
+	console.log(element.href);
+}
+
+function izbaciAlert2(element){
+	//	alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
+		element.href = element.href+"&idpac="+id2;
+		}
+
+function izbaciAlert(element){
+	alert("Uspesno ste zakazali pregled. Svoje zakazane preglede mozete pogledati na linku zakazani pregledi");
+	element.href = element.href+"&id="+id2;
+	}
 
 function sortTablePoNazivu() {
   var table, rows, switching, i, x, y, shouldSwitch;
@@ -289,11 +481,201 @@ return "" + String(y) + "" + String(m) + "" + String(d) + "";
 } // function GetDateSortingKey()
 
 
-</script>
+function myFunction1() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput1");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[1];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction2() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput2");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[2];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction3() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput3");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[5];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction5() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput5");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[3];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction6() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput6");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[4];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction4() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput4");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[6];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction10() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput10");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[2];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction11() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput11");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[2];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction12() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput12");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[3];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function myFunction12() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput12");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("indextable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[4];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
 
 
-		</c:when>
-	</c:choose>
+</script>	
+		
+		
+	
  
  
  

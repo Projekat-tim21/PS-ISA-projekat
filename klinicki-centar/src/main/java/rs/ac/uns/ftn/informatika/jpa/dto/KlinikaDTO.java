@@ -8,9 +8,9 @@ public class KlinikaDTO {
 	private String naziv;
 	private String grad;
 	private String drzava;
-	private int ocena;
+	private double ocena;
 	private String adresa;
-	private int cena;
+	private String tip;
 	private KorisnikDTO admin;
 	
 
@@ -21,7 +21,7 @@ public class KlinikaDTO {
 		grad=klinika.getGrad();
 		drzava=klinika.getDrzava();
 		ocena=klinika.getOcena();
-		cena=klinika.getCena();
+		tip=klinika.getTip();
 	}
 
 
@@ -65,12 +65,12 @@ public class KlinikaDTO {
 	}
 
 
-	public int getOcena() {
+	public double getOcena() {
 		return ocena;
 	}
 
 
-	public void setOcena(int ocena) {
+	public void setOcena(double ocena) {
 		this.ocena = ocena;
 	}
 
@@ -85,13 +85,13 @@ public class KlinikaDTO {
 	}
 
 
-	public int getCena() {
-		return cena;
+	public String getTip() {
+		return tip;
 	}
 
 
-	public void setCena(int cena) {
-		this.cena = cena;
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
 

@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,13 +33,15 @@ public class Klinika {
 		private String drzava;
 
 		@Column(name = "ocena", nullable = true)
-		private int ocena;
+		private double ocena;
 	
 		@Column(name = "adresa", nullable = false)
 		private String adresa;
 		
-		@Column(name = "cena", nullable = false)
-		private int cena;
+		@Column(name = "tip", nullable = false)
+		private String tip;
+		
+		
 
 		@OneToMany(mappedBy = "klinika", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		private Set<Korisnik> admini = new HashSet<Korisnik>();
@@ -48,8 +51,8 @@ public class Klinika {
 		}
 
 		
-		public Klinika(Long id, String naziv, String grad, String drzava, int ocena, String adresa,
-				int cena) {
+		public Klinika(Long id, String naziv, String grad, String drzava, double ocena, String adresa,
+				String tip) {
 			super();
 			this.id = id;
 			this.naziv = naziv;
@@ -57,7 +60,7 @@ public class Klinika {
 			this.drzava = drzava;
 			this.ocena = ocena;
 			this.adresa = adresa;
-			this.cena = cena;
+			this.tip = tip;
 		}
 
 		public Long getId() {
@@ -92,11 +95,11 @@ public class Klinika {
 			this.drzava = drzava;
 		}
 
-		public int getOcena() {
+		public double getOcena() {
 			return ocena;
 		}
 
-		public void setOcena(int ocena) {
+		public void setOcena(double ocena) {
 			this.ocena = ocena;
 		}
 
@@ -108,12 +111,12 @@ public class Klinika {
 			this.adresa = adresa;
 		}
 
-		public int getCena() {
-			return cena;
+		public String getTip() {
+			return tip;
 		}
 
-		public void setCena(int cena) {
-			this.cena = cena;
+		public void setTip(String tip) {
+			this.tip = tip;
 		}
 
 
