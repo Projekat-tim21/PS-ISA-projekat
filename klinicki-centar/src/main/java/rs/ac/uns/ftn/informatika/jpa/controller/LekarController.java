@@ -119,7 +119,7 @@ public class LekarController {
 	 @PostMapping("/noviPregled/{lekarId}/{korisnikId}")
 	    public String noviAdminKlinike(@PathVariable Long lekarId,@PathVariable Long korisnikId,
 				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
-	        String result = "redirect://radniKalendar";
+	        String result = "redirect://radniKalendar/{lekarId}";
 	        HttpSession session = request.getSession();
 			session.setAttribute("id", korisnikId);
 			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));

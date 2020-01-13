@@ -8,6 +8,32 @@
 
 <html>
 <head>
+<style>
+.btn-group button {
+  background-color: #D3D3D3; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 30px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: center; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+</style>
 <meta charset='utf-8' />
 <link rel="shortcut icon" href="#">
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
@@ -175,6 +201,12 @@
 			</div>
 		</c:when>
 	</c:choose>
+	
+	<div class="btn-group" style="width:80%">
+  <button style="width:40%"><a href="/zakazivanjePregleda">Zakazi pregled</a></button>
+  <button style="width:40%"><a href="/zakazivanjeOperacije">Zakazi operaciju</a></button>
+</div>
+	
 	<div id='calendar'></div>
 
 </body>
