@@ -29,6 +29,7 @@ import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
+import rs.ac.uns.ftn.informatika.jpa.service.InformacijeOpregleduService;
 import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
@@ -43,12 +44,15 @@ public class MedSestraController {
 	 
 	 private final OdsustvoService odsustvoSerevice;
 
+	 private final InformacijeOpregleduService infoService;
 
 	public MedSestraController( KorisnikService korisnikService,
-			OdsustvoService odsustvoSerevice) {
+			OdsustvoService odsustvoSerevice,InformacijeOpregleduService info) {
 
 		this.korisnikService = korisnikService;
 		this.odsustvoSerevice = odsustvoSerevice;
+		this.infoService=info;
+		
 	}
 
 	@GetMapping("/medSestraPocetna")
@@ -74,6 +78,15 @@ public class MedSestraController {
 	        return modelAndView;
 	    }
 	 
+	 @GetMapping("/overaRecepta")
+	    public ModelAndView sviRecepti(HttpServletRequest request) {
+		 request.setAttribute("info", infoService.pokaziZaOveru());
+			request.setAttribute("mode", "ALL_USERS");
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("sestraOvera");
+	        return modelAndView;
+	    }
+	 
 	 @GetMapping("/vidijos/{korisnikId}")
 	    public String enable(@PathVariable Long korisnikId,HttpServletRequest request) {
 		 request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
@@ -82,6 +95,13 @@ public class MedSestraController {
 			request.setAttribute("mode", "MODE_ZKARTON");
 			
 			return "pacijentSestra";   }
+	 
+	 @GetMapping("/overi/{infoid}")
+	    public String overa(@PathVariable Long infoid,HttpServletRequest request) {
+		 request.setAttribute("korisnik", infoService.findOne(infoid));
+			request.setAttribute("mode", "MODE_ZKARTON");
+			
+			return "overi";   }
 	 
 	
 	 @PostMapping("/zahtevZaOdsustvoo/{id}") // korisnik povezan sa valuom iz js
