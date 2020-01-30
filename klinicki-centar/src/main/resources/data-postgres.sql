@@ -19,6 +19,7 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Marsala Junaka 1055', 'Srbija', 'cobii5@gmail.com',  'Novi Sad', 'Cobii', '788843235426', 'addmin', 'Cobi', '0645537724', 'addmin',FALSE,'ADMIN',false);
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Anica Dobra 155', 'Srbija', 'anai5@gmail.com',  'Novi Sad', 'Ananfi', '8587568488586', 'aadmin', 'Ana', '0649998584', 'aadmin',FALSE,'ADMIN',true);
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Sestra 155', 'Srbija', 'sestra@gmail.com',  'Novi Sad', 'Sestra', '777458488586', 'sestra', 'Sestra', '0649998587', 'sestra',FALSE,'SESTRA',true);
+insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Sestra 1555', 'Srbija', 'sestra1@gmail.com',  'Novi Sad', 'Sestra1', '7771458488586', 'sestra1', 'Sestra1', '06491998587', 'sestra1',FALSE,'SESTRA',true);
 
 
 INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);
@@ -43,6 +44,8 @@ insert into sala(id, naziv, br, datum, rezervisana) values (3, 'Deca', 5, '1.1.2
 insert into sala(id, naziv, br, datum, rezervisana) values (10, 'Novo srce', 9, '12.12.2019.', 'true');
 insert into sala(id, naziv, br, datum, rezervisana) values (7, 'Novo srce', 11, '5.12.2019.', 'false');
 
+
+
 insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (3, '2019-12-04T05:42', '2B', 1000, 10 , 'Sara', 'Saric','dermatologija','false',0,'false','true');
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',0,'false', 'true');
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',0, 'false', 'true');
@@ -51,6 +54,7 @@ insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,t
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (5, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true');
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (6, '2019-12-05T06:50', '2B', 1500, 20, 'Pedja', 'Matic', 'dermatologija', 'false',0, 'false', 'true');
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (4, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true');
+
 
 
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled, terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00', TRUE, 'true', '2019-12-04T09:42', 'Sara', 'Saric',3,11,0);
@@ -64,6 +68,9 @@ insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme, terminoper
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme,terminoperacija, lekarimeoperacija, lekarprezimeoperacija, idlekaroperacija, idpacijenta, ocenaoperacije, obavljenaoperacija, zakazan) values (2000, '15.02.2020', 'Jovan Jovic', '2A', 'stomatolog', '1h', '09:00','2019-07-04T10:00', 'Sara', 'Saric',3,11,0,'true', 'true');
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme,terminoperacija, lekarimeoperacija, lekarprezimeoperacija, idlekaroperacija, idpacijenta, ocenaoperacije, obavljenaoperacija, zakazan) values (1300, '25.12.2019', 'Jovan Jovic', '2A', 'ocno','2h' ,'09:00','2019-11-10T11:50', 'Mara', 'Maric',2,11,0,'true', 'true');
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme,terminoperacija, lekarimeoperacija, lekarprezimeoperacija, idlekaroperacija, idpacijenta, ocenaoperacije, obavljenaoperacija, zakazan) values (2300, '25.12.2019', 'Jovan Jovic', '2A', 'url','2h' ,'09:00','2019-12-01T09:00', 'Zoran', 'Zoric',1,12,0,'true', 'true');
+
+insert into odsustvo(idkorisnika,pocetak,kraj,odobren) values(10,'2019-11-04','2019-12-05',true);
+
 
 insert into lek (sifra,naziv,dodatno) values ('APIISEF','Aspirin','ASPIRIN protect inhibira slepljivanje i nagomilavanje krvnih pločica (trombocita) i na taj način sprečava
 nastajanje krvnih ugrušaka (tromba) – inhibicija agregacije trombocita. 

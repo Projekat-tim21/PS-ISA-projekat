@@ -167,7 +167,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/prikazKalendaraSala").permitAll()
 		.antMatchers("/getCalendar").permitAll()
 		.antMatchers("/zakazivanjePregledaIzaListeLekara").permitAll()
-		.antMatchers("/zapocniOperacijeP").permitAll()
+		.antMatchers("/zapocniOperacijeP/*").permitAll()
 		.antMatchers("/listaSvihDefinisanihPregledaZaLekara").permitAll()
 		.antMatchers("/uspesnoZakazanPregled").permitAll()
 		.antMatchers("/vratiSeNaLoginBezDobrodosli2").permitAll()
@@ -193,6 +193,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/radniKalendar/*").permitAll()
 	    .antMatchers("/zapocniOperacijeP").permitAll()
 	    .antMatchers("/naListuLekaraSaZakazivanjaPregleda").permitAll()
+	    .antMatchers("/zapocniOperacijeP/*/*").permitAll()
 	    .antMatchers("/odobreniZahteviKodPacijenta").permitAll()
 	    .antMatchers("/idiNaLoginPoslePotvrde").permitAll()
 	    .antMatchers("/oceniLekaraOperacija").permitAll()
@@ -202,6 +203,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/pregled").permitAll()
 	    .antMatchers("/korakUnazadNaLisuLekara").permitAll()
 
+	    .antMatchers("/zahtevZaOdsustvo").permitAll()
+	    .antMatchers("/zahtevZaOdsustvoo/*").permitAll()
+	    .antMatchers("/medSestraPocetna").permitAll()
+	    .antMatchers("/profilSestra").permitAll()
+	    .antMatchers("/izmenaPodatakaSestre/*").permitAll()
+	    .antMatchers("/sacuvajIzmeneProfila/*").permitAll()
+	    .antMatchers("/radniKalendarSestre").permitAll()
+	    .antMatchers("/getCalendarSestra").permitAll()
+	    .antMatchers("/noviPregled/*/*").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

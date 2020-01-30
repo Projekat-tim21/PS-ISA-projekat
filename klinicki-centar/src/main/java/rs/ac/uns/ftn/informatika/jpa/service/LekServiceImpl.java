@@ -53,4 +53,9 @@ public class LekServiceImpl {
 	 public Page<Lek> listUsers(Pageable pageable) {
 	        return lekRepository.findAll(pageable);
 	    }
+
+	public Lek findByNaziv(String string) {
+		// TODO Auto-generated method stub
+		return lekRepository.findByNaziv(string);
+	}
 }

@@ -92,8 +92,8 @@ public class EmailService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(k.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("Administrator KC");
-		mail.setText("Pozdrav " + k.getIme() + ",\n\nPostavljeni ste za administratora klinickog centra.");
+		mail.setSubject("Postavljanje za administratora klinickog centra");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nPostavljeni ste za administratora klinickog centra. Vasa lozinka i korsinicko ime su sledeci->>\n\n Korisnicko ime:  "+ k.getUsername() +"\n\n Lozinka: "+ k.getPassword());
 		javaMailSender.send(mail);
 
 		System.out.println("Email poslat!");
@@ -186,8 +186,8 @@ public class EmailService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(k.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("Administrator Klinike");
-		mail.setText("Pozdrav " + k.getIme() + ",\n\nPostavljeni ste za administratora klinike.");
+		mail.setSubject("Postavljanje za administratora klinike");
+		mail.setText("Pozdrav " + k.getIme() + ",\n\nPostavljeni ste za administratora klinike. Vasa lozinka i korsinicko ime su sledeci->>\n\n Korisnicko ime:  "+ k.getUsername() +"\n\n Lozinka: "+ k.getPassword());
 		javaMailSender.send(mail);
 
 		System.out.println("Email poslat!");
