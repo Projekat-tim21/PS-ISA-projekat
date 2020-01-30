@@ -582,4 +582,16 @@ public class LekarZaPrikazIPregledeController {
 		return "login";
 	}
 
+	@RequestMapping("/naListuLekaraSaZakazivanjaPregleda")
+	public String vratiSeNazadNaListuLekara(HttpServletRequest request) {
+		request.setAttribute("lipi", lipServis.pokaziSveKorisnikeKojiSuLekari());
+		request.setAttribute("mode", "ALL_LEKARI");
+		return "listaLekara";
+		//return "redirect:/prikaziListuLekara";
+	}
+
+	
+	
+	
+	
 }
