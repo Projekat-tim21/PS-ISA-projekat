@@ -111,6 +111,8 @@ public class PreglediController {
 		return "listaPregledaIOperacija";
 	}
 	
+	
+
 	@PostMapping("/ocenaLekaraPregled/{pregledId}/{lekarid}/{korisnikid}")
 	public String mejlOdbijanja(@ModelAttribute Pregled pregled,@PathVariable Long korisnikid,@PathVariable Long pregledId,@PathVariable Long lekarid, HttpServletRequest request) {
 
