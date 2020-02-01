@@ -103,6 +103,7 @@ insert into zaposleni(idklinike, idlekara) values (7,5);
 
 insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',375313,16,false,6);
 insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',375313,16,false,5);
+
 insert into leks(lek_id,informacijepregled_id) values(1,1);
 insert into leks(lek_id,informacijepregled_id) values(1,2);
 insert into leks(lek_id,informacijepregled_id) values(1,3);

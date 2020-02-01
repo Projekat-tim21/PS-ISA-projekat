@@ -116,10 +116,10 @@ public class LekarController {
 	        return map;
 	    }
 	 
-	 @PostMapping("/noviPregled/{lekarId}/{korisnikId}")
-	    public String noviAdminKlinike(@PathVariable Long lekarId,@PathVariable Long korisnikId,
+	 @PostMapping("/noviPregled/{korisnikId}/{lekarId}")
+	    public ModelAndView noviAdminKlinike(@PathVariable Long korisnikId,@PathVariable Long lekarId,
 				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
-	        String result = "redirect://radniKalendar/{lekarId}";
+	        String result = "redirect://radniKalendar{lekarId}";
 	        HttpSession session = request.getSession();
 			session.setAttribute("id", korisnikId);
 			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
@@ -148,6 +148,9 @@ public class LekarController {
 	        System.out.println(korisnikId);
 	        infor.setOveren(false);
 	        infoService.saveInformacije(infor);
-	        return result;
+	        //return result;
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("uspesan");
+	        return modelAndView;
 	    }
 }

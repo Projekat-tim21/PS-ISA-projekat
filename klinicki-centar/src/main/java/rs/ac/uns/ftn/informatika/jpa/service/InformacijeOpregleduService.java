@@ -30,9 +30,9 @@ public class InformacijeOpregleduService {
 		
 		List<InformacijeOpregledu> overi=new ArrayList<InformacijeOpregledu>();
 		for(InformacijeOpregledu infp : infoRepo.findAll()) {
-		//	if(infp.getOveren()==false) {
+			if(infp.getOveren()==false) {
 				overi.add(infp);
-			//}
+			}
 		}
 		return overi;
 		
@@ -41,5 +41,10 @@ public class InformacijeOpregleduService {
 	public Object findOne(Long id) {
 		// TODO Auto-generated method stub
 		return infoRepo.findById(id).orElseGet(null);
+	}
+
+	public void saveRecept(InformacijeOpregledu i) {
+		// TODO Auto-generated method stub
+		infoRepo.save(i);
 	}
 	}

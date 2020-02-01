@@ -202,11 +202,6 @@
 		</c:when>
 	</c:choose>
 	
-	<div class="btn-group" style="width:80%">
-  <button style="width:40%"><a href="/zakazivanjePregleda">Zakazi pregled</a></button>
-  <button style="width:40%"><a href="/zakazivanjeOperacije">Zakazi operaciju</a></button>
-</div>
-	
 	<div id='calendar'></div>
 
 </body>
