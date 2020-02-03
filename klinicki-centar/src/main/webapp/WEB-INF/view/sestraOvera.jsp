@@ -9,6 +9,7 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
 <title>Sestra</title>
+<link rel="shortcut icon" href="#">
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <style>
@@ -50,44 +51,32 @@ body,html {
 	<c:choose>
 	<c:when test="${mode=='ALL_USERS' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Svi Pacijenti</h3>
+				<h3>Za overu</h3>
 				<hr>
 				<div class="table-responsive">
 					<table id="myTable" class="table table-striped table-bordered">
 						<thead>
 							<tr>
 								<th><a href="javascript:SortTable(0,'N');">Id</a></th>
-								<th><a href="javascript:SortTable(1,'T');">Korisnicko ime</a></th>
-								<th ><a href="javascript:SortTable(2,'T');">Ime</a></th>
-								<th><a href="javascript:SortTable(3,'T');">Prezime</a></th>
-								<th><a href="javascript:SortTable(4,'N');">JBO</a></th>
-								<th><a href="javascript:SortTable(5,'T');">Email</a></th>
-								<th><a href="javascript:SortTable(6,'T');">Adresa</a></th>
-								<th><a href="javascript:SortTable(7,'T');">Grad</a></th>
-								<th><a href="javascript:SortTable(8,'T');">Drzava</a></th>
-								<th><a href="javascript:SortTable(9,'N');">Telefon</a></th>
-								<th>Detaljnije</th>
+							
+								<th ><a href="javascript:SortTable(2,'T');">Dijagnoza</a></th>
+								<th>Overi recept</th>
 						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="korisnik" items="${korisnici }">
+							<c:forEach var="inofr" items="${info }" >
+								
 								<tr>
-									<td>${korisnik.id}</td>
-									<td>${korisnik.username}</td>
-									<td>${korisnik.ime}</td>
-									<td>${korisnik.prezime}</td>
-									<td>${korisnik.jedBrOsig}</td>
-									<td>${korisnik.email}</td>
-									<td>${korisnik.adresa}</td>
-									<td>${korisnik.grad}</td>
-									<td>${korisnik.drzava}</td>
-									<td>${korisnik.telefon}</td>
-									<td><a href="/vidijos/${korisnik.getId()}" >Vidi jos</a></td>
+									<td>${inofr.id}</td>
+									
+									<td>${inofr.dijagnoza}</td>
+									<td><a href="/overi/${inofr.getId()}" >Overi</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+				
 				</div>
 			</div>
 		</c:when>
@@ -141,23 +130,7 @@ body,html {
     }
 
 
-    var getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    };
-
-    var idPacijenta = getUrlParameter('id');
-    console.log(idPacijenta);
+  
 
     function addIdPac (element){
     	element.href = element.href+"?id="+idPacijenta;

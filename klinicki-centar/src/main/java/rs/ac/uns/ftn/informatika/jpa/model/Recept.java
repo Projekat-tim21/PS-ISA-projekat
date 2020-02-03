@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="recept")
@@ -34,6 +35,20 @@ public class Recept {
 	
 	@Column(name="overen")
 	private Boolean overen;
+	
+
+	@Version
+	private Long version;
+	
+	
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	public Long getId() {
 		return id;

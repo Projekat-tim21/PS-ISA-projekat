@@ -212,6 +212,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/radniKalendarSestre").permitAll()
 	    .antMatchers("/getCalendarSestra").permitAll()
 	    .antMatchers("/noviPregled/*/*").permitAll()
+	    .antMatchers("/overaRecepta").permitAll()
+	    .antMatchers("/overi/*").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.csrf().disable();

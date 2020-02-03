@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="java.sql.*" %>
-<%ResultSet resultset =null;%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Uspesna akcija</title>
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -14,8 +14,6 @@
     <meta name="keywords" content="au theme template">
 	<link rel="shortcut icon" href="#" />
 	
-    <!-- Title Page-->
-    <title>Pregled</title>
 
   
     <!-- Bootstrap CSS-->
@@ -224,22 +222,7 @@ transition: all 0.3s ease 0s;
     </style>
 
 </head>
-
-<body class="my-login-page">
-
-<%
-    try{
-//Class.forName("com.mysql.jdbc.Driver").newInstance();
-Connection connection = 
-         DriverManager.getConnection
-            ("jdbc:postgresql://localhost:5432/jpa?user=postgres&password=root");
-
-       Statement statement = connection.createStatement() ;
-
-       resultset =statement.executeQuery("select * from dijagnoza") ;
-%>
-
-
+<body>
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
@@ -255,175 +238,11 @@ Connection connection =
 			</div>
 		</div>
 	</div>
-
-<section class="h-100">
-    <div class="container h-100">
-        <div class="row justify-content-md-center h-100">
-            <div class="card-wrapper">
-                <div class="card fat">
-                    <div class="card-body">
-                    <c:choose>
-		<c:when test="${mode=='MODE_ZKARTON' }">
-			<div class="container text-center">
-				<h3>Pacijent: ${korisnik.ime } ${korisnik.prezime } </h3>
-				<hr>
-			</div>
-		</c:when>
-	</c:choose>
-	
-	   <c:choose>
-		<c:when test="${mode=='MODE_LEKAR' }">
-			
-		</c:when>
-	</c:choose>
-                        <h4 align="center">PREGLED</h4>
-                        <hr>
-                        <form action="/noviPregled/${korisnik.id}/${lekar.id }" method="POST">
-					<div class="form-group">
-						<label>Informacije o pregledu</label>
-						<div >
-							<textarea rows="10" cols="100" class="form-control" id="informacije" name="informacije" ></textarea>
-						</div>
-					</div>
-                            
-                             <div class="form-group">
-                                <label for="dijagnozaId">Dijagnoza</label>
-                                <hr>
-                                <select name=didi>
-       								 <%  while(resultset.next()){ %>
-          							  <option><%= resultset.getString(3)%></option>
-      									  <% } %>
-     						   </select> </div>
-     					
-    <label for="dijagnoza">Recept</label> 
-     				  <hr>
-
-<c:if test="${not empty lists}">
-     				<select multiple="multiple" size="5" name="database1">
-    					<c:forEach items="${lists}" var="lists">
-      						 <option value="${lists}">
-      							  ${lists}
-  							  </option>
-						</c:forEach>
-					</select>
-					</c:if>
-     		<hr>		
-     				<div class="button_cont" id="myBtn" align="center"><button class="example_e" target="_blank" rel="nofollow noopener">Zakazi operaciju</button></div>
-     				<!-- The Modal -->
-						<div id="myModal" class="modal">
-
- 					 <!-- Modal content -->
-  						<div class="modal-content">
-  						  <span class="close">&times;</span>
-   							 <p>Zakazivanje operacije</p>
-   							 <form method="POST" action="sacuvajOperaciju">
-   							 <input type="datetime-local" name="terminoperacija" id="terminoperacija"/>
-									<input type="hidden" id="idlekaroperacija" name="idlekaroperacija" value="${lekar.id }"> 
-									<input type="hidden" id="pacijentId" name="pacijentId" value="${korisnik.id}"> 
-  							<input type="submit" name="zakazi">
-  							</div>
-
-						</div>
-     				<hr>
-     				
-     				<div class="button_cont" id="myBtn1" align="center"><button class="example_e"  target="_blank" rel="nofollow noopener">Zakazi pregled</button></div>
-					<!-- The Modal -->
-						<div id="myModal1" class="modall">
-
- 					 <!-- Modal content -->
-  						<div class="modal-contentt">
-  						  <span class="closee">&times;</span>
-   							 <p>Novi</p>
-  							</div>
-
-						</div>
-<hr>
-<%
-//**Should I input the codes here?**
-        }
-        catch(Exception e)
-        {
-             out.println("wrong entry"+e);
-        }
-
-%>
-							
- 							<div class="form-group no-margin">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    SACUVAJ
-                                </button>
-                            </div>
-                        </form>
-                        
-                        	   <hr>
-     				
-     				
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<script>// Get the modal
-var modal = document.getElementById("myModal");
-
-//Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-//Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-//When the user clicks the button, open the modal 
-btn.onclick = function() {
-modal.style.display = "block";
-}
-
-//When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-modal.style.display = "none";
-}
-
-//When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal) {
- modal.style.display = "none";
-}
-}
-
-var modal1 = document.getElementById("myModal1");
-
-//Get the button that opens the modal
-var btn1 = document.getElementById("myBtn1");
-
-//Get the <span> element that closes the modal
-var span1 = document.getElementsByClassName("closee")[0];
-//When the user clicks the button, open the modal 
-btn1.onclick = function() {
-modal1.style.display = "block";
-}
-
-//When the user clicks on <span> (x), close the modal
-span1.onclick = function() {
-modal1.style.display = "none";
-}
-
-//When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal1) {
- modal1.style.display = "none";
-}
-}
-
-function izbaciAlert(){
-	alert("Uspesno kreirana operacija");
-	}
-
-function izbaciAlertP(){
-	alert("Uspesno kreiran pregled");
-	}
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/app.js"></script>
+<p>Pregled zavrsen</p>
 </body>
+<script>
+  
+</script>
+
 </html>
+

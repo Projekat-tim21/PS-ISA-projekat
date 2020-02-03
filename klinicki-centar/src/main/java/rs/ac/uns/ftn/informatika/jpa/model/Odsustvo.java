@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="odsustvo")
@@ -26,6 +27,17 @@ public class Odsustvo {
 	
 	@Column(name="idkorisnika")
 	private long idkorisnika;
+	
+	@Version
+	private Long version;
+	
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	public Odsustvo(Long id, String pocetak, String kraj, boolean odobren, long idkorisnika) {
 		super();

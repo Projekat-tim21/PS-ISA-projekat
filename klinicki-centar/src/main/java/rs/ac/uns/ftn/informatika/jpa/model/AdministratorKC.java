@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.informatika.jpa.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Version;
 
 
 @Entity
@@ -13,6 +14,19 @@ public class AdministratorKC extends Korisnik{
 	@Column(name = "predefinisani", nullable = false)
 	private boolean predefinisani;
 	
+
+	@Version
+	private Long version;
+	
+	
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public AdministratorKC() {
 		
 	}
@@ -33,5 +47,4 @@ public class AdministratorKC extends Korisnik{
 		this.predefinisani = predefinisani;
 	}
 	
-
 }

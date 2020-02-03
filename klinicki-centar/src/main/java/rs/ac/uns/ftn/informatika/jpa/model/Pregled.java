@@ -18,16 +18,16 @@ public class Pregled {
 	private Long id;
 	
 	
-	@Column(name="datum", nullable=false)
+	@Column(name="datum", nullable=true)
 	private String datum;   //ovo se ne koristi vise
 
-	@Column(name = "vreme", nullable = false)
+	@Column(name = "vreme", nullable = true)
 	private String vreme;   //ovo se ne koristi vise
 	
 	@Column(name="terminpregled", nullable=true)
 	private String terminpregled;
 	
-	@Column(name="tip", nullable=false)
+	@Column(name="tip", nullable=true)
 	private String tip;
 	
 	@Column(name="lekarimepregled", nullable=true)
@@ -42,24 +42,24 @@ public class Pregled {
 	@Column(name="idpacijenta", nullable=true)
 	private Long idpacijenta;
 	
-	@Column(name = "lekar", nullable = false)
+	@Column(name = "lekar", nullable = true)
 	private String lekar;  //ovo se ne koristi vise
 	
-	@Column(name = "cena", nullable = false)
+	@Column(name = "cena", nullable = true)
 	private int cena;
 	
 	@Column(name="ocenapregleda", nullable=true)
 	private double ocenapregleda;
 
-	@Column(name="trajanje", nullable=false)
+	@Column(name="trajanje", nullable=true)
 	private String trajanje;
 
 		
-	@Column(name="sala", nullable=false)
+	@Column(name="sala", nullable=true)
 	private String sala;
 	
 	
-	@Column(name = "zakazan", nullable = false)
+	@Column(name = "zakazan", nullable = true)
 	private Boolean zakazan;
 	
 	@Column(name="obavljenpregled", nullable=true)

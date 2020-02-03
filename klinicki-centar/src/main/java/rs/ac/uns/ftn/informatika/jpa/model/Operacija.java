@@ -16,10 +16,10 @@ public class Operacija {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="datum", nullable=false)
+	@Column(name="datum", nullable=true)
 	String datum; //ovo se ne koristi vise
 	
-	@Column(name="vreme", nullable=false)
+	@Column(name="vreme", nullable=true)
 	String vreme; //ovo se ne koristi vise
 	
 	@Column(name="terminoperacija", nullable=true)
@@ -37,7 +37,7 @@ public class Operacija {
 	@Column(name="idpacijenta", nullable=true)
 	private Long idpacijenta;
 	
-	@Column(name="tip", nullable=false)
+	@Column(name="tip", nullable=true)
 	private String tip;
 	
 	@Column(name="ocenaoperacije", nullable=true)
@@ -46,19 +46,19 @@ public class Operacija {
 	@Column(name="obavljenaoperacija", nullable=true)
 	private boolean obavljenaoperacija;
 	
-	@Column(name = "zakazan", nullable = false)
+	@Column(name = "zakazan", nullable = true)
 	private Boolean zakazan;
 	
-	@Column(name="trajanje", nullable=false)
+	@Column(name="trajanje", nullable=true)
 	private String trajanje;
 	
-	@Column(name="sala", nullable=false)
+	@Column(name="sala", nullable=true)
 	private String sala;
 	
-	@Column(name="lekar", nullable=false)
+	@Column(name="lekar", nullable=true)
 	String lekar;  //ovo se ne koristi
 	
-	@Column(name="cena", nullable=false)
+	@Column(name="cena", nullable=true)
 	int cena;
 
 	@Version

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -33,6 +34,28 @@ public class Calendar {
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "korisnik_id")
 	private Korisnik korisnik;
+	
+
+	@Version
+	private Long version;
+
+	
+	
+	public Set<TerminiSaId> getTermini() {
+		return termini;
+	}
+
+	public void setTermini(Set<TerminiSaId> termini) {
+		this.termini = termini;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	public Long getId() {
 		return id;

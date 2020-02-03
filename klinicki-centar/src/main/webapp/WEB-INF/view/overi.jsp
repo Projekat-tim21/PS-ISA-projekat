@@ -8,38 +8,23 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Sestra</title>
+<title>Overa recepta</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
-<style>
-body,html {
-  height: 100%;
-}
+<link rel="shortcut icon" href="#" />
 
-.bg {
-  /* The image used */
-  background-image: url(static/images/hhh.jpg);
-
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-</style>
 </head>
-<body class="my-login-page">
+<body>
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 			<h2>MEDICINSKA SESTRA</h2>
 				<ul class="nav navbar-nav">
-				<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
-				<li><a href="/overaRecepta">Overa recepata</a></li>
+					<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
 					<li><a href="/zahtevZaOdsustvo?id=${id}">Odsustvo/Odmor</a></li>
 					<li><a href="/profilSestra?id=${id}">Profil</a></li>
+					
+					<li><a href="/radniKalendarSestre?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 			
@@ -48,52 +33,36 @@ body,html {
 	</div>
 	
 	<c:choose>
-	<c:when test="${mode=='ALL_USERS' }">
-			<div class="container text-center" id="tasksDiv">
-				<h3>Svi Pacijenti</h3>
+		<c:when test="${mode=='MODE_OVERA' }">
+			<div class="container text-center">
+				<h3>Informacije</h3>
 				<hr>
-				<div class="table-responsive">
-					<table id="myTable" class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<th><a href="javascript:SortTable(0,'N');">Id</a></th>
-								<th><a href="javascript:SortTable(1,'T');">Korisnicko ime</a></th>
-								<th ><a href="javascript:SortTable(2,'T');">Ime</a></th>
-								<th><a href="javascript:SortTable(3,'T');">Prezime</a></th>
-								<th><a href="javascript:SortTable(4,'N');">JBO</a></th>
-								<th><a href="javascript:SortTable(5,'T');">Email</a></th>
-								<th><a href="javascript:SortTable(6,'T');">Adresa</a></th>
-								<th><a href="javascript:SortTable(7,'T');">Grad</a></th>
-								<th><a href="javascript:SortTable(8,'T');">Drzava</a></th>
-								<th><a href="javascript:SortTable(9,'N');">Telefon</a></th>
-								<th>Detaljnije</th>
-						<!--		<th>Sifra</th>  -->
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="korisnik" items="${korisnici }">
-								<tr>
-									<td>${korisnik.id}</td>
-									<td>${korisnik.username}</td>
-									<td>${korisnik.ime}</td>
-									<td>${korisnik.prezime}</td>
-									<td>${korisnik.jedBrOsig}</td>
-									<td>${korisnik.email}</td>
-									<td>${korisnik.adresa}</td>
-									<td>${korisnik.grad}</td>
-									<td>${korisnik.drzava}</td>
-									<td>${korisnik.telefon}</td>
-									<td><a href="/vidijos/${korisnik.getId()}" >Vidi jos</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+					</div>
+				<div>
+						<label class="control-label col-md-4">Pacijent</label>
+						<label >${korisnik.pacijentId }</label>
 				</div>
-			</div>
+				<div>
+						<label class="control-label col-md-4">Lekar</label>
+						<label >${korisnik.lekarId }</label>
+				</div>
+				<div>
+						<label class="control-label col-md-4">Pregled</label>
+						<label >${korisnik.informacije }</label>
+				</div>
+				
+					<hr>
 		</c:when>
-</c:choose>
-	
 
+
+
+
+
+
+
+	</c:choose>
+	
+</body>
 <script>
     function saveData(id) {
         console.log('save Data -  ' + id)
@@ -141,23 +110,7 @@ body,html {
     }
 
 
-    var getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    };
-
-    var idPacijenta = getUrlParameter('id');
-    console.log(idPacijenta);
+  
 
     function addIdPac (element){
     	element.href = element.href+"?id="+idPacijenta;
@@ -341,10 +294,8 @@ body,html {
 
    
     </script>
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/app.js"></script>
 <script src="static/js/edit.js"></script>
-</body>
 </html>
