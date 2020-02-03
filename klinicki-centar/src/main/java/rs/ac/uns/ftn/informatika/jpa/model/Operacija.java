@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="operacija")
@@ -60,7 +61,19 @@ public class Operacija {
 	@Column(name="cena", nullable=false)
 	int cena;
 
+	@Version
+	private Long version;
 	
+	
+	
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public String getTerminoperacija() {
 		return terminoperacija;
 	}

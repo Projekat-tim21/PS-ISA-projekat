@@ -6,7 +6,7 @@ insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Mare Ilic 9
 insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Atinska 9', 'ocno', 'Srbija', 'Nis', 'Aria', 6 );
 insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Atinska 9', 'ocno', 'Srbija', 'Novi Sad', 'Zimer', 9 );
 insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Kostova 9', 'url', 'Srbija', 'Novi Sad', 'Cestion', 7 );
-insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Njegoseva 9', 'url', 'Srbija', 'Kragujevac', 'Cestion', 10 );
+insert into klinika(adresa, tip, drzava, grad,naziv,ocena) values ( 'Njegoseva 9', 'url', 'Srbija', 'Kragujevac', 'Zdravlje', 10 );
 
 
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,klinika_id,login ) values ('Branka Radicevica 5', 'Srbija', 'miki@gmail.com',  'Novi Sad', 'Miki', '586623556', 'miki', 'Miki', '067528856', 'miki','TRUE','ADMIN_KLINIKE',1,true);

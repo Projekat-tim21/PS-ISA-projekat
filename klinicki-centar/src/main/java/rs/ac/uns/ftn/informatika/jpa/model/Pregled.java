@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 
 @Entity
@@ -69,6 +70,9 @@ public class Pregled {
 		return ocenapregleda;
 	}
 
+	@Version
+	private Long version;
+	
 	public void setOcenapregleda(double ocenapregleda) {
 		this.ocenapregleda = ocenapregleda;
 	}
@@ -83,6 +87,16 @@ public class Pregled {
 
 	public String getTerminpregled() {
 		return terminpregled;
+	}
+
+	
+	
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 	public void setTerminpregled(String terminpregled) {

@@ -11,6 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="korisnik3")
@@ -94,6 +95,10 @@ public class Korisnik {
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Klinika klinika;
 
+	
+	@Version
+	private Long version;
+	
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
 			String tezina, String kgrupa, String dioptrija, String alergije, String bolesti, String anamneza) {
@@ -113,16 +118,17 @@ public class Korisnik {
 		this.anamneza = anamneza;
 	}
 
-/*	public List<Pregled> getPregledi(){
-		return pregledi;
-	}
-	
-	public void setPregledi(List<Pregled> pregledi) {
-		this.pregledi = pregledi;
-	}*/
-	
+
 	public String getDatum() {
 		return datum;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 	public void setDatum(String datum) {

@@ -124,6 +124,9 @@ body {
 <script type="text/javascript">
 
 document.getElementById("clickMe").onclick = function () { alert('Vas zahtev je uspesno prosledjen administratoru klinike!');};
+//var mile=document.getElementById("idtermina");
+var mile = document.getElementById("idtermina").value;
+console.log(mile);
 
 function alertzazahtev(){
 	alert("Vas zahtev je uspesno prosledjen administratoru klinike");
