@@ -31,7 +31,7 @@ public class Sala {
 	public boolean isRezervisana() {
 		return rezervisana;
 	}
-
+/*
 	@Version
 	private Long version;
 
@@ -46,7 +46,7 @@ public class Sala {
 		this.version = version;
 	}
 
-
+*/
 	public void setRezervisana(boolean rezervisana) {
 		this.rezervisana = rezervisana;
 	}

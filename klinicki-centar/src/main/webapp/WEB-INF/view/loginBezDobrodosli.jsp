@@ -58,7 +58,7 @@ body {
 				<h3>Pregled podataka</h3>
 				<hr>
 				<form class="form-horizontal" method="POST"
-					action="sacuvajupdateNaLogin">
+					action="sacuvajupdateNaLogin?id=${korisnik.id}">
 
 					<div class="form-group">
 						<label class="control-label col-md-3">Id</label>

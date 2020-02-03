@@ -258,7 +258,7 @@ public class KorisnikContreller {
 			HttpServletRequest request) {
 	
 		String id2 = request.getParameter("id");
-		
+		System.out.println("id jeeee" + " "+id2);
 		HttpSession session = request.getSession();
 		session.setAttribute("id", id2);
 		

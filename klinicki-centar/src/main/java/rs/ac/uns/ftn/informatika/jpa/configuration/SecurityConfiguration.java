@@ -130,6 +130,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/korakUnazadNaLogin").permitAll()
 		.antMatchers("/kartonZ").permitAll()	
 		.antMatchers("/admin").permitAll()	
+		.antMatchers("/odobreniZahteviKodPacijentaSaMaila").permitAll()
 		.antMatchers("/sacuvajNovaLozinka").permitAll()
 		.antMatchers("/radniKalendar").permitAll()
 		.antMatchers("/kartonZ").permitAll()

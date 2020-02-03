@@ -30,10 +30,10 @@ public class TerminiSaId {
 	
 	@Column(name="lekarprezime")
 	private String lekarprezime;
-	
+	/*
 	@Version
 	private Long version;
-	
+	*/
 	@Column(name="tippregleda")
 	private String tippregleda;
 	
@@ -58,8 +58,38 @@ public class TerminiSaId {
 	@Column(name="prikaz", nullable=true)
 	private boolean prikaz;
 
+	@Column(name="poslatnaobradu", nullable=true)
+	private boolean poslatnaobradu;
 	
 	
+	public TerminiSaId(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
+			String sala, double cena, double popust, boolean zakazan, long idkorisnika, boolean odobrenpregled,
+			boolean prikaz, boolean poslatnaobradu) {
+		super();
+		this.id = id;
+		this.termin = termin;
+		this.lekarId = lekarId;
+		this.lekarime = lekarime;
+		this.lekarprezime = lekarprezime;
+		this.tippregleda = tippregleda;
+		this.sala = sala;
+		this.cena = cena;
+		this.popust = popust;
+		this.zakazan = zakazan;
+		this.idkorisnika = idkorisnika;
+		this.odobrenpregled = odobrenpregled;
+		this.prikaz = prikaz;
+		this.poslatnaobradu = poslatnaobradu;
+	}
+
+	public boolean isPoslatnaobradu() {
+		return poslatnaobradu;
+	}
+
+	public void setPoslatnaobradu(boolean poslatnaobradu) {
+		this.poslatnaobradu = poslatnaobradu;
+	}
+/*
 	public Long getVersion() {
 		return version;
 	}
@@ -67,7 +97,7 @@ public class TerminiSaId {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
+*/
 	public boolean isPrikaz() {
 		return prikaz;
 	}
@@ -260,6 +290,8 @@ public class TerminiSaId {
 	public void setPopust(double popust) {
 		this.popust = popust;
 	}
+
+	
 	
 
 	

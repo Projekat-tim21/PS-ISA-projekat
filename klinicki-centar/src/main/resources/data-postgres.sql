@@ -46,15 +46,22 @@ insert into sala(id, naziv, br, datum, rezervisana) values (7, 'Novo srce', 11, 
 
 
 
-insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (3, '2019-12-04T05:42', '2B', 1000, 10 , 'Sara', 'Saric','dermatologija','false',0,'false','true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',0,'false', 'true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',0, 'false', 'true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (16, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (16, '2019-12-05T06:50', '2B', 1500, 20, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (16, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz) values (16, '2019-12-05T06:50', '2B', 1500, 20, 'Pedja', 'Matic', 'dermatologija', 'false',0, 'false', 'true');
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz) values (16, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true');
+insert into termini(lekar_id, termin,sala, cena, popust, lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (3, '2019-12-04T05:42', '2B', 1000, 10 , 'Sara', 'Saric','dermatologija','false',0,'false','true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (2, '2019-10-04T06:50', '1A', 2000, 15, 'Mara', 'Maric', 'url','false',0,'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (4, '2019-12-05T06:50', '2B', 1500, 20, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (6, '2019-12-05T06:50', '2B', 1500, 20, 'Pedja', 'Matic', 'dermatologija', 'false',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu) values (4, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true','false');
 
+
+/*unapred definisani*/
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu) values (2, '2019-04-04T05:30', '3C', 800, 0, 'Mara', 'Maric', 'url', 'true',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (4, '2019-06-05T06:50', '2B', 1500, 20, 'Kata', 'Katic', 'ocno', 'true',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu) values (2, '2019-11-04T04:10', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'true',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu) values (6, '2019-12-05T06:15', '2B', 900, 10, 'Pedja', 'Matic', 'dermatologija', 'true',0, 'false', 'true','false');
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu) values (4, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'true',0, 'false', 'true','false');
 
 
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled, terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda) values (500, '27.12.2019', 'Jovan Jovic', '203', 'dermatolog', '15min', '09:00', TRUE, 'true', '2019-12-04T09:42', 'Sara', 'Saric',3,11,0);

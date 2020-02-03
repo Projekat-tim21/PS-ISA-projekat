@@ -60,7 +60,7 @@ public class Operacija {
 	
 	@Column(name="cena", nullable=true)
 	int cena;
-
+/*
 	@Version
 	private Long version;
 	
@@ -73,7 +73,7 @@ public class Operacija {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
+*/
 	public String getTerminoperacija() {
 		return terminoperacija;
 	}
