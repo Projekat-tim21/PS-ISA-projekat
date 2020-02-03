@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="dijagnoza")
@@ -24,6 +25,20 @@ public class Dijagnoza {
 	
 	@Column(name="dodatno",unique=true,nullable=false)
 	String dodatno;
+
+
+	@Version
+	private Long version;
+	
+	
+	
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	public Dijagnoza(String sifra, String naziv, String dodatno) {
 		super();

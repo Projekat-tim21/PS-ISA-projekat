@@ -35,6 +35,11 @@ public class OperacijeService {
 		return orepo.findOneById(id);
 	}
 
+	public void save(Operacija o) {
+		// TODO Auto-generated method stub
+		orepo.save(o);
+	}
+
 	
 
 }

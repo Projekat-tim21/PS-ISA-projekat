@@ -308,20 +308,25 @@ Connection connection =
 					</select>
 					</c:if>
      		<hr>		
-     				<div class="button_cont" id="myBtn" align="center"><a class="example_e" target="_blank" rel="nofollow noopener">Zakazi operaciju</a></div>
+     				<div class="button_cont" id="myBtn" align="center"><button class="example_e" target="_blank" rel="nofollow noopener">Zakazi operaciju</button></div>
      				<!-- The Modal -->
 						<div id="myModal" class="modal">
 
  					 <!-- Modal content -->
   						<div class="modal-content">
   						  <span class="close">&times;</span>
-   							 <p>Some text in the Modal..</p>
+   							 <p>Zakazivanje operacije</p>
+   							 <form method="POST" action="sacuvajOperaciju">
+   							 <input type="datetime-local" name="terminoperacija" id="terminoperacija"/>
+									<input type="hidden" id="idlekaroperacija" name="idlekaroperacija" value="${lekar.id }"> 
+									<input type="hidden" id="pacijentId" name="pacijentId" value="${korisnik.id}"> 
+  							<input type="submit" name="zakazi">
   							</div>
 
 						</div>
      				<hr>
      				
-     				<div class="button_cont" id="myBtn1" align="center"><a class="example_e"  target="_blank" rel="nofollow noopener">Zakazi pregled</a></div>
+     				<div class="button_cont" id="myBtn1" align="center"><button class="example_e"  target="_blank" rel="nofollow noopener">Zakazi pregled</button></div>
 					<!-- The Modal -->
 						<div id="myModal1" class="modall">
 
@@ -408,6 +413,14 @@ if (event.target == modal1) {
  modal1.style.display = "none";
 }
 }
+
+function izbaciAlert(){
+	alert("Uspesno kreirana operacija");
+	}
+
+function izbaciAlertP(){
+	alert("Uspesno kreiran pregled");
+	}
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>

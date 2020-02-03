@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 public class Admin extends Korisnik {
@@ -23,8 +24,18 @@ public class Admin extends Korisnik {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
+
+	@Version
+	private Long version;
 	
-	
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public Long getId() {
 		return id;
 	}

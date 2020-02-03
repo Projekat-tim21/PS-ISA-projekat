@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +30,8 @@ import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
+import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
@@ -33,6 +39,7 @@ import rs.ac.uns.ftn.informatika.jpa.service.InformacijeOpregleduService;
 import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
+import rs.ac.uns.ftn.informatika.jpa.service.OperacijeService;
 import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 
 @Controller
@@ -61,6 +68,9 @@ public class LekarController {
 	 private DijagnozaServiceImpl dijagnozaService;
 	 @Autowired
 	 private TerminSaIdService terService;
+	 
+	 @Autowired
+	 private OperacijeService oService;
 
 	 @GetMapping("/radniKalendar")
 	    public ModelAndView kalendar(@RequestParam Long id, HttpServletRequest request) {
@@ -112,7 +122,7 @@ public class LekarController {
 	        return map;
 	    }
 	 
-	 @PostMapping("/noviPregled/{korisnikId}/{lekarId}")
+	 @RequestMapping(value="/noviPregled/{korisnikId}/{lekarId}", method =  RequestMethod.POST )
 	    public ModelAndView noviAdminKlinike(@PathVariable Long korisnikId,@PathVariable Long lekarId,
 				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
 	        String result = "redirect://radniKalendar{lekarId}";
@@ -149,4 +159,26 @@ public class LekarController {
 	        modelAndView.setViewName("uspesan");
 	        return modelAndView;
 	    }
+	 
+	 @PostMapping("/sacuvajOperaciju") // korisnik povezan sa valuom iz js
+		public String cuvajOperaciju(@ModelAttribute Operacija operacija, BindingResult bindingResult,
+				HttpServletRequest request) throws ParseException {
+		
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+			
+			Operacija o= new Operacija();
+			o.setIdlekaroperacija(operacija.getIdlekaroperacija());
+			o.setIdpacijenta(operacija.getIdpacijenta());
+			
+			Date datum=sdf.parse(operacija.getTerminoperacija());
+			o.setTerminoperacija(operacija.getTerminoperacija());
+			o.setZakazan(false);// nije zakazan
+			oService.save(o);
+			request.setAttribute("message", "uspesno kreirana operacija");
+			//request.setAttribute("mode", "VRATISE");
+			return "pregled";
+		}
+
+	 
+	 
 }

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="lek")
@@ -36,6 +37,28 @@ public class Lek {
 	
 	@ManyToMany(mappedBy = "leks")
 	private Set<InformacijeOpregledu> pregledi = new HashSet<InformacijeOpregledu>();
+	
+
+	@Version
+	private Long version;
+	
+	
+
+	public Set<InformacijeOpregledu> getPregledi() {
+		return pregledi;
+	}
+
+	public void setPregledi(Set<InformacijeOpregledu> pregledi) {
+		this.pregledi = pregledi;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	public Lek() {
 		
