@@ -69,10 +69,10 @@ public class Pregled {
 	public double getOcenapregleda() {
 		return ocenapregleda;
 	}
-
+/*
 	@Version
 	private Long version;
-	
+	*/
 	public void setOcenapregleda(double ocenapregleda) {
 		this.ocenapregleda = ocenapregleda;
 	}
@@ -90,7 +90,7 @@ public class Pregled {
 	}
 
 	
-	
+	/*
 	public Long getVersion() {
 		return version;
 	}
@@ -98,7 +98,7 @@ public class Pregled {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
+*/
 	public void setTerminpregled(String terminpregled) {
 		this.terminpregled = terminpregled;
 	}

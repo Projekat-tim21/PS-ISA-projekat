@@ -50,12 +50,12 @@ body {
 			<div class="container text-center">
 				<h3>Posalji zahtev za pregled</h3>
 				<hr>
-				<form class="form-horizontal" method="POST" action="posaljiZahtevZaPregledom?id=${idpac}"   >
+				<form class="form-horizontal" method="POST" action="posaljiZahtevZaPregledom?id=${idpac}&idtermina=${idtermina}"   >
 				
 					<div class="form-group">
 						<label class="control-label col-md-3">Termin</label>
 						<div class="col-md-6">
-							<input type="text"  class="form-control" id="id" name="termin"
+							<input type="text"  class="form-control" id="termin" name="termin"
 								value="${termini.termin }" readonly>
 								<span id="free"></span>
 						</div>

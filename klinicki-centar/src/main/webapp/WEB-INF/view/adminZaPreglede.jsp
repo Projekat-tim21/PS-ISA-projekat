@@ -36,7 +36,7 @@ body, html {
 				<ul class="nav navbar-nav">
 					<li><a href="/AdminPraviPreglede">Prikaz lekara</a></li>
 					<li><a href="/zahteviZaPregledom">Odobravanje zahteva</a></li>
-					<li><a href="/vratiSe?id=${lip.id}">Vrati se</a></li>
+		<!-- 			<li><a href="/vratiSe?id=${lip.id}">Vrati se</a></li>   -->
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 
@@ -146,7 +146,7 @@ body, html {
 
 <c:when test="${mode=='ALL_PREGLEDI_SA_ADMINA' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Lista pregleda</h3>
+				<h3>Lista pregleda <strong>${imeLekaraTransfer} ${przLekaraTransfer}</strong>  </h3>
 				<hr>
 				<div class="table-responsive">
 
@@ -182,7 +182,7 @@ body, html {
 
 
 		<c:when test="${mode=='ALL_PRAVIMOO' }">
-			<h3>Kreiraj pregled za lekara</h3>
+			<h3>Kreiraj pregled za lekara <strong>${imeLekaraTransfer} ${przLekaraTransfer}</strong> </h3>
 			<!-- 
 				<form onsubmit="return addItem('list', this.inputItem)">
 					<input type="datetime-local" id="inputItem"
@@ -226,15 +226,11 @@ body, html {
 					</div>
 				
 					<div>
-					<input type="submit" name="zakazi" onclick="izbaciAlert();">
+					<input type="submit" name="zakazi" name="potvrdi" onclick="izbaciAlert();">
 					</div>
 			</form>
-
-			<!-- ovaj button za sada nije potreban -->
-
-			<!-- 	<button onclick="ispis();">ispisi</button>   -->
-
 		</c:when>
+
 
 		<c:when test="${mode=='VRATISE' }">
 			<h3>
@@ -246,22 +242,16 @@ body, html {
 
 		<c:when test="${mode=='ALL_TERMINI' }">
 			<div class="container text-center" id="tasksDiv">
-				<h3>Lista slobodnih termina</h3>
+				<h3>Lista slobodnih termina za lekara <strong>${imeLekaraTransfer} ${przLekaraTransfer}</strong></h3>
 				<hr>
-				<!-- 	<h4>Sortiraj klinike</h4>
-			<span class="form-group">	
-			<button onclick="sortTablePoNazivu()">Po nazivu</button>
-			<button onclick="sortTablePoGradu()">Po gradu</button>   
-			</span>	 
-			 -->
+
 
 				<div class="table-responsive">
 					<table id="indextable" class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th><a href="javascript:SortTable(6,'N');">Id</a></th>
+								<th><a href="javascript:SortTable(0,'N');">Id termina</a></th>
 								<th><a href="javascript:SortTable(1,'D','mdy');">Termin</a></th>
-								<th><a href="javascript:SortTable(6,'N');">Id lekara</a></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -269,7 +259,6 @@ body, html {
 								<tr>
 									<td>${termini.id}</td>
 									<td>${termini.termin}</td>
-									<td>${termini.lekarId}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -284,15 +273,11 @@ body, html {
 	</c:choose>
 
 	<script>
-	//idTermina = document.getElementById('idHidden').value;
-	//var querystring = require('querystring');
-	//var qs = new Querystring();
-	//var v1 = querystring.get("id");
+
 	var url = window.location.href;
 	var idx = url.indexOf("=");
 	var idd = url.substring(idx+1, idx+3);
 	  console.log(idd);
-	//var id = parseInt(idd);
 	  console.log(idd);
 	document.getElementById('lekarId').value = idd;
 
@@ -335,44 +320,6 @@ body, html {
 			}
 
 	  
-	/*
-	//za listu
-	function addItem(list, inputField) { 
-		  var list = document.getElementById(list);
-		  var listItem = document.createElement("li");
-		  var mojaLista=new Array();
-		  listItem.innerText = inputField.value; // passed the field. 
-		  list.appendChild(listItem);
-		  mojaLista.push(listItem);
-		  return false; // stop submission
-		}
-*/
-   
-
-   // for (var i = 0; i < mojaLista .length; i ++ ){
-    //   window.console.log(mojaLista[i]);
-   // }
-	
-/*
-	var Foo = function(){
-	    document.getElementById( "a" ).setAttribute( "onClick", "javascript: Boo();" );
-	}
-
-	var Boo = function loadFilter() {
-	    var element = document.getElementById('list');
-	    var children = element.children;
-	    var filtered = [];
-	    for (var i = 0; i < children.length; i++) {
-	        if (children[i].textContent.startsWith('--')) {
-	            filtered.push(children[i].textContent);
-	        }
-	    }
-	    return filtered;
-	    alert (filtered);
-	}
-
-		*/
-		
 		//za sort
 		var TableIDvalue = "indextable";
 
@@ -539,27 +486,13 @@ body, html {
 				}
 			}
 		}
-/*
-		function getInputValue() {
-			// Selecting the input element and get its value 
-			var inputVal = document.getElementById("datumInput").value;
 
-			// Displaying the value
-			alert(inputVal);
-		}*/
 	</script>
 
 
 </body>
 </html>
-<!--  
-  <form  method="POST" action="sacuvajDatum">
-  	<label>Datum:</label>
-  	<input type="datetime-local"/><br>
-  	<input type="submit"/>
-  </form>
-  
-  -->
+
 
 
 

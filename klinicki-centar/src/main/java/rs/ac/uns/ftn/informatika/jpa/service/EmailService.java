@@ -125,7 +125,7 @@ public class EmailService {
 			m.setFrom(new InternetAddress(env.getProperty("spring.mail.username")));
 			m.addRecipient(Message.RecipientType.TO,new InternetAddress(k.getEmail()));
 			m.setSubject("Odobren zahtev za pregledom");
-			m.setContent("Pozdrav " + k.getIme() +",\n\nPotvrdite/odbijte svoj pregled klikom na sledeci link  " +"<a href='http://localhost:8081/odobreniZahteviKodPacijenta'>Klinki ovde</a>", "text/html");
+			m.setContent("Pozdrav " + k.getIme() +",\n\nPotvrdite/odbijte svoj pregled klikom na sledeci link  " +"<a href='http://localhost:8081/odobreniZahteviKodPacijentaSaMaila'>Klinki ovde</a>", "text/html");
 			Transport.send(m);
 			System.out.println("poslaliiii");
 			

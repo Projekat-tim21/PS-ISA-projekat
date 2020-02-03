@@ -57,7 +57,7 @@ public class OdobravanjePregleda {
 	
 	@Column(name="odobrenpregledop")
 	private boolean odobrenpregledop;
-	
+	/*
 	@Version
 	private Long version;
 	
@@ -70,7 +70,7 @@ public class OdobravanjePregleda {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
+*/
 	public OdobravanjePregleda(Long id, String terminzahtev, String imelekara, String prezimelekara,
 			String tipspecijalizacije, String imepacijenta, Long idpacijenta, String prezimepacijenta,
 			String jedbrosigpac, String salaop, double cenaop, double popustop, Long idtermina, Long lekaridop,
