@@ -119,7 +119,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac2(this)" href="/naLogin">Vrati se nazad</a></li>
+					<li><a onclick="addIdPac4(this)" href="/naListuLekaraSaZakazivanjaPregleda">Vrati se nazad</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 
@@ -300,6 +300,10 @@ body {
 		element.href = element.href+"?id="+idPacijenta;
 	}
 
+	function addIdPac4 (element){
+		element.href = element.href+"?idpac="+idPacijenta;
+	}
+	
 	function addIdPac3 (element){
 		element.href = element.href+"?id="+id2;
 	}

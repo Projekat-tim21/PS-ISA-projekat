@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="klinika")
@@ -41,7 +42,8 @@ public class Klinika {
 		@Column(name = "tip", nullable = false)
 		private String tip;
 		
-		
+		@Version
+		private Long version;
 
 		@OneToMany(mappedBy = "klinika", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		private Set<Korisnik> admini = new HashSet<Korisnik>();
@@ -50,6 +52,7 @@ public class Klinika {
 			super();
 		}
 
+		
 		
 		public Klinika(Long id, String naziv, String grad, String drzava, double ocena, String adresa,
 				String tip) {
@@ -78,6 +81,17 @@ public class Klinika {
 		public void setNaziv(String naziv) {
 			this.naziv = naziv;
 		}
+
+		
+		public Long getVersion() {
+			return version;
+		}
+
+
+		public void setVersion(Long version) {
+			this.version = version;
+		}
+
 
 		public String getGrad() {
 			return grad;

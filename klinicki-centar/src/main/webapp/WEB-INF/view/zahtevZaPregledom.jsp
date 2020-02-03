@@ -28,7 +28,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac(this)" href="/login">Logovanje</a></li>
+					<li><a onclick="addIdPac(this)" href="/saljemoZahtevZaPregledom">Odustani od slanja zahteva</a></li>
 				
 				</ul>
 			
@@ -117,13 +117,16 @@ body {
 					</div>
 				</form>
 			</div>
-			<a onclick="addIdPac(this)" href="/saljemoZahtevZaPregledom">Vrati se nazad</a>
+		
 		</c:when>
 </c:choose>
 
 <script type="text/javascript">
 
 document.getElementById("clickMe").onclick = function () { alert('Vas zahtev je uspesno prosledjen administratoru klinike!');};
+//var mile=document.getElementById("idtermina");
+var mile = document.getElementById("idtermina").value;
+console.log(mile);
 
 function alertzazahtev(){
 	alert("Vas zahtev je uspesno prosledjen administratoru klinike");

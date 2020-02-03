@@ -35,8 +35,8 @@ public class KlinikaController {
 	@Autowired 
 	private ZaposleniUKlinikamaRepository zRepo;
 	
-	@Autowired 
-	private LekarZaPrikazIPregledeRepository lipRepo;
+	//@Autowired 
+	//private LekarZaPrikazIPregledeRepository lipRepo;
 	
 	@Autowired
 	private  ZaposleniUKlinikamaService zaposleniServis;

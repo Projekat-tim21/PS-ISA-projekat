@@ -191,6 +191,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/razlogOdbijanjaPregleda/*").permitAll()
 	    .antMatchers("/getCalendar/*").permitAll()
 	    .antMatchers("/radniKalendar/*").permitAll()
+	    .antMatchers("/zapocniOperacijeP").permitAll()
+	    .antMatchers("/naListuLekaraSaZakazivanjaPregleda").permitAll()
 	    .antMatchers("/zapocniOperacijeP/*/*").permitAll()
 	    .antMatchers("/odobreniZahteviKodPacijenta").permitAll()
 	    .antMatchers("/idiNaLoginPoslePotvrde").permitAll()

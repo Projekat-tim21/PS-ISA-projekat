@@ -151,6 +151,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+
 var idPacijenta = getUrlParameter('id');
 //console.log(idPacijenta);
 
