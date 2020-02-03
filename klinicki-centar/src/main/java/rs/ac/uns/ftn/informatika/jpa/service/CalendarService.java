@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Calendar;
+import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
@@ -18,6 +19,8 @@ public interface CalendarService {
 	Calendar getCalendarById(Long id);
 	
 	List<TerminiSaId> getTerminiByLekarId(Long id);
+
+	List<Odsustvo> getOdsustvoBySestraId(Long id);
 	
 
 }

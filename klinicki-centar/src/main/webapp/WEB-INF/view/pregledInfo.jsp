@@ -42,14 +42,6 @@ body {
 				<hr>
 				<form class="form-horizontal" method="POST"
 					modelAttribute="korisnik" action="sacuvajupdateNaLogin">
-
-					<div class="form-group">
-						<label class="control-label col-md-3">Id</label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" id="id" name="id"
-								value="${korisnik.id }" readonly> <span id="free"></span>
-						</div>
-					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Korisnicko ime</label>
 						<div class="col-md-6">

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.sql.*" %>
+<%ResultSet resultset =null;%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,6 +49,20 @@
 </head>
 
 <body class="my-login-page">
+
+<%
+    try{
+//Class.forName("com.mysql.jdbc.Driver").newInstance();
+Connection connection = 
+         DriverManager.getConnection
+            ("jdbc:postgresql://localhost:5432/jpa?user=postgres&password=root");
+
+       Statement statement = connection.createStatement() ;
+
+       resultset =statement.executeQuery("select * from dijagnoza") ;
+%>
+
+
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
@@ -61,40 +78,66 @@
 			</div>
 		</div>
 	</div>
-	
-	<c:choose>
-		<c:when test="${mode=='MODE_ZKARTON' }">
-			<div class="container text-center">
-				<h3>Pregled</h3>
-				<hr>
-			</div>
-		</c:when>
-	</c:choose>
 
-    <!-- Jquery JS-->
-    <script src="/static/js/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="/static/js/bootstrap-4.1/popper.min.js"></script>
-    <script src="/static/js/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="/static/js/slick/slick.min.js">
-    </script>
-    <script src="/static/js/wow/wow.min.js"></script>
-    <script src="/static/js/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="/static/js/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="/static/js/circle-progress/circle-progress.min.js"></script>
-    <script src="/static/js/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/static/js/chartjs/Chart.bundle.min.js"></script>
-    <script src="/static/js/select2/select2.min.js"></script>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 align="center">PREGLED</h4>
+                        <hr>
+                        <form action="/noviPregeld" method="POST">
+					<div class="form-group">
+						<label>Informacije o pregledu</label>
+						<div >
+							<textarea rows="10" cols="100" class="form-control" id="pregled" name="pregled" ></textarea>
+						</div>
+					</div>
+                            
+                             <div class="form-group">
+                                <label for="dijagnoza">Dijagnoza</label>
+                                <hr>
+                                <select name=odabrana>
+       								 <%  while(resultset.next()){ %>
+          							  <option><%= resultset.getString(3)%></option>
+      									  <% } %>
+     						   </select> </div>
+     						
+     				<label for="dijagnoza">Recept</label> 
+     				  <hr>
+     				<c:if test="${not empty lists}">
+     				<select multiple="multiple" size="5" name="database1">
+    					<c:forEach items="${lists}" var="lists">
+      						 <option value="${lists}">
+      							  ${lists}
+  							  </option>
+						</c:forEach>
+					</select>
+					</c:if>
+<%
+//**Should I input the codes here?**
+        }
+        catch(Exception e)
+        {
+             out.println("wrong entry"+e);
+        }
 
-    <!-- full calendar requires moment along jquery which is included above -->
-    <script src="/static/js/fullcalendar-3.10.0/lib/moment.min.js"></script>
-    <script src="/static/js/fullcalendar-3.10.0/fullcalendar.js"></script>
-
-
+%>
+ 							<div class="form-group no-margin">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    SACUVAJ
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/app.js"></script>
 </body>
-
 </html>
-<!-- end document-->
