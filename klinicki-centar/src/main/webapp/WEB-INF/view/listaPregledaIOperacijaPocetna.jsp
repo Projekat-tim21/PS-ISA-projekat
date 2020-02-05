@@ -73,7 +73,25 @@ body {
 </head>
 <body>
 
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
 
+
+					<li><a onclick="addIdPac(this)" href="/naLogin">Vrati se
+							nazad</a></li>
+					<li><a onclick="addIdPac(this)" href="/prikaziListuOperacija">Istorija
+							operacija</a></li>
+					<li><a onclick="addIdPac(this)" href="/prikaziListuPregleda">Istorija
+							pregleda</a></li>
+					<li><a onclick="addIdPac(this)" href="/logout">Odjavi se</a></li>
+
+				</ul>
+
+			</div>
+		</div>
+	</div>
 
 	<c:choose>
 
@@ -182,9 +200,9 @@ body {
 									<form class="form-horizontal" name="forma" method="POST"
 										action="/ocenaLekaraPregled/${pregled.id}/${lip.id}/${korisnik.id}">
 										<div class="form-group">
-						<!--  					<label class="control-label col-md-3">Id lekara</label>   -->
+											<label class="control-label col-md-3">Id lekara</label>
 											<div class="col-md-6">
-												<input type="hidden" class="form-control" id="id"
+												<input type="text" class="form-control" id="id"
 													name="id" value="${lip.id }" readonly> <span
 													id="free"></span>
 											</div>
@@ -353,9 +371,9 @@ body {
 									<form class="form-horizontal" name="forma" method="POST"
 										action="/ocenaLekaraOperacije/${operacija.id}/${lip.id}/${korisnik.id}">
 										<div class="form-group">
-								<!-- 			<label class="control-label col-md-3">Id lekara</label>   -->
+											<label class="control-label col-md-3">Id lekara</label>
 											<div class="col-md-6">
-												<input type="hidden" class="form-control" id="id"
+												<input type="text" class="form-control" id="id"
 													name="id" value="${lip.id }" readonly> <span
 													id="free"></span>
 											</div>
@@ -438,15 +456,12 @@ body {
 							<div class="card-header">
 
 								<div class="container text-center">
-									<h3>Ocenite kliniku na osnovu obavljene operacije</h3>
+									<h3>Ocenite kliniku na osnovu obavljenog pregleda</h3>
 									<hr>
 
 									<form class="form-horizontal" name="forma" method="POST"
-										action="/ocenaKlinikeOperacija/${operacija.id}/${lip.getId()}/${korisnik.id}/${idKlinikeOvajTreba}">
+										action="/ocenaKlinikeOperacija/${operacija.id}/${lip.getId()}/${korisnik.id}">
 										
-										<input type="hidden" class="form-control" id="idKlinikeOvajTreba"
-													name="idKlinikeOvajTreba" value="${klinika.id }" >
-													
 										<div class="form-group">
 											<label class="control-label col-md-3">Ime Klinike</label>
 											<div class="col-md-6">
@@ -537,10 +552,8 @@ body {
 									<hr>
 
 									<form class="form-horizontal" name="forma" method="POST"
-										action="/ocenaKlinikePregled/${pregled.id}/${lip.getId()}/${korisnik.id}/${klinika.id}">
+										action="/ocenaKlinikePregled/${pregled.id}/${lip.getId()}/${korisnik.id}">
 										
-										<input type="hidden" class="form-control" id="klinikaPregled"
-													name="klinikaPregled" value="${klinika.id }" readonly>
 										<div class="form-group">
 											<label class="control-label col-md-3">Ime Klinike</label>
 											<div class="col-md-6">
@@ -570,7 +583,7 @@ body {
 										<div class="form-group">
 											<label class="control-label col-md-3">Ocena</label>
 											<div  class="col-md-6 ">
-												<input type="number" class="form-control tooltiptext" id="ocenapregleda" name="ocenapregleda"
+												<input type="number" class="form-control tooltiptext" id="ocenaoperacije" name="ocenaoperacije"
 													value="${pregled.ocenapregleda}" required>
 											</div>
 										</div>

@@ -321,6 +321,7 @@ public class KorisnikContreller {
 	@RequestMapping("/profilkaPregledu")
 	public String editUserProfilPregled(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
+		request.setAttribute("id", id);
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
 	}

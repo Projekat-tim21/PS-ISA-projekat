@@ -71,7 +71,7 @@ public class PreglediController {
 	
 	@RequestMapping("/preglediIoperacijePrikaz")
 	public String prikazStraniceListaPregledaIOperacija(HttpServletRequest request) {
-		return "listaPregledaIOperacija";
+		return "listaPregledaIOperacijaPocetna";
 	}
 	
 	
@@ -91,6 +91,28 @@ public class PreglediController {
 	
 	@RequestMapping("/naLogin")
 	public String koranUnazad(HttpServletRequest request) {
+		return "loginBezDobrodosli";
+	}
+	
+	@RequestMapping("/odustaniOdOcenjivanjaLekaraPregled")
+	public String odustaniOdOcenjivanjaLekaraPregled(HttpServletRequest request) {
+		return "loginBezDobrodosli";
+	}
+	
+	@RequestMapping("/odustaniOdOcenjivanjaKlinikePregled")
+	public String odustaniOdOcenjivanjaKlinikePregled(HttpServletRequest request) {
+		return "loginBezDobrodosli";
+	}
+	
+
+	@RequestMapping("/odustaniOdOcenjivanjaKlinikePregled2")
+	public String odustaniOdOcenjivanjaKlinikePregled2(HttpServletRequest request) {
+		return "loginBezDobrodosli";
+	}
+	
+	
+	@RequestMapping("/odustaniOdOcenjivanjaLekaraPregled3")
+	public String odustaniOdOcenjivanjaKlinikePregled3(HttpServletRequest request) {
 		return "loginBezDobrodosli";
 	}
 	
@@ -171,34 +193,38 @@ public class PreglediController {
 	
 	
 	
-	@PostMapping("/ocenaKlinikePregled/{idpregleda}/{lekarid}/{korisnikid}")
-	public String ocenaKlinikePregled(@ModelAttribute Pregled pregled,@PathVariable Long idpregleda,@PathVariable Long lekarid,@PathVariable Long korisnikid, HttpServletRequest request) {
+	@PostMapping("/ocenaKlinikePregled/{idpregleda}/{lekarid}/{korisnikid}/{klinikaid}")
+	public String ocenaKlinikePregled(@ModelAttribute Pregled pregled,@PathVariable Long idpregleda,@PathVariable Long klinikaid,@PathVariable Long lekarid,@PathVariable Long korisnikid, HttpServletRequest request) {
 
-		ZaposleniUKlinikama zuk=zipService.findOne(lekarid);
+		long idKlinike=klinikaid;
+		HttpSession session = request.getSession();
+		//double x=(double) session.getAttribute("ocenapregleda");
+		//System.out.println("ocena klinike je: "+x);
+		//ZaposleniUKlinikama zuk=zipService.findOne(lekarid);
 		long idKorisnika=korisnikid;
-		long idKlinikeKojuOcenjujem=zuk.getIdklinike(); //ovo mi treba
+		//long idKlinikeKojuOcenjujem=zuk.getIdklinike(); //ovo mi treba
 		OcenaKlinike ol=new OcenaKlinike();
 		ol.setKorisnikid(idKorisnika);
 		ol.setLekarid(lekarid);
 		ol.setPregledid(idpregleda);
-		ol.setKlinikaid(idKlinikeKojuOcenjujem); 
+		ol.setKlinikaid(idKlinike); 
 		okServis.saveOcenaKlinike(ol);
-		
+		System.out.println(pregled.getOcenapregleda()+"   ovo proveri");
 		double suma=0;
 		double prosek=0;
 		
 		for(Klinika klin : klinRepo.findAll()) {
-			if(klin.getId()==idKlinikeKojuOcenjujem) {
+			if(klin.getId()==idKlinike) {
 				suma=klin.getOcena()+pregled.getOcenapregleda();
 				prosek=suma/2;
 			}
 			klin.setOcena(prosek);  
-			klinServis.saveOcenaKlinike(prosek, idKlinikeKojuOcenjujem); 
+			klinServis.saveOcenaKlinike(prosek, idKlinike); 
 		}
 		System.out.println("prosek klinike pregled"+prosek);
 		
 		
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		session.setAttribute("id", idKorisnika);
 		session.setAttribute("idlek", lekarid);
 		//session.setAttribute("idoperacije", operacijaId);

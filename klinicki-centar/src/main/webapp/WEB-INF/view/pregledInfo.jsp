@@ -117,7 +117,7 @@ body {
 					</div>
 
 					<div class="form-group ">
-							<button type="submit" formaction="/izmenaPodataka">Izmeni</button>
+							<button type="submit" formaction="/izmenaPodataka?id=${id}">Izmeni</button>
 					</div>
 					<div class="form-group ">
 						<button type="submit" formaction="/idiNaLoginBezDobrodosli?id=${id}">Pocetna</button>

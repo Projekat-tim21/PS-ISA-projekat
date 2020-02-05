@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.OdobravanjePregleda;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
+import rs.ac.uns.ftn.informatika.jpa.model.ZaposleniUKlinikama;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.OdobravanjePregledaRepozitorijum;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.ZaposleniUKlinikamaRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
@@ -37,6 +40,8 @@ public class LekarZaPrikazIPregledeController {
 
 	private Logger logger = LoggerFactory.getLogger(LekarZaPrikazIPregledeController.class);
 
+	@Autowired 
+	private ZaposleniUKlinikamaRepository zRepo;
 	
 	@Autowired
 	private LekarZaPrikazIPregledeService lipServis;
@@ -287,8 +292,43 @@ public class LekarZaPrikazIPregledeController {
 		return "adminZaPreglede";
 	}
 
+	
+	@RequestMapping("/listaSvihTerminaPacijent2")
+	public String prikazListeTerminaPacijent2(@RequestParam("idpac") int idpac, @ModelAttribute TerminiSaId t,
+			@ModelAttribute LekarZaPrikazIPreglede lip, BindingResult bindingResult, HttpServletRequest request) {
+
+		//String lazniIdKlinike="klinika";
+		String idZaPoredjenje = request.getParameter("id");
+		HttpSession session = request.getSession();
+		session.setAttribute("id", idZaPoredjenje);
+		long lekarId = Long.parseLong(idZaPoredjenje);
+		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		System.out.println("hej hej");
+		for (TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
+			if (termin.isZakazan() == false) {
+				termini.add(termin);
+			}
+
+		}
+		long pacijentId = idpac;
+
+		Korisnik korisnici = korisnikServis.findOne(pacijentId);
+		request.setAttribute("korisnik", korisnici);
+		//session.setAttribute("idklinike", idklinike);
+		//System.out.println("id klinike je : " + idklinike);
+		//session.setAttribute("idklinike", lazniIdKlinike);
+		request.setAttribute("termini", termini);
+		request.setAttribute("mode", "ALL_TERMINI_KOPIJA");
+		return "listaLekara";
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/listaSvihTerminaPacijent")
-	public String prikazListeTerminaPacijent(@RequestParam("idpac") int idpac, @ModelAttribute TerminiSaId t,
+	public String prikazListeTerminaPacijent(@RequestParam("idpac") int idpac,@RequestParam("idklinike") String idklinike, @ModelAttribute TerminiSaId t,
 			@ModelAttribute LekarZaPrikazIPreglede lip, BindingResult bindingResult, HttpServletRequest request) {
 
 		String idZaPoredjenje = request.getParameter("id");
@@ -307,7 +347,8 @@ public class LekarZaPrikazIPregledeController {
 
 		Korisnik korisnici = korisnikServis.findOne(pacijentId);
 		request.setAttribute("korisnik", korisnici);
-
+		session.setAttribute("idklinike", idklinike);
+		System.out.println("id klinike je : " + idklinike);
 		request.setAttribute("termini", termini);
 		request.setAttribute("mode", "ALL_TERMINI");
 		return "listaLekara";
@@ -616,13 +657,71 @@ public class LekarZaPrikazIPregledeController {
 	}
 
 	@RequestMapping("/naListuLekaraSaZakazivanjaPregleda")
-	public String vratiSeNazadNaListuLekara(HttpServletRequest request) {
-		request.setAttribute("lipi", lipServis.pokaziSveKorisnikeKojiSuLekari());
-		request.setAttribute("mode", "ALL_LEKARI");
-		return "listaLekara";
+	public String vratiSeNazadNaListuLekara(@RequestParam("idpac") long idpac,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String ovajIdKlinike=(String) session.getAttribute("idklinike");
+		long idKlinike= Long.parseLong(ovajIdKlinike);
+		System.out.println("id pac  "+idpac+"  idKlinike   "+idKlinike);
+		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
+		Klinika k=new Klinika();
+		//HttpSession session = request.getSession();
+		session.setAttribute("id", idpac);
+	
+		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
+		List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
+		for(ZaposleniUKlinikama zaposlen : zRepo.findByIdklinike(idKlinike)) {
+			zaposleni.add(zaposlen);
+			long idlekara=zaposlen.getIdlekara();
+			for(LekarZaPrikazIPreglede lip :  lipServis.pokaziSveKorisnikeKojiSuLekari()) {
+				if(zaposlen.getIdlekara()==lip.getId()) {
+					lipi.add(lip);
+				}
+					
+			}
+		}
+		
+		request.setAttribute("zaposleni", zaposleni);
+		request.setAttribute("lipi", lipi);
+		request.setAttribute("mode", "ALL_LEKARI_2");
+		return "listaKlinika";
 	}
 
 	
+	
+	@RequestMapping("/naListuLekaraSaZakazivanjaPregleda2")
+	public String vratiSeNazadNaListuLekara2(@RequestParam("idpac") long idpac,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		//String ovajIdKlinike=(String) session.getAttribute("idklinike");
+		//long idKlinike= Long.parseLong(ovajIdKlinike);
+		//System.out.println("id pac  "+idpac+"  idKlinike   "+idKlinike);
+		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
+		Klinika k=new Klinika();
+		//HttpSession session = request.getSession();
+		session.setAttribute("id", idpac);
+	/*
+		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
+		List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
+		for(ZaposleniUKlinikama zaposlen : zRepo.findByIdklinike(idKlinike)) {
+			zaposleni.add(zaposlen);
+			long idlekara=zaposlen.getIdlekara();
+			for(LekarZaPrikazIPreglede lip :  lipServis.pokaziSveKorisnikeKojiSuLekari()) {
+				if(zaposlen.getIdlekara()==lip.getId()) {
+					lipi.add(lip);
+				}
+					
+			}
+		}
+		*/
+		//request.setAttribute("zaposleni", zaposleni);
+		//request.setAttribute("lipi", lipi);
+		//request.setAttribute("mode", "ALL_LEKARI_2");
+		
+		request.setAttribute("lipi", lipServis.pokaziSveKorisnikeKojiSuLekari());
+		request.setAttribute("mode", "ALL_LEKARI");
+		return "listaLekara";
+		
+		//return "redirect:/prikaziListuLekara";
+	}
 	
 	
 	
