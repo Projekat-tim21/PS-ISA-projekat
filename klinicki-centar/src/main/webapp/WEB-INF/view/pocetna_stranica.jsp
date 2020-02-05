@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Welcome</title>
+<title>Dobrodosli</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 </head>

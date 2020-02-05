@@ -32,7 +32,7 @@ body {
 					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena
 							podataka</a></li>
 					<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista klinika</a></li>
-					<li><a onclick="addIdPac(this)" href="/preglediIoperacijePrikaz">Lista pregleda i
+					<li><a onclick="addIdPac(this)" href="/preglediIoperacijePrikaz">Istorija pregleda i
 							operacija</a></li>
 					<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni
 							karton</a>

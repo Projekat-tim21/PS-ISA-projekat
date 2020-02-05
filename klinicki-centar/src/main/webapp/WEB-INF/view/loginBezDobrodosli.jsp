@@ -33,12 +33,13 @@ body {
 					<li><a onclick="addIdPac(this)" href="/profilkaPregledu">Profil</a></li>
 					<li><a onclick="addIdPac(this)" href="/izmenaPodataka">Izmena
 							podataka</a></li>
+					<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni
+							karton</a>
 					<li><a onclick="addIdPac(this)" href="/listaSvihKlinika">Lista
 							klinika</a></li>
 					<li><a onclick="addIdPac(this)"
-						href="/preglediIoperacijePrikaz">Lista pregleda i operacija</a></li>
-					<li><a onclick="addIdPac(this)" href="/kartonZ">Zdravstveni
-							karton</a>
+						href="/preglediIoperacijePrikaz">Istorija pregleda i operacija</a></li>
+					
 					<li><a onclick="addIdPac2(this)" href="/prikaziListuLekara">Lista
 							lekara</a>
 					<li><a onclick="addIdPac(this)" href="/zakaziPregledKojiJeDef">Zakazi
@@ -61,9 +62,9 @@ body {
 					action="sacuvajupdateNaLogin?id=${korisnik.id}">
 
 					<div class="form-group">
-						<label class="control-label col-md-3">Id</label>
+	<!--  					<label class="control-label col-md-3">Id</label>  -->
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="id" name="id"
+							<input type="hidden" class="form-control" id="id" name="id"
 								value="${korisnik.id }" readonly> <span id="free"></span>
 						</div>
 					</div>
@@ -168,30 +169,24 @@ body {
 		var getUrlParameter = function getUrlParameter(sParam) {
 			var sPageURL = window.location.search.substring(1), sURLVariables = sPageURL
 					.split('&'), sParameterName, i;
-
 			for (i = 0; i < sURLVariables.length; i++) {
 				sParameterName = sURLVariables[i].split('=');
-
 				if (sParameterName[0] === sParam) {
 					return sParameterName[1] === undefined ? true
 							: decodeURIComponent(sParameterName[1]);
 				}
 			}
 		};
-
 		var idPacijenta = getUrlParameter('id');
-
 		function addIdPac(element) {
 			console.log("proba");
 			element.href = element.href + "?id=" + idPacijenta;
 			console.log(element.href);
 		}
-
 		function addIdPac2(element) {
 			element.href = element.href + "?idpac=" + idPacijenta;
 			console.log(element.href);
 		}
-
 		function checkredirect() {
 			window.location = 'http://localhost:8081/sacuvajupdateNaLogin?id='
 					+ napokooon;

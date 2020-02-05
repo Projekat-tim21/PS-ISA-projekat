@@ -46,12 +46,7 @@ body {
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista klinika</h3>
 				<hr>
-		<!-- 	<h4>Sortiraj klinike</h4>
-			<span class="form-group">	
-			<button onclick="sortTablePoNazivu()">Po nazivu</button>
-			<button onclick="sortTablePoGradu()">Po gradu</button>   
-			</span>	 
-			 -->
+	
 				<div class="table-responsive">
 				
 				<table class="table">
@@ -271,6 +266,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+var idKlinike=getUrlParameter('idklinike');
 var idPacijenta2 = getUrlParameter('idpac');
 var idPacijenta = getUrlParameter('id');
 console.log(idPacijenta);
@@ -280,8 +276,13 @@ function addIdPac (element){
 	console.log(element.href);
 }
 
+function klinikaIPacijent (element){
+	element.href = element.href+"?idklinike="+idKlinike+"&idpac="+idPacijenta2;
+	console.log('klinika i pacijent   '+element.href);
+}
+
 function addIdPac3 (element){
-	element.href = element.href+"&idpac="+idPacijenta2;
+	element.href = element.href+"&idpac="+idPacijenta2+"&idklinike="+idKlinike;
 	console.log(element.href);
 }
 
