@@ -226,6 +226,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/kreirajOperaciju/*/*").permitAll()
 	    .antMatchers("/sacuvajNoviPregled/*/*").permitAll()
 	    .antMatchers("/sacuvajNovuOperaciju/*/*").permitAll()
+	    .antMatchers("/zapocniOperacijeS/*/*/*/*/*").permitAll()
+	    .antMatchers("/noviPregledS/*/*/*/*/*").permitAll()
 	    .anyRequest()
 		.authenticated();
 		http.csrf().disable();

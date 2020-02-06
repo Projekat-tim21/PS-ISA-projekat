@@ -14,6 +14,8 @@ public class InformacijeOpregleduDTO {
 	private Long pacijentId;
 	private String informacije;;
 	private String dijagnozaId;
+	private Long pregledId;
+	private Long tip;
 	private Set<Lek> leks = new HashSet<Lek>();
 	private String[] lekici=new String[20];
 	private Boolean overen;
@@ -69,6 +71,24 @@ public class InformacijeOpregleduDTO {
 		this.dijagnozaId = dijagnozaId;
 		this.leks = leks;
 		this.overen = overen;
+	}
+	public Long getPregledId() {
+		return pregledId;
+	}
+	public void setPregledId(Long pregledId) {
+		this.pregledId = pregledId;
+	}
+	public String[] getLekici() {
+		return lekici;
+	}
+	public void setLekici(String[] lekici) {
+		this.lekici = lekici;
+	}
+	public Long getTip() {
+		return tip;
+	}
+	public void setTip(Long tip) {
+		this.tip = tip;
 	}
 	
 	

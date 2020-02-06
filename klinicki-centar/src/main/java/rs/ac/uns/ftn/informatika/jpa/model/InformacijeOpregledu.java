@@ -30,6 +30,12 @@ public class InformacijeOpregledu {
 	@Column(name="pacijent_id")
 	private Long pacijentId;
 	
+	@Column(name="pregled_id")
+	private Long pregledId;
+	
+	@Column(name="tip")
+	private Long tip;
+	
 	@Lob
 	@Column(name="informacije",nullable=true)
 	private String informacije;
@@ -100,8 +106,13 @@ public class InformacijeOpregledu {
 		this.dijagnozaId = dijagnoza;
 	}
 
+	public Long getPregledId() {
+		return pregledId;
+	}
 
-
+	public void setPregledId(Long pregledId) {
+		this.pregledId = pregledId;
+	}
 
 	public InformacijeOpregledu(Long id, Long lekarId, Long pacijentId, String informacije, String dijagnoza,
 			String lekovi) {
@@ -161,6 +172,14 @@ public class InformacijeOpregledu {
 		this.dijagnozaId = dijagnozaId;
 		this.leks = leks;
 		this.overen = overen;
+	}
+
+	public Long getTip() {
+		return tip;
+	}
+
+	public void setTip(Long tip) {
+		this.tip = tip;
 	}
 
 	

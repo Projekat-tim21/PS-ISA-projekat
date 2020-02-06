@@ -12,6 +12,7 @@
 <link href="static/css/style.css" rel="stylesheet">
 <link href="static/css/theme.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="shortcut icon" href="#" />
 </head>
 <body class="my-login-page">
 <div role="navigation">
@@ -20,7 +21,9 @@
 			<h2>MEDICINSKA SESTRA</h2>
 				<ul class="nav navbar-nav">
 				<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
+				<li><a href="/overaRecepta">Overa recepata</a></li>
 				<li><a href="/zahtevZaOdsustvo?id=${id}">Odsustvo/Odmor</a></li>
+				<li><a href="/radniKalendarSestre?id=${id}">Radni kalendar</a></li>
 				<li><a href="/profilSestra?id=${id}">Profil</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>

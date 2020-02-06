@@ -13,5 +13,6 @@ public interface PregledRepository extends JpaRepository<Pregled, Long> {
 	public Pregled findByDatum(String datum);
 	public Pregled findByVreme(String vreme);
 	public List<Pregled> findByObavljenpregled(boolean obavljen);
+	public List<Pregled> findByIdlekarpregled(String broj);
 
 }

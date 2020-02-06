@@ -42,6 +42,13 @@ public class InformacijeOpregleduService {
 		// TODO Auto-generated method stub
 		return infoRepo.findById(id).orElseGet(null);
 	}
+	
+	public InformacijeOpregledu postojiVec(Long id,Long tip) {
+		// TODO Auto-generated method stub
+			return infoRepo.findByPregledIdAndTip(id, tip);
+		
+		}
+	
 
 	public void saveRecept(InformacijeOpregledu i) {
 		// TODO Auto-generated method stub

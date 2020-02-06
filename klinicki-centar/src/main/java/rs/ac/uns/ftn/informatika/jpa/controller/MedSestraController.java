@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,34 +19,48 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Lek;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.service.InformacijeOpregleduService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
+import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.OdsustvoService;
+import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
+import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 
 @Controller
 public class MedSestraController {
-
 	
 	 private final KorisnikService korisnikService;
 	 
 	 private final OdsustvoService odsustvoSerevice;
 
+	 private final LekServiceImpl lekService;
+
 	 private final InformacijeOpregleduService infoService;
+	 
+	 private final TerminSaIdService terminiService;
+	 
+	 private final PregledService pergledService;
 
 	public MedSestraController( KorisnikService korisnikService,
-			OdsustvoService odsustvoSerevice,InformacijeOpregleduService info) {
+			OdsustvoService odsustvoSerevice,InformacijeOpregleduService info,LekServiceImpl lek,TerminSaIdService terminiService,PregledService pergledService) {
 
 		this.korisnikService = korisnikService;
 		this.odsustvoSerevice = odsustvoSerevice;
 		this.infoService=info;
+		this.lekService=lek;
+		this.terminiService=terminiService;
+		this.pergledService=pergledService;
 		
 	}
 
@@ -97,9 +114,7 @@ public class MedSestraController {
 		Set novi=i.getLeks();
 		request.setAttribute("lekici", novi);
 		System.out.println(novi.isEmpty());
-		 request.setAttribute("mode", "MODE_OVERA");
-	//	request.setAttribute("lekovi", i.getLeks());
-		//request.setAttribute("mode1", "MODE_LEK");	
+		 request.setAttribute("mode", "MODE_OVERA");	
 		 infoService.saveRecept(i);	
 		 return "overa";   }
 	 
@@ -166,12 +181,7 @@ public class MedSestraController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id2);
-			
-			
-			Korisnik izBaze=korisnikService.findOne(id);
-			
 			Korisnik k = new Korisnik();
-			Long Idx = korisnikd.getId();
 			k.setId(korisnikd.getId());
 			k.setIme(korisnikd.getIme());
 			k.setPrezime(korisnikd.getPrezime());
@@ -186,7 +196,6 @@ public class MedSestraController {
 			k.setRoleName(Role.SESTRA.name());
 			
 			korisnikService.saveMogKorisnika(k);
-			//request.setAttribute("mode", "MODE");
 			return "redirect:/profilSestra?id={id}";
 
 		}
@@ -203,6 +212,78 @@ public class MedSestraController {
 			request.setAttribute("mode", "MODE_ZKARTON");
 		 	ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("radniKalendarSestre");
+	        return modelAndView;
+	   
+	 }
+	 
+	 private LinkedList<String> getList(){
+		    LinkedList<String> list = new LinkedList<>();
+		    
+		    List<Lek> lekovi= lekService.showAll();
+		    
+		    for(int i=0; i<lekovi.size(); i++) {
+		    	list.add(lekovi.get(i).getNaziv());
+		    }
+		   
+
+		    return list;
+		}
+	 
+	 @RequestMapping(value="/zapocniOperacijeS/{tipD}/{idD}/{pD}/{lD}/{sD}", method = { RequestMethod.GET, RequestMethod.POST })
+	    public ModelAndView addmin(@PathVariable Long tipD,@PathVariable Long idD,@PathVariable Long pD,@PathVariable Long lD,@PathVariable Long sD,HttpServletRequest request) {
+		 	if(tipD==0L || tipD==2L) {
+		 		ModelAndView map1 = new ModelAndView("klikNaOiliO");
+		 		return map1;
+		 	}
+		 	InformacijeOpregledu o=infoService.postojiVec(idD,tipD);
+		 	if(o!=null) {
+		 		ModelAndView map1 = new ModelAndView("vecPostojiIzvestaj");
+		 		return map1;
+		 	}
+		 	request.setAttribute("tip", tipD);
+			request.setAttribute("sestra", korisnikService.findOne(sD));
+			request.setAttribute("pacijent", korisnikService.findOne(pD));
+			if(tipD==3L) {
+			request.setAttribute("pregled", pergledService.findOneById(idD));
+			}else if(tipD==1L){
+				request.setAttribute("pregled", terminiService.findOne(idD));
+			}
+			request.setAttribute("mode", "MODE_ZKARTON");
+			request.setAttribute("lekar", korisnikService.findOne(lD));
+			request.setAttribute("mode", "MODE_LEKAR");
+		 	LinkedList<String> list = getList();
+	        ModelAndView map = new ModelAndView("pregledS");
+	        map.addObject("lists", list);
+	        return map;
+	    }
+	 
+	 @RequestMapping(value="/noviPregledS/{korisnikId}/{lekarId}/{sestraId}/{pregledId}/{tipD}", method = { RequestMethod.GET, RequestMethod.POST } )
+	    public ModelAndView noviPregled(@PathVariable Long korisnikId,@PathVariable Long lekarId,@PathVariable Long sestraId,@PathVariable Long pregledId,@PathVariable Long tipD,
+				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
+		 
+			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
+			request.setAttribute("mode", "MODE_ZKARTON");
+			InformacijeOpregledu infor=new InformacijeOpregledu();
+	        infor.setInformacije(info.getInformacije());
+	        infor.setLekarId(lekarId);
+			infor.setDijagnozaId(info.getDijagnozaId());
+	        Set<Lek> leks = new HashSet<Lek>();
+	        String[] lekici = request.getParameterValues("lekici");
+	        for(int i=0;i<lekici.length;i++) {
+	        	Lek nov=lekService.findByNaziv(lekici[i]);
+	        	System.out.println(nov.getNaziv());
+	        	leks.add(nov);
+	        }
+	        infor.setLeks(leks);
+	        infor.setPacijentId(korisnikId);
+	        infor.setOveren(false);
+	        infor.setPregledId(pregledId);
+	        infor.setTip(tipD);
+	        System.out.println("ID PREGLEDA "+ pregledId);
+	        infoService.saveInformacije(infor);
+	        request.setAttribute("lekar", korisnikService.findOne(lekarId));
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("uspesanS");
 	        return modelAndView;
 	    }
 }

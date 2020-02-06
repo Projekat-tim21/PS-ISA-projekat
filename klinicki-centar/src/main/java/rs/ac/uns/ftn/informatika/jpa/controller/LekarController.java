@@ -1,8 +1,6 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,15 +9,12 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
-import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
@@ -36,10 +30,7 @@ import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
-import rs.ac.uns.ftn.informatika.jpa.service.DijagnozaServiceImpl;
-import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
 import rs.ac.uns.ftn.informatika.jpa.service.InformacijeOpregleduService;
-import rs.ac.uns.ftn.informatika.jpa.service.KlinikaService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
 import rs.ac.uns.ftn.informatika.jpa.service.OperacijeService;
@@ -48,28 +39,16 @@ import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 
 @Controller
 public class LekarController {
-
-
-	private Logger logger = LoggerFactory.getLogger(AdminKCController.class);
-	
-	@Autowired
-	private EmailService emailService;
 	
 	 @Autowired
-	    private KorisnikService korisnikService;
-	 
-	 @Autowired
-	 private KlinikaService klinikaService;
+	 private KorisnikService korisnikService;
 	
-	 
 	 @Autowired
 	 private LekServiceImpl lekService;
 	 
 	 @Autowired
 	 private InformacijeOpregleduService infoService;
-	 
-	 @Autowired
-	 private DijagnozaServiceImpl dijagnozaService;
+
 	 @Autowired
 	 private TerminSaIdService terService;
 	 
@@ -121,7 +100,6 @@ public class LekarController {
 			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
 			request.setAttribute("mode", "MODE_ZKARTON");
 			request.setAttribute("lekar", korisnikService.findOne(lekarId));
-			Korisnik kk=korisnikService.findOne(lekarId);
 			System.out.println("PACIJENT JADNI: " + k.getIme());
 			request.setAttribute("mode", "MODE_LEKAR");
 		 	LinkedList<String> list = getList();
@@ -131,7 +109,7 @@ public class LekarController {
 	    }
 	 
 	 @RequestMapping(value="/noviPregled/{korisnikId}/{lekarId}", method = { RequestMethod.GET, RequestMethod.POST } )
-	    public ModelAndView noviAdminKlinike(@PathVariable Long korisnikId,@PathVariable Long lekarId,
+	    public ModelAndView noviPregled(@PathVariable Long korisnikId,@PathVariable Long lekarId,
 				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
 		 
 			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
@@ -213,7 +191,7 @@ public class LekarController {
 	 
 	 @RequestMapping(value="/sacuvajKarton",method = { RequestMethod.GET, RequestMethod.POST }) 
 		public String sacuvajZK(@ModelAttribute KorisnikDTO korisnikd, HttpServletRequest request) {
-	    	String id2 = request.getParameter("id");
+	  
 			Korisnik izBaze=korisnikService.findOne(korisnikd.getId());
 			System.out.println("ISPISISI "+ izBaze.getId());
 			Korisnik k = new Korisnik();
@@ -258,7 +236,7 @@ public class LekarController {
 			LinkedList<String> list = getList();
 			ModelAndView map = new ModelAndView("izmenaIzvestaja");
 			ModelAndView map1 = new ModelAndView("ne");
-			 map.addObject("lists", list);
+			map.addObject("lists", list);
 			if(kor.getId()==info.getLekarId()) {
 				return map;
 			}
@@ -289,42 +267,32 @@ public class LekarController {
 		public String cuvajPregled(@PathVariable String lekarId,@PathVariable Long pacijentId,@ModelAttribute PregledDTO pregledDTO, BindingResult bindingResult,
 				HttpServletRequest request) throws ParseException {
 		
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-			
 			Pregled o= new Pregled();
 			o.setIdlekarpregled(lekarId);
 			o.setIdpacijenta(pacijentId);
-			
-			//Date datum=sdf.parse(pregledDTO.getTerminpregled());
 			o.setTerminpregled(pregledDTO.getTerminpregled());
-			o.setObradjen(false);// nije zakazan
+			o.setObradjen(false);
 			pService.save(o);
 			request.setAttribute("message", "uspesno kreirana operacija");
 			Long n=Long.parseLong( lekarId );
 			request.setAttribute("lekar", korisnikService.findOne(n));
 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
 			request.setAttribute("mode", "MODE_PACIJENT");
-			//request.setAttribute("mode", "VRATISE");
 			return "uspesan";
 		}
 	 @RequestMapping(value="/sacuvajNovuOperaciju/{pacijentId}/{lekarId}",method = { RequestMethod.GET, RequestMethod.POST }) // korisnik povezan sa valuom iz js
 		public String cuvajOperaciju(@PathVariable Long lekarId,@PathVariable Long pacijentId,@ModelAttribute Operacija operacijaDTO, BindingResult bindingResult,
 				HttpServletRequest request) throws ParseException {
 		
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-			
 			Operacija o= new Operacija();
 			o.setIdpacijenta(pacijentId);
-			
-			//Date datum=sdf.parse(pregledDTO.getTerminpregled());
 			o.setTerminoperacija(operacijaDTO.getTerminoperacija());
-			o.setObradjen(false);// nije zakazan
+			o.setObradjen(false);
 			oService.save(o);
 			request.setAttribute("message", "uspesno kreirana operacija");
 			request.setAttribute("lekar", korisnikService.findOne(lekarId));
 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
 			request.setAttribute("mode", "MODE_PACIJENT");
-			//request.setAttribute("mode", "VRATISE");
 			return "uspesan";
 		}
 	 

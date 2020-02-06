@@ -5,6 +5,7 @@ import java.util.List;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Calendar;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
+import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
@@ -21,6 +22,16 @@ public interface CalendarService {
 	List<TerminiSaId> getTerminiByLekarId(Long id);
 
 	List<Odsustvo> getOdsustvoBySestraId(Long id);
+
+	List<Operacija> getOperacijeByLekarId(Long id);
+
+	List<Pregled> getPreglediByLekarId(Long id);
+
+	List<TerminiSaId> getTerminiSaIdAll();
+
+	List<Operacija> getOperacijeAll();
+
+	List<Pregled> getPreglediAll();
 	
 
 }
