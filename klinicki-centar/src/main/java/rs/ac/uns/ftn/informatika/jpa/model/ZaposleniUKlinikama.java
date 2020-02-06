@@ -25,20 +25,7 @@ public class ZaposleniUKlinikama {
 	public Long getId() {
 		return id;
 	}
-
-	@Version
-	private Long version;
 	
-	
-	
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}

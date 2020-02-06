@@ -31,9 +31,6 @@ public class TerminiSaId {
 	@Column(name="lekarprezime")
 	private String lekarprezime;
 	
-	@Version
-	private Long version;
-	
 	@Column(name="tippregleda")
 	private String tippregleda;
 	
@@ -58,15 +55,6 @@ public class TerminiSaId {
 	@Column(name="prikaz", nullable=true)
 	private boolean prikaz;
 
-	
-	
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
 
 	public boolean isPrikaz() {
 		return prikaz;

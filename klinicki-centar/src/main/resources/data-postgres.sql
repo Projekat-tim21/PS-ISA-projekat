@@ -22,7 +22,7 @@ insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password,
 insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role,login ) values ('Sestra 1555', 'Srbija', 'sestra1@gmail.com',  'Novi Sad', 'Sestra1', '7771458488586', 'sestra1', 'Sestra1', '06491998587', 'sestra1',FALSE,'SESTRA',true);
 
 
-INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);
+/*INSERT INTO administratorkc (user_id, first_login, predefinisani) VALUES ('6', true, true);*/
 /*ovo je admin klinike*/
 /*insert into korisnik3 ( adresa, drzava, email, grad, ime, jed_br_osig, password, prezime,telefon, username,active,role ) values ('Anica Dobra 15', 'Srbija', 'andsfa5@gmail.com',  'Novi Sad', 'Ananfi', '8585658488586', 'ak', 'Ana', '0649998584', 'ak',FALSE,'PACIJENT');*/
 
@@ -103,7 +103,13 @@ insert into zaposleni(idklinike, idlekara) values (7,5);
 
 insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',375313,16,false,6);
 insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',375313,16,false,5);
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',472188,16,false,7);
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',472188,16,false,7);
 
 insert into leks(lek_id,informacijepregled_id) values(1,1);
 insert into leks(lek_id,informacijepregled_id) values(1,2);
 insert into leks(lek_id,informacijepregled_id) values(1,3);
+insert into leks(lek_id,informacijepregled_id) values(2,1);
+insert into leks(lek_id,informacijepregled_id) values(2,2);
+insert into leks(lek_id,informacijepregled_id) values(3,1);
+insert into leks(lek_id,informacijepregled_id) values(4,2);

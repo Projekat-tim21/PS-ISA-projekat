@@ -29,19 +29,6 @@ public class OcenaLekara {
 	@Column(name="lekarid", nullable=true)
 	private Long lekarid;
 
-	@Version
-	private Long version;
-	
-	
-	
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
 	public Long getId() {
 		return id;
 	}

@@ -7,11 +7,11 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Zahtevi za registraciju</title>
+<link rel="shortcut icon" href="#" />
+<title>Kreiranje zdravstvenog kartona</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <link href="static/css/theme.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
  
 	<div role="navigation">
@@ -33,24 +33,11 @@
 			</div>
 		</div>
 	</div>
-	<section class="h-100">
-    <div class="container h-100">
-        <div class="row justify-content-md-center">
-            <div class="card">
-                <div class="card-header">
-	<div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <h3>ADMINISTRATORI KLINICKOG CENTRA</h3>
-                                          </div>
-				
-                                    <div class="table-data_tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"><a class="nav-link" href="/addNewAdminKC">DODAJ NOVOG ADMINISTRATORA</a></i></button>
-                                    </div>
-                                </div>
+	
 	<c:choose>
-	<c:when test="${mode=='ALL_ADMINI' }">
+	<c:when test="${mode=='ALL_USERS' }">
 			<div class="container text-center" id="tasksDiv">
+				<h3>Kreiraj zdravstevni karton</h3>
 				<hr>
 				<div class="table-responsive">
 					<table class="table table-hover">
@@ -66,7 +53,7 @@
 								<th>Grad</th>
 								<th>Drzava</th>
 								<th>Telefon</th>
-						<!--		<th>Sifra</th>  -->
+								<th>Zdravstveni karton</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -82,20 +69,14 @@
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-					<!--  				<td>${korisnik.password}</td>  -->
+									<td><a href="/kreirajKarton/${korisnik.getId()}" >Kreiraj</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-			</c:when>
-	</c:choose>
-	</div>
-	</div>
-	</div>
-	</div>
-	</section>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
-<script src="static/js/app.js"></script>
+				</div>
+			</div>
+		</c:when>
+</c:choose>
 </body>
 </html>

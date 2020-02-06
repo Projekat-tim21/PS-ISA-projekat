@@ -96,9 +96,6 @@ public class Korisnik {
 	private Klinika klinika;
 
 	
-	@Version
-	private Long version;
-	
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
 			String tezina, String kgrupa, String dioptrija, String alergije, String bolesti, String anamneza) {
@@ -121,14 +118,6 @@ public class Korisnik {
 
 	public String getDatum() {
 		return datum;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 
 	public void setDatum(String datum) {

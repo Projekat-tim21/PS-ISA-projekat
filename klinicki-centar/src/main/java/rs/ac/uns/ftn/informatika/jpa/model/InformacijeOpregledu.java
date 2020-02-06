@@ -31,17 +31,17 @@ public class InformacijeOpregledu {
 	private Long pacijentId;
 	
 	@Lob
-	@Column(name="informacije")
+	@Column(name="informacije",nullable=true)
 	private String informacije;
 	
-	@Column(name="dijagnoza")
+	@Column(name="dijagnoza",nullable=true)
 	private String dijagnozaId;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "leks", joinColumns = @JoinColumn(name = "lek_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "informacijepregled_id", referencedColumnName = "id"))
+	@JoinTable(name = "leks",joinColumns = @JoinColumn(name = "lek_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "informacijepregled_id", referencedColumnName = "id"))
 	private Set<Lek> leks = new HashSet<Lek>();
 	
-	@Column(name="overen")
+	@Column(name="overen",nullable=true)
 	private Boolean overen;
 
 	public Set<Lek> getLeks() {

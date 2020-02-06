@@ -36,19 +36,7 @@ public class LekarZaPrikazIPreglede {
 	@Column(name="ocena", nullable=true)
 	private double ocena;
 
-	@Version
-	private Long version;
-
 	
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
 	public Long getId() {
 		return id;
 	}

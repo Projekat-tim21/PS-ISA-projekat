@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import rs.ac.uns.ftn.informatika.jpa.model.Lek;
+
 public class InformacijeOpregleduDTO {
 
 	private Long id;
@@ -12,7 +14,8 @@ public class InformacijeOpregleduDTO {
 	private Long pacijentId;
 	private String informacije;;
 	private String dijagnozaId;
-	private List<String> leks = new ArrayList<String>();
+	private Set<Lek> leks = new HashSet<Lek>();
+	private String[] lekici=new String[20];
 	private Boolean overen;
 	public Long getId() {
 		return id;
@@ -44,19 +47,20 @@ public class InformacijeOpregleduDTO {
 	public void setDijagnozaId(String dijagnozaId) {
 		this.dijagnozaId = dijagnozaId;
 	}
-	public List<String> getLeks() {
-		return leks;
-	}
-	public void setLeks(List<String> leks) {
-		this.leks = leks;
-	}
+	
 	public Boolean getOveren() {
 		return overen;
 	}
 	public void setOveren(Boolean overen) {
 		this.overen = overen;
 	}
-	public InformacijeOpregleduDTO(Long lekarId, Long pacijentId, String informacije, String dijagnozaId, List<String> leks,
+	public Set<Lek> getLeks() {
+		return leks;
+	}
+	public void setLeks(Set<Lek> leks) {
+		this.leks = leks;
+	}
+	public InformacijeOpregleduDTO(Long lekarId, Long pacijentId, String informacije, String dijagnozaId, Set<Lek> leks,
 			Boolean overen) {
 		super();
 		this.lekarId = lekarId;
@@ -66,6 +70,8 @@ public class InformacijeOpregleduDTO {
 		this.leks = leks;
 		this.overen = overen;
 	}
+	
+	
 	
 	
 	

@@ -31,7 +31,7 @@ public class Operacija {
 	@Column(name="lekarprezimeoperacija", nullable=true)
 	private String lekarprezimeoperacija;
 	
-	@Column(name="idlekaroperacija", nullable=false)
+	@Column(name="idlekaroperacija", nullable=true)
 	private Long idlekaroperacija;
 	
 	@Column(name="idpacijenta", nullable=true)
@@ -49,6 +49,9 @@ public class Operacija {
 	@Column(name = "zakazan", nullable = true)
 	private Boolean zakazan;
 	
+	@Column(name = "obradjen", nullable = true)
+	private Boolean obradjen;
+	
 	@Column(name="trajanje", nullable=true)
 	private String trajanje;
 	
@@ -61,17 +64,14 @@ public class Operacija {
 	@Column(name="cena", nullable=true)
 	int cena;
 
-	@Version
-	private Long version;
 	
 	
-	
-	public Long getVersion() {
-		return version;
+	public Boolean getObradjen() {
+		return obradjen;
 	}
 
-	public void setVersion(Long version) {
-		this.version = version;
+	public void setObradjen(Boolean obradjen) {
+		this.obradjen = obradjen;
 	}
 
 	public String getTerminoperacija() {

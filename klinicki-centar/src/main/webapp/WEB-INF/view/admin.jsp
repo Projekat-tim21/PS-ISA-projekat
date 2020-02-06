@@ -30,6 +30,7 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a href="/sviIzBaze">Pregled svih</a></li>
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
+					<li><a href="/addNewZK">Zdravstevni karton</a></li>
 					<li><a href="/klinike">Klinike</a></li>
 					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
 					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
@@ -43,9 +44,7 @@ body {
 	</div>
 	
  <div class="bg"></div>
-<div class="footer">
-    Copyright &copy; 2019
-</div>
+
 
 <script>
     function saveData(id) {

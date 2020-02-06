@@ -214,7 +214,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/noviPregled/*/*").permitAll()
 	    .antMatchers("/overaRecepta").permitAll()
 	    .antMatchers("/overi/*").permitAll()
-		.anyRequest()
+	    .antMatchers("/addNewZK").permitAll()
+	    .antMatchers("/kreirajKarton/*").permitAll()
+	    .antMatchers("/nov").permitAll()
+	    .antMatchers("/izmenaKartona/*").permitAll()
+	    .antMatchers("/sacuvajKarton").permitAll()
+	    .antMatchers("/istorijaIzvestaja/*/*").permitAll()
+	    .antMatchers("/izmenaIzvestaja/*/*").permitAll()
+	    .antMatchers("/sacuvajIzmeneIzvestaja/*/*/*").permitAll()
+	    .antMatchers("/kreirajPregled/*/*").permitAll()
+	    .antMatchers("/kreirajOperaciju/*/*").permitAll()
+	    .antMatchers("/sacuvajNoviPregled/*/*").permitAll()
+	    .antMatchers("/sacuvajNovuOperaciju/*/*").permitAll()
+	    .anyRequest()
 		.authenticated();
 		http.csrf().disable();
 		

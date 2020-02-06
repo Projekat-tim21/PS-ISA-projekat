@@ -38,7 +38,7 @@ public class InformacijeOpregleduService {
 		
 	}
 
-	public Object findOne(Long id) {
+	public InformacijeOpregledu findOne(Long id) {
 		// TODO Auto-generated method stub
 		return infoRepo.findById(id).orElseGet(null);
 	}
@@ -46,5 +46,15 @@ public class InformacijeOpregleduService {
 	public void saveRecept(InformacijeOpregledu i) {
 		// TODO Auto-generated method stub
 		infoRepo.save(i);
+	}
+
+	public List<InformacijeOpregledu> izvestajiDatogPacijenta(Long pacijentId) {
+		List<InformacijeOpregledu> pacijentovi=new ArrayList<InformacijeOpregledu>();
+		for(InformacijeOpregledu infp : infoRepo.findAll()) {
+			if(infp.getPacijentId()==pacijentId) {
+				pacijentovi.add(infp);
+			}
+		}
+		return pacijentovi;
 	}
 	}
