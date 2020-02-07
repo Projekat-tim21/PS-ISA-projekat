@@ -31,6 +31,8 @@ public class LekarZaPrikazIPreglede {
 	@Column(name="uloga")
 	private String uloga;
 	
+	@Column(name = "lekarveza")
+	private Long lekarveza;
 
 	
 	@Column(name="ocena", nullable=true)
@@ -116,6 +118,26 @@ public class LekarZaPrikazIPreglede {
 	public LekarZaPrikazIPreglede() {
 		super();
 	}
+
+	public Long getLekarveza() {
+		return lekarveza;
+	}
+
+	public void setLekarveza(Long lekarveza) {
+		this.lekarveza = lekarveza;
+	}
+
+	public LekarZaPrikazIPreglede(String imelek, String prezimelek, String tipspecijalizacije, String uloga,
+			Long lekarveza, double ocena) {
+		super();
+		this.imelek = imelek;
+		this.prezimelek = prezimelek;
+		this.tipspecijalizacije = tipspecijalizacije;
+		this.uloga = uloga;
+		this.lekarveza = lekarveza;
+		this.ocena = ocena;
+	}
+	
 	
 	
 }

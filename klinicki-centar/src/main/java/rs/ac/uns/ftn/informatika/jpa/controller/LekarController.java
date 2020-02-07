@@ -128,6 +128,7 @@ public class LekarController {
 	        infor.setLeks(leks);
 	        infor.setPacijentId(korisnikId);
 	        infor.setOveren(false);
+	        
 	        infoService.saveInformacije(infor);
 	        request.setAttribute("lekar", korisnikService.findOne(lekarId));
 	        ModelAndView modelAndView = new ModelAndView();

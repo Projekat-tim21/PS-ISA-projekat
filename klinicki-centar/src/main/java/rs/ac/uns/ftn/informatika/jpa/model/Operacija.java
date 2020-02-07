@@ -71,6 +71,8 @@ public class Operacija {
 	@Column(name="cena", nullable=true)
 	int cena;
 
+	@Column(name="korisnikId", nullable=true)
+	Long korisnikId;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "lekari",joinColumns = @JoinColumn(name = "operacija_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "lekar_id", referencedColumnName = "user_id"))
@@ -99,7 +101,7 @@ public class Operacija {
 	public void setObradjen(Boolean obradjen) {
 		this.obradjen = obradjen;
 	}
-	
+
 	public String getTerminoperacija() {
 		return terminoperacija;
 	}
@@ -243,6 +245,39 @@ public class Operacija {
 
 	public void setCena(int cena) {
 		this.cena = cena;
+	}
+
+	public Long getKorisnikId() {
+		return korisnikId;
+	}
+
+	public void setKorisnikId(Long korisnikId) {
+		this.korisnikId = korisnikId;
+	}
+
+	public Operacija(String datum, String vreme, String terminoperacija, String lekarimeoperacija,
+			String lekarprezimeoperacija, Long idlekaroperacija, Long idpacijenta, String tip, double ocenaoperacije,
+			boolean obavljenaoperacija, Boolean zakazan, Boolean obradjen, String trajanje, String sala, String lekar,
+			int cena, Long korisnikId, Set<Korisnik> lekari) {
+		super();
+		this.datum = datum;
+		this.vreme = vreme;
+		this.terminoperacija = terminoperacija;
+		this.lekarimeoperacija = lekarimeoperacija;
+		this.lekarprezimeoperacija = lekarprezimeoperacija;
+		this.idlekaroperacija = idlekaroperacija;
+		this.idpacijenta = idpacijenta;
+		this.tip = tip;
+		this.ocenaoperacije = ocenaoperacije;
+		this.obavljenaoperacija = obavljenaoperacija;
+		this.zakazan = zakazan;
+		this.obradjen = obradjen;
+		this.trajanje = trajanje;
+		this.sala = sala;
+		this.lekar = lekar;
+		this.cena = cena;
+		this.korisnikId = korisnikId;
+		this.lekari = lekari;
 	}
 	
 	
