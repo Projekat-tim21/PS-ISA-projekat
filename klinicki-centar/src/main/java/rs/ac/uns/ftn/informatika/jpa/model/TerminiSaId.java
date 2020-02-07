@@ -63,6 +63,8 @@ public class TerminiSaId {
 	@Column(name="poslatnaobradu", nullable=true)
 	private boolean poslatnaobradu;
 	
+	@Column(name="korisnikId", nullable=true)
+	private Long korisnikId;
 	
 	public TerminiSaId(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
 			String sala, double cena, double popust, boolean zakazan, long idkorisnika, boolean odobrenpregled,
@@ -292,6 +294,34 @@ public class TerminiSaId {
 
 	public void setPopust(double popust) {
 		this.popust = popust;
+	}
+
+	public Long getKorisnikId() {
+		return korisnikId;
+	}
+
+	public void setKorisnikId(Long korisnikId) {
+		this.korisnikId = korisnikId;
+	}
+
+	public TerminiSaId(String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
+			String sala, double cena, double popust, boolean zakazan, long idkorisnika, boolean odobrenpregled,
+			boolean prikaz, boolean poslatnaobradu, Long korisnikId) {
+		super();
+		this.termin = termin;
+		this.lekarId = lekarId;
+		this.lekarime = lekarime;
+		this.lekarprezime = lekarprezime;
+		this.tippregleda = tippregleda;
+		this.sala = sala;
+		this.cena = cena;
+		this.popust = popust;
+		this.zakazan = zakazan;
+		this.idkorisnika = idkorisnika;
+		this.odobrenpregled = odobrenpregled;
+		this.prikaz = prikaz;
+		this.poslatnaobradu = poslatnaobradu;
+		this.korisnikId = korisnikId;
 	}
 
 	
