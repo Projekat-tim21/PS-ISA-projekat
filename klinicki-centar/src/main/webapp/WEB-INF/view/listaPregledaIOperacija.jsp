@@ -347,7 +347,7 @@ body {
 							<div class="card-header">
 
 								<div class="container text-center">
-									<h3>Ocenite lekara za izabrani pregled</h3>
+									<h3>Ocenite lekara za izabranu operaciju</h3>
 									<hr>
 
 									<form class="form-horizontal" name="forma" method="POST"

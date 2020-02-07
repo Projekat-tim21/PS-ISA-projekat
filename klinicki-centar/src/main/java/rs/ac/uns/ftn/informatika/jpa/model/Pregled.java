@@ -68,6 +68,9 @@ public class Pregled {
 	@Column(name = "obradjen", nullable = true)
 	private Boolean obradjen;
 	
+	@Column(name="korisnikId", nullable=true)
+	private Long korisnikId;
+	
 	public double getOcenapregleda() {
 		return ocenapregleda;
 	}
@@ -257,6 +260,38 @@ public class Pregled {
 
 	public void setCena(int cena) {
 		this.cena = cena;
+	}
+
+	public Long getKorisnikId() {
+		return korisnikId;
+	}
+
+	public void setKorisnikId(Long korisnikId) {
+		this.korisnikId = korisnikId;
+	}
+
+	public Pregled(String datum, String vreme, String terminpregled, String tip, String lekarimepregled,
+			String lekarprezimepregled, String idlekarpregled, Long idpacijenta, String lekar, int cena,
+			double ocenapregleda, String trajanje, String sala, Boolean zakazan, boolean obavljenpregled,
+			Boolean obradjen, Long korisnikId) {
+		super();
+		this.datum = datum;
+		this.vreme = vreme;
+		this.terminpregled = terminpregled;
+		this.tip = tip;
+		this.lekarimepregled = lekarimepregled;
+		this.lekarprezimepregled = lekarprezimepregled;
+		this.idlekarpregled = idlekarpregled;
+		this.idpacijenta = idpacijenta;
+		this.lekar = lekar;
+		this.cena = cena;
+		this.ocenapregleda = ocenapregleda;
+		this.trajanje = trajanje;
+		this.sala = sala;
+		this.zakazan = zakazan;
+		this.obavljenpregled = obavljenpregled;
+		this.obradjen = obradjen;
+		this.korisnikId = korisnikId;
 	}
 	
 	

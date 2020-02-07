@@ -29,7 +29,9 @@ import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
+import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.InformacijeOpregleduService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
@@ -273,6 +275,17 @@ public class MedSestraController {
 	        	Lek nov=lekService.findByNaziv(lekici[i]);
 	        	System.out.println(nov.getNaziv());
 	        	leks.add(nov);
+	        }
+	        Pregled p=new Pregled();
+	        TerminiSaId t= new TerminiSaId();
+	        if(tipD==3L) {
+	        	p=pergledService.findOneById(pregledId);
+	        	p.setObavljenpregled(true);
+	        	p.setObradjen(true);
+	        	
+	        }else if(tipD==1L) {
+	        	t=terminiService.findOne(pregledId);
+	        	
 	        }
 	        infor.setLeks(leks);
 	        infor.setPacijentId(korisnikId);

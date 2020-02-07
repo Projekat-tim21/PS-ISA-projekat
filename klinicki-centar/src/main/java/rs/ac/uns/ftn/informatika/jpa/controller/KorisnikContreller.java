@@ -161,7 +161,8 @@ public class KorisnikContreller {
 			k.setPassword(korisnikd.getPassword());
 			k.setRoleName(Role.PACIJENT.name());
 			k.setIsActive(false);
-			k.setFirst_Login(false);
+			
+			k.setFirst_Login(true);
 			System.out.println(k.getRoleName());
 			korisnikServis.saveMogKorisnika(k);
 
@@ -239,6 +240,8 @@ public class KorisnikContreller {
 		k.setUsername(korisnikd.getUsername());
 		k.setPassword(korisnikd.getPassword());
 		k.setRoleName(Role.PACIJENT.name());
+		k.setFirst_Login(true);
+		k.setIsActive(true);
 
 		korisnikServis.deleteMyUser(korisnikd.getId());
 		k.setId(Idx);
@@ -284,6 +287,8 @@ public class KorisnikContreller {
 		k.setAlergije(izBaze.getAlergije());
 		k.setBolesti(izBaze.getBolesti());
 		k.setAnamneza(izBaze.getAnamneza());
+		k.setIsActive(true);
+		k.setFirst_Login(true);
 		k.setId(Idx);
 		korisnikServis.saveMogKorisnika(k);
 

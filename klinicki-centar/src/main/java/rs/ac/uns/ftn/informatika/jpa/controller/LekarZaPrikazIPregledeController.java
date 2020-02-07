@@ -447,6 +447,7 @@ public class LekarZaPrikazIPregledeController {
 		t.setIdkorisnika(op.getIdpacijenta());
 		t.setOdobrenpregled(true);
 		t.setPrikaz(true);
+		
 		tisServis.saveMojTermin(t);
 		opRepo.delete(op);
 		Korisnik k = repoKorisnik.findByJedBrOsig(op.getJedbrosigpac());
