@@ -60,10 +60,10 @@ body {
 	
 		<c:when test="${mode=='MODE_PREGLED' }">
 			<div class="container text-center">
-				<h3>Pregled podataka</h3>
+				<h3>Pregled podataka "${lekar.ime}"</h3>
 				<hr>
 				<form class="form-horizontal" method="POST"
-					action="/sacuvajKarton">
+					action="/sacuvajKarton/${korisnik.id }/${lekar.id }">
 
 					<div class="form-group">
 						<label class="control-label col-md-3">Id</label>

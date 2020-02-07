@@ -1,10 +1,17 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -64,8 +71,21 @@ public class Operacija {
 	@Column(name="cena", nullable=true)
 	int cena;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "lekari",joinColumns = @JoinColumn(name = "operacija_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "lekar_id", referencedColumnName = "user_id"))
+	private Set<Korisnik> lekari = new HashSet<Korisnik>();
 	
 	
+	
+	
+	public Set<Korisnik> getLekari() {
+		return lekari;
+	}
+
+	public void setLekari(Set<Korisnik> lekari) {
+		this.lekari = lekari;
+	}
+
 	public Boolean getObradjen() {
 		return obradjen;
 	}

@@ -36,6 +36,7 @@ body, html {
 				<ul class="nav navbar-nav">
 					<li><a href="/AdminPraviPreglede">Prikaz lekara</a></li>
 					<li><a href="/zahteviZaPregledom">Odobravanje zahteva</a></li>
+					<li><a href="/prikaziOperacijeBezSale">Sale za operaciju</a></li>
 					<li><a href="/vratiSe?id=${lip.id}">Vrati se</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>

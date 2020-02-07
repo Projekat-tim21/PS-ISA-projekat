@@ -165,11 +165,11 @@ public class LekarController {
 
 		}
 
-	 @RequestMapping("/izmenaKartona/{pacijentId}")
-		public String editUserProfilIzBara(@PathVariable Long pacijentId, HttpServletRequest request) {
+	 @RequestMapping("/izmenaKartona/{pacijentId}/{lekarId}")
+		public String editUserProfilIzBara(@PathVariable Long pacijentId, @PathVariable Long lekarId,HttpServletRequest request) {
+			request.setAttribute("lekar", korisnikService.findOne(lekarId));
 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
 			request.setAttribute("mode", "MODE_PREGLED");
-
 			return "kartonPacijenta";  //bio je login
 		}
 	
@@ -189,8 +189,8 @@ public class LekarController {
 			return "istorijaIzvestaja";  //bio je login
 		}
 	 
-	 @RequestMapping(value="/sacuvajKarton",method = { RequestMethod.GET, RequestMethod.POST }) 
-		public String sacuvajZK(@ModelAttribute KorisnikDTO korisnikd, HttpServletRequest request) {
+	 @RequestMapping(value="/sacuvajKarton/{pacijentId}/{lekarId}",method = { RequestMethod.GET, RequestMethod.POST }) 
+		public String sacuvajZK(@PathVariable Long pacijentId,@PathVariable Long lekarId,@ModelAttribute KorisnikDTO korisnikd, HttpServletRequest request) {
 	  
 			Korisnik izBaze=korisnikService.findOne(korisnikd.getId());
 			System.out.println("ISPISISI "+ izBaze.getId());
@@ -221,7 +221,8 @@ public class LekarController {
 			k.setBolesti(korisnikd.getBolesti());
 			k.setAnamneza(korisnikd.getAnamneza());
 			korisnikService.saveMogKorisnika(k);
-			request.setAttribute("korisnik", korisnikService.findOne(korisnikd.getId()));
+			request.setAttribute("lekar", korisnikService.findOne(lekarId));
+			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
 			request.setAttribute("mode", "MODE_PACIJENT");
 			return "uspesan";
 
@@ -285,7 +286,9 @@ public class LekarController {
 				HttpServletRequest request) throws ParseException {
 		
 			Operacija o= new Operacija();
+			
 			o.setIdpacijenta(pacijentId);
+			o.setIdlekaroperacija(lekarId);
 			o.setTerminoperacija(operacijaDTO.getTerminoperacija());
 			o.setObradjen(false);
 			oService.save(o);

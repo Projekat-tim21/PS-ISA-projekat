@@ -45,7 +45,7 @@ Connection connection =
 %>
 
 
-<<div role="navigation">
+<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 			<h2>MEDICINSKA SESTRA</h2>
@@ -103,8 +103,23 @@ Connection connection =
 						</c:if>
     <hr>		
     
+    <div class="form-group no-margin">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    SACUVAJ
+                                </button>
+                            </div>
+                             </form> 
      				</c:when>
-	</c:choose>
+	</c:choose>			
+ 							
+                               
+                      <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <%
 //**Should I input the codes here?**
         }
@@ -114,23 +129,9 @@ Connection connection =
         }
 
 %>
-							
- 							<div class="form-group no-margin">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    SACUVAJ
-                                </button>
-                            </div>
-                        </form>         
-                      <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/app.js"></script>
+<script src="/static/js/editDijagnoza.js"></script>
 </body>
 </html>

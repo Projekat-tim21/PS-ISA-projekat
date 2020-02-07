@@ -247,7 +247,7 @@ transition: all 0.3s ease 0s;
 				<hr>
 				<label class="control-label ">Prezime : ${korisnik.prezime }</label>
 				<hr>		
-				<a href="/izmenaKartona/${korisnik.id}">Zdravstveni karton</a>
+				<a href="/izmenaKartona/${korisnik.id}/${lekar.id }">Zdravstveni karton</a>
 				<hr>
 				<a href="/istorijaIzvestaja/${korisnik.id}/${lekar.id }">Istorija pregleda</a>
 				<hr>

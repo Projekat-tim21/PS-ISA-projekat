@@ -217,8 +217,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/addNewZK").permitAll()
 	    .antMatchers("/kreirajKarton/*").permitAll()
 	    .antMatchers("/nov").permitAll()
-	    .antMatchers("/izmenaKartona/*").permitAll()
-	    .antMatchers("/sacuvajKarton").permitAll()
+	    .antMatchers("/izmenaKartona/*/*").permitAll()
+	    .antMatchers("/sacuvajKarton/*/*").permitAll()
 	    .antMatchers("/istorijaIzvestaja/*/*").permitAll()
 	    .antMatchers("/izmenaIzvestaja/*/*").permitAll()
 	    .antMatchers("/sacuvajIzmeneIzvestaja/*/*/*").permitAll()
@@ -228,6 +228,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/sacuvajNovuOperaciju/*/*").permitAll()
 	    .antMatchers("/zapocniOperacijeS/*/*/*/*/*").permitAll()
 	    .antMatchers("/noviPregledS/*/*/*/*/*").permitAll()
+	    .antMatchers("/prikaziOperacijeBezSale").permitAll()
+	    .antMatchers("/dodajSalu/*").permitAll()
+	    .antMatchers("/rezervisiSalu/*/*").permitAll()
+	    .antMatchers("/obavezniLekari/*/*").permitAll()
 	    .anyRequest()
 		.authenticated();
 		http.csrf().disable();

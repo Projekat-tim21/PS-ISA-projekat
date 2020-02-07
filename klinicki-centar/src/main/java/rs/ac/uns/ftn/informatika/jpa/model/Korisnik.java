@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -95,6 +99,9 @@ public class Korisnik {
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Klinika klinika;
 
+	@ManyToMany(mappedBy = "lekari")
+	private Set<Operacija> operacije = new HashSet<Operacija>();
+	
 	
 	//za zdravstveni karton
 	public Korisnik(Long id, String jedBrOsig, String ime, String prezime, String datum, String pol, String visina,
@@ -187,6 +194,16 @@ public class Korisnik {
 	public void setAnamneza(String anamneza) {
 		this.anamneza = anamneza;
 	}
+	
+	public Set<Operacija> getOperacije() {
+		return operacije;
+	}
+
+
+	public void setOperacije(Set<Operacija> operacije) {
+		this.operacije = operacije;
+	}
+
 
 	public Korisnik() {
 	}

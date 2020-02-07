@@ -137,6 +137,14 @@ public class KorisnikService {
 	}
 */
 
+	public List<Korisnik> pokaziLekare() {
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("LEKAR")) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
+	}
+
 	
 
 	
