@@ -26,20 +26,6 @@ public class Dijagnoza {
 	@Column(name="dodatno",unique=true,nullable=false)
 	String dodatno;
 
-
-	@Version
-	private Long version;
-	
-	
-	
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
 	public Dijagnoza(String sifra, String naziv, String dodatno) {
 		super();
 		this.sifra = sifra;

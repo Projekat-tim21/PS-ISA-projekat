@@ -86,6 +86,15 @@ public class KorisnikService {
 		return korisnici;
 	}
 	
+	public List<Korisnik> pokaziBezKartona(){
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("PACIJENT")) {
+			if(korisnik.getDatum()==null && korisnik.getPol()==null && korisnik.getIsActive()==true) {
+				korisnici.add(korisnik);
+			}
+		}
+		return korisnici;
+	}
 	
 	//public Korisnik findAllData(Long id, String username, String ime, String prezime, String jedBrOsig, String email, String adresa, String grad, String drzava, String telefon, String password) {
 	//	return korisnikRepository.findAllData(id, username, ime, prezime, jedBrOsig, email, adresa, grad, drzava, telefon, password);
@@ -127,6 +136,14 @@ public class KorisnikService {
 		korisnikRepository.saveDatum(novidatum);
 	}
 */
+
+	public List<Korisnik> pokaziLekare() {
+		List<Korisnik> korisnici=new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnikRepository.findByRoleName("LEKAR")) {
+			korisnici.add(korisnik);
+		}
+		return korisnici;
+	}
 
 	
 

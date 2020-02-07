@@ -45,6 +45,7 @@ public class Klinika {
 		@Version
 		private Long version;
 */
+
 		@OneToMany(mappedBy = "klinika", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		private Set<Korisnik> admini = new HashSet<Korisnik>();
 		
@@ -82,6 +83,7 @@ public class Klinika {
 			this.naziv = naziv;
 		}
 
+
 		/*
 		public Long getVersion() {
 			return version;
@@ -93,6 +95,7 @@ public class Klinika {
 		}
 
 */
+
 		public String getGrad() {
 			return grad;
 		}

@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Calendar;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
+import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.repository.CalendarRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.TerminSaIdRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.OdsustvoRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.OperacijeRepository;
+import rs.ac.uns.ftn.informatika.jpa.repository.PregledRepository;
 @Service
 public class CalendarServiceImpl implements CalendarService{
 
@@ -26,6 +29,12 @@ public class CalendarServiceImpl implements CalendarService{
 	
 	@Autowired
 	private TerminSaIdRepository terminiRepository;
+	
+	@Autowired
+	private OperacijeRepository operacijaRepository;
+	
+	@Autowired
+	private PregledRepository pregledRepository;
 	
 	@Autowired
 	private OdsustvoRepository odsustvoRepository;
@@ -105,6 +114,52 @@ public class CalendarServiceImpl implements CalendarService{
 			}
 		}
 		return odsustva;
+	}
+
+	@Override
+	public List<Operacija> getOperacijeByLekarId(Long id) {
+		List<Operacija> termini=new ArrayList<Operacija>();
+		for(Operacija t : operacijaRepository.findByIdlekaroperacija(id)) {
+			termini.add(t);
+		}
+		return termini;
+	}
+
+	@Override
+	public List<Pregled> getPreglediByLekarId(Long id) {
+		List<Pregled> termini=new ArrayList<Pregled>();
+		String broj=Long.toString(id);
+		for(Pregled t : pregledRepository.findByIdlekarpregled(broj)) {
+			termini.add(t);
+		}
+		return termini;
+	}
+
+	@Override
+	public List<TerminiSaId> getTerminiSaIdAll() {
+		List<TerminiSaId> termini=new ArrayList<TerminiSaId>();
+		for(TerminiSaId t : terminiRepository.findAll()) {
+			termini.add(t);
+		}
+		return termini;
+	}
+
+	@Override
+	public List<Operacija> getOperacijeAll() {
+		List<Operacija> termini=new ArrayList<Operacija>();
+		for(Operacija t : operacijaRepository.findAll()) {
+			termini.add(t);
+		}
+		return termini;
+	}
+
+	@Override
+	public List<Pregled> getPreglediAll() {
+		List<Pregled> termini=new ArrayList<Pregled>();
+		for(Pregled t : pregledRepository.findAll()) {
+			termini.add(t);
+		}
+		return termini;
 	}
 	
 }

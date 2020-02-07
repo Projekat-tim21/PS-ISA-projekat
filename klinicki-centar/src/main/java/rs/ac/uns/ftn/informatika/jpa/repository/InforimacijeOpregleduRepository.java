@@ -8,5 +8,8 @@ public interface InforimacijeOpregleduRepository extends JpaRepository<Informaci
 	
 	public InformacijeOpregledu findByLekarId(Long id);
 	public InformacijeOpregledu findByPacijentId(Long id);
+	public InformacijeOpregledu findByPregledId(Long id);
+	public InformacijeOpregledu findByTip(Long id);
+	public InformacijeOpregledu findByPregledIdAndTip(Long id,Long idx);
 
 }

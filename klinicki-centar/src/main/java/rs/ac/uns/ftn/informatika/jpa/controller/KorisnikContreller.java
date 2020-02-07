@@ -77,6 +77,7 @@ public class KorisnikContreller {
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
 		
+			System.out.println("Nessto "+ korisnik.getUsername());
 			//Korisnik =korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
 			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
@@ -85,15 +86,10 @@ public class KorisnikContreller {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-//samo privremeno da se mogu zakazati pregledi-username 3.12
-			if(k.getUsername().equals("ak") && k.getPassword().equals("ak")) {
-				return "adminZaPreglede";
-			}
-			
 			System.out.println("OVDE " + session.getAttribute(username));
 			System.out.println(k.getRoleName());
 			if(k.getRoleName().equals(Role.ADMIN.name())) {
-				
+				session.setAttribute("id", k.getId());
 				if(k.getFirst_Login()==true) {
 					k.setFirst_Login(false);
 					request.setAttribute("korisnik", korisnikServis.findOne(k.getId()));
@@ -117,7 +113,7 @@ public class KorisnikContreller {
 				return "adminZaPreglede";
 			}
 			session.setAttribute("id", k.getId());
-			if(k.getFirst_Login()==false && k.getIsActive()==true) {
+			if((k.getFirst_Login()==false || k.getFirst_Login()==null) && k.getIsActive()==true) {
 				return "neuspesnaRegistracija";
 			}else if(k.getIsActive()==false) {
 				return "neobradjenaRegistracija";

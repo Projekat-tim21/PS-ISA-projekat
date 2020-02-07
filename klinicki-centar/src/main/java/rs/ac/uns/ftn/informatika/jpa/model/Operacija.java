@@ -1,10 +1,17 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -31,7 +38,7 @@ public class Operacija {
 	@Column(name="lekarprezimeoperacija", nullable=true)
 	private String lekarprezimeoperacija;
 	
-	@Column(name="idlekaroperacija", nullable=false)
+	@Column(name="idlekaroperacija", nullable=true)
 	private Long idlekaroperacija;
 	
 	@Column(name="idpacijenta", nullable=true)
@@ -49,6 +56,9 @@ public class Operacija {
 	@Column(name = "zakazan", nullable = true)
 	private Boolean zakazan;
 	
+	@Column(name = "obradjen", nullable = true)
+	private Boolean obradjen;
+	
 	@Column(name="trajanje", nullable=true)
 	private String trajanje;
 	
@@ -60,18 +70,34 @@ public class Operacija {
 	
 	@Column(name="cena", nullable=true)
 	int cena;
+
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "lekari",joinColumns = @JoinColumn(name = "operacija_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "lekar_id", referencedColumnName = "user_id"))
+	private Set<Korisnik> lekari = new HashSet<Korisnik>();
+
 /*
 	@Version
 	private Long version;
+*/
 	
 	
 	
-	public Long getVersion() {
-		return version;
+	
+	public Set<Korisnik> getLekari() {
+		return lekari;
 	}
 
-	public void setVersion(Long version) {
-		this.version = version;
+	public void setLekari(Set<Korisnik> lekari) {
+		this.lekari = lekari;
+	}
+
+	public Boolean getObradjen() {
+		return obradjen;
+	}
+
+	public void setObradjen(Boolean obradjen) {
+		this.obradjen = obradjen;
 	}
 */
 	public String getTerminoperacija() {

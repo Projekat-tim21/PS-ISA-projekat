@@ -223,5 +223,47 @@ public class EmailService {
 		System.out.println("Email poslat!");
 		
 	}
+
+	public void sendNotificaitionPromenaDatumaOperacije(Korisnik k, String s) {
+		System.out.println("Slanje mejla promene termina operacije pacijentu" + k.getIme() + s);
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Promena termina operacije");
+		mail.setText("Pozdrav " + k.getIme() + "  " + "Termin operacije se pomera na "    + s);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+		
+	}
+
+	public void sendNotificaitionOperacijaPacijent(Korisnik k, String s) {
+		// TODO Auto-generated method stub
+		System.out.println("Termin operacije" + k.getIme() + s);
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Termin operacije");
+		mail.setText("Pozdrav " + k.getIme() + "  " + "Termin operacije je "    + s);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+
+	public void sendNotificaitionObavezanLekarOperacija(Korisnik k, String s) {
+		// TODO Auto-generated method stub
+		System.out.println("Termin operacije" + k.getIme() + s);
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(k.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Prisustvo operaciji");
+		mail.setText("Pozdrav " + k.getIme() + "  " + "Termin operacije je "    + s);
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
 	
 }

@@ -12,6 +12,7 @@
 <link rel="shortcut icon" href="#">
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+ <link rel="shortcut icon" href="#" />
 <style>
 body,html {
   height: 100%;
@@ -40,6 +41,7 @@ body,html {
 				<li><a href="/sviSestraPacijenti">Svi pacijenti</a></li>
 				<li><a href="/overaRecepta">Overa recepata</a></li>
 					<li><a href="/zahtevZaOdsustvo?id=${id}">Odsustvo/Odmor</a></li>
+					<li><a href="/radniKalendarSestre?id=${id}">Radni kalendar</a></li>
 					<li><a href="/profilSestra?id=${id}">Profil</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>

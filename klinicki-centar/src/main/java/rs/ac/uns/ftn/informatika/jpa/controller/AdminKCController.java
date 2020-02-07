@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.DijagnozaDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KlinikaDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.LekDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.Response;
 import rs.ac.uns.ftn.informatika.jpa.model.Dijagnoza;
+import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
@@ -266,7 +270,7 @@ public class AdminKCController {
 	        novi.setRoleName(Role.ADMIN_KLINIKE.name());
 	        String naziv=request.getParameter("odabrana");
 	        Klinika clinic=klinikaService.findByNaziv(naziv);
-	        System.out.println("KLINIKA "+ clinic.getNaziv());
+	       // System.out.println("KLINIKA "+ clinic.getNaziv());
 	        //Klinika nova=new Klinika();
 	        novi.setKlinika(clinic);
 	        
@@ -366,11 +370,68 @@ public class AdminKCController {
 	    }
 	    
 	    
+	    @GetMapping("/addNewZK")
+	    public ModelAndView addNewZK(HttpServletRequest request) {
+	    	request.setAttribute("korisnici", korisnikService.pokaziBezKartona());
+			request.setAttribute("mode", "ALL_USERS");
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("addNewZK");
+	        return modelAndView;
+	    }
+	    
+	    @RequestMapping("/kreirajKarton/{korisnikId}")
+	    public String enable(@PathVariable Long korisnikId,HttpServletRequest request) {
+			 request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
+				Korisnik k=korisnikService.findOne(korisnikId);
+				request.setAttribute("mode", "MODE_PREGLED");
+				return "create-zk";   
+		}
+	    
+	    @RequestMapping(value="/nov", method = { RequestMethod.GET, RequestMethod.POST }) 
+		public String sacuvajZK(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, HttpServletRequest request) {
+	    	String id2 = request.getParameter("id");
+			Korisnik izBaze=korisnikService.findOne(korisnikd.getId());
+			System.out.println("ISPISISI "+ izBaze.getId());
+			Korisnik k = new Korisnik();
+			k.setId(izBaze.getId());
+			System.out.println("ONO STO JE ID SAD : "+k.getId());
+			k.setId(izBaze.getId());
+			k.setIme(izBaze.getIme());
+			k.setPrezime(izBaze.getPrezime());
+			k.setJedBrOsig(izBaze.getJedBrOsig());
+			k.setEmail(izBaze.getEmail());
+			k.setAdresa(izBaze.getAdresa());
+			k.setDrzava(izBaze.getDrzava());
+			k.setGrad(izBaze.getGrad());
+			k.setTelefon(izBaze.getTelefon());
+			k.setUsername(izBaze.getUsername());
+			k.setPassword(izBaze.getPassword());
+			k.setIsActive(izBaze.getIsActive());
+			k.setFirst_Login(true);
+			k.setRoleName(Role.PACIJENT.name());
+			k.setDatum(korisnikd.getDatum());
+			k.setPol(korisnikd.getPol());
+			k.setVisina(korisnikd.getVisina());
+			k.setTezina(korisnikd.getTezina());
+			k.setKgrupa(korisnikd.getKgrupa());
+			k.setDioptrija(korisnikd.getDioptrija());
+			k.setAlergije(korisnikd.getAlergije());
+			k.setBolesti(korisnikd.getBolesti());
+			k.setAnamneza(korisnikd.getAnamneza());
+			korisnikService.saveMogKorisnika(k);
+			return "uspesanZK";
+
+		}
+	    
+	    
 	    @GetMapping("/zahteviRegistrovanje")
 	    public ModelAndView zahtevi(HttpServletRequest request) {
 	    	request.setAttribute("korisnici", korisnikService.pokaziSveZahteve());
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
+	        if(korisnikService.pokaziSveZahteve()==null) {
+	        	modelAndView.setViewName("nemaZahteva");
+	        }
 	        modelAndView.setViewName("pregledZahteva");
 	        return modelAndView;
 	    }
@@ -664,5 +725,6 @@ public class AdminKCController {
 		        return "redirect:/zahteviRegistrovanje";
 		        
 		    }
-	
+		 
+		
 }

@@ -33,13 +33,7 @@ public class Calendar {
 
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "korisnik_id")
-	private Korisnik korisnik;
-	
-
-	@Version
-	private Long version;
-
-	
+	private Korisnik korisnik;	
 	
 	public Set<TerminiSaId> getTermini() {
 		return termini;
@@ -49,13 +43,7 @@ public class Calendar {
 		this.termini = termini;
 	}
 
-	public Long getVersion() {
-		return version;
-	}
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
 
 	public Long getId() {
 		return id;

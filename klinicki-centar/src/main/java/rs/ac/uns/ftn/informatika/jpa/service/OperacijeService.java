@@ -40,6 +40,17 @@ public class OperacijeService {
 		orepo.save(o);
 	}
 
+	public List<Operacija> pokaziSveBezSale() {
+		List<Operacija> operacije = new ArrayList<Operacija>();
+		for (Operacija operacija : orepo.findAll()) {
+			if(operacija.getSala()==null && operacija.getTerminoperacija()!=null && operacija.getObradjen()==false) {
+				operacije.add(operacija);
+			}else {
+			}
+	}
+		return operacije;
+	}
+
 	
 
 }

@@ -35,6 +35,7 @@ public class LekarZaPrikazIPreglede {
 	
 	@Column(name="ocena", nullable=true)
 	private double ocena;
+
 /*
 	@Version
 	private Long version;

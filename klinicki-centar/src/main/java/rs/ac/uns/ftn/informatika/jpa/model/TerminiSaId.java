@@ -30,6 +30,7 @@ public class TerminiSaId {
 	
 	@Column(name="lekarprezime")
 	private String lekarprezime;
+
 	/*
 	@Version
 	private Long version;
@@ -57,6 +58,7 @@ public class TerminiSaId {
 
 	@Column(name="prikaz", nullable=true)
 	private boolean prikaz;
+
 
 	@Column(name="poslatnaobradu", nullable=true)
 	private boolean poslatnaobradu;
@@ -98,6 +100,7 @@ public class TerminiSaId {
 		this.version = version;
 	}
 */
+
 	public boolean isPrikaz() {
 		return prikaz;
 	}

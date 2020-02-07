@@ -57,6 +57,12 @@ public class PregledService {
 		
 		return pregledRepo.findByVreme(vreme);
 	}
+
+	public void save(Pregled o) {
+		// TODO Auto-generated method stub
+		pregledRepo.save(o);
+		
+	}
 	
 }
 	

@@ -65,14 +65,18 @@ public class Pregled {
 	@Column(name="obavljenpregled", nullable=true)
 	private boolean obavljenpregled;
 	
+	@Column(name = "obradjen", nullable = true)
+	private Boolean obradjen;
 	
 	public double getOcenapregleda() {
 		return ocenapregleda;
 	}
+
 /*
 	@Version
 	private Long version;
 	*/
+
 	public void setOcenapregleda(double ocenapregleda) {
 		this.ocenapregleda = ocenapregleda;
 	}
@@ -89,6 +93,7 @@ public class Pregled {
 		return terminpregled;
 	}
 
+
 	
 	/*
 	public Long getVersion() {
@@ -99,6 +104,7 @@ public class Pregled {
 		this.version = version;
 	}
 */
+
 	public void setTerminpregled(String terminpregled) {
 		this.terminpregled = terminpregled;
 	}
@@ -109,6 +115,16 @@ public class Pregled {
 
 	public void setLekarimepregled(String lekarimepregled) {
 		this.lekarimepregled = lekarimepregled;
+	}
+
+	
+	
+	public Boolean getObradjen() {
+		return obradjen;
+	}
+
+	public void setObradjen(Boolean obradjen) {
+		this.obradjen = obradjen;
 	}
 
 	public String getLekarprezimepregled() {

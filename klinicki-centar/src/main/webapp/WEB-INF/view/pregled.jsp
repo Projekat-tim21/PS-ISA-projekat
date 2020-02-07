@@ -13,11 +13,8 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 	<link rel="shortcut icon" href="#" />
-	
-    <!-- Title Page-->
     <title>Pregled</title>
 
-  
     <!-- Bootstrap CSS-->
 	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/css/style.css" rel="stylesheet">
@@ -262,82 +259,43 @@ Connection connection =
             <div class="card-wrapper">
                 <div class="card fat">
                     <div class="card-body">
-                    <c:choose>
-		<c:when test="${mode=='MODE_ZKARTON' }">
-			<div class="container text-center">
-				<h3>Pacijent: ${korisnik.ime } ${korisnik.prezime } </h3>
-				<hr>
-			</div>
-		</c:when>
-	</c:choose>
-	
-	   <c:choose>
+
+	<c:choose>
 		<c:when test="${mode=='MODE_LEKAR' }">
-			
-		</c:when>
-	</c:choose>
-                        <h4 align="center">PREGLED</h4>
-                        <hr>
-                        <form action="/noviPregled/${korisnik.id}/${lekar.id }" method="POST">
+			<h4 align="center">PREGLED</h4>
+            	<h3>Pacijent: ${korisnik.ime } ${korisnik.prezime } </h3>
+            	<hr>
+                <form action="/noviPregled/${korisnik.id}/${lekar.id }" method="POST">		
 					<div class="form-group">
 						<label>Informacije o pregledu</label>
 						<div >
-							<textarea rows="10" cols="100" class="form-control" id="informacije" name="informacije" ></textarea>
+							<textarea rows="10" cols="60" class="form-control" id="informacije" name="informacije" ></textarea>
 						</div>
 					</div>
                             
-                             <div class="form-group">
-                                <label for="dijagnozaId">Dijagnoza</label>
-                                <hr>
-                                <select name=didi>
-       								 <%  while(resultset.next()){ %>
-          							  <option><%= resultset.getString(3)%></option>
-      									  <% } %>
-     						   </select> </div>
-     					
-    <label for="dijagnoza">Recept</label> 
-     				  <hr>
-
-<c:if test="${not empty lists}">
-     				<select multiple="multiple" size="5" name="database1">
-    					<c:forEach items="${lists}" var="lists">
-      						 <option value="${lists}">
-      							  ${lists}
-  							  </option>
-						</c:forEach>
-					</select>
-					</c:if>
-     		<hr>		
-     				<div class="button_cont" id="myBtn" align="center"><button class="example_e" target="_blank" rel="nofollow noopener">Zakazi operaciju</button></div>
-     				<!-- The Modal -->
-						<div id="myModal" class="modal">
-
- 					 <!-- Modal content -->
-  						<div class="modal-content">
-  						  <span class="close">&times;</span>
-   							 <p>Zakazivanje operacije</p>
-   							 <form method="POST" action="sacuvajOperaciju">
-   							 <input type="datetime-local" name="terminoperacija" id="terminoperacija"/>
-									<input type="hidden" id="idlekaroperacija" name="idlekaroperacija" value="${lekar.id }"> 
-									<input type="hidden" id="pacijentId" name="pacijentId" value="${korisnik.id}"> 
-  							<input type="submit" name="zakazi">
-  							</div>
-
-						</div>
-     				<hr>
-     				
-     				<div class="button_cont" id="myBtn1" align="center"><button class="example_e"  target="_blank" rel="nofollow noopener">Zakazi pregled</button></div>
-					<!-- The Modal -->
-						<div id="myModal1" class="modall">
-
- 					 <!-- Modal content -->
-  						<div class="modal-contentt">
-  						  <span class="closee">&times;</span>
-   							 <p>Novi</p>
-  							</div>
-
-						</div>
-<hr>
+                    <div class="form-group">
+                        <label for="dijagnozaId">Dijagnoza</label>
+                        <select name=dijagnozaId>
+       						<%  while(resultset.next()){ %>
+          						<option><%= resultset.getString(3)%></option>
+      						<% } %>
+     					</select> 
+     				</div>
+				<hr>	
+    					<label for="dijagnoza">Recept</label> 
+						<c:if test="${not empty lists}">
+     						<select multiple="multiple" size="5" name="lekici">
+    							<c:forEach items="${lists}" var="lists">
+      						 		<option value="${lists}">
+      							  		${lists}
+  							  		</option>
+								</c:forEach>
+							</select>
+						</c:if>
+    <hr>		
+    
+     				</c:when>
+	</c:choose>
 <%
 //**Should I input the codes here?**
         }
@@ -353,75 +311,15 @@ Connection connection =
                                     SACUVAJ
                                 </button>
                             </div>
-                        </form>
-                        
-                        	   <hr>
-     				
-     				
+                        </form>         
+                      <hr>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script>// Get the modal
-var modal = document.getElementById("myModal");
 
-//Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-//Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-//When the user clicks the button, open the modal 
-btn.onclick = function() {
-modal.style.display = "block";
-}
-
-//When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-modal.style.display = "none";
-}
-
-//When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal) {
- modal.style.display = "none";
-}
-}
-
-var modal1 = document.getElementById("myModal1");
-
-//Get the button that opens the modal
-var btn1 = document.getElementById("myBtn1");
-
-//Get the <span> element that closes the modal
-var span1 = document.getElementsByClassName("closee")[0];
-//When the user clicks the button, open the modal 
-btn1.onclick = function() {
-modal1.style.display = "block";
-}
-
-//When the user clicks on <span> (x), close the modal
-span1.onclick = function() {
-modal1.style.display = "none";
-}
-
-//When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal1) {
- modal1.style.display = "none";
-}
-}
-
-function izbaciAlert(){
-	alert("Uspesno kreirana operacija");
-	}
-
-function izbaciAlertP(){
-	alert("Uspesno kreiran pregled");
-	}
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/app.js"></script>

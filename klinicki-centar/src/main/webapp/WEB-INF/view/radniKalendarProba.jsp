@@ -70,6 +70,7 @@
                           for(var i=0; i<len; i++){
                               console.log(result[i]);
                               var termin=result[i].termin;
+                              var tipEventa=result[i].tipEventa;
                               var startDate = new Date(termin);
                               var idkorisnika=result[i].idkorisnika;
                               var odobrenpregled=result[i].odobrenpregled;
@@ -84,7 +85,7 @@
                               
                               var event={
                                       
-                                      title:'TERMINI--'+'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
+                                      title:tipEventa + 'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                       start:startDate.toISOString(),
                                       allDay: false,
                                      
@@ -93,7 +94,7 @@
                                       };
                               
                               termini.push({
-                                  title:'TERMINI--'+'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
+                                  title: tipEventa+" --> " +'Tip '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                   start:startDate.toISOString(),
                                   allDay: false,
                                   url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika

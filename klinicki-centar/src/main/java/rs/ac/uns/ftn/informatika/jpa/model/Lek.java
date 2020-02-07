@@ -39,9 +39,6 @@ public class Lek {
 	private Set<InformacijeOpregledu> pregledi = new HashSet<InformacijeOpregledu>();
 	
 
-	@Version
-	private Long version;
-	
 	
 
 	public Set<InformacijeOpregledu> getPregledi() {
@@ -50,14 +47,6 @@ public class Lek {
 
 	public void setPregledi(Set<InformacijeOpregledu> pregledi) {
 		this.pregledi = pregledi;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 
 	public Lek() {

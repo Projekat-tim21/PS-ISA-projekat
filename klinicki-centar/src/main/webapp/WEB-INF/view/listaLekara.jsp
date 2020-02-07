@@ -44,6 +44,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
+					<li><a href="/prikaziOperacijeBezSale">Sale za operaciju</a></li>
 					<li><a onclick="addIdPac2(this)" href="/naLogin">Vrati se nazad</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>

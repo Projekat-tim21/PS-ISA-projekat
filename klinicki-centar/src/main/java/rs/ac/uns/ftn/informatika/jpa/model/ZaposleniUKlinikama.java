@@ -25,6 +25,7 @@ public class ZaposleniUKlinikama {
 	public Long getId() {
 		return id;
 	}
+
 /*
 	@Version
 	private Long version;

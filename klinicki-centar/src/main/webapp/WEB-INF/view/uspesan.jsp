@@ -238,11 +238,29 @@ transition: all 0.3s ease 0s;
 			</div>
 		</div>
 	</div>
-<p>Pregled zavrsen</p>
+<c:choose>
+	<c:when test="${mode=='MODE_PACIJENT' }">
+			<div class="container text-center">
+				<label class="control-label ">Id : ${korisnik.id } </label>
+				<hr>
+				<label class="control-label">Ime : ${korisnik.ime }</label>
+				<hr>
+				<label class="control-label ">Prezime : ${korisnik.prezime }</label>
+				<hr>		
+				<a href="/izmenaKartona/${korisnik.id}/${lekar.id }">Zdravstveni karton</a>
+				<hr>
+				<a href="/istorijaIzvestaja/${korisnik.id}/${lekar.id }">Istorija pregleda</a>
+				<hr>
+				<a href="/kreirajPregled/${korisnik.id}/${lekar.id }">Zakazi novi pregled</a>
+				<hr>
+				<a href="/kreirajOperaciju/${korisnik.id}/${lekar.id }">Zakazi operaciju</a>
+			</div>
+			
+	</c:when>
+</c:choose>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/app.js"></script>			
 </body>
-<script>
-  
-</script>
-
 </html>
 

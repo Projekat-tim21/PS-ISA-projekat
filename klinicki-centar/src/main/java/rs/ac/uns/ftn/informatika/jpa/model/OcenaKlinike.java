@@ -31,6 +31,7 @@ public class OcenaKlinike {
 	
 	@Column(name="klinikaid", nullable=true)
 	private Long klinikaid;
+
 /*
 	@Version
 	private Long version;
@@ -45,6 +46,7 @@ public class OcenaKlinike {
 		this.version = version;
 	}
 */
+
 	public Long getId() {
 		return id;
 	}
