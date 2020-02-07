@@ -99,7 +99,7 @@ public class Operacija {
 	public void setObradjen(Boolean obradjen) {
 		this.obradjen = obradjen;
 	}
-*/
+	
 	public String getTerminoperacija() {
 		return terminoperacija;
 	}
