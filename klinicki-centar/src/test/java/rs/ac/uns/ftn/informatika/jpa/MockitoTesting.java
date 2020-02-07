@@ -1,6 +1,9 @@
 package rs.ac.uns.ftn.informatika.jpa;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -9,23 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
-
+import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,21 +31,39 @@ import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class KorisnikTestMockito {
+public class MockitoTesting {
 
-	@Autowired
+	@InjectMocks
 	private KorisnikService servis;
 	
 	@Mock
-    KorisnikDTO dto;
+    private KorisnikDTO dao;
+	
+	@Before
+    public void setUp() throws Exception {
+
+        MockitoAnnotations.initMocks(this);
+    }
 	
 	private MockMvc mockMvc;
 	
 	@MockBean
 	private KorisnikRepository repo;
 	
-	 @Captor
-	 private ArgumentCaptor<Korisnik> customerArgument;
+	
+
+	@Test
+	public void DodajKorisnika() {
+		when(repo.save(any(Korisnik.class))).thenReturn(new Korisnik((long) 20, "Bate Brkic 42","alergije2", "anamneza2", "bolesti2", "25.04.1999.", "2", "2b", "muski", "80kg", "190cm", "Srbija", "marko22@gmail.com"));
+		assertEquals(1, servis.pokaziSveKorisnike().size());
+	}
+
+	@Test
+	public void getKorisniciTest() {
+		when(repo.findAll()).thenReturn(Stream.of(new Korisnik((long) 20, "Bate Brkic 42","alergije2", "anamneza2", "bolesti2", "25.04.1999.", "2", "2b", "muski", "80kg", "190cm", "Srbija", "marko22@gmail.com")).collect(Collectors.toList()));
+		assertEquals(1, servis.pokaziSveKorisnike().size());
+	}
+	
 	
 	@Test
     public void saveKorisnikTest()
@@ -65,35 +76,6 @@ public class KorisnikTestMockito {
          k.getUsername();
     }
 	  
-	@Test
-	public void getKorisniciTest() {
-		when(repo.findAll()).thenReturn(Stream.of(new Korisnik((long) 20, "Bate Brkic 42","alergije2", "anamneza2", "bolesti2", "25.04.1999.", "2", "2b", "muski", "80kg", "190cm", "Srbija", "marko22@gmail.com")).collect(Collectors.toList()));
-		assertEquals(1, servis.pokaziSveKorisnike().size());
-	}
-	
-	/*
-	@Test
-	public void DodajKorisnika() {
-		Korisnik k=new Korisnik( "pera","peric", "64645", "pera@hg", "nade matic 5", "Srbija", "Novi Sad", "15656646", "pera", "peric", "PACIJENT");
-		when(repo.save(k)).thenReturn(new Korisnik()); 
-		assertEquals(1, servis.pokaziSveKorisnike().size());
-	}
-	*/
-	/*
-	@Test
-    public void testRegister() {
-
-        //Requirement: we want to register a new customer. Every new customer should be assigned a random token before saving in the database.
-        
-       servis.editUser(200L); 
-        
-        //captures the argument which was passed in to save method.
-        verify(servis).saveMogKorisnika(customerArgument.capture()); 
-        
-        //make sure a token is assigned by the register method before saving.
-        assertThat(customerArgument.getValue().getTelefon(), is(notNullValue()));
-    }
-*/
 	
 	
 	@Test
@@ -134,3 +116,4 @@ public class KorisnikTestMockito {
     }
 }
 	
+

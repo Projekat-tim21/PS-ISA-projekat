@@ -96,6 +96,11 @@ public class Korisnik {
 	private Klinika klinika;
 
 	/*
+	 @Version
+	    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+	    private int version;
+	*/
+	/*
 	@Version
 	private Long version;
 	*/
