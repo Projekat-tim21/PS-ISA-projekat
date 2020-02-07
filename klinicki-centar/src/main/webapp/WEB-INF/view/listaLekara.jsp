@@ -99,7 +99,7 @@ body {
 									<td>${lip.tipspecijalizacije}</td>
 									<td>${lip.ocena}</td>
 									<td>
-										<a onclick="addIdPac(this)" href="/listaSvihTerminaPacijent?id=${lip.id}">Slobodni termini</a>
+										<a onclick="addIdPac(this)" href="/listaSvihTerminaPacijent2?id=${lip.id}">Slobodni termini</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -113,14 +113,16 @@ body {
 
 		</c:when>
 
-		<c:when test="${mode=='ALL_TERMINI' }">
+
+
+<c:when test="${mode=='ALL_TERMINI_KOPIJA' }">
 		
 		
 		<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac4(this)" href="/naListuLekaraSaZakazivanjaPregleda">Vrati se nazad</a></li>
+				<ul class="nav navbar-nav">															
+					<li><a onclick="addIdPac44(this)" href="/naListuLekaraSaZakazivanjaPregleda2">Vrati se nazad</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
 
@@ -132,12 +134,59 @@ body {
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista slobodnih termina  </h3>
 				<hr>
-				<!-- 	<h4>Sortiraj klinike</h4>
-			<span class="form-group">	
-			<button onclick="sortTablePoNazivu()">Po nazivu</button>
-			<button onclick="sortTablePoGradu()">Po gradu</button>   
-			</span>	 
-			 -->
+				
+<input type="hidden" id="idHidden" name="idHidden">
+				<div class="table-responsive">
+					<table id="indextable" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th><a href="javascript:SortTable(6,'N');">Id</a></th>
+								<th><a href="javascript:SortTable(1,'D','mdy');">Termin</a></th>
+								<th><a href="javascript:SortTable(6,'N');">Id lekara</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="termini" items="${termini}">
+								<tr>
+									<td>${termini.id}</td>
+									<td>${termini.termin}</td>
+									<td>${termini.lekarId}</td>
+									<td><a onclick="addIdPac(this)" href="/zakazivanjePregledaIzaListeLekara?id=${termini.id}">Zakazi pregled</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+		</c:when>
+
+
+
+
+
+
+		<c:when test="${mode=='ALL_TERMINI' }">
+		
+		
+		<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">															
+					<li><a onclick="addIdPac4(this)" href="/naListuLekaraSaZakazivanjaPregleda?idklinike=${idklinike}">Vrati se nazad</a></li>
+					<li><a href="/logout">Odjavi se</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+		
+		
+			<div class="container text-center" id="tasksDiv">
+				<h3>Lista slobodnih termina  </h3>
+				<hr>
+				
 <input type="hidden" id="idHidden" name="idHidden">
 				<div class="table-responsive">
 					<table id="indextable" class="table table-striped table-bordered">
@@ -170,12 +219,7 @@ body {
 			<div class="container text-center" id="tasksDiv">
 				<h3>Lista slobodnih termina  </h3>
 				<hr>
-				<!-- 	<h4>Sortiraj klinike</h4>
-			<span class="form-group">	
-			<button onclick="sortTablePoNazivu()">Po nazivu</button>
-			<button onclick="sortTablePoGradu()">Po gradu</button>   
-			</span>	 
-			 -->
+			
 <input type="hidden" id="idHidden" name="idHidden">
 				<div class="table-responsive">
 					<table id="indextable" class="table table-striped table-bordered">
@@ -270,7 +314,8 @@ body {
 
 	<script>
 
-	
+	//var klinkaId='${idklinike}';
+	//console.log(klinikaId+ ' dfwhfjfejfwf');
 	
 	var getUrlParameter = function getUrlParameter(sParam) {
 	    var sPageURL = window.location.search.substring(1),
@@ -302,6 +347,10 @@ body {
 	}
 
 	function addIdPac4 (element){
+		element.href = element.href+"&idpac="+idPacijenta;
+	}
+
+	function addIdPac44 (element){
 		element.href = element.href+"?idpac="+idPacijenta;
 	}
 	

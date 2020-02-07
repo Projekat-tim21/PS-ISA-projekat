@@ -67,6 +67,14 @@ public class TerminSaIdService {
 		}
 		return termini;
 	}
+
+
+	public void deleteMyTerminObjekat(TerminiSaId t) {
+		// TODO Auto-generated method stub
+		System.out.println("brise se objekat");
+		long idtermina=t.getId();
+		tidRepo.deleteById(idtermina);
+	}
 	
 
 

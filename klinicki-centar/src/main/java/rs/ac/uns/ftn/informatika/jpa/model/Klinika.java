@@ -41,7 +41,10 @@ public class Klinika {
 		
 		@Column(name = "tip", nullable = false)
 		private String tip;
-
+		/*
+		@Version
+		private Long version;
+*/
 
 		@OneToMany(mappedBy = "klinika", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		private Set<Korisnik> admini = new HashSet<Korisnik>();
@@ -80,6 +83,18 @@ public class Klinika {
 			this.naziv = naziv;
 		}
 
+
+		/*
+		public Long getVersion() {
+			return version;
+		}
+
+
+		public void setVersion(Long version) {
+			this.version = version;
+		}
+
+*/
 
 		public String getGrad() {
 			return grad;

@@ -38,6 +38,12 @@ body {
 <body>
 
 
+
+<c:choose>
+<c:when test="${mode=='ALL_ZAHTEVI_ODOBRENI' }">
+
+
+
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
@@ -52,8 +58,6 @@ body {
 
 
 
-<c:choose>
-<c:when test="${mode=='ALL_ZAHTEVI_ODOBRENI' }">
 			<div class="container text-center" id="tasksDiv">
 				<h3>Vasi odobreni zahtevi</h3>
 				<hr>
@@ -100,6 +104,62 @@ body {
 		</c:when>
 
 
+<c:when test="${mode=='ALL_ZAHTEVI_ODOBRENI_SA_MAILA_KAD_ULAZIM' }">
+
+<div role="navigation">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-collapse collapse">
+			
+
+			</div>
+		</div>
+	</div>
+
+			<div class="container text-center" id="tasksDiv">
+				<h3>Vasi odobreni zahtevi</h3>
+				<hr>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Termin</th>
+								<th>Ime lekara</th>
+								<th>Prezime lekara</th>
+								<th>Tip pregleda</th>
+								<th>Sala</th>
+								<th>Cena</th>
+								<th>Popust</th>
+								<th colspan="2">Prihvati/Odbij</th>
+						<!--		<th>Sifra</th>  -->
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="termin" items="${termini }">
+								<tr>
+									<td>${termin.id}</td>
+									<td>${termin.termin}</td>
+									<td>${termin.lekarime}</td>
+									<td>${termin.lekarprezime}</td>
+									<td>${termin.tippregleda}</td>
+									<td>${termin.sala}</td>
+									<td>${termin.cena}</td>
+									<td>${termin.popust}</td>
+									
+									<td>
+                                        <a href="/enable3/${termin.getId()}" onclick="alertEnable()" class="saveData"><span class="btn-label"><img src="static/svg/check.svg"></span></a>
+                                        </td>
+                                        <td><a href="/disable3/${termin.getId()}" onclick="alertDisable()" class="deleteData"><span class="btn-label"><img src="static/svg/x.svg"></span></a>
+                                        </td>
+					
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</c:when>
+
 </c:choose>
 
 
@@ -126,6 +186,9 @@ function alertDisable(){
 			}
 		};
 
+		var termin ='${termin.id}';
+		console.log(termin);
+		
 		var idPacijenta = getUrlParameter('id');
 		console.log(idPacijenta);
 

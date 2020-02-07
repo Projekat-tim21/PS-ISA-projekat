@@ -32,6 +32,23 @@ public class Sala {
 		return rezervisana;
 	}
 
+/*
+	@Version
+	private Long version;
+
+	
+	
+	public Long getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+*/
+
 	public void setRezervisana(boolean rezervisana) {
 		this.rezervisana = rezervisana;
 	}

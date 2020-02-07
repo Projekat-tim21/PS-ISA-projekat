@@ -254,7 +254,7 @@ public class KorisnikContreller {
 			HttpServletRequest request) {
 	
 		String id2 = request.getParameter("id");
-		
+		System.out.println("id jeeee" + " "+id2);
 		HttpSession session = request.getSession();
 		session.setAttribute("id", id2);
 		
@@ -317,6 +317,7 @@ public class KorisnikContreller {
 	@RequestMapping("/profilkaPregledu")
 	public String editUserProfilPregled(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
+		request.setAttribute("id", id);
 		request.setAttribute("mode", "MODE_PREGLED");
 		return "pregledInfo";
 	}

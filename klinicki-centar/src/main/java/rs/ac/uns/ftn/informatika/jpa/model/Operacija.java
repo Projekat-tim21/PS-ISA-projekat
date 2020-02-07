@@ -71,9 +71,15 @@ public class Operacija {
 	@Column(name="cena", nullable=true)
 	int cena;
 
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "lekari",joinColumns = @JoinColumn(name = "operacija_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "lekar_id", referencedColumnName = "user_id"))
 	private Set<Korisnik> lekari = new HashSet<Korisnik>();
+
+/*
+	@Version
+	private Long version;
+*/
 	
 	
 	
@@ -93,7 +99,7 @@ public class Operacija {
 	public void setObradjen(Boolean obradjen) {
 		this.obradjen = obradjen;
 	}
-
+*/
 	public String getTerminoperacija() {
 		return terminoperacija;
 	}
