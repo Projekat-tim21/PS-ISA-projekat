@@ -55,6 +55,8 @@ public class TerminiSaId {
 	@Column(name="prikaz", nullable=true)
 	private boolean prikaz;
 
+	@Column(name="poslatnaobradu", nullable=true)
+	private boolean poslatnaobradu;
 
 	public boolean isPrikaz() {
 		return prikaz;
