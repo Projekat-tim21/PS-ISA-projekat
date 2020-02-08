@@ -242,9 +242,6 @@ Connection connection =
 			<div class="navbar-collapse collapse">
 			<h2>LEKAR</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
-					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
-					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>

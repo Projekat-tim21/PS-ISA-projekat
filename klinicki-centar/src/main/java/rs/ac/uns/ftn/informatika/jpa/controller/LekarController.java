@@ -1,6 +1,9 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.OperacijaDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
@@ -293,6 +297,19 @@ public class LekarController {
 			o.setTerminpregled(pregledDTO.getTerminpregled());
 			o.setObradjen(false);
 			pService.save(o);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+			Date date1 = sdf.parse(o.getTerminpregled());
+			LocalDate sada=java.time.LocalDate.now();
+			 Date date3=java.sql.Date.valueOf(sada);
+			 if(date1.compareTo(date3) < 0) {
+	        	 System.out.println("Date1 is before Date3");
+	        	 Long n=Long.parseLong( lekarId );
+	        	 request.setAttribute("lekar", korisnikService.findOne(n));
+	 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
+	 			request.setAttribute("mode", "MODE_PACIJENT");
+	 			
+	        	 return "drugiDatumPregleda";
+	        }
 			request.setAttribute("message", "uspesno kreirana operacija");
 			Long n=Long.parseLong( lekarId );
 			request.setAttribute("lekar", korisnikService.findOne(n));
@@ -301,7 +318,7 @@ public class LekarController {
 			return "uspesan";
 		}
 	 @RequestMapping(value="/sacuvajNovuOperaciju/{pacijentId}/{lekarId}",method = { RequestMethod.GET, RequestMethod.POST }) // korisnik povezan sa valuom iz js
-		public String cuvajOperaciju(@PathVariable Long lekarId,@PathVariable Long pacijentId,@ModelAttribute Operacija operacijaDTO, BindingResult bindingResult,
+		public String cuvajOperaciju(@PathVariable Long lekarId,@PathVariable Long pacijentId,@ModelAttribute OperacijaDTO operacijaDTO, BindingResult bindingResult,
 				HttpServletRequest request) throws ParseException {
 		
 			Operacija o= new Operacija();
@@ -311,6 +328,18 @@ public class LekarController {
 			o.setTerminoperacija(operacijaDTO.getTerminoperacija());
 			o.setObradjen(false);
 			oService.save(o);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+			Date date1 = sdf.parse(o.getTerminoperacija());
+			LocalDate sada=java.time.LocalDate.now();
+			 Date date3=java.sql.Date.valueOf(sada);
+			 if(date1.compareTo(date3) < 0) {
+	        	 System.out.println("Date1 is before Date3");
+	        	 request.setAttribute("lekar", korisnikService.findOne(lekarId));
+	 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
+	 			request.setAttribute("mode", "MODE_PACIJENT");
+	 			
+	        	 return "drugiDatumOperacija";
+	        }
 			request.setAttribute("message", "uspesno kreirana operacija");
 			request.setAttribute("lekar", korisnikService.findOne(lekarId));
 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));

@@ -25,9 +25,6 @@
 			<div class="navbar-collapse collapse">
 			<h2>LEKAR</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
-					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
-					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -45,7 +42,7 @@
 				<form class="form-horizontal" method="POST"
 					action="sacuvajNoviPregled/${lekar.id  }/${korisnik.id }">
 					<label>Zakazi novi pregled</label>
-					<input type="datetime-local" name="terminpregled" id="terminpregled"/>
+					<input type="datetime-local" name="terminpregled" id="terminpregled"/ required>
 					<input type="hidden" id="idlekarpregled" name="idlekarpregled" value="${lekar.id }"> 
 					<input type="hidden" id="idpacijenta" name="idpacijenta" value="${korisnik.id}"> 
   				

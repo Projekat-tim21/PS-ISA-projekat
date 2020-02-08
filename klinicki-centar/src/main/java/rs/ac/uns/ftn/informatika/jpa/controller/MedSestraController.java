@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.OdsustvoDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
@@ -126,7 +127,7 @@ public class MedSestraController {
 	 
 	
 	 @PostMapping("/zahtevZaOdsustvoo/{id}") // korisnik povezan sa valuom iz js
-		public String zahtevZaOdsustvo(@PathVariable(value="id") Long id,@ModelAttribute Odsustvo odsustvo, BindingResult bindingResult,
+		public String zahtevZaOdsustvo(@PathVariable(value="id") Long id,@ModelAttribute OdsustvoDTO odsustvo, BindingResult bindingResult,
 				HttpServletRequest request) throws ParseException {
 	
 		 	Korisnik k=korisnikService.findOne(id);
