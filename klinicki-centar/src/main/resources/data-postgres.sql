@@ -51,9 +51,10 @@ insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime, 
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu,korisnik_id) values (1, '2019-12-05T06:50', '2B', 1500, 20, 'Zoran', 'Zoric', 'ocno', 'false',0, 'false', 'true','false',18);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true','false',19);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu,korisnik_id) values (4, '2019-12-05T06:50', '2B', 1500, 20, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true','false',21);
-insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (2, '2019-11-04T05:30', '3C', 1800, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true','false',19);
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (2, '2020-02-07T10:30', '3C', 900, 0, 'Mara', 'Maric', 'url', 'false',0, 'false', 'true','false',19);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled,prikaz,poslatnaobradu,korisnik_id) values (6, '2019-12-05T06:50', '2B', 1500, 20, 'Pedja', 'Matic', 'dermatologija', 'false',0, 'false', 'true','false',23);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (4, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true','false',21);
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (4, '2019-02-07T03:30', '3C', 300, 0, 'Kata', 'Katic', 'ocno', 'true',12, 'true', 'true','true',21);
 
 
 /*unapred definisani*/

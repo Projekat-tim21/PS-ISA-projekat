@@ -28,7 +28,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac(this)" href="/korakUnazadNaLogin">Vrati se nazad</a></li>	
+					<li><a onclick="addIdPac2(this)" href="/korakUnazadNaLogin">Vrati se nazad</a></li>	
 					<li><a href="/logout">Odjavi se</a></li> 
 				</ul>
 			
@@ -58,6 +58,7 @@ body {
 								<th>Sala</th>
 								<th>Cena</th>
 								<th>Popust</th>
+								<th>Otkazi pregled</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -71,7 +72,7 @@ body {
 									<td>${termin.sala}</td>
 									<td>${termin.cena}</td>
 									<td>${termin.popust}</td>
-									
+									<td><a onclick="addIdPac(this)" href="/otkazivanjePregleda?idtermina=${termin.id}">Otkazi pregled</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -106,9 +107,16 @@ body {
 		console.log(idPacijenta);
 
 		function addIdPac(element) {
+			element.href = element.href + "&id=" + idPacijenta;
+			console.log(element.href);
+		}
+
+		function addIdPac2(element) {
 			element.href = element.href + "?id=" + idPacijenta;
 			console.log(element.href);
 		}
+
+		
 	</script>
 
 </body>

@@ -62,6 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		.authorizeRequests().antMatchers("/").permitAll()
 		.antMatchers("/login").permitAll()
+		.antMatchers("/otkaziPregledSubmit").permitAll()
+		.antMatchers("/otkazivanjePregleda").permitAll()
 		.antMatchers("/registracija").permitAll()
 		.antMatchers("/login-user").permitAll()
 		.antMatchers("/pokazi-korisnika").hasAuthority(Role.ADMIN.name())

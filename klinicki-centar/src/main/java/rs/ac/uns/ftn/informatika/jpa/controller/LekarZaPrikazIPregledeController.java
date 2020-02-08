@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -203,7 +206,7 @@ public class LekarZaPrikazIPregledeController {
 		}
 
 		request.setAttribute("termini", termini);
-
+		
 		request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
 		return "sviZakazaniPregledi";
 	}
@@ -415,6 +418,7 @@ public class LekarZaPrikazIPregledeController {
 		t.setCena(op.getCenaop());
 		t.setPopust(op.getPopustop());
 		t.setZakazan(false);
+		t.setPoslatnaobradu(false);
 		t.setLekarId(op.getLekaridop());
 		t.setOdobrenpregled(false);
 
@@ -445,6 +449,7 @@ public class LekarZaPrikazIPregledeController {
 		t.setZakazan(false);
 		t.setLekarId(op.getLekaridop());
 		t.setIdkorisnika(op.getIdpacijenta());
+		t.setPoslatnaobradu(true);
 		t.setOdobrenpregled(true);
 		t.setPrikaz(true);
 		
@@ -481,7 +486,12 @@ public class LekarZaPrikazIPregledeController {
 		tnovi.setPopust(t.getPopust());
 		tnovi.setZakazan(true);
 		tnovi.setPrikaz(false);
-
+		tnovi.setOdobrenpregled(true);
+		tnovi.setPoslatnaobradu(true);
+		tnovi.setIdkorisnika(k.getId());
+		tnovi.setKorisnikId(k.getId());
+		tnovi.setLekarId(t.getLekarId());
+		tisServis.deleteMyTerminObjekat(t);
 		tisServis.saveMojTermin(tnovi);
 
 		return "redirect:/idiNaLoginPoslePotvrde";
@@ -507,7 +517,12 @@ public class LekarZaPrikazIPregledeController {
 		tnovi.setSala(t.getSala());
 		tnovi.setPopust(t.getPopust());
 		tnovi.setZakazan(false);
+		tnovi.setPrikaz(false);
+		tnovi.setPoslatnaobradu(false);
 		tnovi.setOdobrenpregled(false);
+		tnovi.setIdkorisnika(k.getId());
+		tnovi.setKorisnikId(k.getId());
+		tnovi.setLekarId(t.getLekarId());
 		
 		tisServis.deleteMyTerminObjekat(t);
 		
@@ -553,7 +568,7 @@ public class LekarZaPrikazIPregledeController {
 	}
 	
 	
-	
+	//ovaj
 	@RequestMapping("/odobreniZahteviKodPacijenta")
 	public String odobreniZahteviKodPacijenta(@RequestParam("id") int id, HttpServletRequest request) {
 
@@ -563,7 +578,7 @@ public class LekarZaPrikazIPregledeController {
 
 		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
 		for (TerminiSaId termin : tidRepo.findByOdobrenpregled(true)) {
-			if (termin.isPrikaz() != false)
+			if (termin.isPrikaz() != false)//prikazem sve termine koji tu prikaz true
 				termini.add(termin);
 		}
 
@@ -642,6 +657,38 @@ public class LekarZaPrikazIPregledeController {
 		return "zahtevZaPregledom";
 	}
 
+	//odjava pregleda
+	
+	@GetMapping("/otkazivanjePregleda")
+	public String otkazivanjeZakazanogPregleda(@RequestParam("id") long idpacijenta,@RequestParam("idtermina") long idTermina, @ModelAttribute TerminiSaId tt,
+			@RequestParam Long id, HttpServletRequest request) {
+
+		Korisnik korisnici = korisnikServis.findOne(idpacijenta);
+		request.setAttribute("korisnik", korisnici);
+		OdobravanjePregleda op = new OdobravanjePregleda();
+		HttpSession session = request.getSession();
+		
+		TerminiSaId terminiSaId = tisServis.findOne(idTermina);
+		System.out.println(terminiSaId.getId() + " Id lekara od termina");
+		session.setAttribute("id", idpacijenta);
+		long idLekara = terminiSaId.getLekarId();
+		op.setImelekara(terminiSaId.getLekarime());
+		op.setPrezimelekara(terminiSaId.getLekarprezime());
+		op.setTipspecijalizacije(terminiSaId.getTippregleda());
+		op.setImepacijenta(korisnici.getIme());
+		op.setPrezimepacijenta(korisnici.getPrezime());
+		op.setJedbrosigpac(korisnici.getJedBrOsig());
+		request.setAttribute("lipi", lipServis.findOne(idLekara));
+		request.setAttribute("terminId", idTermina);
+		System.out.println("id termina je: "+idTermina + " id pacijenta je "+idpacijenta);
+		request.setAttribute("termini", terminiSaId);
+		request.setAttribute("id", idpacijenta);
+		request.setAttribute("mode", "ODBIJANJE_ZAHTEVA_PRIKAZ");
+		return "odbijanjeZahteva";
+	}
+	
+	
+	
 	@RequestMapping("/vratiSeNaLoginBezDobrodosli2")
 	public String vracanjenapocetak(HttpServletRequest request) {
 		return "loginBezDobrodosli2";
@@ -692,36 +739,110 @@ public class LekarZaPrikazIPregledeController {
 	@RequestMapping("/naListuLekaraSaZakazivanjaPregleda2")
 	public String vratiSeNazadNaListuLekara2(@RequestParam("idpac") long idpac,HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		//String ovajIdKlinike=(String) session.getAttribute("idklinike");
-		//long idKlinike= Long.parseLong(ovajIdKlinike);
-		//System.out.println("id pac  "+idpac+"  idKlinike   "+idKlinike);
 		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
 		Klinika k=new Klinika();
-		//HttpSession session = request.getSession();
 		session.setAttribute("id", idpac);
-	/*
-		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
-		List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
-		for(ZaposleniUKlinikama zaposlen : zRepo.findByIdklinike(idKlinike)) {
-			zaposleni.add(zaposlen);
-			long idlekara=zaposlen.getIdlekara();
-			for(LekarZaPrikazIPreglede lip :  lipServis.pokaziSveKorisnikeKojiSuLekari()) {
-				if(zaposlen.getIdlekara()==lip.getId()) {
-					lipi.add(lip);
-				}
-					
-			}
-		}
-		*/
-		//request.setAttribute("zaposleni", zaposleni);
-		//request.setAttribute("lipi", lipi);
-		//request.setAttribute("mode", "ALL_LEKARI_2");
-		
+
 		request.setAttribute("lipi", lipServis.pokaziSveKorisnikeKojiSuLekari());
 		request.setAttribute("mode", "ALL_LEKARI");
 		return "listaLekara";
 		
-		//return "redirect:/prikaziListuLekara";
+	}
+	
+	
+	@PostMapping("/otkaziPregledSubmit")
+	public String otkaziPregledSubmit(@RequestParam("id") long idpac,@RequestParam("idtermina") long idTerminaOvaj, @ModelAttribute TerminiSaId termini,
+			@ModelAttribute Korisnik korisnik, @ModelAttribute LekarZaPrikazIPreglede lipi,
+			HttpServletRequest request) {
+		System.out.println("cao");
+		HttpSession session = request.getSession();
+		
+		TerminiSaId ter2 = new TerminiSaId();
+		//long l = Long.parseLong(idTerminaOvaj);
+		//int num = int.valueOf(idTerminaOvaj);
+		ter2 = tisServis.findOne(idTerminaOvaj);
+		String terminVreme=ter2.getTermin();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		ZoneId z = ZoneId.of( "Europe/Paris" );
+		LocalDate ld = LocalDate.now( z ) ;
+		int dayOfMonth = ld.getDayOfMonth();
+		System.out.println("dan u mesecu  "+ dayOfMonth);
+		//String ovajDan=sdf;
+		//String danasnjiDan=sdf.split("-")[2];
+		String terminVremeDrugiDeo = terminVreme.split("-")[2];
+		System.out.println(terminVremeDrugiDeo);
+		String dan = terminVremeDrugiDeo.substring(0,1);
+		System.out.println("dan je "+dan);
+	//	String dan2=terminVremeDrugiDeo.substring(0);
+		char dan2=terminVremeDrugiDeo.charAt(0);
+		char nula=0;
+		System.out.println("dan2 je "+dan2);
+		if (dan2==nula) {
+			char odDan=terminVremeDrugiDeo.charAt(1);
+			System.out.println("odDan je "+odDan);
+			
+			//int danBroj = Integer.parseInt(odDan);
+			//int poredim=danBroj-1;
+			if((odDan-dayOfMonth == 1) && (odDan-dayOfMonth<1) )
+			{
+				
+				request.setAttribute("mode", "MODE_OTKAZ_NE_MOZE");
+			}else {
+				TerminiSaId ter3=new TerminiSaId();
+				ter3.setCena(ter2.getCena());
+				ter3.setId(ter2.getId());
+				ter3.setIdkorisnika(ter2.getIdkorisnika());
+				ter3.setKorisnikId(ter2.getKorisnikId());
+				ter3.setLekarId(ter2.getLekarId());
+				ter3.setLekarime(ter2.getLekarime());
+				ter3.setLekarprezime(ter2.getLekarprezime());
+				ter3.setOdobrenpregled(ter2.isOdobrenpregled());
+				ter3.setPopust(ter2.getPopust());
+				ter3.setPoslatnaobradu(ter2.isPoslatnaobradu());
+				ter3.setSala(ter2.getSala());
+				ter3.setTermin(ter2.getTermin());
+				ter3.setTippregleda(ter2.getTippregleda());
+				ter3.setPrikaz(ter2.isPrikaz());
+				ter3.setZakazan(false);
+				tisServis.deleteMyTermin(ter2.getId());
+				tisServis.saveMojTermin(ter3);
+				
+				request.setAttribute("mode", "MODE_OTKAZ");
+			
+			}
+		}else {
+			int danBroj = Integer.parseInt(dan);
+		//int poredim=danBroj-1;
+			if((danBroj-dayOfMonth == 1) && (danBroj-dayOfMonth<1) )
+			{
+			
+				request.setAttribute("mode", "MODE_OTKAZ_NE_MOZE");
+			}else {
+				TerminiSaId ter3=new TerminiSaId();
+				ter3.setCena(ter2.getCena());
+				ter3.setId(ter2.getId());
+				ter3.setIdkorisnika(ter2.getIdkorisnika());
+				ter3.setKorisnikId(ter2.getKorisnikId());
+				ter3.setLekarId(ter2.getLekarId());
+				ter3.setLekarime(ter2.getLekarime());
+				ter3.setLekarprezime(ter2.getLekarprezime());
+				ter3.setOdobrenpregled(ter2.isOdobrenpregled());
+				ter3.setPopust(ter2.getPopust());
+				ter3.setPoslatnaobradu(ter2.isPoslatnaobradu());
+				ter3.setSala(ter2.getSala());
+				ter3.setTermin(ter2.getTermin());
+				ter3.setTippregleda(ter2.getTippregleda());
+				ter3.setPrikaz(ter2.isPrikaz());
+				ter3.setZakazan(false);
+				tisServis.deleteMyTermin(ter2.getId());
+				tisServis.saveMojTermin(ter3);
+				request.setAttribute("mode", "MODE_OTKAZ");
+				
+			}
+		}
+		session.setAttribute("id", idpac);
+		//request.setAttribute("mode", "MODE_OTKAZ");
+		return "loginBezDobrodosli";
 	}
 	
 	

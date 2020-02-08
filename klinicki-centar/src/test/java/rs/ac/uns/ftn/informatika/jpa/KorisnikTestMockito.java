@@ -71,15 +71,15 @@ public class KorisnikTestMockito {
 		assertEquals(1, servis.pokaziSveKorisnike().size());
 	}
 	
-	/*
+	
 	@Test
 	public void DodajKorisnika() {
 		Korisnik k=new Korisnik( "pera","peric", "64645", "pera@hg", "nade matic 5", "Srbija", "Novi Sad", "15656646", "pera", "peric", "PACIJENT");
 		when(repo.save(k)).thenReturn(new Korisnik()); 
 		assertEquals(1, servis.pokaziSveKorisnike().size());
 	}
-	*/
-	/*
+	
+	
 	@Test
     public void testRegister() {
 
@@ -93,7 +93,7 @@ public class KorisnikTestMockito {
         //make sure a token is assigned by the register method before saving.
         assertThat(customerArgument.getValue().getTelefon(), is(notNullValue()));
     }
-*/
+
 	
 	
 	@Test
