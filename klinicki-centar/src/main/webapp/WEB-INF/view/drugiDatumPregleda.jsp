@@ -9,7 +9,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="ISO-8859-1">
-<title>Nova operacija</title>
+<title>Drugi datum</title>
   <base href="/">
    <link rel="shortcut icon" href="#" />
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -33,32 +33,13 @@
 		</div>
 	</div>
 
-<c:choose>
-	
-		<c:when test="${mode=='MODE_PREGLED' }">
-			<div class="container text-center">
+
 				
-		<hr>
-				<form class="form-horizontal" method="POST"
-					action="sacuvajNovuOperaciju/${lekar.id  }/${korisnik.id }">
-					<label>Zakazi operaciju</label>
-					<input type="datetime-local" name="terminoperacija" id="terminoperacija"/ required>
-					<input type="hidden" id="idlekaroperacija" name="idlekaroperacija" value="${lekar.id }"> 
-					<input type="hidden" id="pacijentId" name="pacijentId" value="${korisnik.id}"> 
-  				
-					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="Sacuvaj">
-					</div>
-				</form>
-			</div>
-
-
-		</c:when>
-
-
-
-	</c:choose>
-
+	<h2 align="center">Odaberite validan datum</h2>
+<div align="center">
+<a href="/kreirajPregled/${korisnik.id}/${lekar.id }">Zakazi novi pregled</a>
+</div>
+		
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/app.js"></script>

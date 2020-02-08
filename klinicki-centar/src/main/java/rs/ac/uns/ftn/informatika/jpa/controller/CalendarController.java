@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,12 +24,17 @@ import flexjson.JSONSerializer;
 import rs.ac.uns.ftn.informatika.jpa.dto.KalendarDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.Odsustvo;
 import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
+import rs.ac.uns.ftn.informatika.jpa.model.ZaposleniUKlinikama;
 import rs.ac.uns.ftn.informatika.jpa.service.CalendarService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
+import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
+import rs.ac.uns.ftn.informatika.jpa.service.ZaposleniUKlinikamaService;
 
 
 
@@ -43,11 +49,17 @@ public class CalendarController {
 	 
 	 @Autowired
 	 private KorisnikService userService;
+	 
+	 private ZaposleniUKlinikamaService zService;
+	 
+	 private LekarZaPrikazIPregledeService zpService;
 
 	public CalendarController( CalendarService calendarService,
-			KorisnikService userService) {
+			KorisnikService userService,ZaposleniUKlinikamaService z,LekarZaPrikazIPregledeService zpService) {
 		this.calendarService = calendarService;
 		this.userService = userService;
+		this.zService=z;
+		this.zpService=zpService;
 	}
 	 
 /*	 @RequestMapping(value = "/getCalendar",method = RequestMethod.GET, produces="application/json; charset=utf-8")
@@ -135,7 +147,7 @@ public class CalendarController {
 	 */
 	 @RequestMapping(value = "/getCalendar",method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	 @ResponseBody
-	 public ResponseEntity<String> getCalendarLekar(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,HttpServletRequest request) {
+	 public ResponseEntity<String> getCalendarLekar(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,HttpServletRequest request) throws Exception {
 		 request.setAttribute("korisnik", korisnikService.findOne(id));
 		 request.setAttribute("mode", "MODE_LOGIN");	
 		 Korisnik korisnik=korisnikService.findOne(id);
@@ -144,11 +156,13 @@ public class CalendarController {
 		 Long tr=1L;
 		 Long op=2L;
 		 Long pr=3L;
+		 LekarZaPrikazIPreglede doktor=zpService.pronadji(korisnikd.getId());
 		 System.out.println("Pokupljen id iz fronta "+korisnikd.getId());
 		 Map<String, Object> map = new HashMap<String, Object>();
-		 List<TerminiSaId> termini = calendarService.getTerminiByLekarId(id);
-		 List<Operacija> operacija = calendarService.getOperacijeByLekarId(id);
-		 List<Pregled> pregledi = calendarService.getPreglediByLekarId(id);
+		 List<TerminiSaId> termini = calendarService.getTerminiByLekarId(doktor.getId());
+		 System.out.println("DOKTOR "+doktor.getId());
+		 List<Operacija> operacija = calendarService.getOperacijeByLekarId(doktor.getId());
+		 List<Pregled> pregledi = calendarService.getPreglediByLekarId(doktor.getId());
 		 System.out.println("Size: "+ termini.size());
 		 List<KalendarDTO> tt=new ArrayList<KalendarDTO>();
 		 for(int i=0; i<termini.size();i++) {
@@ -165,7 +179,9 @@ public class CalendarController {
 			 novi.setIdkorisnika(termini.get(i).getId());
 			 novi.setId(termini.get(i).getId());
 			 novi.setIdEventa(tr);
-			 tt.add(novi);
+			 if(novi.getTermin()!="") {
+				 tt.add(novi);
+				 }
 			 
 		 }
 		 for(int i=0; i<operacija.size();i++) {
@@ -182,8 +198,9 @@ public class CalendarController {
 			 novi.setIdkorisnika(operacija.get(i).getIdpacijenta());
 			 novi.setId(operacija.get(i).getId());
 			 novi.setIdEventa(op);
+			 if(novi.getTermin()!="") {
 			 tt.add(novi);
-			 
+			 }
 		 }
 		 for(int i=0; i<pregledi.size();i++) {
 			 KalendarDTO novi=new KalendarDTO();
@@ -199,7 +216,9 @@ public class CalendarController {
 			 novi.setIdkorisnika(pregledi.get(i).getIdpacijenta());
 			 novi.setId(pregledi.get(i).getId());
 			 novi.setIdEventa(pr);
-			 tt.add(novi);
+			 if(novi.getTermin()!="") {
+				 tt.add(novi);
+				 }
 			 
 		 }
 		 
@@ -211,46 +230,24 @@ public class CalendarController {
 		        return new ResponseEntity<String>(new JSONSerializer().include("termin","terminkraj","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika","tipEventa","id","idEventa").exclude("*").serialize(tt), headers, HttpStatus.OK);
 		    }
 		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
-		/* for(int i=0; i<termini.size();i++) {
-			 String termin=termini.get(i).getTermin();
-			 Long lekarId=termini.get(i).getLekarId();
-			 String lekarime=termini.get(i).getLekarime();
-			 String lekarprezime=termini.get(i).getLekarprezime();
-			 String tippregleda=termini.get(i).getTippregleda();
-			 String sala=termini.get(i).getSala();id
-			 Double cena=termini.get(i).getCena();
-			 Double popust=termini.get(i).getPopust();
-			 Boolean zakazan=termini.get(i).isZakazan();
-			 Long idkorisnika=termini.get(i).getIdkorisnika();
-			 
-			 map.put("termin", termin);
-			 map.put("lekarId", lekarId);
-			 map.put("lekarime", lekarime);
-			 map.put("lekarprezime", lekarprezime);
-			 map.put("tippregleda", tippregleda);
-			 map.put("sala", sala);
-			 map.put("cena", cena);
-			 map.put("popust", popust);
-			 map.put("zakazan", zakazan);
-			 map.put("idkorisnika", idkorisnika);
-		 }
-		 
-		System.out.println(map);
-	     return map;*/
+		
 	 }
 	 @RequestMapping(value = "/getCalendarSestra",method = RequestMethod.GET, produces="application/json; charset=utf-8")
 	 @ResponseBody
 	 public ResponseEntity<String> getCalendarSestra1(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,HttpServletRequest request) {
+		 HttpSession session = request.getSession();
+		 Object id2 = session.getAttribute("id");
+		 System.out.println(id2);
 		 request.setAttribute("korisnik", korisnikService.findOne(id));
 		 request.setAttribute("mode", "MODE_LOGIN");	
-		 Korisnik korisnik=korisnikService.findOne(id);
+		// Korisnik korisnik=korisnikService.findOne(id);
 		 Long Idx=korisnikd.getId();
 		 Long od=0L;
 		 Long tr=1L;
 		 Long op=2L;
 		 Long pr=3L;
 		 System.out.println("Pokupljen id iz fronta "+korisnikd.getId());
-		 Map<String, Object> map = new HashMap<String, Object>();
+		// Map<String, Object> map = new HashMap<String, Object>();
 		 List<TerminiSaId> termini = calendarService.getTerminiSaIdAll();
 		 List<Operacija> operacija = calendarService.getOperacijeAll();
 		 List<Pregled> pregledi = calendarService.getPreglediAll();
@@ -272,8 +269,14 @@ public class CalendarController {
 			 novi.setId(termini.get(i).getId());
 			 novi.setIdEventa(tr);
 			 novi.setLekarId(termini.get(i).getLekarId());
-			 tt.add(novi);
-			 
+			 Long broj=Long.parseLong((String) id2);
+			 Korisnik sestra=userService.findOne(broj);
+			 System.out.println(sestra.getIme());
+			 Long klinika=novi.getLekarId();
+			 List<ZaposleniUKlinikama> zaposleni=zService.nadjiKliniku(klinika);
+			 if(sestra.getKlinika().getId()==zaposleni.get(0).getIdklinike()) {
+				 tt.add(novi);
+			 }
 		 }
 		 for(int i=0; i<operacija.size();i++) {
 			 KalendarDTO novi=new KalendarDTO();
@@ -290,7 +293,14 @@ public class CalendarController {
 			 novi.setId(operacija.get(i).getId());
 			 novi.setIdEventa(op);
 			 novi.setLekarId(operacija.get(i).getIdlekaroperacija());
-			 tt.add(novi);
+			 Long broj=Long.parseLong((String) id2);
+			 Korisnik sestra=userService.findOne(broj);
+			 System.out.println(sestra.getIme());
+			 Long klinika=novi.getLekarId();
+			 List<ZaposleniUKlinikama> zaposleni=zService.nadjiKliniku(klinika);
+			 if(sestra.getKlinika().getId()==zaposleni.get(0).getIdklinike()) {
+				 tt.add(novi);
+			 }
 			 
 		 }
 		 for(int i=0; i<pregledi.size();i++) {
@@ -309,7 +319,14 @@ public class CalendarController {
 			 novi.setIdEventa(pr);
 			 Long lekarID=Long.parseLong(pregledi.get(i).getIdlekarpregled());
 			 novi.setLekarId(lekarID);
-			 tt.add(novi);
+			 Long broj=Long.parseLong((String) id2);
+			 Korisnik sestra=userService.findOne(broj);
+			 System.out.println(sestra.getIme());
+			 Long klinika=novi.getLekarId();
+			 List<ZaposleniUKlinikama> zaposleni=zService.nadjiKliniku(klinika);
+			 if(sestra.getKlinika().getId()==zaposleni.get(0).getIdklinike()) {
+				 tt.add(novi);
+			 }
 			 
 		 }
 		 
@@ -332,7 +349,7 @@ public class CalendarController {
 		 }
 		 
 		 
-		 
+		 System.out.println("Broj desavanja"+ tt.size());
 		 HttpHeaders headers = new HttpHeaders();
 		    headers.add("Content-Type", "application/json; charset=utf-8");
 		    if (termini.size() > 0)
@@ -340,32 +357,7 @@ public class CalendarController {
 		        return new ResponseEntity<String>(new JSONSerializer().include("termin","terminkraj","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika","tipEventa","id","idEventa","lekarId").exclude("*").serialize(tt), headers, HttpStatus.OK);
 		    }
 		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
-		/* for(int i=0; i<termini.size();i++) {
-			 String termin=termini.get(i).getTermin();
-			 Long lekarId=termini.get(i).getLekarId();
-			 String lekarime=termini.get(i).getLekarime();
-			 String lekarprezime=termini.get(i).getLekarprezime();
-			 String tippregleda=termini.get(i).getTippregleda();
-			 String sala=termini.get(i).getSala();id
-			 Double cena=termini.get(i).getCena();
-			 Double popust=termini.get(i).getPopust();
-			 Boolean zakazan=termini.get(i).isZakazan();
-			 Long idkorisnika=termini.get(i).getIdkorisnika();
-			 
-			 map.put("termin", termin);
-			 map.put("lekarId", lekarId);
-			 map.put("lekarime", lekarime);
-			 map.put("lekarprezime", lekarprezime);
-			 map.put("tippregleda", tippregleda);
-			 map.put("sala", sala);
-			 map.put("cena", cena);
-			 map.put("popust", popust);
-			 map.put("zakazan", zakazan);
-			 map.put("idkorisnika", idkorisnika);
 		 }
-		 
-		System.out.println(map);
-	     return map;*/ }
 }
 	 
 

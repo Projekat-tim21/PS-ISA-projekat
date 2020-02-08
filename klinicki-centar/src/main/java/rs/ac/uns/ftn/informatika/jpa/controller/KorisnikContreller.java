@@ -110,6 +110,8 @@ public class KorisnikContreller {
 				System.out.println("Id sestre "+k.getId() );
 				return "medSestraPocetna";
 			}else if(k.getRoleName().equals(Role.ADMIN_KLINIKE.name())) {
+				session.setAttribute("id", k.getId());
+				System.out.println("Id admina klinike"+k.getId() );
 				return "adminZaPreglede";
 			}
 			session.setAttribute("id", k.getId());

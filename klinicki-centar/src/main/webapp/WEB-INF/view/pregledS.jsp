@@ -78,7 +78,7 @@ Connection connection =
 					<div class="form-group">
 						<label>Informacije o pregledu</label>
 						<div >
-							<textarea rows="10" cols="60" class="form-control" id="informacije" name="informacije" ></textarea>
+							<textarea rows="10" cols="60" class="form-control" id="informacije" name="informacije" required></textarea>
 						</div>
 					</div>
                             
@@ -93,7 +93,7 @@ Connection connection =
 				<hr>	
     					<label for="dijagnoza">Recept</label> 
 						<c:if test="${not empty lists}">
-     						<select multiple="multiple" size="5" name="lekici">
+     						<select multiple="multiple" size="5" name="lekici" required>
     							<c:forEach items="${lists}" var="lists">
       						 		<option value="${lists}">
       							  		${lists}

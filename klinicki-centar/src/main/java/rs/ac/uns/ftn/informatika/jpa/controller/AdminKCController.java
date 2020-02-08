@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -388,9 +389,12 @@ public class AdminKCController {
 		}
 	    
 	    @RequestMapping(value="/nov", method = { RequestMethod.GET, RequestMethod.POST }) 
-		public String sacuvajZK(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, HttpServletRequest request) {
-	    	String id2 = request.getParameter("id");
-			Korisnik izBaze=korisnikService.findOne(korisnikd.getId());
+		public String sacuvajZK(@ModelAttribute KorisnikDTO korisnikd, HttpServletRequest request) {
+			
+	    	HttpSession session = request.getSession();
+	    	Object id2 = session.getAttribute("id");
+	    	System.out.println(id2);
+	    	Korisnik izBaze=korisnikService.findOne(korisnikd.getId());
 			System.out.println("ISPISISI "+ izBaze.getId());
 			Korisnik k = new Korisnik();
 			k.setId(izBaze.getId());
@@ -456,6 +460,10 @@ public class AdminKCController {
 	    
 	    @GetMapping("/pregledSvihAdmina")
 		public ModelAndView pokaziAdmineKC(HttpServletRequest request) {
+	    	HttpSession session = request.getSession();
+	    	Object id2 = session.getAttribute("id");
+	    	System.out.println(id2);
+	    	request.setAttribute("admin", id2);
 			request.setAttribute("korisnici", korisnikService.pokaziAdmine());
 			request.setAttribute("mode", "ALL_ADMINI");
 			ModelAndView modelAndView = new ModelAndView();
@@ -715,7 +723,6 @@ public class AdminKCController {
 		        String s=request.getParameter("razlog");
 		       // String ss=request.getParameter("mail");
 		      ///  System.out.println(ss);
-		        
 		        try {
 					emailService.sendNotificaitionRazlogOdbijanja(k,s);
 				}catch( Exception e ){

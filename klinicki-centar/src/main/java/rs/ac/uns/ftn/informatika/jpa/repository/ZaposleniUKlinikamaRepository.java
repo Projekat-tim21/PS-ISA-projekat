@@ -10,5 +10,5 @@ import rs.ac.uns.ftn.informatika.jpa.model.ZaposleniUKlinikama;
 public interface ZaposleniUKlinikamaRepository extends JpaRepository<ZaposleniUKlinikama, Long>{
 
 	public List<ZaposleniUKlinikama> findByIdklinike(long idKlinike);
-
+	public List<ZaposleniUKlinikama> findByIdlekara(long idlekara);
 }

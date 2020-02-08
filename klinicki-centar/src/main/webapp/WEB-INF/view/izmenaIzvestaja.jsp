@@ -40,9 +40,6 @@ Connection connection =
 			<div class="navbar-collapse collapse">
 			<h2>LEKAR</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
-					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
-					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -86,7 +83,7 @@ Connection connection =
 					<div class="form-group">
 						<label class="control-label col-md-3">Informacije</label>
 						<div >
-							<textarea rows="6" cols="50" class="form-control" id="informacije" name="informacije"></textarea>
+							<textarea rows="6" cols="50" class="form-control" id="informacije" name="informacije" required></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -103,7 +100,7 @@ Connection connection =
 					<div class="form-group">
 						<label for="dijagnoza">Lekovi</label>
 						<c:if test="${not empty lists}">
-     						<select multiple="multiple" size="5" name="lekici" >
+     						<select multiple="multiple" size="5" name="lekici"  required>
     							<c:forEach items="${lists}" var="lists">
       						 		<option value="${lists}">
       							  		${lists}
