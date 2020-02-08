@@ -113,10 +113,10 @@ insert into zaposleni(idklinike, idlekara) values (5,4);
 insert into zaposleni(idklinike, idlekara) values (6,2);
 insert into zaposleni(idklinike, idlekara) values (7,5);
 
-insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',375313,16,false,6);
-insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',375313,16,false,5);
-insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',472188,16,false,7);
-insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',472188,16,false,7);
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',375313,19,false,6);
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',375313,20,false,5);
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Hipertenzija',472188,21,false,7);
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',472188,22,false,7);
 
 insert into leks(lek_id,informacijepregled_id) values(1,1);
 insert into leks(lek_id,informacijepregled_id) values(1,2);
@@ -158,3 +158,6 @@ insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme, terminoper
 insert into pregled(cena, datum, lekar, sala,tip, trajanje, vreme, zakazan,obavljenpregled,terminpregled, lekarimepregled, lekarprezimepregled, idlekarpregled,idpacijenta,ocenapregleda,korisnik_id) values (400, '15.01.2020', 'Jovan Jovic', '203', 'stomatolog', '15min', '08:00', TRUE, 'true','2019-10-25T15:42', 'Mira', 'Maric',5,7,0,23);
 insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (5, '2019-11-04T05:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'true',0, 'false', 'true','false',23);
 insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme, terminoperacija, lekarimeoperacija, lekarprezimeoperacija, idlekaroperacija, idpacijenta, ocenaoperacije, obavljenaoperacija, zakazan,obradjen,korisnik_id) values (1500, '10.01.2020', 'Jovan Jovic', '2A', 'dermatolog', '1h', '09:00','2019-09-25T09:42','Mira', 'Maric',5,5,0,'true', 'true', 'true',23);
+
+insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',472188,20,false,12);
+insert into leks(lek_id,informacijepregled_id) values(5,2);
