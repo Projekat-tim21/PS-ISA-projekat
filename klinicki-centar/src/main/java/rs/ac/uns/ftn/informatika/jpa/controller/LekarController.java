@@ -91,9 +91,13 @@ public class LekarController {
 		    return list;
 		}
 	 
-	 @RequestMapping(value="/zapocniOperacijeP/{lekarId}/{korisnikId}", method = { RequestMethod.GET, RequestMethod.POST })
-	    public ModelAndView addmin(@PathVariable Long lekarId,@PathVariable Long korisnikId,HttpServletRequest request) {
-		 	
+	 @RequestMapping(value="/zapocniOperacijeP/{lekarId}/{korisnikId}/{tip}/{idP}", method = { RequestMethod.GET, RequestMethod.POST })
+	    public ModelAndView addmin(@PathVariable Long lekarId,@PathVariable Long korisnikId,@PathVariable Long tip,@PathVariable Long idP,HttpServletRequest request) {
+		 InformacijeOpregledu o=infoService.postojiVec(idP,tip);
+		 	if(o!=null) {
+		 		ModelAndView map1 = new ModelAndView("vecPostojiIzvestajLekar");
+		 		return map1;
+		 	}
 		 	request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
 			Korisnik k=korisnikService.findOne(korisnikId);
 			System.out.println("PACIJENT PONOVO: "+k.getIme());
@@ -101,6 +105,8 @@ public class LekarController {
 			request.setAttribute("mode", "MODE_ZKARTON");
 			request.setAttribute("lekar", korisnikService.findOne(lekarId));
 			System.out.println("PACIJENT JADNI: " + k.getIme());
+			request.setAttribute("tip", tip);
+			request.setAttribute("pregled", idP);
 			request.setAttribute("mode", "MODE_LEKAR");
 		 	LinkedList<String> list = getList();
 	        ModelAndView map = new ModelAndView("pregled");
@@ -108,8 +114,8 @@ public class LekarController {
 	        return map;
 	    }
 	 
-	 @RequestMapping(value="/noviPregled/{korisnikId}/{lekarId}", method = { RequestMethod.GET, RequestMethod.POST } )
-	    public ModelAndView noviPregled(@PathVariable Long korisnikId,@PathVariable Long lekarId,
+	 @RequestMapping(value="/noviPregled/{korisnikId}/{lekarId}/{tip}/{idP}", method = { RequestMethod.GET, RequestMethod.POST } )
+	    public ModelAndView noviPregled(@PathVariable Long korisnikId,@PathVariable Long lekarId,@PathVariable Long tip,@PathVariable Long idP,
 				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
 		 
 			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
@@ -127,8 +133,20 @@ public class LekarController {
 	        }
 	        infor.setLeks(leks);
 	        infor.setPacijentId(korisnikId);
+	        infor.setPregledId(idP);
+	        infor.setTip(tip);
 	        infor.setOveren(false);
-	        
+	        Pregled p=new Pregled();
+	        TerminiSaId t= new TerminiSaId();
+	        if(tip==3L) {
+	        	p=pService.findOneById(idP);
+	        	p.setObavljenpregled(true);
+	        	p.setObradjen(true);
+	        	pService.save(p);
+	        }else if(tip==1L) {
+	        	t=terService.findOne(idP);
+	        	
+	        }
 	        infoService.saveInformacije(infor);
 	        request.setAttribute("lekar", korisnikService.findOne(lekarId));
 	        ModelAndView modelAndView = new ModelAndView();

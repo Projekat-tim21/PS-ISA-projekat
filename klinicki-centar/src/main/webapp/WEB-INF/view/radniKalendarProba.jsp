@@ -81,7 +81,8 @@
                               console.log("isoString: " + startDate.toISOString());
                               var sala=result[i].sala;
                               var cena=result[i].cena;
-                           
+                              var id=result[i].id;
+                              var idEventa=result[i].idEventa;
                               
                               var event={
                                       
@@ -89,7 +90,7 @@
                                       start:startDate.toISOString(),
                                       allDay: false,
                                      
-                                      url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika
+                                      url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika+'/'+idEventa+'/'+id
                       
                                       };
                               
@@ -97,7 +98,7 @@
                                   title: tipEventa+" --> " +'Tip '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                   start:startDate.toISOString(),
                                   allDay: false,
-                                  url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika
+                                  url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika+'/'+idEventa+'/'+id
                                   });
 
                               
@@ -197,7 +198,7 @@
 <c:choose>
 		<c:when test="${mode=='MODE_ZKARTON' }">
 			<div class="container text-center">
-				<h3>dr ${korisnik.ime } ${korisnik.prezime }</h3>
+				<h3>Dr ${korisnik.ime } ${korisnik.prezime }</h3>
 				<hr>
 			</div>
 		</c:when>

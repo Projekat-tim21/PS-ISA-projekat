@@ -286,7 +286,7 @@ public class MedSestraController {
 	        	p=pergledService.findOneById(pregledId);
 	        	p.setObavljenpregled(true);
 	        	p.setObradjen(true);
-	        	
+	        	pergledService.save(p);
 	        }else if(tipD==1L) {
 	        	t=terminiService.findOne(pregledId);
 	        	

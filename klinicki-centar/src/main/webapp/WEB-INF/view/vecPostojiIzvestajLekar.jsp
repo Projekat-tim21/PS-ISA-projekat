@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="java.sql.*" %>
-<%ResultSet resultset =null;%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Uspesna akcija</title>
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -13,8 +13,9 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 	<link rel="shortcut icon" href="#" />
-    <title>Pregled</title>
+	
 
+  
     <!-- Bootstrap CSS-->
 	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/css/style.css" rel="stylesheet">
@@ -221,22 +222,7 @@ transition: all 0.3s ease 0s;
     </style>
 
 </head>
-
-<body class="my-login-page">
-
-<%
-    try{
-//Class.forName("com.mysql.jdbc.Driver").newInstance();
-Connection connection = 
-         DriverManager.getConnection
-            ("jdbc:postgresql://localhost:5432/jpa?user=postgres&password=root");
-
-       Statement statement = connection.createStatement() ;
-
-       resultset =statement.executeQuery("select * from dijagnoza") ;
-%>
-
-
+<body>
 <div role="navigation">
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
@@ -252,76 +238,13 @@ Connection connection =
 			</div>
 		</div>
 	</div>
-
-<section class="h-100">
-    <div class="container h-100">
-        <div class="row justify-content-md-center h-100">
-            <div class="card-wrapper">
-                <div class="card fat">
-                    <div class="card-body">
-
-	<c:choose>
-		<c:when test="${mode=='MODE_LEKAR' }">
-			<h4 align="center">PREGLED</h4>
-            	<h3>Pacijent: ${korisnik.ime } ${korisnik.prezime } </h3>
-            	<hr>
-                <form action="/noviPregled/${korisnik.id}/${lekar.id }/${tip}/${pregled}" method="POST">		
-					<div class="form-group">
-						<label>Informacije o pregledu</label>
-						<div >
-							<textarea rows="10" cols="60" class="form-control" id="informacije" name="informacije" ></textarea>
-						</div>
-					</div>
-                            
-                    <div class="form-group">
-                        <label for="dijagnozaId">Dijagnoza</label>
-                        <select name=dijagnozaId>
-       						<%  while(resultset.next()){ %>
-          						<option><%= resultset.getString(3)%></option>
-      						<% } %>
-     					</select> 
-     				</div>
-				<hr>	
-    					<label for="dijagnoza">Recept</label> 
-						<c:if test="${not empty lists}">
-     						<select multiple="multiple" size="5" name="lekici">
-    							<c:forEach items="${lists}" var="lists">
-      						 		<option value="${lists}">
-      							  		${lists}
-  							  		</option>
-								</c:forEach>
-							</select>
-						</c:if>
-    <hr>		
-    
-     				</c:when>
-	</c:choose>
-<%
-//**Should I input the codes here?**
-        }
-        catch(Exception e)
-        {
-             out.println("wrong entry"+e);
-        }
-
-%>
-							
- 							<div class="form-group no-margin">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    SACUVAJ
-                                </button>
-                            </div>
-                        </form>         
-                      <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+<h3 align="center">Vec postoji izvestaj za dati pregled</h3>
+<hr>
+<div align="center">
+	<a href="/radniKalendar?id=${id}">Nazad na radni kalendar</a>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/app.js"></script>
+<script src="/static/js/app.js"></script>			
 </body>
 </html>
