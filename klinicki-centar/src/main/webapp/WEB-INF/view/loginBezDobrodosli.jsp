@@ -156,6 +156,13 @@ body {
 <h2>Uspesno ste izmenili svoje podatke.  <a href="/vratiSeNaPocetnu?id=${id}">Vrati se na pocetnu</a>   </h2>
 		</c:when>
 
+	<c:when test="${mode=='MODE_OTKAZ'}">
+<h2>Uspesno ste otkazali termin.  <a href="/vratiSeNaPocetnu?id=${id}">Vrati se na pocetnu</a>   </h2>
+		</c:when>
+
+<c:when test="${mode=='MODE_OTKAZ_NE_MOZE'}">
+<h2>Ne mozete otkazati svoj termin jer je preostalo manje od 24h do termina.  <a href="/vratiSeNaPocetnu?id=${id}">Vrati se na pocetnu</a>   </h2>
+		</c:when>
 
 
 	</c:choose>
