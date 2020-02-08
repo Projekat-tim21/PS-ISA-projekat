@@ -113,7 +113,7 @@ body {
 								value="${termini.id }" readonly>
 							
 					<div class="form-group ">
-						<input id="clickMe" type="submit"  class="btn btn-primary" value="otkazi">
+						<input id="clickMe2" type="submit"  class="btn btn-primary" value="otkazi">
 					</div>
 				</form>
 			</div>
@@ -124,7 +124,7 @@ body {
 <script type="text/javascript">
 
 document.getElementById("clickMe").onclick = function () { alert('Vas zahtev je uspesno prosledjen administratoru klinike!');};
-//var mile=document.getElementById("idtermina");
+document.getElementById("clickMe2").onclick = function () { alert('Otkazivanje zakazanog termina u toku...!');};
 var mile = document.getElementById("idtermina").value;
 console.log(mile);
 

@@ -1,11 +1,12 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormatSymbols;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
@@ -548,7 +550,7 @@ public class LekarZaPrikazIPregledeController {
 
 	}
 
-	
+	//heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeej
 	@RequestMapping("/odobreniZahteviKodPacijentaSaMaila")
 	public String odobreniZahteviKodPacijenta(HttpServletRequest request) {
 
@@ -752,96 +754,48 @@ public class LekarZaPrikazIPregledeController {
 	
 	@PostMapping("/otkaziPregledSubmit")
 	public String otkaziPregledSubmit(@RequestParam("id") long idpac,@RequestParam("idtermina") long idTerminaOvaj, @ModelAttribute TerminiSaId termini,
-			@ModelAttribute Korisnik korisnik, @ModelAttribute LekarZaPrikazIPreglede lipi,
+			@ModelAttribute KorisnikDTO korisnik, @ModelAttribute LekarZaPrikazIPreglede lipi,
 			HttpServletRequest request) {
-		System.out.println("cao");
-		HttpSession session = request.getSession();
 		
+		HttpSession session = request.getSession();
 		TerminiSaId ter2 = new TerminiSaId();
-		//long l = Long.parseLong(idTerminaOvaj);
-		//int num = int.valueOf(idTerminaOvaj);
 		ter2 = tisServis.findOne(idTerminaOvaj);
-		String terminVreme=ter2.getTermin();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		ZoneId z = ZoneId.of( "Europe/Paris" );
-		LocalDate ld = LocalDate.now( z ) ;
-		int dayOfMonth = ld.getDayOfMonth();
-		System.out.println("dan u mesecu  "+ dayOfMonth);
-		//String ovajDan=sdf;
-		//String danasnjiDan=sdf.split("-")[2];
-		String terminVremeDrugiDeo = terminVreme.split("-")[2];
-		System.out.println(terminVremeDrugiDeo);
-		String dan = terminVremeDrugiDeo.substring(0,1);
-		System.out.println("dan je "+dan);
-	//	String dan2=terminVremeDrugiDeo.substring(0);
-		char dan2=terminVremeDrugiDeo.charAt(0);
-		char nula=0;
-		System.out.println("dan2 je "+dan2);
-		if (dan2==nula) {
-			char odDan=terminVremeDrugiDeo.charAt(1);
-			System.out.println("odDan je "+odDan);
+		String vreme=ter2.getTermin();
+		
+		LocalDateTime time = LocalDateTime.now();
+		LocalDateTime ZakazaniTermin = LocalDateTime.parse(vreme);
+	
+		System.out.println(ZakazaniTermin +"  :  "+ time);
+		System.out.println("REZULTAT: " +  time.plusDays(1).isBefore(ZakazaniTermin));
+		
+		if(time.plusDays(1).isBefore(ZakazaniTermin)) {
+			//sme da otkaze
+			TerminiSaId ter3=new TerminiSaId();
+			ter3.setCena(ter2.getCena());
+			ter3.setId(ter2.getId());
+			ter3.setIdkorisnika(ter2.getIdkorisnika());
+			ter3.setKorisnikId(ter2.getKorisnikId());
+			ter3.setLekarId(ter2.getLekarId());
+			ter3.setLekarime(ter2.getLekarime());
+			ter3.setLekarprezime(ter2.getLekarprezime());
+			ter3.setOdobrenpregled(ter2.isOdobrenpregled());
+			ter3.setPopust(ter2.getPopust());
+			ter3.setPoslatnaobradu(ter2.isPoslatnaobradu());
+			ter3.setSala(ter2.getSala());
+			ter3.setTermin(ter2.getTermin());
+			ter3.setTippregleda(ter2.getTippregleda());
+			ter3.setPrikaz(ter2.isPrikaz());
+			ter3.setZakazan(false);
+			tisServis.deleteMyTermin(ter2.getId());
+			tisServis.saveMojTermin(ter3);
 			
-			//int danBroj = Integer.parseInt(odDan);
-			//int poredim=danBroj-1;
-			if((odDan-dayOfMonth == 1) && (odDan-dayOfMonth<1) )
-			{
-				
-				request.setAttribute("mode", "MODE_OTKAZ_NE_MOZE");
-			}else {
-				TerminiSaId ter3=new TerminiSaId();
-				ter3.setCena(ter2.getCena());
-				ter3.setId(ter2.getId());
-				ter3.setIdkorisnika(ter2.getIdkorisnika());
-				ter3.setKorisnikId(ter2.getKorisnikId());
-				ter3.setLekarId(ter2.getLekarId());
-				ter3.setLekarime(ter2.getLekarime());
-				ter3.setLekarprezime(ter2.getLekarprezime());
-				ter3.setOdobrenpregled(ter2.isOdobrenpregled());
-				ter3.setPopust(ter2.getPopust());
-				ter3.setPoslatnaobradu(ter2.isPoslatnaobradu());
-				ter3.setSala(ter2.getSala());
-				ter3.setTermin(ter2.getTermin());
-				ter3.setTippregleda(ter2.getTippregleda());
-				ter3.setPrikaz(ter2.isPrikaz());
-				ter3.setZakazan(false);
-				tisServis.deleteMyTermin(ter2.getId());
-				tisServis.saveMojTermin(ter3);
-				
-				request.setAttribute("mode", "MODE_OTKAZ");
-			
-			}
+			request.setAttribute("mode", "MODE_OTKAZ");
 		}else {
-			int danBroj = Integer.parseInt(dan);
-		//int poredim=danBroj-1;
-			if((danBroj-dayOfMonth == 1) && (danBroj-dayOfMonth<1) )
-			{
-			
-				request.setAttribute("mode", "MODE_OTKAZ_NE_MOZE");
-			}else {
-				TerminiSaId ter3=new TerminiSaId();
-				ter3.setCena(ter2.getCena());
-				ter3.setId(ter2.getId());
-				ter3.setIdkorisnika(ter2.getIdkorisnika());
-				ter3.setKorisnikId(ter2.getKorisnikId());
-				ter3.setLekarId(ter2.getLekarId());
-				ter3.setLekarime(ter2.getLekarime());
-				ter3.setLekarprezime(ter2.getLekarprezime());
-				ter3.setOdobrenpregled(ter2.isOdobrenpregled());
-				ter3.setPopust(ter2.getPopust());
-				ter3.setPoslatnaobradu(ter2.isPoslatnaobradu());
-				ter3.setSala(ter2.getSala());
-				ter3.setTermin(ter2.getTermin());
-				ter3.setTippregleda(ter2.getTippregleda());
-				ter3.setPrikaz(ter2.isPrikaz());
-				ter3.setZakazan(false);
-				tisServis.deleteMyTermin(ter2.getId());
-				tisServis.saveMojTermin(ter3);
-				request.setAttribute("mode", "MODE_OTKAZ");
-				
-			}
+			//ne sme
+			request.setAttribute("mode", "MODE_OTKAZ_NE_MOZE");
 		}
+		
 		session.setAttribute("id", idpac);
-		//request.setAttribute("mode", "MODE_OTKAZ");
 		return "loginBezDobrodosli";
 	}
 	
