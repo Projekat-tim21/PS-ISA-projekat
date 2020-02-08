@@ -66,6 +66,11 @@
                                 <label for="adresa">Adresa</label>
                                 <input id="adresa" type="adresa" class="form-control" name="adresa" required>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="tip">Tip</label>
+                                <input id="tip" type="tip" class="form-control" name="tip" required>
+                            </div>
 
                             <div class="form-group no-margin">
                                 <button type="submit" class="btn btn-primary btn-block">

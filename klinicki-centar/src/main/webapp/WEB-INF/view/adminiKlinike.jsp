@@ -71,12 +71,10 @@
 								<th>Grad</th>
 								<th>Drzava</th>
 								<th>Telefon</th>
-								<th>Klinika</th>
-						<!--		<th>Sifra</th>  -->
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="korisnik"  items="${korisnici}">
+						<c:forEach var="korisnik"  items="${korisnici}">
 								<tr>
 									<td>${korisnik.id}</td>
 									<td>${korisnik.username}</td>
@@ -88,8 +86,6 @@
 									<td>${korisnik.grad}</td>
 									<td>${korisnik.drzava}</td>
 									<td>${korisnik.telefon}</td>
-									<td>${korisnik.klinika.naziv}</td>									
-					<!--  				<td>${korisnik.password}</td>  -->
 								</tr>
 							</c:forEach>
 						</tbody>
