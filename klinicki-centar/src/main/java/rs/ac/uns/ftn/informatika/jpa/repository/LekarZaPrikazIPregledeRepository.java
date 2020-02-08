@@ -11,6 +11,7 @@ import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 public interface LekarZaPrikazIPregledeRepository extends JpaRepository<LekarZaPrikazIPreglede, Long>{
 
 	public Optional<LekarZaPrikazIPreglede> findById(Long id);
+	public LekarZaPrikazIPreglede findByLekarveza(Long id);
 	
 	
 }

@@ -242,9 +242,6 @@ Connection connection =
 			<div class="navbar-collapse collapse">
 			<h2>LEKAR</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
-					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
-					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -265,11 +262,11 @@ Connection connection =
 			<h4 align="center">PREGLED</h4>
             	<h3>Pacijent: ${korisnik.ime } ${korisnik.prezime } </h3>
             	<hr>
-                <form action="/noviPregled/${korisnik.id}/${lekar.id }" method="POST">		
+                <form action="/noviPregled/${korisnik.id}/${lekar.id }/${tip}/${pregled}" method="POST">		
 					<div class="form-group">
 						<label>Informacije o pregledu</label>
 						<div >
-							<textarea rows="10" cols="60" class="form-control" id="informacije" name="informacije" ></textarea>
+							<textarea rows="10" cols="60" class="form-control" id="informacije" name="informacije" required></textarea>
 						</div>
 					</div>
                             
@@ -284,7 +281,7 @@ Connection connection =
 				<hr>	
     					<label for="dijagnoza">Recept</label> 
 						<c:if test="${not empty lists}">
-     						<select multiple="multiple" size="5" name="lekici">
+     						<select multiple="multiple" size="5" name="lekici" required>
     							<c:forEach items="${lists}" var="lists">
       						 		<option value="${lists}">
       							  		${lists}

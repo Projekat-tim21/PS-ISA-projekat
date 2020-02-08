@@ -30,6 +30,12 @@ public class ZaposleniUKlinikamaService {
 		public ZaposleniUKlinikama findOne(long idlekara) {
 			return zRepo.findById(idlekara).orElseGet(null);
 		}
+
+
+		public List<ZaposleniUKlinikama> nadjiKliniku(Long klinika) {
+			// TODO Auto-generated method stub
+			return zRepo.findByIdlekara(klinika);
+		}
 		
 
 		

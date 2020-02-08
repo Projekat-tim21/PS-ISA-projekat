@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -21,7 +22,9 @@
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/addNewZK">Zdravstevni karton</a></li>
 					<li><a href="/klinike">Klinike</a></li>
-					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					<c:if test="${id eq 8}">
+   						<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					</c:if>
 					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>
