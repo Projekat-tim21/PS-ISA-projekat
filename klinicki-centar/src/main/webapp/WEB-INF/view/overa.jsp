@@ -74,7 +74,7 @@ transition: all 0.3s ease 0s;
 		
 				
 					<hr>
-					<div class="button_cont" align="center"><a class="example_d"  href="/overaRecepta" target="_blank" rel="nofollow noopener">OVERI</a></div>
+					<div class="button_cont" align="center"><a class="example_d"  href="/overaRecepta">OVERI</a></div>
 
 
 		</c:when>

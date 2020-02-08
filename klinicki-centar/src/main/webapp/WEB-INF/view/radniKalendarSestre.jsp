@@ -82,10 +82,12 @@
                               var id=result[i].id;
                               var idEventa=result[i].idEventa;
                               var lekarId=result[i].lekarId;
-                              
+                              var kraj=result[i].terminkraj;
+                              var endDate = new Date(kraj);
                               termini.push({
                                   title: tipEventa+" --> " +'Tip '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
                                   start:startDate.toISOString(),
+                                  end:endDate.toISOString(),
                                   allDay: false,
                                   url:'/zapocniOperacijeS/'+idEventa+'/'+id+'/'+idkorisnika+'/'+lekarId+'/'+${korisnik.id }
                                   });

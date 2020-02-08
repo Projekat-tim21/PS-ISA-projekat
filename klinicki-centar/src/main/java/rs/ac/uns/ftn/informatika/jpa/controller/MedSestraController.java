@@ -112,7 +112,11 @@ public class MedSestraController {
 		 request.setAttribute("korisnik", infoService.findOne(infoid));
 		InformacijeOpregledu i=	(InformacijeOpregledu) infoService.findOne(infoid);
 		i.setOveren(true);
-		
+		HttpSession session = request.getSession();
+    	Object id2 = session.getAttribute("id");
+    	System.out.println(id2);
+    	Long broj=Long.parseLong((String) id2);
+    	i.setSestraovera(broj);
 		Set novi=i.getLeks();
 		request.setAttribute("lekici", novi);
 		System.out.println(novi.isEmpty());
