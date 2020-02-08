@@ -1,6 +1,9 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.OperacijaDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
@@ -91,9 +95,13 @@ public class LekarController {
 		    return list;
 		}
 	 
-	 @RequestMapping(value="/zapocniOperacijeP/{lekarId}/{korisnikId}", method = { RequestMethod.GET, RequestMethod.POST })
-	    public ModelAndView addmin(@PathVariable Long lekarId,@PathVariable Long korisnikId,HttpServletRequest request) {
-		 	
+	 @RequestMapping(value="/zapocniOperacijeP/{lekarId}/{korisnikId}/{tip}/{idP}", method = { RequestMethod.GET, RequestMethod.POST })
+	    public ModelAndView addmin(@PathVariable Long lekarId,@PathVariable Long korisnikId,@PathVariable Long tip,@PathVariable Long idP,HttpServletRequest request) {
+		 InformacijeOpregledu o=infoService.postojiVec(idP,tip);
+		 	if(o!=null) {
+		 		ModelAndView map1 = new ModelAndView("vecPostojiIzvestajLekar");
+		 		return map1;
+		 	}
 		 	request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
 			Korisnik k=korisnikService.findOne(korisnikId);
 			System.out.println("PACIJENT PONOVO: "+k.getIme());
@@ -101,6 +109,8 @@ public class LekarController {
 			request.setAttribute("mode", "MODE_ZKARTON");
 			request.setAttribute("lekar", korisnikService.findOne(lekarId));
 			System.out.println("PACIJENT JADNI: " + k.getIme());
+			request.setAttribute("tip", tip);
+			request.setAttribute("pregled", idP);
 			request.setAttribute("mode", "MODE_LEKAR");
 		 	LinkedList<String> list = getList();
 	        ModelAndView map = new ModelAndView("pregled");
@@ -108,8 +118,8 @@ public class LekarController {
 	        return map;
 	    }
 	 
-	 @RequestMapping(value="/noviPregled/{korisnikId}/{lekarId}", method = { RequestMethod.GET, RequestMethod.POST } )
-	    public ModelAndView noviPregled(@PathVariable Long korisnikId,@PathVariable Long lekarId,
+	 @RequestMapping(value="/noviPregled/{korisnikId}/{lekarId}/{tip}/{idP}", method = { RequestMethod.GET, RequestMethod.POST } )
+	    public ModelAndView noviPregled(@PathVariable Long korisnikId,@PathVariable Long lekarId,@PathVariable Long tip,@PathVariable Long idP,
 				@ModelAttribute InformacijeOpregleduDTO info,HttpServletRequest request) {
 		 
 			request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
@@ -127,8 +137,20 @@ public class LekarController {
 	        }
 	        infor.setLeks(leks);
 	        infor.setPacijentId(korisnikId);
+	        infor.setPregledId(idP);
+	        infor.setTip(tip);
 	        infor.setOveren(false);
-	        
+	        Pregled p=new Pregled();
+	        TerminiSaId t= new TerminiSaId();
+	        if(tip==3L) {
+	        	p=pService.findOneById(idP);
+	        	p.setObavljenpregled(true);
+	        	p.setObradjen(true);
+	        	pService.save(p);
+	        }else if(tip==1L) {
+	        	t=terService.findOne(idP);
+	        	
+	        }
 	        infoService.saveInformacije(infor);
 	        request.setAttribute("lekar", korisnikService.findOne(lekarId));
 	        ModelAndView modelAndView = new ModelAndView();
@@ -275,6 +297,19 @@ public class LekarController {
 			o.setTerminpregled(pregledDTO.getTerminpregled());
 			o.setObradjen(false);
 			pService.save(o);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+			Date date1 = sdf.parse(o.getTerminpregled());
+			LocalDate sada=java.time.LocalDate.now();
+			 Date date3=java.sql.Date.valueOf(sada);
+			 if(date1.compareTo(date3) < 0) {
+	        	 System.out.println("Date1 is before Date3");
+	        	 Long n=Long.parseLong( lekarId );
+	        	 request.setAttribute("lekar", korisnikService.findOne(n));
+	 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
+	 			request.setAttribute("mode", "MODE_PACIJENT");
+	 			
+	        	 return "drugiDatumPregleda";
+	        }
 			request.setAttribute("message", "uspesno kreirana operacija");
 			Long n=Long.parseLong( lekarId );
 			request.setAttribute("lekar", korisnikService.findOne(n));
@@ -283,7 +318,7 @@ public class LekarController {
 			return "uspesan";
 		}
 	 @RequestMapping(value="/sacuvajNovuOperaciju/{pacijentId}/{lekarId}",method = { RequestMethod.GET, RequestMethod.POST }) // korisnik povezan sa valuom iz js
-		public String cuvajOperaciju(@PathVariable Long lekarId,@PathVariable Long pacijentId,@ModelAttribute Operacija operacijaDTO, BindingResult bindingResult,
+		public String cuvajOperaciju(@PathVariable Long lekarId,@PathVariable Long pacijentId,@ModelAttribute OperacijaDTO operacijaDTO, BindingResult bindingResult,
 				HttpServletRequest request) throws ParseException {
 		
 			Operacija o= new Operacija();
@@ -293,6 +328,18 @@ public class LekarController {
 			o.setTerminoperacija(operacijaDTO.getTerminoperacija());
 			o.setObradjen(false);
 			oService.save(o);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+			Date date1 = sdf.parse(o.getTerminoperacija());
+			LocalDate sada=java.time.LocalDate.now();
+			 Date date3=java.sql.Date.valueOf(sada);
+			 if(date1.compareTo(date3) < 0) {
+	        	 System.out.println("Date1 is before Date3");
+	        	 request.setAttribute("lekar", korisnikService.findOne(lekarId));
+	 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
+	 			request.setAttribute("mode", "MODE_PACIJENT");
+	 			
+	        	 return "drugiDatumOperacija";
+	        }
 			request.setAttribute("message", "uspesno kreirana operacija");
 			request.setAttribute("lekar", korisnikService.findOne(lekarId));
 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));

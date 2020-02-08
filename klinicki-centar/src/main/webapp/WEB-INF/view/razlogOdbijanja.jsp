@@ -50,7 +50,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Razlog odbijanja</label>
 						<div class="col-md-6">
-							<textarea rows="4" cols="80" class="form-control" id="razlog" name="razlog" ></textarea>
+							<textarea rows="4" cols="80" class="form-control" id="razlog" name="razlog" required></textarea>
 						</div>
 					</div>
 					

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +94,26 @@ public class AdminKlinikeController {
 	 
 	 @GetMapping("/prikaziOperacijeBezSale")
 		public String prikazOperacijaBezSale(HttpServletRequest request) {
-			request.setAttribute("operacije", oService.pokaziSveBezSale());
+		 	HttpSession session = request.getSession();
+	    	Object id2 = session.getAttribute("id");
+	    	System.out.println(id2);
+	    	List<Operacija> prikaz=new ArrayList<Operacija>();
+	    	List<Operacija> o=oService.pokaziSveBezSale();
+	    	for(int i=0; i<o.size();i++) {
+	    	Korisnik doktor=korisnikService.findOne(o.get(i).getKorisnikId());
+	    	Korisnik admin=korisnikService.findOne((Long) id2);
+	    	if(doktor.getKlinika().getId()==admin.getKlinika().getId()) {
+	    		System.out.println("IF"+doktor.getKlinika().getId());
+	    		System.out.println(admin.getKlinika().getId());
+	    		prikaz.add(o.get(i));
+	    	}else {
+	    		System.out.println("ELSE"+doktor.getKlinika().getId());
+	    		System.out.println(admin.getKlinika().getId());
+	    		
+	    	}
+		 	
+	    	}
+	    	request.setAttribute("operacije", prikaz);
 			request.setAttribute("mode", "ALL_OPERACIJE");
 			return "listaOperacijaBezSale";
 		}

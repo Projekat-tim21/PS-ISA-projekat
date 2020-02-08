@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.repository.LekarZaPrikazIPregledeRepository;
 
@@ -59,6 +60,12 @@ public class LekarZaPrikazIPregledeService {
 				
 			}
 		}
+	}
+
+
+	public LekarZaPrikazIPreglede pronadji(Long id) {
+		// TODO Auto-generated method stub
+		return lipRepo.findByLekarveza(id);
 	}
 
 
