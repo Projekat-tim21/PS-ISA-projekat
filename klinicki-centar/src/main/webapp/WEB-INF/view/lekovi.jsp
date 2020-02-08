@@ -65,7 +65,7 @@
 								<th>Sifra</th>
 								<th>Naziv</th>
 								<th>Dodatno</th>
-								<th colspan="2">Izmeni/Obrisi</th>
+								<th>Izmeni</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,8 +101,7 @@
                                                onclick="event.preventDefault();saveData(${lek.getId()});"
                                                style="display: none;"><span class="btn-label"><img src="static/svg/diff.svg"></span></a>
                                         </td>
-                                        <td><a href="/delete/${lek.getId()}" class="deleteData"><span class="btn-label"><img src="static/svg/trashcan.svg"></span></a>
-                                        </td>       
+                                             
 									
 								</tr>
 							</c:forEach>

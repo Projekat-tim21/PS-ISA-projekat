@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.informatika.jpa.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -83,7 +84,37 @@ public class MedSestraController {
 	 
 	 @GetMapping("/sviSestraPacijenti")
 	    public ModelAndView svi(HttpServletRequest request) {
-		 request.setAttribute("korisnici", korisnikService.pokaziSvePacijente());
+		 List<Korisnik> k=korisnikService.pokaziSvePacijente();
+	    	List<KorisnikDTO> kDTO=new ArrayList<KorisnikDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KorisnikDTO korisnikDTO=new KorisnikDTO();
+	    		korisnikDTO.setAdresa(k.get(i).getAdresa());
+	    		korisnikDTO.setAlergije(k.get(i).getAlergije());
+	    		korisnikDTO.setAnamneza(k.get(i).getAnamneza());
+	    		korisnikDTO.setBolesti(k.get(i).getBolesti());
+	    		korisnikDTO.setDatum(k.get(i).getDatum());
+	    		korisnikDTO.setDioptrija(k.get(i).getDioptrija());
+	    		korisnikDTO.setDrzava(k.get(i).getDrzava());
+	    		korisnikDTO.setEmail(k.get(i).getEmail());
+	    		korisnikDTO.setFirstLogin(k.get(i).getFirst_Login());
+	    		korisnikDTO.setGrad(k.get(i).getGrad());
+	    		korisnikDTO.setId(k.get(i).getId());
+	    		korisnikDTO.setIme(k.get(i).getIme());
+	    		korisnikDTO.setIsActive(k.get(i).getIsActive());
+	    		korisnikDTO.setJedBrOsig(k.get(i).getJedBrOsig());
+	    		korisnikDTO.setKgrupa(k.get(i).getKgrupa());
+	    		korisnikDTO.setPassword(k.get(i).getPassword());
+	    		korisnikDTO.setPol(k.get(i).getPol());
+	    		korisnikDTO.setPrezime(k.get(i).getPrezime());
+	    		korisnikDTO.setRole(k.get(i).getRoleName());
+	    		korisnikDTO.setTelefon(k.get(i).getTelefon());
+	    		korisnikDTO.setTezina(k.get(i).getTezina());
+	    		korisnikDTO.setUsername(k.get(i).getUsername());
+	    		korisnikDTO.setVisina(k.get(i).getVisina());
+	    		
+	    		kDTO.add(korisnikDTO);
+	    	}
+		 request.setAttribute("korisnici", kDTO);
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("sviSestraPacijenti");
@@ -92,7 +123,24 @@ public class MedSestraController {
 	 
 	 @GetMapping("/overaRecepta")
 	    public ModelAndView sviRecepti(HttpServletRequest request) {
-		 request.setAttribute("info", infoService.pokaziZaOveru());
+		 
+		 	List<InformacijeOpregleduDTO> infoDTO=new ArrayList<InformacijeOpregleduDTO>();
+		 	List<InformacijeOpregledu> nova=infoService.pokaziZaOveru();
+		 	for(int i=0; i<nova.size();i++) {
+		 		InformacijeOpregleduDTO o=new InformacijeOpregleduDTO();
+		 		o.setDijagnoza(nova.get(i).getDijagnoza());
+		 		o.setDijagnozaId(nova.get(i).getDijagnozaId());
+		 		o.setId(nova.get(i).getId());
+		 		o.setInformacije(nova.get(i).getInformacije());
+		 		o.setLekarId(nova.get(i).getLekarId());
+		 		o.setLeks(nova.get(i).getLeks());
+		 		o.setOveren(nova.get(i).getOveren());
+		 		o.setPacijentId(nova.get(i).getPacijentId());
+		 		o.setPregledId(nova.get(i).getPregledId());
+		 		o.setTip(nova.get(i).getTip());
+		 		infoDTO.add(o);
+		 		}
+		 	request.setAttribute("info", infoDTO);
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("sestraOvera");
@@ -101,8 +149,33 @@ public class MedSestraController {
 	 
 	 @GetMapping("/vidijos/{korisnikId}")
 	    public String enable(@PathVariable Long korisnikId,HttpServletRequest request) {
-		 request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
-			Korisnik k=korisnikService.findOne(korisnikId);
+		 Korisnik k=korisnikService.findOne(korisnikId);
+		 KorisnikDTO korisnikDTO=new KorisnikDTO();
+ 		korisnikDTO.setAdresa(k.getAdresa());
+ 		korisnikDTO.setAlergije(k.getAlergije());
+ 		korisnikDTO.setAnamneza(k.getAnamneza());
+ 		korisnikDTO.setBolesti(k.getBolesti());
+ 		korisnikDTO.setDatum(k.getDatum());
+ 		korisnikDTO.setDioptrija(k.getDioptrija());
+ 		korisnikDTO.setDrzava(k.getDrzava());
+ 		korisnikDTO.setEmail(k.getEmail());
+ 		korisnikDTO.setFirstLogin(k.getFirst_Login());
+ 		korisnikDTO.setGrad(k.getGrad());
+ 		korisnikDTO.setId(k.getId());
+ 		korisnikDTO.setIme(k.getIme());
+ 		korisnikDTO.setIsActive(k.getIsActive());
+ 		korisnikDTO.setJedBrOsig(k.getJedBrOsig());
+ 		korisnikDTO.setKgrupa(k.getKgrupa());
+ 		korisnikDTO.setPassword(k.getPassword());
+ 		korisnikDTO.setPol(k.getPol());
+ 		korisnikDTO.setPrezime(k.getPrezime());
+ 		korisnikDTO.setRole(k.getRoleName());
+ 		korisnikDTO.setTelefon(k.getTelefon());
+ 		korisnikDTO.setTezina(k.getTezina());
+ 		korisnikDTO.setUsername(k.getUsername());
+ 		korisnikDTO.setVisina(k.getVisina());
+		 request.setAttribute("korisnik", korisnikDTO);
+			//Korisnik k=korisnikService.findOne(korisnikId);
 			System.out.println(k.getVisina());
 			request.setAttribute("mode", "MODE_ZKARTON");
 			
@@ -110,14 +183,27 @@ public class MedSestraController {
 	 
 	 @GetMapping("/overi/{infoid}")
 	    public String overa(@PathVariable Long infoid,HttpServletRequest request) {
-		 request.setAttribute("korisnik", infoService.findOne(infoid));
+		 	
+		InformacijeOpregledu ip=infoService.findOne(infoid);
+		InformacijeOpregleduDTO o=new InformacijeOpregleduDTO();
+	 	o.setDijagnoza(ip.getDijagnoza());
+	 	o.setDijagnozaId(ip.getDijagnozaId());
+	 	o.setId(ip.getId());
+	 	o.setInformacije(ip.getInformacije());
+	 	o.setLekarId(ip.getLekarId());
+	 	o.setLeks(ip.getLeks());
+	 	o.setOveren(ip.getOveren());
+	 	o.setPacijentId(ip.getPacijentId());
+	 	o.setPregledId(ip.getPregledId());
+	 	o.setTip(ip.getTip());
+		request.setAttribute("korisnik", o);
 		InformacijeOpregledu i=	(InformacijeOpregledu) infoService.findOne(infoid);
 		i.setOveren(true);
 		HttpSession session = request.getSession();
-    	Object id2 = session.getAttribute("id");
+    	Long id2 = (Long) session.getAttribute("id");
     	System.out.println(id2);
-    	Long broj=Long.parseLong((String) id2);
-    	i.setSestraovera(broj);
+    	//Long broj=Long.parseLong((String) id2);
+    	i.setSestraovera( id2);
 		Set novi=i.getLeks();
 		request.setAttribute("lekici", novi);
 		System.out.println(novi.isEmpty());
@@ -166,7 +252,32 @@ public class MedSestraController {
 	 
 	 @RequestMapping("/profilSestra")
 		public String editUserProfilPregled(@RequestParam Long id, HttpServletRequest request) {
-			request.setAttribute("korisnik", korisnikService.findOne(id));
+		 Korisnik k=korisnikService.findOne(id);
+		 KorisnikDTO korisnikDTO=new KorisnikDTO();
+ 		korisnikDTO.setAdresa(k.getAdresa());
+ 		korisnikDTO.setAlergije(k.getAlergije());
+ 		korisnikDTO.setAnamneza(k.getAnamneza());
+ 		korisnikDTO.setBolesti(k.getBolesti());
+ 		korisnikDTO.setDatum(k.getDatum());
+ 		korisnikDTO.setDioptrija(k.getDioptrija());
+ 		korisnikDTO.setDrzava(k.getDrzava());
+ 		korisnikDTO.setEmail(k.getEmail());
+ 		korisnikDTO.setFirstLogin(k.getFirst_Login());
+ 		korisnikDTO.setGrad(k.getGrad());
+ 		korisnikDTO.setId(k.getId());
+ 		korisnikDTO.setIme(k.getIme());
+ 		korisnikDTO.setIsActive(k.getIsActive());
+ 		korisnikDTO.setJedBrOsig(k.getJedBrOsig());
+ 		korisnikDTO.setKgrupa(k.getKgrupa());
+ 		korisnikDTO.setPassword(k.getPassword());
+ 		korisnikDTO.setPol(k.getPol());
+ 		korisnikDTO.setPrezime(k.getPrezime());
+ 		korisnikDTO.setRole(k.getRoleName());
+ 		korisnikDTO.setTelefon(k.getTelefon());
+ 		korisnikDTO.setTezina(k.getTezina());
+ 		korisnikDTO.setUsername(k.getUsername());
+ 		korisnikDTO.setVisina(k.getVisina());
+			request.setAttribute("korisnik", korisnikDTO);
 			request.setAttribute("mode", "MODE_PREGLED");
 			return "profilSestra";
 		}
@@ -175,7 +286,32 @@ public class MedSestraController {
 	 
 	 @RequestMapping("/izmenaPodatakaSestre/{id}")
 		public String editUserProfil2(@PathVariable(value="id") Long id, HttpServletRequest request) {
-			request.setAttribute("korisnik", korisnikService.findOne(id));
+		 Korisnik k=korisnikService.findOne(id);
+		 KorisnikDTO korisnikDTO=new KorisnikDTO();
+ 		korisnikDTO.setAdresa(k.getAdresa());
+ 		korisnikDTO.setAlergije(k.getAlergije());
+ 		korisnikDTO.setAnamneza(k.getAnamneza());
+ 		korisnikDTO.setBolesti(k.getBolesti());
+ 		korisnikDTO.setDatum(k.getDatum());
+ 		korisnikDTO.setDioptrija(k.getDioptrija());
+ 		korisnikDTO.setDrzava(k.getDrzava());
+ 		korisnikDTO.setEmail(k.getEmail());
+ 		korisnikDTO.setFirstLogin(k.getFirst_Login());
+ 		korisnikDTO.setGrad(k.getGrad());
+ 		korisnikDTO.setId(k.getId());
+ 		korisnikDTO.setIme(k.getIme());
+ 		korisnikDTO.setIsActive(k.getIsActive());
+ 		korisnikDTO.setJedBrOsig(k.getJedBrOsig());
+ 		korisnikDTO.setKgrupa(k.getKgrupa());
+ 		korisnikDTO.setPassword(k.getPassword());
+ 		korisnikDTO.setPol(k.getPol());
+ 		korisnikDTO.setPrezime(k.getPrezime());
+ 		korisnikDTO.setRole(k.getRoleName());
+ 		korisnikDTO.setTelefon(k.getTelefon());
+ 		korisnikDTO.setTezina(k.getTezina());
+ 		korisnikDTO.setUsername(k.getUsername());
+ 		korisnikDTO.setVisina(k.getVisina());
+			request.setAttribute("korisnik", korisnikDTO);
 			request.setAttribute("mode", "MODE_PREGLED");
 			return "izmenaPodatakaSestre";  //bio je login
 		}
@@ -187,8 +323,9 @@ public class MedSestraController {
 			String id2 = request.getParameter("id");
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("id", id2);
+			//session.setAttribute("id", id2);
 			Korisnik k = new Korisnik();
+			Korisnik pomocni=korisnikService.findOne(korisnikd.getId());
 			k.setId(korisnikd.getId());
 			k.setIme(korisnikd.getIme());
 			k.setPrezime(korisnikd.getPrezime());
@@ -201,7 +338,8 @@ public class MedSestraController {
 			k.setUsername(korisnikd.getUsername());
 			k.setPassword(korisnikd.getPassword());
 			k.setRoleName(Role.SESTRA.name());
-			
+			k.setKlinika(pomocni.getKlinika());
+			System.out.println();
 			korisnikService.saveMogKorisnika(k);
 			return "redirect:/profilSestra?id={id}";
 
@@ -209,10 +347,10 @@ public class MedSestraController {
 	 
 	 @GetMapping("/radniKalendarSestre")
 	    public ModelAndView kalendar(@RequestParam Long id, HttpServletRequest request) {
-		 String id2 = request.getParameter("id");
+		 	String id2 = request.getParameter("id");
 			System.out.println(id);
 			HttpSession session = request.getSession();
-			session.setAttribute("id", id2);
+			session.setAttribute("sestra", id2);
 			request.setAttribute("korisnik", korisnikService.findOne(id));
 			Korisnik k=korisnikService.findOne(id);
 			System.out.println(k.getVisina());

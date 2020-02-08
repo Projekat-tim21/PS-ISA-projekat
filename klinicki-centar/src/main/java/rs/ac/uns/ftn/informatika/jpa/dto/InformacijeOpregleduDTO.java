@@ -14,6 +14,13 @@ public class InformacijeOpregleduDTO {
 	private Long pacijentId;
 	private String informacije;;
 	private String dijagnozaId;
+	private String dijagnoza;
+	public String getDijagnoza() {
+		return dijagnoza;
+	}
+	public void setDijagnoza(String dijagnoza) {
+		this.dijagnoza = dijagnoza;
+	}
 	private Long pregledId;
 	private Long tip;
 	private Set<Lek> leks = new HashSet<Lek>();
@@ -71,6 +78,9 @@ public class InformacijeOpregleduDTO {
 		this.dijagnozaId = dijagnozaId;
 		this.leks = leks;
 		this.overen = overen;
+	}
+	public InformacijeOpregleduDTO() {
+		// TODO Auto-generated constructor stub
 	}
 	public Long getPregledId() {
 		return pregledId;
