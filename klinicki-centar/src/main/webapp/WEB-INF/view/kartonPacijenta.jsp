@@ -46,9 +46,6 @@ body {
 			<div class="navbar-collapse collapse">
 			<h2>LEKAR</h2>
 				<ul class="nav navbar-nav">
-					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
-					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
-					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -60,7 +57,7 @@ body {
 	
 		<c:when test="${mode=='MODE_PREGLED' }">
 			<div class="container text-center">
-				<h3>Pregled podataka "${lekar.ime}"</h3>
+				<h3>Pregled podataka</h3>
 				<hr>
 				<form class="form-horizontal" method="POST"
 					action="/sacuvajKarton/${korisnik.id }/${lekar.id }">

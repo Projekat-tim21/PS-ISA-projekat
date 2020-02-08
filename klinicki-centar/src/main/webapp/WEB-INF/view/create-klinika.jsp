@@ -10,6 +10,7 @@
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="shortcut icon" href="#" />
 </head>
 
 <div role="navigation">
@@ -21,7 +22,9 @@
 					<li><a href="/zahteviRegistrovanje">Registrovanje korisnika</a></li>
 					<li><a href="/addNewZK">Zdravstevni karton</a></li>
 					<li><a href="/klinike">Klinike</a></li>
-					<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					<c:if test="${id eq 8}">
+   						<li><a href="/pregledSvihAdmina">Administratori KC</a></li>
+					</c:if>
 					<li><a href="/pregledSvihAdminaKlinike">Administratori klinika</a></li>
 					<li><a href="/lekovi">Lekovi</a></li>
 					<li><a href="/dijagnoze">Dijagnoze</a></li>

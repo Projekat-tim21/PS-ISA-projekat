@@ -228,6 +228,9 @@ transition: all 0.3s ease 0s;
 			<div class="navbar-collapse collapse">
 			<h2>LEKAR</h2>
 				<ul class="nav navbar-nav">
+					<li><a href="/pregledSvihPacijenataMetoda">Svi pacijenti</a></li>
+					<li><a href="/pacijenti">Prikazi profil pacijenta</a></li>
+					<li><a href="/zakazivanjePregleda">Zakazi pregled</a></li>
 					<li><a href="/radniKalendar?id=${id}">Radni kalendar</a></li>
 					<li><a href="/logout">Odjavi se</a></li>
 				</ul>
@@ -235,29 +238,13 @@ transition: all 0.3s ease 0s;
 			</div>
 		</div>
 	</div>
-<c:choose>
-	<c:when test="${mode=='MODE_PACIJENT' }">
-			<div class="container text-center">
-				<label class="control-label ">Id : ${korisnik.id } </label>
-				<hr>
-				<label class="control-label">Ime : ${korisnik.ime }</label>
-				<hr>
-				<label class="control-label ">Prezime : ${korisnik.prezime }</label>
-				<hr>		
-				<a href="/izmenaKartona/${korisnik.id}/${lekar.id }">Zdravstveni karton</a>
-				<hr>
-				<a href="/istorijaIzvestaja/${korisnik.id}/${lekar.id }">Istorija pregleda</a>
-				<hr>
-				<a href="/kreirajPregled/${korisnik.id}/${lekar.id }">Zakazi novi pregled</a>
-				<hr>
-				<a href="/kreirajOperaciju/${korisnik.id}/${lekar.id }">Zakazi operaciju</a>
-			</div>
-			
-	</c:when>
-</c:choose>
+<h3 align="center">Vec postoji izvestaj za dati pregled</h3>
+<hr>
+<div align="center">
+	<a href="/radniKalendar?id=${id}">Nazad na radni kalendar</a>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/app.js"></script>			
 </body>
 </html>
-

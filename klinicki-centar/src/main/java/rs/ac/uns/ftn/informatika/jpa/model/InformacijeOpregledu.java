@@ -49,6 +49,9 @@ public class InformacijeOpregledu {
 	
 	@Column(name="overen",nullable=true)
 	private Boolean overen;
+	
+	@Column(name="sestraovera",nullable=true)
+	private Long sestraovera;
 
 	public Set<Lek> getLeks() {
 		return leks;
@@ -182,5 +185,28 @@ public class InformacijeOpregledu {
 		this.tip = tip;
 	}
 
+	public Long getSestraovera() {
+		return sestraovera;
+	}
+
+	public void setSestraovera(Long sestraovera) {
+		this.sestraovera = sestraovera;
+	}
+
+	public InformacijeOpregledu(Long lekarId, Long pacijentId, Long pregledId, Long tip, String informacije,
+			String dijagnozaId, Set<Lek> leks, Boolean overen, Long sestraovera) {
+		super();
+		this.lekarId = lekarId;
+		this.pacijentId = pacijentId;
+		this.pregledId = pregledId;
+		this.tip = tip;
+		this.informacije = informacije;
+		this.dijagnozaId = dijagnozaId;
+		this.leks = leks;
+		this.overen = overen;
+		this.sestraovera = sestraovera;
+	}
+	
+	
 	
 }
