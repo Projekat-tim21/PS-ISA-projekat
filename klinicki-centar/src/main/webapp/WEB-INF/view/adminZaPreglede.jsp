@@ -23,9 +23,6 @@ body, html {
 	
 }
 
-banja{
-	
-}
 
 </style>
 </head>
@@ -47,7 +44,7 @@ banja{
 
 			</div>
 			
-			<input type="submit" name="zakazi" id="lekariPrikaz" name="potvrdi" onclick="/AdminPraviPreglede">
+			
 			
 		</div>
 	</div>
