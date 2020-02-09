@@ -23,6 +23,9 @@ body, html {
 	
 }
 
+banja{
+	
+}
 
 </style>
 </head>
@@ -43,6 +46,9 @@ body, html {
 				</ul>
 
 			</div>
+			
+			<input type="submit" name="zakazi" id="lekariPrikaz" name="potvrdi" onclick="/AdminPraviPreglede">
+			
 		</div>
 	</div>
 
@@ -228,7 +234,7 @@ body, html {
 					</div>
 				
 					<div>
-					<input type="submit" name="zakazi" name="potvrdi" onclick="izbaciAlert();">
+					<input type="submit" name="zakazi" id="potvrda" name="potvrdi" onclick="izbaciAlert();">
 					</div>
 			</form>
 		</c:when>

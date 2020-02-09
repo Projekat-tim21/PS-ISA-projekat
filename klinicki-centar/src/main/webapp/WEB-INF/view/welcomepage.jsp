@@ -184,7 +184,7 @@ body {
 						</div>
 					</div>
 					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="Register">
+						<input type="submit" class="btn btn-primary" id="login" value="Register">
 					</div>
 				</form>
 			</div>
@@ -353,12 +353,12 @@ body {
 					<div class="form-group">
 						<label class="control-label col-md-3">Sifra</label>
 						<div class="col-md-7">
-							<input type="password" class="form-control" name="password"
+							<input type="password" class="form-control" id="password" name="password"
 								value="${korisnik.password }" />
 						</div>
 					</div>
 					<div class="form-group ">
-						<input type="submit" class="btn btn-primary" value="Login" />
+						<input type="submit" class="btn btn-primary" id="login" value="Login" />
 					</div>
 				</form>
 			</div>
