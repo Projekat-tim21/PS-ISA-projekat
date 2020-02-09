@@ -19,7 +19,7 @@ body {
   background-position: bottom right; 
 }
 </style>
-
+<!-- onclick="addIdPac2(this)" -->
 
 </head>
 <body>
@@ -28,7 +28,7 @@ body {
 		<div class="navbar navbar-inverse">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a onclick="addIdPac2(this)" href="/saljemoZahtevZaPregledom">Odustani od slanja zahteva</a></li>
+					<li><a  href="/saljemoZahtevZaPregledom?id=${id}">Odustani od slanja zahteva</a></li>
 				
 				</ul>
 			
@@ -150,6 +150,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 var idPacijenta2 = getUrlParameter('id');
 var idPacijenta = getUrlParameter('idpac');
 console.log(idPacijenta);
+console.log(idPacijenta2 + 'heej ovo mi treba');
 
 function addIdPac (element){
 	element.href = element.href+"?id="+idPacijenta;

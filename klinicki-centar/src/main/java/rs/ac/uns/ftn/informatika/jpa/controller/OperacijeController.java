@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import rs.ac.uns.ftn.informatika.jpa.dto.OperacijaDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.OcenaKlinike;
 import rs.ac.uns.ftn.informatika.jpa.model.OcenaLekara;
 import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
-import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.ZaposleniUKlinikama;
 import rs.ac.uns.ftn.informatika.jpa.repository.KlinikaRepository;
 import rs.ac.uns.ftn.informatika.jpa.repository.LekarZaPrikazIPregledeRepository;
@@ -69,13 +69,13 @@ public class OperacijeController {
 	@RequestMapping("/prikaziListuOperacija")
 	public String idiNaPrikazListeOperacija(@RequestParam("id") int idpac,HttpServletRequest request) {
 		
-		List<Operacija> operacije = new ArrayList<Operacija>();
+		List<OperacijaDTO> operacijedto = new ArrayList<OperacijaDTO>();
 		for (Operacija operacija :  oRepo.findByObavljenaoperacija(true)) {
 			if(operacija.getIdpacijenta()==idpac)
-				operacije.add(operacija);
+				operacijedto.add(new OperacijaDTO(operacija));
 		}
 		
-		request.setAttribute("operacije", operacije);
+		request.setAttribute("operacije", operacijedto);
 		request.setAttribute("mode", "ALL_OPERACIJE");
 		return "listaPregledaIOperacija";
 	}
@@ -104,16 +104,14 @@ public class OperacijeController {
 		long idLekara=idlekar;
 		long idOperacije=idoperacije;
 		ZaposleniUKlinikama zuk=zipService.findOne(idLekara);
-		long idKlinikeKojuOcenjujem=zuk.getIdklinike(); //ovo mi treba
+		long idKlinikeKojuOcenjujem=zuk.getIdklinike(); 
 		LekarZaPrikazIPreglede lip=lipServis.findOne(idLekara);
 		Korisnik k=korisnikServis.findOne(idpacijenta);
 		Operacija o=oServis.findOneById(idOperacije);
-		HttpSession session = request.getSession();
 		
 		request.setAttribute("operacija", o);
 		request.setAttribute("korisnik", k);
 		request.setAttribute("lip", lip);
-		//request.setAttribute("klinika", zuk);
 		Klinika klin=klinServis.findOne(idKlinikeKojuOcenjujem);
 		request.setAttribute("idKlinikeOvajTreba", klin.getId());
 		request.setAttribute("klinika",klin);
@@ -123,14 +121,10 @@ public class OperacijeController {
 	
 	
 	@PostMapping("/ocenaKlinikeOperacija/{operacijaId}/{lekarid}/{korisnikid}/{klinikaid}")
-	public String ocenaKlinikeOperacije(@ModelAttribute Operacija operacija,@PathVariable Long klinikaid,@PathVariable Long operacijaId,@PathVariable Long lekarid,@PathVariable Long korisnikid, HttpServletRequest request) {
+	public String ocenaKlinikeOperacije(@ModelAttribute OperacijaDTO operacijadto,@PathVariable Long klinikaid,@PathVariable Long operacijaId,@PathVariable Long lekarid,@PathVariable Long korisnikid, HttpServletRequest request) {
 		
 		long idKlinike=klinikaid;
-		//Klinika k=klinServis.findOne(idKlinike);
-		//ZaposleniUKlinikama zuk=zipService.findOne(idKlinike);
-		
 		long idKorisnika=korisnikid;
-		//long idKlinikeKojuOcenjujem=zuk.getIdklinike(); //ovo mi treba
 		OcenaKlinike ol=new OcenaKlinike();
 		ol.setKorisnikid(idKorisnika);
 		ol.setLekarid(lekarid);
@@ -140,10 +134,9 @@ public class OperacijeController {
 		
 		double suma=0;
 		double prosek=0;
-		//System.out.println("getOcenaOperacije  "+operacija.getOcenaoperacije());
 		for(Klinika klin : klinRepo.findAll()) {
 			if(klin.getId()==idKlinike) {
-				suma=klin.getOcena()+operacija.getOcenaoperacije();
+				suma=klin.getOcena()+operacijadto.getOcenaoperacije();
 				prosek=suma/2;
 			}
 			klin.setOcena(prosek);  
@@ -155,8 +148,6 @@ public class OperacijeController {
 		HttpSession session = request.getSession();
 		session.setAttribute("id", idKorisnika);
 		session.setAttribute("idlek", lekarid);
-		//session.setAttribute("idoperacije", operacijaId);
-		//session.setAttribute("idklinike", idKlinikeKojuOcenjujem);
 		
 		
 		return "redirect:/idiNaLoginPoslePotvrde";
@@ -164,25 +155,21 @@ public class OperacijeController {
 	}
 	
 	
-	
-	
-	
 	@PostMapping("/ocenaLekaraOperacije/{operacijaId}/{lekarid}/{korisnikid}")
-	public String ocenalekaraOperacije(@ModelAttribute Operacija operacija,@PathVariable Long korisnikid,@PathVariable Long operacijaId,@PathVariable Long lekarid, HttpServletRequest request) {
+	public String ocenalekaraOperacije(@ModelAttribute OperacijaDTO operacijadto,@PathVariable Long korisnikid,@PathVariable Long operacijaId,@PathVariable Long lekarid, HttpServletRequest request) {
 
 		OcenaLekara ol=new OcenaLekara();
 		ol.setKorisnikid(korisnikid);
 		ol.setLekarid(lekarid);
 		ol.setPregledid(operacijaId);
-		ol.setOcenalek(operacija.getOcenaoperacije());
+		ol.setOcenalek(operacijadto.getOcenaoperacije());
 		olServis.saveOcenaLekara(ol);
-		System.out.println("getOcenaoperacije  "+operacija.getOcenaoperacije());
+		System.out.println("getOcenaoperacije  "+operacijadto.getOcenaoperacije());
 		double suma=0;
 		double prosek=0;
-		//List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
 		for(LekarZaPrikazIPreglede lip : lipRepo.findAll()) {
 			if(lip.getId()==lekarid) {
-				suma=lip.getOcena()+operacija.getOcenaoperacije();
+				suma=lip.getOcena()+operacijadto.getOcenaoperacije();
 				prosek=suma/2;
 			}
 			lip.setOcena(prosek);
@@ -190,11 +177,9 @@ public class OperacijeController {
 		}
 		System.out.println(prosek);
 		
-		
 		HttpSession session = request.getSession();
 		session.setAttribute("id", korisnikid);
 		session.setAttribute("idlek", lekarid);
-		
 		
 		return "redirect:/idiNaLoginPoslePotvrde";
 

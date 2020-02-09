@@ -270,6 +270,33 @@ public class Pregled {
 		this.korisnikId = korisnikId;
 	}
 
+	
+	
+	public Pregled(Long id, String datum, String vreme, String terminpregled, String tip, String lekarimepregled,
+			String lekarprezimepregled, String idlekarpregled, Long idpacijenta, String lekar, int cena,
+			double ocenapregleda, String trajanje, String sala, Boolean zakazan, boolean obavljenpregled,
+			Boolean obradjen, Long korisnikId) {
+		super();
+		this.id = id;
+		this.datum = datum;
+		this.vreme = vreme;
+		this.terminpregled = terminpregled;
+		this.tip = tip;
+		this.lekarimepregled = lekarimepregled;
+		this.lekarprezimepregled = lekarprezimepregled;
+		this.idlekarpregled = idlekarpregled;
+		this.idpacijenta = idpacijenta;
+		this.lekar = lekar;
+		this.cena = cena;
+		this.ocenapregleda = ocenapregleda;
+		this.trajanje = trajanje;
+		this.sala = sala;
+		this.zakazan = zakazan;
+		this.obavljenpregled = obavljenpregled;
+		this.obradjen = obradjen;
+		this.korisnikId = korisnikId;
+	}
+
 	public Pregled(String datum, String vreme, String terminpregled, String tip, String lekarimepregled,
 			String lekarprezimepregled, String idlekarpregled, Long idpacijenta, String lekar, int cena,
 			double ocenapregleda, String trajanje, String sala, Boolean zakazan, boolean obavljenpregled,
