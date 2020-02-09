@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import rs.ac.uns.ftn.informatika.jpa.dto.DijagnozaDTO;
 import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
@@ -270,8 +274,9 @@ public class AdminKCController {
 	        novi.setIsActive(false);
 	        novi.setRoleName(Role.ADMIN_KLINIKE.name());
 	        String naziv=request.getParameter("odabrana");
+	        
 	        Klinika clinic=klinikaService.findByNaziv(naziv);
-	       // System.out.println("KLINIKA "+ clinic.getNaziv());
+	        System.out.println("KLINIKA "+ clinic.getNaziv());
 	        //Klinika nova=new Klinika();
 	        novi.setKlinika(clinic);
 	        
@@ -357,6 +362,7 @@ public class AdminKCController {
 	        klinikaN.setGrad(klinika.getGrad());
 	        klinikaN.setDrzava(klinika.getDrzava());
 	        klinikaN.setAdresa(klinika.getAdresa());
+	        klinikaN.setTip(klinika.getTip());
 	        if(klinika.getNaziv()==null || klinika.getNaziv().trim().isEmpty()) {
 	        	result = "redirect:/addNewKlinika?error=Unesite naziv";
 	        }
@@ -373,7 +379,38 @@ public class AdminKCController {
 	    
 	    @GetMapping("/addNewZK")
 	    public ModelAndView addNewZK(HttpServletRequest request) {
-	    	request.setAttribute("korisnici", korisnikService.pokaziBezKartona());
+	    	List<Korisnik> k=korisnikService.pokaziBezKartona();
+	    	List<KorisnikDTO> kDTO=new ArrayList<KorisnikDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KorisnikDTO korisnikDTO=new KorisnikDTO();
+	    		korisnikDTO.setAdresa(k.get(i).getAdresa());
+	    		korisnikDTO.setAlergije(k.get(i).getAlergije());
+	    		korisnikDTO.setAnamneza(k.get(i).getAnamneza());
+	    		korisnikDTO.setBolesti(k.get(i).getBolesti());
+	    		korisnikDTO.setDatum(k.get(i).getDatum());
+	    		korisnikDTO.setDioptrija(k.get(i).getDioptrija());
+	    		korisnikDTO.setDrzava(k.get(i).getDrzava());
+	    		korisnikDTO.setEmail(k.get(i).getEmail());
+	    		korisnikDTO.setFirstLogin(k.get(i).getFirst_Login());
+	    		korisnikDTO.setGrad(k.get(i).getGrad());
+	    		korisnikDTO.setId(k.get(i).getId());
+	    		korisnikDTO.setIme(k.get(i).getIme());
+	    		korisnikDTO.setIsActive(k.get(i).getIsActive());
+	    		korisnikDTO.setJedBrOsig(k.get(i).getJedBrOsig());
+	    		korisnikDTO.setKgrupa(k.get(i).getKgrupa());
+	    		korisnikDTO.setPassword(k.get(i).getPassword());
+	    		korisnikDTO.setPol(k.get(i).getPol());
+	    		korisnikDTO.setPrezime(k.get(i).getPrezime());
+	    		korisnikDTO.setRole(k.get(i).getRoleName());
+	    		korisnikDTO.setTelefon(k.get(i).getTelefon());
+	    		korisnikDTO.setTezina(k.get(i).getTezina());
+	    		korisnikDTO.setUsername(k.get(i).getUsername());
+	    		korisnikDTO.setVisina(k.get(i).getVisina());
+	    		
+	    		kDTO.add(korisnikDTO);
+	    	}
+	    	
+	    	request.setAttribute("korisnici", kDTO);
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("addNewZK");
@@ -384,6 +421,32 @@ public class AdminKCController {
 	    public String enable(@PathVariable Long korisnikId,HttpServletRequest request) {
 			 request.setAttribute("korisnik", korisnikService.findOne(korisnikId));
 				Korisnik k=korisnikService.findOne(korisnikId);
+
+		   		KorisnikDTO korisnikDTO=new KorisnikDTO();
+		    	korisnikDTO.setAdresa(k.getAdresa());
+		    	korisnikDTO.setAlergije(k.getAlergije());
+		    	korisnikDTO.setAnamneza(k.getAnamneza());
+		    	korisnikDTO.setBolesti(k.getBolesti());
+		    	korisnikDTO.setDatum(k.getDatum());
+		    	korisnikDTO.setDioptrija(k.getDioptrija());
+		    	korisnikDTO.setDrzava(k.getDrzava());
+		    	korisnikDTO.setEmail(k.getEmail());
+		    	korisnikDTO.setFirstLogin(k.getFirst_Login());
+		    	korisnikDTO.setGrad(k.getGrad());
+		    	korisnikDTO.setId(k.getId());
+		    	korisnikDTO.setIme(k.getIme());
+		    	korisnikDTO.setIsActive(k.getIsActive());
+		    	korisnikDTO.setJedBrOsig(k.getJedBrOsig());
+		    	korisnikDTO.setKgrupa(k.getKgrupa());
+		    	korisnikDTO.setPassword(k.getPassword());
+		    	korisnikDTO.setPol(k.getPol());
+		    	korisnikDTO.setPrezime(k.getPrezime());
+		    	korisnikDTO.setRole(k.getRoleName());
+		    	korisnikDTO.setTelefon(k.getTelefon());
+		    	korisnikDTO.setTezina(k.getTezina());
+		    	korisnikDTO.setUsername(k.getUsername());
+		    	korisnikDTO.setVisina(k.getVisina());
+		    	request.setAttribute("korisnik", korisnikDTO);
 				request.setAttribute("mode", "MODE_PREGLED");
 				return "create-zk";   
 		}
@@ -430,7 +493,38 @@ public class AdminKCController {
 	    
 	    @GetMapping("/zahteviRegistrovanje")
 	    public ModelAndView zahtevi(HttpServletRequest request) {
-	    	request.setAttribute("korisnici", korisnikService.pokaziSveZahteve());
+	    	
+	    	List<Korisnik> k=korisnikService.pokaziSveZahteve();
+	    	List<KorisnikDTO> kDTO=new ArrayList<KorisnikDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KorisnikDTO korisnikDTO=new KorisnikDTO();
+	    		korisnikDTO.setAdresa(k.get(i).getAdresa());
+	    		korisnikDTO.setAlergije(k.get(i).getAlergije());
+	    		korisnikDTO.setAnamneza(k.get(i).getAnamneza());
+	    		korisnikDTO.setBolesti(k.get(i).getBolesti());
+	    		korisnikDTO.setDatum(k.get(i).getDatum());
+	    		korisnikDTO.setDioptrija(k.get(i).getDioptrija());
+	    		korisnikDTO.setDrzava(k.get(i).getDrzava());
+	    		korisnikDTO.setEmail(k.get(i).getEmail());
+	    		korisnikDTO.setFirstLogin(k.get(i).getFirst_Login());
+	    		korisnikDTO.setGrad(k.get(i).getGrad());
+	    		korisnikDTO.setId(k.get(i).getId());
+	    		korisnikDTO.setIme(k.get(i).getIme());
+	    		korisnikDTO.setIsActive(k.get(i).getIsActive());
+	    		korisnikDTO.setJedBrOsig(k.get(i).getJedBrOsig());
+	    		korisnikDTO.setKgrupa(k.get(i).getKgrupa());
+	    		korisnikDTO.setPassword(k.get(i).getPassword());
+	    		korisnikDTO.setPol(k.get(i).getPol());
+	    		korisnikDTO.setPrezime(k.get(i).getPrezime());
+	    		korisnikDTO.setRole(k.get(i).getRoleName());
+	    		korisnikDTO.setTelefon(k.get(i).getTelefon());
+	    		korisnikDTO.setTezina(k.get(i).getTezina());
+	    		korisnikDTO.setUsername(k.get(i).getUsername());
+	    		korisnikDTO.setVisina(k.get(i).getVisina());
+	    		
+	    		kDTO.add(korisnikDTO);
+	    	}
+	    	request.setAttribute("korisnici", kDTO);
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
 	        if(korisnikService.pokaziSveZahteve()==null) {
@@ -442,7 +536,37 @@ public class AdminKCController {
 
 	    @GetMapping("/sviIzBaze")
 	    public ModelAndView svi(HttpServletRequest request) {
-	    	request.setAttribute("korisnici", korisnikService.pokaziSvePacijente());
+	    	List<Korisnik> k=korisnikService.pokaziSvePacijente();
+	    	List<KorisnikDTO> kDTO=new ArrayList<KorisnikDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KorisnikDTO korisnikDTO=new KorisnikDTO();
+	    		korisnikDTO.setAdresa(k.get(i).getAdresa());
+	    		korisnikDTO.setAlergije(k.get(i).getAlergije());
+	    		korisnikDTO.setAnamneza(k.get(i).getAnamneza());
+	    		korisnikDTO.setBolesti(k.get(i).getBolesti());
+	    		korisnikDTO.setDatum(k.get(i).getDatum());
+	    		korisnikDTO.setDioptrija(k.get(i).getDioptrija());
+	    		korisnikDTO.setDrzava(k.get(i).getDrzava());
+	    		korisnikDTO.setEmail(k.get(i).getEmail());
+	    		korisnikDTO.setFirstLogin(k.get(i).getFirst_Login());
+	    		korisnikDTO.setGrad(k.get(i).getGrad());
+	    		korisnikDTO.setId(k.get(i).getId());
+	    		korisnikDTO.setIme(k.get(i).getIme());
+	    		korisnikDTO.setIsActive(k.get(i).getIsActive());
+	    		korisnikDTO.setJedBrOsig(k.get(i).getJedBrOsig());
+	    		korisnikDTO.setKgrupa(k.get(i).getKgrupa());
+	    		korisnikDTO.setPassword(k.get(i).getPassword());
+	    		korisnikDTO.setPol(k.get(i).getPol());
+	    		korisnikDTO.setPrezime(k.get(i).getPrezime());
+	    		korisnikDTO.setRole(k.get(i).getRoleName());
+	    		korisnikDTO.setTelefon(k.get(i).getTelefon());
+	    		korisnikDTO.setTezina(k.get(i).getTezina());
+	    		korisnikDTO.setUsername(k.get(i).getUsername());
+	    		korisnikDTO.setVisina(k.get(i).getVisina());
+	    		
+	    		kDTO.add(korisnikDTO);
+	    	}
+	    	request.setAttribute("korisnici", kDTO);
 			request.setAttribute("mode", "ALL_USERS");
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("sviIzBaze");
@@ -451,7 +575,21 @@ public class AdminKCController {
 	    
 	    @GetMapping("/klinike")
 	    public ModelAndView klinike(HttpServletRequest request) {
-	    	request.setAttribute("klinike", klinikaService.pokaziSveKlinike());
+	    	List<Klinika> k=klinikaService.pokaziSveKlinike();
+	    	List<KlinikaDTO> kDTO=new ArrayList<KlinikaDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KlinikaDTO klinikaDTO=new KlinikaDTO();
+	    		klinikaDTO.setAdresa(k.get(i).getAdresa());
+	    		klinikaDTO.setDrzava(k.get(i).getDrzava());
+	    		klinikaDTO.setGrad(k.get(i).getGrad());
+	    		klinikaDTO.setId(k.get(i).getId());
+	    		klinikaDTO.setNaziv(k.get(i).getNaziv());
+	    		klinikaDTO.setOcena(k.get(i).getOcena());
+	    		klinikaDTO.setTip(k.get(i).getTip());
+	    		
+	    		kDTO.add(klinikaDTO);
+	    	}
+	    	request.setAttribute("klinike", kDTO);
 			request.setAttribute("mode", "ALL_KLINIKE");
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("klinike");
@@ -464,7 +602,37 @@ public class AdminKCController {
 	    	Object id2 = session.getAttribute("id");
 	    	System.out.println(id2);
 	    	request.setAttribute("admin", id2);
-			request.setAttribute("korisnici", korisnikService.pokaziAdmine());
+	    	List<Korisnik> k=korisnikService.pokaziAdmine();
+	    	List<KorisnikDTO> kDTO=new ArrayList<KorisnikDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KorisnikDTO korisnikDTO=new KorisnikDTO();
+	    		korisnikDTO.setAdresa(k.get(i).getAdresa());
+	    		korisnikDTO.setAlergije(k.get(i).getAlergije());
+	    		korisnikDTO.setAnamneza(k.get(i).getAnamneza());
+	    		korisnikDTO.setBolesti(k.get(i).getBolesti());
+	    		korisnikDTO.setDatum(k.get(i).getDatum());
+	    		korisnikDTO.setDioptrija(k.get(i).getDioptrija());
+	    		korisnikDTO.setDrzava(k.get(i).getDrzava());
+	    		korisnikDTO.setEmail(k.get(i).getEmail());
+	    		korisnikDTO.setFirstLogin(k.get(i).getFirst_Login());
+	    		korisnikDTO.setGrad(k.get(i).getGrad());
+	    		korisnikDTO.setId(k.get(i).getId());
+	    		korisnikDTO.setIme(k.get(i).getIme());
+	    		korisnikDTO.setIsActive(k.get(i).getIsActive());
+	    		korisnikDTO.setJedBrOsig(k.get(i).getJedBrOsig());
+	    		korisnikDTO.setKgrupa(k.get(i).getKgrupa());
+	    		korisnikDTO.setPassword(k.get(i).getPassword());
+	    		korisnikDTO.setPol(k.get(i).getPol());
+	    		korisnikDTO.setPrezime(k.get(i).getPrezime());
+	    		korisnikDTO.setRole(k.get(i).getRoleName());
+	    		korisnikDTO.setTelefon(k.get(i).getTelefon());
+	    		korisnikDTO.setTezina(k.get(i).getTezina());
+	    		korisnikDTO.setUsername(k.get(i).getUsername());
+	    		korisnikDTO.setVisina(k.get(i).getVisina());
+	    		
+	    		kDTO.add(korisnikDTO);
+	    	}
+			request.setAttribute("korisnici", kDTO);
 			request.setAttribute("mode", "ALL_ADMINI");
 			ModelAndView modelAndView = new ModelAndView();
 		    modelAndView.setViewName("adminiKC");
@@ -474,7 +642,40 @@ public class AdminKCController {
 	    
 	    @GetMapping("/pregledSvihAdminaKlinike")
 		public ModelAndView pokaziAdmineKlinike(HttpServletRequest request) {
-			request.setAttribute("korisnici", korisnikService.pokaziAdmineKlinike());
+	    	List<Korisnik> k=korisnikService.pokaziAdmineKlinike();
+	    	List<KorisnikDTO> kDTO=new ArrayList<KorisnikDTO>();
+	    	List<KlinikaDTO> klDTO=new ArrayList<KlinikaDTO>();
+	    	for(int i=0; i<k.size(); i++) {
+	    		KorisnikDTO korisnikDTO=new KorisnikDTO();
+	    		korisnikDTO.setAdresa(k.get(i).getAdresa());
+	    		korisnikDTO.setAlergije(k.get(i).getAlergije());
+	    		korisnikDTO.setAnamneza(k.get(i).getAnamneza());
+	    		korisnikDTO.setBolesti(k.get(i).getBolesti());
+	    		korisnikDTO.setDatum(k.get(i).getDatum());
+	    		korisnikDTO.setDioptrija(k.get(i).getDioptrija());
+	    		korisnikDTO.setDrzava(k.get(i).getDrzava());
+	    		korisnikDTO.setEmail(k.get(i).getEmail());
+	    		korisnikDTO.setFirstLogin(k.get(i).getFirst_Login());
+	    		korisnikDTO.setGrad(k.get(i).getGrad());
+	    		korisnikDTO.setId(k.get(i).getId());
+	    		korisnikDTO.setIme(k.get(i).getIme());
+	    		korisnikDTO.setIsActive(k.get(i).getIsActive());
+	    		korisnikDTO.setJedBrOsig(k.get(i).getJedBrOsig());
+	    		korisnikDTO.setKgrupa(k.get(i).getKgrupa());
+	    		korisnikDTO.setPassword(k.get(i).getPassword());
+	    		korisnikDTO.setPol(k.get(i).getPol());
+	    		korisnikDTO.setPrezime(k.get(i).getPrezime());
+	    		korisnikDTO.setRole(k.get(i).getRoleName());
+	    		korisnikDTO.setTelefon(k.get(i).getTelefon());
+	    		korisnikDTO.setTezina(k.get(i).getTezina());
+	    		korisnikDTO.setUsername(k.get(i).getUsername());
+	    		korisnikDTO.setVisina(k.get(i).getVisina());
+	    		
+	    		kDTO.add(korisnikDTO);
+	    		
+	    	}
+			request.setAttribute("korisnici", kDTO);
+			request.setAttribute("klinike", klDTO);
 			request.setAttribute("mode", "ALL_ADMINI_KLINIKE");
 			ModelAndView modelAndView = new ModelAndView();
 		    modelAndView.setViewName("adminiKlinike");
@@ -484,7 +685,18 @@ public class AdminKCController {
 	    
 	    @GetMapping("/lekovi")
 	    public ModelAndView lekovi(HttpServletRequest request) {
-	    	request.setAttribute("lekovi", lekService.showAll());
+	    	List<Lek> lekovi=lekService.showAll();
+	    	List<LekDTO> lekoviDTO=new ArrayList<LekDTO>();
+	    	for(int i=0; i<lekovi.size();i++) {
+	    		LekDTO lekDTO=new LekDTO();
+	    		lekDTO.setId(lekovi.get(i).getId());
+	    		lekDTO.setDodatno(lekovi.get(i).getDodatno());
+	    		lekDTO.setNaziv(lekovi.get(i).getNaziv());
+	    		lekDTO.setSifra(lekovi.get(i).getSifra());
+	    		
+	    		lekoviDTO.add(lekDTO);
+	    	}
+	    	request.setAttribute("lekovi", lekoviDTO);
 			request.setAttribute("mode", "ALL_LEKOVI");
 	        ModelAndView modelAndView = new ModelAndView();
 	        return modelAndView;
@@ -492,7 +704,18 @@ public class AdminKCController {
 
 	    @GetMapping("/dijagnoze")
 	    public ModelAndView dijagnoze(HttpServletRequest request) {
-	    	request.setAttribute("dijagnoze", dijagnozaService.showAll());
+	    	List<Dijagnoza> dijagnoze=dijagnozaService.showAll();
+	    	List<DijagnozaDTO> dDTO=new ArrayList<DijagnozaDTO>();
+	    	for(int i=0; i<dijagnoze.size();i++) {
+	    		DijagnozaDTO lekDTO=new DijagnozaDTO();
+	    		lekDTO.setId(dijagnoze.get(i).getId());
+	    		lekDTO.setDodatno(dijagnoze.get(i).getDodatno());
+	    		lekDTO.setNaziv(dijagnoze.get(i).getNaziv());
+	    		lekDTO.setSifra(dijagnoze.get(i).getSifra());
+	    		
+	    		dDTO.add(lekDTO);
+	    	}
+	    	request.setAttribute("dijagnoze", dDTO);
 			request.setAttribute("mode", "ALL_DIJAGNOZE");
 	        ModelAndView modelAndView = new ModelAndView();
 	        return modelAndView;

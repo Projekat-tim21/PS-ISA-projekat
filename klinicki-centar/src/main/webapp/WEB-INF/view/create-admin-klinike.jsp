@@ -116,7 +116,7 @@ Connection connection =
                                 <label for="klinika">Klinika</label>
                                 <select name=odabrana>
        								 <%  while(resultset.next()){ %>
-          							  <option><%= resultset.getString(6)%></option>
+          							  <option><%= resultset.getString(5)%></option>
       									  <% } %>
      						   </select> </div>
 <%

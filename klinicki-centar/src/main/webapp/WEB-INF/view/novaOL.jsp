@@ -40,7 +40,7 @@
 				
 		<hr>
 				<form class="form-horizontal" method="POST"
-					action="sacuvajNovuOperaciju/${lekar.id  }/${korisnik.id }">
+					action="sacuvajNovuOperaciju/${korisnik.id  }/${lekar.id }">
 					<label>Zakazi operaciju</label>
 					<input type="datetime-local" name="terminoperacija" id="terminoperacija"/ required>
 					<input type="hidden" id="idlekaroperacija" name="idlekaroperacija" value="${lekar.id }"> 

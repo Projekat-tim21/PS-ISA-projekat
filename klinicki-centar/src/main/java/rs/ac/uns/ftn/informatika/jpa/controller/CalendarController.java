@@ -179,6 +179,7 @@ public class CalendarController {
 			 novi.setIdkorisnika(termini.get(i).getId());
 			 novi.setId(termini.get(i).getId());
 			 novi.setIdEventa(tr);
+			 novi.setTrajanje("1h");
 			 if(novi.getTermin()!="") {
 				 tt.add(novi);
 				 }
@@ -198,6 +199,7 @@ public class CalendarController {
 			 novi.setIdkorisnika(operacija.get(i).getIdpacijenta());
 			 novi.setId(operacija.get(i).getId());
 			 novi.setIdEventa(op);
+			 novi.setTrajanje(operacija.get(i).getTrajanje());
 			 if(novi.getTermin()!="") {
 			 tt.add(novi);
 			 }
@@ -215,6 +217,7 @@ public class CalendarController {
 			 novi.setZakazan(pregledi.get(i).isObavljenpregled());
 			 novi.setIdkorisnika(pregledi.get(i).getIdpacijenta());
 			 novi.setId(pregledi.get(i).getId());
+			 novi.setTrajanje(pregledi.get(i).getTrajanje());
 			 novi.setIdEventa(pr);
 			 if(novi.getTermin()!="") {
 				 tt.add(novi);
@@ -227,7 +230,7 @@ public class CalendarController {
 		    headers.add("Content-Type", "application/json; charset=utf-8");
 		    if (termini.size() > 0)
 		    {
-		        return new ResponseEntity<String>(new JSONSerializer().include("termin","terminkraj","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika","tipEventa","id","idEventa").exclude("*").serialize(tt), headers, HttpStatus.OK);
+		        return new ResponseEntity<String>(new JSONSerializer().include("termin","terminkraj","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika","tipEventa","id","idEventa","trajanje").exclude("*").serialize(tt), headers, HttpStatus.OK);
 		    }
 		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
 		
@@ -236,7 +239,7 @@ public class CalendarController {
 	 @ResponseBody
 	 public ResponseEntity<String> getCalendarSestra1(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,HttpServletRequest request) {
 		 HttpSession session = request.getSession();
-		 Object id2 = session.getAttribute("id");
+		 Long id2 = (Long) session.getAttribute("id");
 		 System.out.println(id2);
 		 request.setAttribute("korisnik", korisnikService.findOne(id));
 		 request.setAttribute("mode", "MODE_LOGIN");	
@@ -269,8 +272,8 @@ public class CalendarController {
 			 novi.setId(termini.get(i).getId());
 			 novi.setIdEventa(tr);
 			 novi.setLekarId(termini.get(i).getLekarId());
-			 Long broj=Long.parseLong((String) id2);
-			 Korisnik sestra=userService.findOne(broj);
+			 //Long broj=Long.parseLong((String) id2);
+			 Korisnik sestra=userService.findOne(id2);
 			 System.out.println(sestra.getIme());
 			 Long klinika=novi.getLekarId();
 			 List<ZaposleniUKlinikama> zaposleni=zService.nadjiKliniku(klinika);
@@ -293,8 +296,8 @@ public class CalendarController {
 			 novi.setId(operacija.get(i).getId());
 			 novi.setIdEventa(op);
 			 novi.setLekarId(operacija.get(i).getIdlekaroperacija());
-			 Long broj=Long.parseLong((String) id2);
-			 Korisnik sestra=userService.findOne(broj);
+			 //Long broj=Long.parseLong(id2);
+			 Korisnik sestra=userService.findOne(id2);
 			 System.out.println(sestra.getIme());
 			 Long klinika=novi.getLekarId();
 			 List<ZaposleniUKlinikama> zaposleni=zService.nadjiKliniku(klinika);
@@ -319,8 +322,8 @@ public class CalendarController {
 			 novi.setIdEventa(pr);
 			 Long lekarID=Long.parseLong(pregledi.get(i).getIdlekarpregled());
 			 novi.setLekarId(lekarID);
-			 Long broj=Long.parseLong((String) id2);
-			 Korisnik sestra=userService.findOne(broj);
+			// Long broj=Long.parseLong((String) id2);
+			 Korisnik sestra=userService.findOne(id2);
 			 System.out.println(sestra.getIme());
 			 Long klinika=novi.getLekarId();
 			 List<ZaposleniUKlinikama> zaposleni=zService.nadjiKliniku(klinika);

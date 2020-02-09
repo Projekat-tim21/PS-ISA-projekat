@@ -16,18 +16,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import rs.ac.uns.ftn.informatika.jpa.dto.InformacijeOpregleduDTO;
-import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
+import rs.ac.uns.ftn.informatika.jpa.dto.OperacijaDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.SalaDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.Lek;
 import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Sala;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
@@ -41,8 +38,8 @@ import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
 import rs.ac.uns.ftn.informatika.jpa.service.OdobravanjePregledaService;
 import rs.ac.uns.ftn.informatika.jpa.service.OperacijeService;
 import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
-import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 import rs.ac.uns.ftn.informatika.jpa.service.SalaService;
+import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
 
 @Controller
 public class AdminKlinikeController {
@@ -113,7 +110,30 @@ public class AdminKlinikeController {
 	    	}
 		 	
 	    	}
-	    	request.setAttribute("operacije", prikaz);
+	    	List<OperacijaDTO> oDTO=new ArrayList<OperacijaDTO>();
+	    	for(int i=0; i<prikaz.size(); i++) {
+	    		OperacijaDTO operacijaDTO=new OperacijaDTO();
+	    		operacijaDTO.setCena(prikaz.get(i).getCena());
+	    		operacijaDTO.setDatum(prikaz.get(i).getDatum());
+	    		operacijaDTO.setId(prikaz.get(i).getId());
+	    		operacijaDTO.setIdlekaroperacija(prikaz.get(i).getIdlekaroperacija());
+	    		operacijaDTO.setIdpacijenta(prikaz.get(i).getIdpacijenta());
+	    		operacijaDTO.setKorisnikId(prikaz.get(i).getKorisnikId());
+	    		operacijaDTO.setLekar(prikaz.get(i).getLekar());
+	    		operacijaDTO.setLekari(prikaz.get(i).getLekari());
+	    		operacijaDTO.setLekarimeoperacija(prikaz.get(i).getLekarimeoperacija());
+	    		operacijaDTO.setLekarprezimeoperacija(prikaz.get(i).getLekarprezimeoperacija());
+	    		operacijaDTO.setObradjen(prikaz.get(i).getObradjen());
+	    		operacijaDTO.setOcenaoperacije(prikaz.get(i).getOcenaoperacije());
+	    		operacijaDTO.setSala(prikaz.get(i).getSala());
+	    		operacijaDTO.setTerminoperacija(prikaz.get(i).getTerminoperacija());
+	    		operacijaDTO.setTip(prikaz.get(i).getTip());
+	    		operacijaDTO.setTrajanje(prikaz.get(i).getTrajanje());
+	    		operacijaDTO.setVreme(prikaz.get(i).getVreme());
+	    		operacijaDTO.setZakazan(prikaz.get(i).getZakazan());
+	    		oDTO.add(operacijaDTO);
+	    	}
+	    	request.setAttribute("operacije", oDTO);
 			request.setAttribute("mode", "ALL_OPERACIJE");
 			return "listaOperacijaBezSale";
 		}
@@ -166,9 +186,39 @@ public class AdminKlinikeController {
 			sala.setRezervisana(true);
 			salaService.save(sala);
 			oService.save(o);
+			
+			Operacija nova=oService.findOneById(operacijaId);
+			OperacijaDTO operacijaDTO=new OperacijaDTO();
+    		operacijaDTO.setCena(nova.getCena());
+    		operacijaDTO.setDatum(nova.getDatum());
+    		operacijaDTO.setId(nova.getId());
+    		operacijaDTO.setIdlekaroperacija(nova.getIdlekaroperacija());
+    		operacijaDTO.setIdpacijenta(nova.getIdpacijenta());
+    		operacijaDTO.setKorisnikId(nova.getKorisnikId());
+    		operacijaDTO.setLekar(nova.getLekar());
+    		operacijaDTO.setLekari(nova.getLekari());
+    		operacijaDTO.setLekarimeoperacija(nova.getLekarimeoperacija());
+    		operacijaDTO.setLekarprezimeoperacija(nova.getLekarprezimeoperacija());
+    		operacijaDTO.setObradjen(nova.getObradjen());
+    		operacijaDTO.setOcenaoperacije(nova.getOcenaoperacije());
+    		operacijaDTO.setSala(nova.getSala());
+    		operacijaDTO.setTerminoperacija(nova.getTerminoperacija());
+    		operacijaDTO.setTip(nova.getTip());
+    		operacijaDTO.setTrajanje(nova.getTrajanje());
+    		operacijaDTO.setVreme(nova.getVreme());
+    		operacijaDTO.setZakazan(nova.getZakazan());
+    		
+    		Sala sala1=salaService.findOneById(salaId);
+    		SalaDTO salaDTO1=new SalaDTO();
+    		salaDTO1.setBr(sala1.getBr());
+    		salaDTO1.setDatum(sala1.getDatum());
+    		salaDTO1.setId(sala1.getId());
+    		salaDTO1.setNaziv(sala1.getNaziv());
+    		salaDTO1.setRezervisana(sala1.isRezervisana());
+    		
 			request.setAttribute("message", "uspesno kreirana operacija");
-			request.setAttribute("operacija", oService.findOneById(operacijaId));
-			request.setAttribute("sala", salaService.findOneById(salaId));
+			request.setAttribute("operacija", operacijaDTO);
+			request.setAttribute("sala", salaDTO1);
 			request.setAttribute("mode", "MODE_LEKARI");
 			LinkedList<Korisnik> list = getList();
 			ModelAndView map = new ModelAndView("dodeliLekareOperaciji");

@@ -1,7 +1,14 @@
 package rs.ac.uns.ftn.informatika.jpa.dto;
 
+
 import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 
 public class PregledDTO {
 
@@ -149,6 +156,37 @@ public class PregledDTO {
 	public void setKorisnikId(Long korisnikId) {
 		this.korisnikId = korisnikId;
 	}
+
+	private Boolean obradjen;	
+
+	private String datum;   //ovo se ne koristi vise
+
+	private String vreme;   //ovo se ne koristi vise
+	
+	private String tip;
+	
+	private String lekarimepregled;
+
+	private String lekarprezimepregled;
+	
+	private String lekar;  //ovo se ne koristi vise
+
+	private int cena;
+
+	private double ocenapregleda;
+
+
+	private String trajanje;
+	
+	private String sala;
+	
+	private Boolean zakazan;
+	
+	private boolean obavljenpregled;
+
+	private Long korisnikId;
+	
+	
 	public Long getId() {
 		return id;
 	}

@@ -102,6 +102,31 @@ public class KalendarDTO {
 		this.tipEventa = tipEventa;
 	}
 	
+	private String trajanje;
+	public String getTrajanje() {
+		return trajanje;
+	}
+	public void setTrajanje(String trajanje) {
+		this.trajanje = trajanje;
+	}
+	public KalendarDTO(String termin, String terminkraj, Long lekarId, long idkorisnika, String tippregleda,
+			String tipEventa, String pacijentime, String pacijentprezime, String sala, Long idEventa, boolean zakazan,
+			String trajanje) {
+		super();
+		this.termin = termin;
+		this.terminkraj = terminkraj;
+		this.lekarId = lekarId;
+		this.idkorisnika = idkorisnika;
+		this.tippregleda = tippregleda;
+		this.tipEventa = tipEventa;
+		this.pacijentime = pacijentime;
+		this.pacijentprezime = pacijentprezime;
+		this.sala = sala;
+		this.idEventa = idEventa;
+		this.zakazan = zakazan;
+		this.trajanje = trajanje;
+	}
+	
 	
 	
 
