@@ -161,3 +161,5 @@ insert into operacija(cena, datum, lekar, sala, tip, trajanje, vreme, terminoper
 
 insert into informacijepregled(dijagnoza,informacije,lekar_id,overen,pacijent_id) values('Anemija',472188,20,false,12);
 insert into leks(lek_id,informacijepregled_id) values(5,2);
+
+insert into termini(lekar_id, termin,sala, cena, popust,lekarime, lekarprezime,tippregleda,zakazan,idkorisnika,odobrenpregled, prikaz,poslatnaobradu,korisnik_id) values (3, '2020-02-08T10:30', '3C', 1800, 0, 'Kata', 'Katic', 'ocno', 'false',0, 'false', 'true','false',21);
