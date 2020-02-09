@@ -114,7 +114,7 @@ public class LekarControllerTest {
 	        pDTO.setIdpacijenta(12L);
 	        pDTO.setTerminpregled("2020-05-05T15:42");
 	        pDTO.setObradjen(false);
-	        
+	        System.out.println(pDTO.getTerminpregled());
 	        LocalDate sada=java.time.LocalDate.now();
 			Date date2=java.sql.Date.valueOf(sada);
 			if(date1.compareTo(date2) < 0) {
