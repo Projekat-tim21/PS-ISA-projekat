@@ -83,10 +83,11 @@
                               var cena=result[i].cena;
                               var id=result[i].id;
                               var idEventa=result[i].idEventa;
+                              var trajanje=result[i].trajanje;
                               
                               var event={
                                       
-                                      title:tipEventa + 'Tip pregleda '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
+                                      title:tipEventa + 'Tip pregleda '+tip +'--'+' Sala: ' + sala+ '--'+' Pacijent: '+ ime+' '+prezime +' Trajanje: '+trajanje, 
                                       start:startDate.toISOString(),
                                       allDay: false,
                                      
@@ -95,7 +96,7 @@
                                       };
                               
                               termini.push({
-                                  title: tipEventa+" --> " +'Tip '+tip +'--'+'Sala: ' + sala+ '--'+'Pacijent: '+ ime+' '+prezime, 
+                                  title: tipEventa+" --> " +' Tip '+tip +'--'+' Sala: ' + sala+ '--'+' Pacijent: '+ ime+' '+prezime+' Trajanje: '+trajanje, 
                                   start:startDate.toISOString(),
                                   allDay: false,
                                   url:'/zapocniOperacijeP/'+${korisnik.id }+'/'+idkorisnika+'/'+idEventa+'/'+id

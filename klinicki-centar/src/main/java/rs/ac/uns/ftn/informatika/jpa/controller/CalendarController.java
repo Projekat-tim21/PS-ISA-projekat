@@ -179,6 +179,7 @@ public class CalendarController {
 			 novi.setIdkorisnika(termini.get(i).getId());
 			 novi.setId(termini.get(i).getId());
 			 novi.setIdEventa(tr);
+			 novi.setTrajanje("1h");
 			 if(novi.getTermin()!="") {
 				 tt.add(novi);
 				 }
@@ -198,6 +199,7 @@ public class CalendarController {
 			 novi.setIdkorisnika(operacija.get(i).getIdpacijenta());
 			 novi.setId(operacija.get(i).getId());
 			 novi.setIdEventa(op);
+			 novi.setTrajanje(operacija.get(i).getTrajanje());
 			 if(novi.getTermin()!="") {
 			 tt.add(novi);
 			 }
@@ -215,6 +217,7 @@ public class CalendarController {
 			 novi.setZakazan(pregledi.get(i).isObavljenpregled());
 			 novi.setIdkorisnika(pregledi.get(i).getIdpacijenta());
 			 novi.setId(pregledi.get(i).getId());
+			 novi.setTrajanje(pregledi.get(i).getTrajanje());
 			 novi.setIdEventa(pr);
 			 if(novi.getTermin()!="") {
 				 tt.add(novi);
@@ -227,7 +230,7 @@ public class CalendarController {
 		    headers.add("Content-Type", "application/json; charset=utf-8");
 		    if (termini.size() > 0)
 		    {
-		        return new ResponseEntity<String>(new JSONSerializer().include("termin","terminkraj","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika","tipEventa","id","idEventa").exclude("*").serialize(tt), headers, HttpStatus.OK);
+		        return new ResponseEntity<String>(new JSONSerializer().include("termin","terminkraj","pacijentime","pacijentprezime","tippregleda","sala","zakazan","idkorisnika","tipEventa","id","idEventa","trajanje").exclude("*").serialize(tt), headers, HttpStatus.OK);
 		    }
 		    return new ResponseEntity<String>(null, headers, HttpStatus.OK);
 		
