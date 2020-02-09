@@ -1,5 +1,6 @@
 Projekat iz ISA i PS predmeta
-Klinicki centar
+
+Aplikacija za kreiranje sistema klinickog centra
 
 Postupak pokretanja projekta:
 
