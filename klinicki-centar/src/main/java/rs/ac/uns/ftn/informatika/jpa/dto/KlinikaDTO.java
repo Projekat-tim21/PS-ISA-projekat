@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.informatika.jpa.dto;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 
 public class KlinikaDTO {
 	
@@ -14,6 +15,7 @@ public class KlinikaDTO {
 	private KorisnikDTO admin;
 	
 
+
 	public KlinikaDTO(Klinika klinika) {
 		// TODO Auto-generated constructor stub
 		id=klinika.getId();
@@ -21,8 +23,30 @@ public class KlinikaDTO {
 		grad=klinika.getGrad();
 		drzava=klinika.getDrzava();
 		ocena=klinika.getOcena();
-		tip=klinika.getTip();
+		adresa=klinika.getAdresa();
 	}
+/*
+	public KlinikaDTO(Klinika k) {
+		this(k.getId(),
+				k.getNaziv(),
+				k.getGrad(),
+				k.getDrzava(),
+				k.getOcena(),
+				k.getAdresa(),
+				k.getTip());
+	}
+*/
+	public KlinikaDTO(Long id, String naziv, String grad, String drzava, double ocena, String adresa, String tip) {
+		super();
+		this.id = id;
+		this.naziv = naziv;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.ocena = ocena;
+		this.adresa = adresa;
+		this.tip = tip;
+	}
+
 
 
 	public Long getId() {

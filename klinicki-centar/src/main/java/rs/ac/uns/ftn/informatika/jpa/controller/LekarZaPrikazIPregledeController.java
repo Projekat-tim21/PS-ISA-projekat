@@ -1,10 +1,6 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
-import java.text.DateFormatSymbols;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
-import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
+import rs.ac.uns.ftn.informatika.jpa.dto.LekarZaPrikazIPregledeDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.TerminDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.OdobravanjePregleda;
@@ -107,15 +103,13 @@ public class LekarZaPrikazIPregledeController {
 	}
 
 	@PostMapping("/sacuvajTermine2") // korisnik povezan sa valuom iz js
-	public String cuvajTermine(@ModelAttribute TerminiSaId termini, BindingResult bindingResult,
+	public String cuvajTermine(@ModelAttribute TerminDTO termini, BindingResult bindingResult,
 			HttpServletRequest request) {
-		// System.out.println("id je" + id);
 		String lekarId = request.getParameter("lekarId");
-		System.out.println(request.getParameter("lekarId"));
 		HttpSession session = request.getSession();
 		session.setAttribute("lekarId", lekarId);
 		long lekarId2 = Long.parseLong(lekarId);
-
+														//ovde bi bio LekarDTO
 		LekarZaPrikazIPreglede lekar = lipServis.findOne(lekarId2);
 
 		TerminiSaId t = new TerminiSaId();
@@ -137,14 +131,15 @@ public class LekarZaPrikazIPregledeController {
 	@RequestMapping("/zakaziPregledKojiJeDef")
 	public String prikazListeDefPregledaNaLoginu(HttpServletRequest request) {
 
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+	
+		List<TerminDTO> terminiDto = new ArrayList<>();
 		for (TerminiSaId termin : tidRepo.findByZakazan(false)) {
 			if(termin.isPoslatnaobradu()==false) {
-				termini.add(termin);
+				terminiDto.add(new TerminDTO(termin));
 			}
 		}
 
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terminiDto);
 		request.setAttribute("mode", "ALL_PREGLEDI_SA_LOGINA");
 		return "listaLekara";
 	}
@@ -152,10 +147,11 @@ public class LekarZaPrikazIPregledeController {
 	// ovde ubaci za email
 	@RequestMapping("/uspesnoZakazanPregled")
 	public String uspesnoJePacijentZakazaoUnapredDefPregled(@RequestParam("id") long idkor,
-			@RequestParam("idter") long idTermina, @ModelAttribute TerminiSaId t, BindingResult bindingResult,
+			@RequestParam("idter") long idTermina, @ModelAttribute TerminDTO t, BindingResult bindingResult,
 			HttpServletRequest request) {
 
 		long idKorisnika = idkor;
+		//korisnikDto=korisnikServis.findOne(idKorisnika);
 		Korisnik k = korisnikServis.findOne(idKorisnika);
 		k.getUsername();
 		k.getIme();
@@ -177,10 +173,10 @@ public class LekarZaPrikazIPregledeController {
 		ukojisipam.setIdkorisnika(idKorisnika);
 		tisServis.saveMojTermin(ukojisipam);
 
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		List<TerminDTO> terminidto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByZakazan(true)) {
 			if (termin.getIdkorisnika() == idKorisnika) {
-				termini.add(termin);
+				terminidto.add(new TerminDTO(termin));
 			}
 		}
 
@@ -190,7 +186,7 @@ public class LekarZaPrikazIPregledeController {
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
 
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terminidto);
 
 		request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
 		return "sviZakazaniPregledi";
@@ -200,14 +196,14 @@ public class LekarZaPrikazIPregledeController {
 	public String listaZakazanihPregleda(@RequestParam("id") long idkor, HttpServletRequest request) {
 
 		long idKorisnika = idkor;
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		List<TerminDTO> terminidto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByZakazan(true)) {
 			if (termin.getIdkorisnika() == idKorisnika) {
-				termini.add(termin);
+				terminidto.add(new TerminDTO(termin));
 			}
 		}
 
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terminidto);
 		
 		request.setAttribute("mode", "ZAKAZANI_PREGLEDI");
 		return "sviZakazaniPregledi";
@@ -239,15 +235,12 @@ public class LekarZaPrikazIPregledeController {
 	@RequestMapping("/zKartonLekar")
 	public String prikazZKartona(@RequestParam("id") Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
-		Korisnik k = korisnikServis.findOne(id);
-		System.out.println(k.getVisina());
 		request.setAttribute("mode", "MODE_ZKARTON");
-
 		return "zKartonLekar";
 	}
 
 	@RequestMapping("/listaSvihDefinisanihPregledaZaLekara")
-	public String prikazListePregeldaSaAdmina(@ModelAttribute TerminiSaId t, @ModelAttribute LekarZaPrikazIPreglede lip,
+	public String prikazListePregeldaSaAdmina(@ModelAttribute TerminDTO t, @ModelAttribute LekarZaPrikazIPregledeDTO lip,
 			BindingResult bindingResult,@RequestParam("id") long idLekara, HttpServletRequest request) {
 		// uzeli smo id iz url-a
 		String idZaPoredjenje = request.getParameter("id");
@@ -261,22 +254,22 @@ public class LekarZaPrikazIPregledeController {
 		
 		session.setAttribute("imeLekaraTransfer", lekarObjekat.getImelek());
 		session.setAttribute("przLekaraTransfer", lekarObjekat.getPrezimelek());
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		List<TerminDTO> terminidto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByZakazan(true)) {
 			if(termin.getLekarId().equals(idLekara)) {
-				termini.add(termin);
+				terminidto.add(new TerminDTO(termin));
 			}
 		}
 
 		LekarZaPrikazIPreglede p = lipServis.findOne(lekarId);
 		request.setAttribute("lipi", p);
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terminidto);
 		request.setAttribute("mode", "ALL_PREGLEDI_SA_ADMINA");
 		return "adminZaPreglede";
 	}
 
 	@RequestMapping("/listaSvihTermina")
-	public String prikazListeTermina(@ModelAttribute TerminiSaId t, @ModelAttribute LekarZaPrikazIPreglede lip,
+	public String prikazListeTermina(@ModelAttribute TerminiSaId t, @ModelAttribute LekarZaPrikazIPregledeDTO lip,
 			BindingResult bindingResult, HttpServletRequest request) {
 		// uzeli smo id iz url-a
 		String idZaPoredjenje = request.getParameter("id");
@@ -288,63 +281,52 @@ public class LekarZaPrikazIPregledeController {
 		lekarObjekat=lipServis.findOne(lekarId);
 		session.setAttribute("imeLekaraTransfer", lekarObjekat.getImelek());
 		session.setAttribute("przLekaraTransfer", lekarObjekat.getPrezimelek());
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		List<TerminDTO> terminidto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
-			termini.add(termin);
+			terminidto.add(new TerminDTO(termin));
 		}
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terminidto);
 		request.setAttribute("mode", "ALL_TERMINI");
 		return "adminZaPreglede";
 	}
 
 	
 	@RequestMapping("/listaSvihTerminaPacijent2")
-	public String prikazListeTerminaPacijent2(@RequestParam("idpac") int idpac, @ModelAttribute TerminiSaId t,
-			@ModelAttribute LekarZaPrikazIPreglede lip, BindingResult bindingResult, HttpServletRequest request) {
+	public String prikazListeTerminaPacijent2(@RequestParam("idpac") int idpac,@ModelAttribute LekarZaPrikazIPregledeDTO lip, BindingResult bindingResult, HttpServletRequest request) {
 
-		//String lazniIdKlinike="klinika";
 		String idZaPoredjenje = request.getParameter("id");
 		HttpSession session = request.getSession();
 		session.setAttribute("id", idZaPoredjenje);
 		long lekarId = Long.parseLong(idZaPoredjenje);
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
-		System.out.println("hej hej");
+		List<TerminDTO> terminidto = new ArrayList<TerminDTO>();
+	
 		for (TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
 			if (termin.isZakazan() == false) {
-				termini.add(termin);
+				terminidto.add(new TerminDTO(termin));
 			}
 
 		}
 		long pacijentId = idpac;
-
 		Korisnik korisnici = korisnikServis.findOne(pacijentId);
 		request.setAttribute("korisnik", korisnici);
-		//session.setAttribute("idklinike", idklinike);
-		//System.out.println("id klinike je : " + idklinike);
-		//session.setAttribute("idklinike", lazniIdKlinike);
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terminidto);
 		request.setAttribute("mode", "ALL_TERMINI_KOPIJA");
 		return "listaLekara";
 	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping("/listaSvihTerminaPacijent")
-	public String prikazListeTerminaPacijent(@RequestParam("idpac") int idpac,@RequestParam("idklinike") String idklinike, @ModelAttribute TerminiSaId t,
-			@ModelAttribute LekarZaPrikazIPreglede lip, BindingResult bindingResult, HttpServletRequest request) {
+	public String prikazListeTerminaPacijent(@RequestParam("idpac") int idpac,@RequestParam("idklinike") String idklinike, @ModelAttribute TerminDTO t,
+			@ModelAttribute LekarZaPrikazIPregledeDTO lip, BindingResult bindingResult, HttpServletRequest request) {
 
 		String idZaPoredjenje = request.getParameter("id");
 		HttpSession session = request.getSession();
 		session.setAttribute("id", idZaPoredjenje);
 		long lekarId = Long.parseLong(idZaPoredjenje);
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
-		System.out.println("hej hej");
+		List<TerminDTO> terdto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByLekarId(lekarId)) {
 			if (termin.isZakazan() == false) {
-				termini.add(termin);
+				terdto.add(new TerminDTO(termin));
 			}
 
 		}
@@ -353,22 +335,17 @@ public class LekarZaPrikazIPregledeController {
 		Korisnik korisnici = korisnikServis.findOne(pacijentId);
 		request.setAttribute("korisnik", korisnici);
 		session.setAttribute("idklinike", idklinike);
-		System.out.println("id klinike je : " + idklinike);
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terdto);
 		request.setAttribute("mode", "ALL_TERMINI");
 		return "listaLekara";
 	}
 
 	@PostMapping("/posaljiZahtevZaPregledom")
-	public String ZahtevZaPregledom(@RequestParam("id") long idpac,@RequestParam("idtermina") long idTerminaOvaj, @ModelAttribute TerminiSaId termini,
-			@ModelAttribute Korisnik korisnik, @ModelAttribute LekarZaPrikazIPreglede lipi,
+	public String ZahtevZaPregledom(@RequestParam("id") long idpac,@RequestParam("idtermina") long idTerminaOvaj, @ModelAttribute TerminDTO termini,
+			@ModelAttribute Korisnik korisnik, @ModelAttribute LekarZaPrikazIPregledeDTO lipi,
 			HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
 		
-		//String hej=(String) session.getAttribute("idtermina");
-	
-		//long terminIdUhvacen = Long.parseLong(hej);
 		TerminiSaId ter2 = new TerminiSaId();
 		ter2 = tisServis.findOne(idTerminaOvaj);
 		OdobravanjePregleda op = new OdobravanjePregleda();
@@ -471,7 +448,6 @@ public class LekarZaPrikazIPregledeController {
 	@GetMapping("/enable3/{terminId}")
 	public String enable3(@PathVariable Long terminId, HttpServletRequest request) {
 		TerminiSaId ter = tisServis.findOne(terminId);
-		System.out.println(ter.getIdkorisnika());
 		Korisnik k = korisnikServis.findOne(ter.getIdkorisnika());
 
 		HttpSession session = request.getSession();
@@ -502,7 +478,6 @@ public class LekarZaPrikazIPregledeController {
 	@GetMapping("/disable3/{terminId}")
 	public String disable3(@PathVariable Long terminId, HttpServletRequest request) {
 		TerminiSaId ter = tisServis.findOne(terminId);
-		System.out.println(ter.getIdkorisnika());
 		Korisnik k = korisnikServis.findOne(ter.getIdkorisnika());
 
 		HttpSession session = request.getSession();
@@ -550,21 +525,17 @@ public class LekarZaPrikazIPregledeController {
 
 	}
 
-	//heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeej
+	
 	@RequestMapping("/odobreniZahteviKodPacijentaSaMaila")
 	public String odobreniZahteviKodPacijenta(HttpServletRequest request) {
 
-		//String ida = request.getParameter("id");
-		//HttpSession session = request.getSession();
-		//session.setAttribute("id", ida);
-
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		List<TerminDTO> terdto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByOdobrenpregled(true)) {
 			if (termin.isPrikaz() != false)
-				termini.add(termin);
+				terdto.add(new TerminDTO(termin));
 		}
 
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terdto);
 		request.setAttribute("mode", "ALL_ZAHTEVI_ODOBRENI_SA_MAILA_KAD_ULAZIM");
 		return "odobreniZahteviPacijent";
 	}
@@ -578,13 +549,13 @@ public class LekarZaPrikazIPregledeController {
 		HttpSession session = request.getSession();
 		session.setAttribute("id", ida);
 
-		List<TerminiSaId> termini = new ArrayList<TerminiSaId>();
+		List<TerminDTO> terdto = new ArrayList<TerminDTO>();
 		for (TerminiSaId termin : tidRepo.findByOdobrenpregled(true)) {
 			if (termin.isPrikaz() != false)//prikazem sve termine koji tu prikaz true
-				termini.add(termin);
+				terdto.add(new TerminDTO(termin));
 		}
 
-		request.setAttribute("termini", termini);
+		request.setAttribute("termini", terdto);
 		request.setAttribute("mode", "ALL_ZAHTEVI_ODOBRENI");
 		return "odobreniZahteviPacijent";
 	}
@@ -592,11 +563,10 @@ public class LekarZaPrikazIPregledeController {
 
 	@GetMapping("/uspesnoZakazanPregled2") // ovaj id je idpac iz zakazivanjePregledaIzaListeLekara
 	public String uspesnoJePacijentZakazaoUnapredDefPregled2(@RequestParam("idpac") long idpac,
-			@RequestParam("id") long idTermina, @ModelAttribute TerminiSaId t, BindingResult bindingResult,
+			@RequestParam("id") long idTermina, @ModelAttribute TerminDTO t, BindingResult bindingResult,
 			HttpServletRequest request) {
 
 		OdobravanjePregleda op = new OdobravanjePregleda();
-		System.out.println(idTermina + "  id termina je taj");
 		HttpSession session = request.getSession();
 		session.setAttribute("idtermina", idTermina);
 		session.setAttribute("idpac", idpac);
@@ -629,7 +599,7 @@ public class LekarZaPrikazIPregledeController {
 
 
 	@GetMapping("/zakazivanjePregledaIzaListeLekara")
-	public String editUserProfilPregled(@RequestParam("idpac") int idpac, @ModelAttribute TerminiSaId tt,
+	public String editUserProfilPregled(@RequestParam("idpac") int idpac, 
 			@RequestParam Long id, HttpServletRequest request) {
 
 		OdobravanjePregleda op = new OdobravanjePregleda();
@@ -662,7 +632,7 @@ public class LekarZaPrikazIPregledeController {
 	//odjava pregleda
 	
 	@GetMapping("/otkazivanjePregleda")
-	public String otkazivanjeZakazanogPregleda(@RequestParam("id") long idpacijenta,@RequestParam("idtermina") long idTermina, @ModelAttribute TerminiSaId tt,
+	public String otkazivanjeZakazanogPregleda(@RequestParam("id") long idpacijenta,@RequestParam("idtermina") long idTermina,
 			@RequestParam Long id, HttpServletRequest request) {
 
 		Korisnik korisnici = korisnikServis.findOne(idpacijenta);
@@ -671,7 +641,6 @@ public class LekarZaPrikazIPregledeController {
 		HttpSession session = request.getSession();
 		
 		TerminiSaId terminiSaId = tisServis.findOne(idTermina);
-		System.out.println(terminiSaId.getId() + " Id lekara od termina");
 		session.setAttribute("id", idpacijenta);
 		long idLekara = terminiSaId.getLekarId();
 		op.setImelekara(terminiSaId.getLekarime());
@@ -711,27 +680,23 @@ public class LekarZaPrikazIPregledeController {
 		HttpSession session = request.getSession();
 		String ovajIdKlinike=(String) session.getAttribute("idklinike");
 		long idKlinike= Long.parseLong(ovajIdKlinike);
-		System.out.println("id pac  "+idpac+"  idKlinike   "+idKlinike);
-		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
-		Klinika k=new Klinika();
-		//HttpSession session = request.getSession();
+	
 		session.setAttribute("id", idpac);
 	
-		List<LekarZaPrikazIPreglede> lipi=new ArrayList<LekarZaPrikazIPreglede>();
+		List<LekarZaPrikazIPregledeDTO> lipidto=new ArrayList<LekarZaPrikazIPregledeDTO>();
 		List<ZaposleniUKlinikama> zaposleni=new ArrayList<ZaposleniUKlinikama>();
 		for(ZaposleniUKlinikama zaposlen : zRepo.findByIdklinike(idKlinike)) {
 			zaposleni.add(zaposlen);
-			long idlekara=zaposlen.getIdlekara();
 			for(LekarZaPrikazIPreglede lip :  lipServis.pokaziSveKorisnikeKojiSuLekari()) {
 				if(zaposlen.getIdlekara()==lip.getId()) {
-					lipi.add(lip);
+					lipidto.add(new LekarZaPrikazIPregledeDTO(lip));
 				}
 					
 			}
 		}
 		
 		request.setAttribute("zaposleni", zaposleni);
-		request.setAttribute("lipi", lipi);
+		request.setAttribute("lipi", lipidto);
 		request.setAttribute("mode", "ALL_LEKARI_2");
 		return "listaKlinika";
 	}
@@ -741,10 +706,8 @@ public class LekarZaPrikazIPregledeController {
 	@RequestMapping("/naListuLekaraSaZakazivanjaPregleda2")
 	public String vratiSeNazadNaListuLekara2(@RequestParam("idpac") long idpac,HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		ZaposleniUKlinikama uk =new ZaposleniUKlinikama();
-		Klinika k=new Klinika();
+		
 		session.setAttribute("id", idpac);
-
 		request.setAttribute("lipi", lipServis.pokaziSveKorisnikeKojiSuLekari());
 		request.setAttribute("mode", "ALL_LEKARI");
 		return "listaLekara";
@@ -753,8 +716,7 @@ public class LekarZaPrikazIPregledeController {
 	
 	
 	@PostMapping("/otkaziPregledSubmit")
-	public String otkaziPregledSubmit(@RequestParam("id") long idpac,@RequestParam("idtermina") long idTerminaOvaj, @ModelAttribute TerminiSaId termini,
-			@ModelAttribute KorisnikDTO korisnik, @ModelAttribute LekarZaPrikazIPreglede lipi,
+	public String otkaziPregledSubmit(@RequestParam("id") long idpac,@RequestParam("idtermina") long idTerminaOvaj, 
 			HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();

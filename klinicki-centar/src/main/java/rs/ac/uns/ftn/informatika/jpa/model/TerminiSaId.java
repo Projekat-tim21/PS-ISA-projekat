@@ -304,6 +304,9 @@ public class TerminiSaId {
 		this.korisnikId = korisnikId;
 	}
 
+	
+	
+	
 	public TerminiSaId(String termin, Long lekarId, String lekarime, String lekarprezime, String tippregleda,
 			String sala, double cena, double popust, boolean zakazan, long idkorisnika, boolean odobrenpregled,
 			boolean prikaz, boolean poslatnaobradu, Long korisnikId) {

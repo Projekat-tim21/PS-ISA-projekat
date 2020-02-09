@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import rs.ac.uns.ftn.informatika.jpa.dto.KorisnikDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
-import rs.ac.uns.ftn.informatika.jpa.model.LekarIPregledi;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 import rs.ac.uns.ftn.informatika.jpa.repository.KorisnikRepository;
 import rs.ac.uns.ftn.informatika.jpa.service.EmailService;
@@ -70,9 +69,7 @@ public class KorisnikContreller {
 	public String loginUser(@ModelAttribute KorisnikDTO korisnik, HttpServletRequest request) {
 
 		Korisnik k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
-		// if(!k.getRoleName().equals(Role.PACIJENT.name())) {
-
-		Korisnik k2 = new Korisnik();
+		
 		k = korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 
 		if (korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword()) != null) {
@@ -80,21 +77,17 @@ public class KorisnikContreller {
 			System.out.println("Nessto "+ korisnik.getUsername());
 			//Korisnik =korisnikServis.findByUsernameAndPassword(korisnik.getUsername(), korisnik.getPassword());
 			request.setAttribute("message", "Dobrodosli, uspesno ste se ulogovali!");
-			// Korisnik idK=korisnikServis.findOne(korisnik.getId());
-			// System.out.println("id korisnika je: "+ k.getId());
+	
 			String username = request.getParameter("username");
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-			System.out.println("OVDE " + session.getAttribute(username));
-			System.out.println(k.getRoleName());
+		
 			if(k.getRoleName().equals(Role.ADMIN.name())) {
 				session.setAttribute("id", k.getId());
 				if(k.getFirst_Login()==true) {
 					k.setFirst_Login(false);
 					request.setAttribute("korisnik", korisnikServis.findOne(k.getId()));
-					Korisnik kori=korisnikServis.findOne(k.getId());
-					//System.out.println(k.getVisina());
 					request.setAttribute("mode", "MODE_LOGIN");
 					return "firstLogin";
 					
@@ -137,7 +130,7 @@ public class KorisnikContreller {
 
 	
 
-	@PostMapping("/sacuvaj") // korisnik povezan sa valuom iz js
+	@PostMapping("/sacuvaj")
 	public String registerKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 
@@ -165,7 +158,6 @@ public class KorisnikContreller {
 			k.setIsActive(false);
 			
 			k.setFirst_Login(true);
-			System.out.println(k.getRoleName());
 			korisnikServis.saveMogKorisnika(k);
 
 			try {
@@ -220,13 +212,10 @@ public class KorisnikContreller {
 		return "edit";
 	}
 
-	@PostMapping("/sacuvajupdate") // korisnik povezan sa valuom iz js
+	@PostMapping("/sacuvajupdate")
 	public String UpdateKorisnik(@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 
-		
-		
-		
 		Korisnik k = new Korisnik();
 		Long Idx = korisnikd.getId();
 
@@ -254,7 +243,7 @@ public class KorisnikContreller {
 
 	}
 
-	@PostMapping("/sacuvajupdateNaLogin") // korisnik povezan sa valuom iz js
+	@PostMapping("/sacuvajupdateNaLogin") 
 	public String UpdateKorisnik2(@RequestParam Long id,@ModelAttribute KorisnikDTO korisnikd, BindingResult bindingResult,
 			HttpServletRequest request) {
 	
@@ -262,7 +251,6 @@ public class KorisnikContreller {
 		System.out.println("id jeeee" + " "+id2);
 		HttpSession session = request.getSession();
 		session.setAttribute("id", id2);
-		
 		
 		Korisnik izBaze=korisnikServis.findOne(id);
 		
@@ -300,7 +288,6 @@ public class KorisnikContreller {
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
 		
-		//request.setAttribute("mode", "MODE");
 		return "uspesnaIzmenaInfo";
 
 	}
@@ -363,14 +350,14 @@ public class KorisnikContreller {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
 
-		return "loginBezDobrodosli";  //bio je login
+		return "loginBezDobrodosli";  
 	}
 
 	@RequestMapping("/profil")
 	public String editUserProfil(@RequestParam String username, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findByUsername(username));
 		request.setAttribute("mode", "MODE_PREGLED");
-		return "loginBezDobrodosli";  //bio je login
+		return "loginBezDobrodosli";  
 	}
 
 	@RequestMapping("/vratiSeNaPocetnu")
@@ -388,7 +375,7 @@ public class KorisnikContreller {
 	public String editUserProfil2(@RequestParam Long id, HttpServletRequest request) {
 		request.setAttribute("korisnik", korisnikServis.findOne(id));
 		request.setAttribute("mode", "MODE_PREGLED");
-		return "loginBezDobrodosli";  //bio je login
+		return "loginBezDobrodosli"; 
 	}
 
 	@RequestMapping("/profil2")
@@ -413,7 +400,7 @@ public class KorisnikContreller {
 
 		System.out.println(korisnikd.getId() + korisnikd.getIme());
 		;
-		return "loginBezDobrodosli"; //bio je login
+		return "loginBezDobrodosli"; 
 	}
 
 	

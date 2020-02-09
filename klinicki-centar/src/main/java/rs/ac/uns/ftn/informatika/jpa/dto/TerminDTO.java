@@ -1,7 +1,8 @@
-package rs.ac.uns.ftn.informatika.jpa.model;
+package rs.ac.uns.ftn.informatika.jpa.dto;
 
+import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 
-public class TerminDAO {
+public class TerminDTO {
 
 
 	private Long id;
@@ -28,11 +29,69 @@ public class TerminDAO {
 	
 	private boolean zakazan;
 	
-	private long idkorisnika;
+	private Long idkorisnika;
 
 	private boolean odobrenpregled;
 
 	private boolean prikaz;
+	
+	private boolean poslatnaobradu;
+
+	private Long korisnikId;
+	
+	public TerminDTO(TerminiSaId terminiSaId) {
+		this(terminiSaId.getId(), 
+				terminiSaId.getTermin(),
+				terminiSaId.getLekarId(),
+				terminiSaId.getLekarime(),
+				terminiSaId.getLekarprezime(),
+				terminiSaId.getTippregleda(),
+				terminiSaId.getSala(),
+			    terminiSaId.getCena(),
+				terminiSaId.getPopust(),
+				terminiSaId.isZakazan(),
+				terminiSaId.getIdkorisnika(),
+				terminiSaId.isOdobrenpregled(),
+				terminiSaId.isPrikaz(),
+				terminiSaId.isPoslatnaobradu());
+	}
+	
+	
+	public TerminDTO(Long id, String termin, Long lekarId, String lekarime, String lekarprezime,
+			String tippregleda, String sala, double cena, double popust, boolean zakazan,
+			Long idkorisnika, boolean odobrenpregled, boolean prikaz, boolean poslatnaobradu) {
+		super();
+		this.id = id;
+		this.termin = termin;
+		this.lekarId = lekarId;
+		this.lekarime = lekarime;
+		this.lekarprezime = lekarprezime;
+		this.tippregleda = tippregleda;
+		this.sala = sala;
+		this.cena = cena;
+		this.popust = popust;
+		this.zakazan = zakazan;
+		this.idkorisnika = idkorisnika;
+		this.odobrenpregled = odobrenpregled;
+		this.prikaz = prikaz;
+		this.poslatnaobradu = poslatnaobradu;
+	}
+
+	public boolean isPoslatnaobradu() {
+		return poslatnaobradu;
+	}
+
+	public void setPoslatnaobradu(boolean poslatnaobradu) {
+		this.poslatnaobradu = poslatnaobradu;
+	}
+
+	public Long getKorisnikId() {
+		return korisnikId;
+	}
+
+	public void setKorisnikId(Long korisnikId) {
+		this.korisnikId = korisnikId;
+	}
 
 	public Long getId() {
 		return id;
@@ -154,7 +213,7 @@ public class TerminDAO {
 		this.prikaz = prikaz;
 	}
 
-	public TerminDAO(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String pacijentime,
+	public TerminDTO(Long id, String termin, Long lekarId, String lekarime, String lekarprezime, String pacijentime,
 			String pacijentprezime, String tippregleda, String sala, double cena, double popust, boolean zakazan,
 			long idkorisnika, boolean odobrenpregled, boolean prikaz) {
 		super();
@@ -175,7 +234,7 @@ public class TerminDAO {
 		this.prikaz = prikaz;
 	}
 
-	public TerminDAO(String termin, String pacijentime, String pacijentprezime, String tippregleda, String sala,
+	public TerminDTO(String termin, String pacijentime, String pacijentprezime, String tippregleda, String sala,
 			boolean zakazan, long idkorisnika) {
 		super();
 		this.termin = termin;
@@ -187,7 +246,7 @@ public class TerminDAO {
 		this.idkorisnika = idkorisnika;
 	}
 
-	public TerminDAO() {
+	public TerminDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -2,26 +2,27 @@ package rs.ac.uns.ftn.informatika.jpa.dto;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Klinika;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
+import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
 
 public class KorisnikDTO {
 
-	private Long id;
-	private String username;
-	private String ime;
-	private String prezime;
-	private String jedBrOsig;
-	private String email;
-	private String adresa;
-	private String grad;
-	private String drzava;
-	private String telefon;
-	private String password;
-	private String repeatPassword;
-	private String role;
-	private Boolean firstLogin;
-	private Boolean isActive;
-	private String datum;
+	private Long id;//
+	private String username;//
+	private String ime;//
+	private String prezime;//
+	private String jedBrOsig;//
+	private String email;//
+	private String adresa;//
+	private String grad;//
+	private String drzava;//
+	private String telefon;//
+	private String password;//
+	//private String repeatPassword;
+	private String roleName;//
+	private Boolean firstLogin;//
+	private Boolean isActive;//
+	private String datum;//
 	private String pol;
 	private String visina;
 	private String tezina;
@@ -32,8 +33,9 @@ public class KorisnikDTO {
 	private String anamneza;
 	private static KlinikaDTO klinika;
 
+
 	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
-			String adresa, String grad, String drzava, String telefon, String password, String repeatPassword,
+			String adresa, String grad, String drzava, String telefon, String password,
 			String role, String datum, String pol, String visina, String tezina, String kgrupa, String dioptrija,
 			String alergije, String bolesti, String anamneza) {
 		super();
@@ -48,8 +50,7 @@ public class KorisnikDTO {
 		this.drzava = drzava;
 		this.telefon = telefon;
 		this.password = password;
-		this.repeatPassword = repeatPassword;
-		this.role = role;
+		this.roleName = role;
 		this.datum = datum;
 		this.pol = pol;
 		this.visina = visina;
@@ -62,6 +63,66 @@ public class KorisnikDTO {
 	}
 
 	
+	public KorisnikDTO(Long id, String username, String ime, String prezime, String jedBrOsig, String email,
+			String adresa, String grad, String drzava, String telefon, String password, String role, Boolean firstLogin,
+			Boolean isActive, String datum, String pol, String visina, String tezina, String kgrupa, String dioptrija,
+			String alergije, String bolesti, String anamneza,KlinikaDTO klinika) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jedBrOsig = jedBrOsig;
+		this.email = email;
+		this.adresa = adresa;
+		this.grad = grad;
+		this.drzava = drzava;
+		this.telefon = telefon;
+		this.password = password;
+		this.roleName = role;
+		this.firstLogin = firstLogin;
+		this.isActive = isActive;
+		this.datum = datum;
+		this.pol = pol;
+		this.visina = visina;
+		this.tezina = tezina;
+		this.kgrupa = kgrupa;
+		this.dioptrija = dioptrija;
+		this.alergije = alergije;
+		this.bolesti = bolesti;
+		this.anamneza = anamneza;
+		this.klinika=klinika;
+	}
+
+
+	public KorisnikDTO(Korisnik korisnik) {
+
+		this(korisnik.getId(), //
+				korisnik.getUsername(),//
+				korisnik.getIme(), //
+				korisnik.getPrezime(), //
+				korisnik.getJedBrOsig(),//
+				korisnik.getEmail(), //
+				korisnik.getAdresa(), //
+				korisnik.getGrad(), //
+				korisnik.getDrzava(), //
+				korisnik.getTelefon(), //
+				korisnik.getPassword(),//
+				
+				korisnik.getRoleName(),//
+				korisnik.getFirst_Login(),
+				korisnik.getIsActive(),
+				korisnik.getDatum(),
+				korisnik.getPol(),
+				korisnik.getVisina(),
+				korisnik.getTezina(),
+				korisnik.getKgrupa(),
+				korisnik.getDioptrija(),
+				korisnik.getAlergije(),
+				korisnik.getBolesti(),
+				korisnik.getAnamneza(),
+				klinika=new KlinikaDTO(korisnik.getKlinika()));
+	}
 	
 	public String getDatum() {
 		return datum;
@@ -152,28 +213,22 @@ public class KorisnikDTO {
 		this.telefon = telefon;
 		this.password = password;
 
-		this.role=role;
+		this.roleName=role;
 		this.firstLogin=firstLogin;
-		this.role = Role.PACIJENT.name();
+		this.roleName = Role.PACIJENT.name();
 		this.isActive=true;
 		this.firstLogin=false;
 	}
 
 	public String getRole() {
-		return role;
+		return roleName;
 
 	}
 
 	public void setRole(String role) {
-		this.role = role;
+		this.roleName = role;
 	}
 
-	public KorisnikDTO(Korisnik korisnik) {
-
-		this(korisnik.getId(), korisnik.getUsername(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getJedBrOsig(),korisnik.getEmail(), korisnik.getAdresa(), korisnik.getGrad(), korisnik.getDrzava(), korisnik.getTelefon(), korisnik.getPassword(),korisnik.getRoleName(),korisnik.getFirst_Login(),klinika=new KlinikaDTO(korisnik.getKlinika()));
-	}
-
-	
 	
 	public Boolean getFirstLogin() {
 		return firstLogin;
@@ -185,14 +240,6 @@ public class KorisnikDTO {
 	}
 
 
-
-	public String getRepeatPassword() {
-		return repeatPassword;
-	}
-
-	public void setRepeatPassword(String repeatPassword) {
-		this.repeatPassword = repeatPassword;
-	}
 
 	public KorisnikDTO() {
 		super();
@@ -309,7 +356,7 @@ public class KorisnikDTO {
 		this.drzava = drzava;
 		this.telefon = telefon;
 		this.password = password;
-		this.role = role;
+		this.roleName = role;
 		this.firstLogin = firstLogin;
 		this.isActive = isActive;
 	}
@@ -331,7 +378,7 @@ public class KorisnikDTO {
 		this.drzava = drzava2;
 		this.telefon = telefon2;
 		this.password = password2;
-		this.role = roleName;
+		this.roleName = roleName;
 		this.firstLogin = firstLogin;
 		this.klinika=klinika2;
 	}

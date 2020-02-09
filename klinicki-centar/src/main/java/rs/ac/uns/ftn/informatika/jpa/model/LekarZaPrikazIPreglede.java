@@ -103,6 +103,17 @@ public class LekarZaPrikazIPreglede {
 	}
 
 
+	public LekarZaPrikazIPreglede(Long id, String imelek, String prezimelek, String tipspecijalizacije, String uloga,
+			Long lekarveza, double ocena) {
+		super();
+		this.id = id;
+		this.imelek = imelek;
+		this.prezimelek = prezimelek;
+		this.tipspecijalizacije = tipspecijalizacije;
+		this.uloga = uloga;
+		this.lekarveza = lekarveza;
+		this.ocena = ocena;
+	}
 
 	public LekarZaPrikazIPreglede(Long id, String imelek, String prezimelek, String tipspecijalizacije, String uloga,
 			double ocena) {

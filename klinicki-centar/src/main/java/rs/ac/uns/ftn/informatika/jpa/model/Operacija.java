@@ -85,9 +85,34 @@ public class Operacija {
 	
 	
 	
-	
 	public Set<Korisnik> getLekari() {
 		return lekari;
+	}
+
+	public Operacija(Long id, String datum, String vreme, String terminoperacija, String lekarimeoperacija,
+			String lekarprezimeoperacija, Long idlekaroperacija, Long idpacijenta, String tip, double ocenaoperacije,
+			boolean obavljenaoperacija, Boolean zakazan, Boolean obradjen, String trajanje, String sala, String lekar,
+			int cena, Long korisnikId, Set<Korisnik> lekari) {
+		super();
+		this.id = id;
+		this.datum = datum;
+		this.vreme = vreme;
+		this.terminoperacija = terminoperacija;
+		this.lekarimeoperacija = lekarimeoperacija;
+		this.lekarprezimeoperacija = lekarprezimeoperacija;
+		this.idlekaroperacija = idlekaroperacija;
+		this.idpacijenta = idpacijenta;
+		this.tip = tip;
+		this.ocenaoperacije = ocenaoperacije;
+		this.obavljenaoperacija = obavljenaoperacija;
+		this.zakazan = zakazan;
+		this.obradjen = obradjen;
+		this.trajanje = trajanje;
+		this.sala = sala;
+		this.lekar = lekar;
+		this.cena = cena;
+		this.korisnikId = korisnikId;
+		this.lekari = lekari;
 	}
 
 	public void setLekari(Set<Korisnik> lekari) {
