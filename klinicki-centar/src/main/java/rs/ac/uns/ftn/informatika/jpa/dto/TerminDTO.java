@@ -249,6 +249,8 @@ public class TerminDTO {
 	public TerminDTO() {
 		// TODO Auto-generated constructor stub
 	}
+
+
 	
 	
 	
