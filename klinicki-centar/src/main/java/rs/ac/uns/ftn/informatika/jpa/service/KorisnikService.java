@@ -89,7 +89,7 @@ public class KorisnikService {
 	public List<Korisnik> pokaziBezKartona(){
 		List<Korisnik> korisnici=new ArrayList<Korisnik>();
 		for(Korisnik korisnik : korisnikRepository.findByRoleName("PACIJENT")) {
-			if(korisnik.getDatum()==null && korisnik.getPol()==null && korisnik.getIsActive()==true &&(korisnik.getFirst_Login()!=false || korisnik.getFirst_Login()!=null)) {
+			if(korisnik.getDatum()==null && korisnik.getPol()==null && korisnik.getIsActive()==true && korisnik.getFirst_Login()!=false) {
 				korisnici.add(korisnik);
 			}
 		}

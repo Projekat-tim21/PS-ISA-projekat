@@ -69,4 +69,11 @@ public class LekarZaPrikazIPregledeService {
 	}
 
 
+	public LekarZaPrikazIPreglede findVeza(Long lekarId) {
+		// TODO Auto-generated method stub
+		return lipRepo.findByLekarveza(lekarId);
+				
+	}
+
+
 }

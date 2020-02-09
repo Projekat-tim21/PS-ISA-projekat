@@ -31,6 +31,7 @@ import rs.ac.uns.ftn.informatika.jpa.dto.PregledDTO;
 import rs.ac.uns.ftn.informatika.jpa.model.InformacijeOpregledu;
 import rs.ac.uns.ftn.informatika.jpa.model.Korisnik;
 import rs.ac.uns.ftn.informatika.jpa.model.Lek;
+import rs.ac.uns.ftn.informatika.jpa.model.LekarZaPrikazIPreglede;
 import rs.ac.uns.ftn.informatika.jpa.model.Operacija;
 import rs.ac.uns.ftn.informatika.jpa.model.Pregled;
 import rs.ac.uns.ftn.informatika.jpa.model.Role;
@@ -38,6 +39,7 @@ import rs.ac.uns.ftn.informatika.jpa.model.TerminiSaId;
 import rs.ac.uns.ftn.informatika.jpa.service.InformacijeOpregleduService;
 import rs.ac.uns.ftn.informatika.jpa.service.KorisnikService;
 import rs.ac.uns.ftn.informatika.jpa.service.LekServiceImpl;
+import rs.ac.uns.ftn.informatika.jpa.service.LekarZaPrikazIPregledeService;
 import rs.ac.uns.ftn.informatika.jpa.service.OperacijeService;
 import rs.ac.uns.ftn.informatika.jpa.service.PregledService;
 import rs.ac.uns.ftn.informatika.jpa.service.TerminSaIdService;
@@ -62,6 +64,9 @@ public class LekarController {
 	 
 	 @Autowired
 	 private PregledService pService;
+	 
+	 @Autowired
+	 private LekarZaPrikazIPregledeService lpService;
 
 	 @GetMapping("/radniKalendar")
 	    public ModelAndView kalendar(@RequestParam Long id, HttpServletRequest request) {
@@ -722,7 +727,10 @@ public class LekarController {
 				HttpServletRequest request) throws ParseException {
 		
 			Pregled o= new Pregled();
-			o.setIdlekarpregled(lekarId);
+			Long novii=Long.parseLong(lekarId);
+			LekarZaPrikazIPreglede leka=lpService.findVeza(novii);
+			o.setIdlekarpregled(leka.getId().toString());
+			o.setKorisnikId(novii);
 			o.setIdpacijenta(pacijentId);
 			o.setTerminpregled(pregledDTO.getTerminpregled());
 			o.setObradjen(false);
@@ -855,7 +863,9 @@ public class LekarController {
 			Operacija o= new Operacija();
 			
 			o.setIdpacijenta(pacijentId);
-			o.setIdlekaroperacija(lekarId);
+			o.setKorisnikId(lekarId);
+			LekarZaPrikazIPreglede leka=lpService.findVeza(lekarId);
+			o.setIdlekaroperacija(leka.getId());
 			o.setTerminoperacija(operacijaDTO.getTerminoperacija());
 			o.setObradjen(false);
 			oService.save(o);
