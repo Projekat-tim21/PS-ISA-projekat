@@ -14,5 +14,8 @@ public interface OperacijeRepository extends JpaRepository<Operacija, Long>{
 
 	public List<Operacija> findByIdlekaroperacija(Long id);
 	public List<Operacija> findByKorisnikId(Long id);
+	public Operacija findByTerminoperacija(String t);
+
+	public Operacija findByTerminoperacijaAndKorisnikId(String terminpregled, Long id);
 
 }

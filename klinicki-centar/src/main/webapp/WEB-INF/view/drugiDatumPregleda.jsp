@@ -36,6 +36,9 @@
 
 				
 	<h2 align="center">Odaberite validan datum</h2>
+	<hr>
+	<p align="center"> Operacija ili pregled vec postoje u datom terminu ili ste odabrali datum koji je vec prosao</p>
+	<hr>
 <div align="center">
 <a href="/kreirajPregled/${korisnik.id}/${lekar.id }">Zakazi novi pregled</a>
 </div>

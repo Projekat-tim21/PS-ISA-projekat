@@ -63,6 +63,11 @@ public class PregledService {
 		pregledRepo.save(o);
 		
 	}
+
+	public Pregled terminZauzet(String terminpregled,Long id) {
+		// TODO Auto-generated method stub
+		return pregledRepo.findByTerminpregledAndKorisnikId(terminpregled,id);
+	}
 	
 }
 	

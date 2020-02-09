@@ -734,12 +734,13 @@ public class LekarController {
 			o.setIdpacijenta(pacijentId);
 			o.setTerminpregled(pregledDTO.getTerminpregled());
 			o.setObradjen(false);
-			pService.save(o);
+			Pregled postoji=pService.terminZauzet(o.getTerminpregled(),o.getKorisnikId());
+			Operacija postojiO=oService.terminZauzet(o.getTerminpregled(),o.getKorisnikId());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 			Date date1 = sdf.parse(o.getTerminpregled());
 			LocalDate sada=java.time.LocalDate.now();
 			Date date3=java.sql.Date.valueOf(sada);
-			if(date1.compareTo(date3) < 0) {
+			if(date1.compareTo(date3) < 0 || postoji!=null || postojiO!=null) {
 	        	System.out.println("Date1 is before Date3");
 	        	Long n=Long.parseLong( lekarId );
 	        	Korisnik novi=korisnikService.findOne(pacijentId);
@@ -800,6 +801,7 @@ public class LekarController {
 	 			
 	        	 return "drugiDatumPregleda";
 	        }
+			pService.save(o);
 			request.setAttribute("message", "uspesno kreirana operacija");
 			Long n=Long.parseLong( lekarId );
 			 Korisnik novi=korisnikService.findOne(pacijentId);
@@ -876,7 +878,10 @@ public class LekarController {
 			Date date1 = sdf.parse(o.getTerminoperacija());
 			LocalDate sada=java.time.LocalDate.now();
 			Date date3=java.sql.Date.valueOf(sada);
-			if(date1.compareTo(date3) < 0) {
+			Pregled postoji=pService.terminZauzet(o.getTerminoperacija(),o.getKorisnikId());
+			Operacija postojiO=oService.terminZauzet(o.getTerminoperacija(),o.getKorisnikId());
+			
+			if(date1.compareTo(date3) < 0 || postoji!=null || postojiO!=null) {
 	        	System.out.println("Date1 is before Date3");
 	        	request.setAttribute("lekar", korisnikService.findOne(lekarId));
 	 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));

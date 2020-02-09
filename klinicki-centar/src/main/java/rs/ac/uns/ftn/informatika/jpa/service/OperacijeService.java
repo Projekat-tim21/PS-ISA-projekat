@@ -51,6 +51,10 @@ public class OperacijeService {
 		return operacije;
 	}
 
+	public Operacija terminZauzet(String terminpregled,Long id) {
+		// TODO Auto-generated method stub
+		return orepo.findByTerminoperacijaAndKorisnikId(terminpregled,id);
+	}
 	
 
 }
