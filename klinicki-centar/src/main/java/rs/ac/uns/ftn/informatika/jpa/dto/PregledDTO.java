@@ -206,6 +206,84 @@ public class PregledDTO {
 		return "PregledDTO [id=" + id + ", terminpregled=" + terminpregled + ", idlekarpregled=" + idlekarpregled
 				+ ", idpacijenta=" + idpacijenta + "]";
 	}
+	public String getDatum() {
+		return datum;
+	}
+	public void setDatum(String datum) {
+		this.datum = datum;
+	}
+	public String getVreme() {
+		return vreme;
+	}
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
+	}
+	public String getTip() {
+		return tip;
+	}
+	public void setTip(String tip) {
+		this.tip = tip;
+	}
+	public String getLekarimepregled() {
+		return lekarimepregled;
+	}
+	public void setLekarimepregled(String lekarimepregled) {
+		this.lekarimepregled = lekarimepregled;
+	}
+	public String getLekarprezimepregled() {
+		return lekarprezimepregled;
+	}
+	public void setLekarprezimepregled(String lekarprezimepregled) {
+		this.lekarprezimepregled = lekarprezimepregled;
+	}
+	public String getLekar() {
+		return lekar;
+	}
+	public void setLekar(String lekar) {
+		this.lekar = lekar;
+	}
+	public int getCena() {
+		return cena;
+	}
+	public void setCena(int cena) {
+		this.cena = cena;
+	}
+	public double getOcenapregleda() {
+		return ocenapregleda;
+	}
+	public void setOcenapregleda(double ocenapregleda) {
+		this.ocenapregleda = ocenapregleda;
+	}
+	public String getTrajanje() {
+		return trajanje;
+	}
+	public void setTrajanje(String trajanje) {
+		this.trajanje = trajanje;
+	}
+	public String getSala() {
+		return sala;
+	}
+	public void setSala(String sala) {
+		this.sala = sala;
+	}
+	public Boolean getZakazan() {
+		return zakazan;
+	}
+	public void setZakazan(Boolean zakazan) {
+		this.zakazan = zakazan;
+	}
+	public boolean isObavljenpregled() {
+		return obavljenpregled;
+	}
+	public void setObavljenpregled(boolean obavljenpregled) {
+		this.obavljenpregled = obavljenpregled;
+	}
+	public Long getKorisnikId() {
+		return korisnikId;
+	}
+	public void setKorisnikId(Long korisnikId) {
+		this.korisnikId = korisnikId;
+	}
 	
 	
 }

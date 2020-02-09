@@ -738,11 +738,11 @@ public class LekarController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 			Date date1 = sdf.parse(o.getTerminpregled());
 			LocalDate sada=java.time.LocalDate.now();
-			 Date date3=java.sql.Date.valueOf(sada);
-			 if(date1.compareTo(date3) < 0) {
-	        	 System.out.println("Date1 is before Date3");
-	        	 Long n=Long.parseLong( lekarId );
-	        	 Korisnik novi=korisnikService.findOne(pacijentId);
+			Date date3=java.sql.Date.valueOf(sada);
+			if(date1.compareTo(date3) < 0) {
+	        	System.out.println("Date1 is before Date3");
+	        	Long n=Long.parseLong( lekarId );
+	        	Korisnik novi=korisnikService.findOne(pacijentId);
 	 	   		KorisnikDTO korisnikDTO=new KorisnikDTO();
 	 	    	korisnikDTO.setAdresa(novi.getAdresa());
 	 	    	korisnikDTO.setAlergije(novi.getAlergije());
@@ -767,33 +767,34 @@ public class LekarController {
 	 	    	korisnikDTO.setTezina(novi.getTezina());
 	 	    	korisnikDTO.setUsername(novi.getUsername());
 	 	    	korisnikDTO.setVisina(novi.getVisina());
-	 	    	 Korisnik kk=korisnikService.findOne(n);
-	 		   		KorisnikDTO korisnikDTO1=new KorisnikDTO();
-	 		    	korisnikDTO1.setAdresa(kk.getAdresa());
-	 		    	korisnikDTO1.setAlergije(kk.getAlergije());
-	 		    	korisnikDTO1.setAnamneza(kk.getAnamneza());
-	 		    	korisnikDTO1.setBolesti(kk.getBolesti());
-	 		    	korisnikDTO1.setDatum(kk.getDatum());
-	 		    	korisnikDTO1.setDioptrija(kk.getDioptrija());
-	 		    	korisnikDTO1.setDrzava(kk.getDrzava());
-	 		    	korisnikDTO1.setEmail(kk.getEmail());
-	 		    	korisnikDTO1.setFirstLogin(kk.getFirst_Login());
-	 		    	korisnikDTO1.setGrad(kk.getGrad());
-	 		    	korisnikDTO1.setId(kk.getId());
-	 		    	korisnikDTO1.setIme(kk.getIme());
-	 		    	korisnikDTO1.setIsActive(kk.getIsActive());
-	 		    	korisnikDTO1.setJedBrOsig(kk.getJedBrOsig());
-	 		    	korisnikDTO1.setKgrupa(kk.getKgrupa());
-	 		    	korisnikDTO1.setPassword(kk.getPassword());
-	 		    	korisnikDTO1.setPol(kk.getPol());
-	 		    	korisnikDTO1.setPrezime(kk.getPrezime());
-	 		    	korisnikDTO1.setRole(kk.getRoleName());
-	 		    	korisnikDTO1.setTelefon(kk.getTelefon());
-	 		    	korisnikDTO1.setTezina(kk.getTezina());
-	 		    	korisnikDTO1.setUsername(kk.getUsername());
-	 		    	korisnikDTO1.setVisina(kk.getVisina());
+	 	    	
+	 	    	Korisnik kk=korisnikService.findOne(n);
+	 		   	KorisnikDTO korisnikDTO1=new KorisnikDTO();
+	 		    korisnikDTO1.setAdresa(kk.getAdresa());
+	 		    korisnikDTO1.setAlergije(kk.getAlergije());
+	 		    korisnikDTO1.setAnamneza(kk.getAnamneza());
+	 		    korisnikDTO1.setBolesti(kk.getBolesti());
+	 		    korisnikDTO1.setDatum(kk.getDatum());
+	 		    korisnikDTO1.setDioptrija(kk.getDioptrija());
+	 		    korisnikDTO1.setDrzava(kk.getDrzava());
+	 		    korisnikDTO1.setEmail(kk.getEmail());
+	 		    korisnikDTO1.setFirstLogin(kk.getFirst_Login());
+	 		    korisnikDTO1.setGrad(kk.getGrad());
+	 		    korisnikDTO1.setId(kk.getId());
+	 		    korisnikDTO1.setIme(kk.getIme());
+	 		    korisnikDTO1.setIsActive(kk.getIsActive());
+	 		    korisnikDTO1.setJedBrOsig(kk.getJedBrOsig());
+	 		    korisnikDTO1.setKgrupa(kk.getKgrupa());
+	 		    korisnikDTO1.setPassword(kk.getPassword());
+	 		    korisnikDTO1.setPol(kk.getPol());
+	 		    korisnikDTO1.setPrezime(kk.getPrezime());
+	 		    korisnikDTO1.setRole(kk.getRoleName());
+	 		    korisnikDTO1.setTelefon(kk.getTelefon());
+	 		    korisnikDTO1.setTezina(kk.getTezina());
+	 		    korisnikDTO1.setUsername(kk.getUsername());
+	 		    korisnikDTO1.setVisina(kk.getVisina());
 	 		 
-	        	 request.setAttribute("lekar", korisnikDTO1);
+	        	request.setAttribute("lekar", korisnikDTO1);
 	 			request.setAttribute("korisnik", korisnikDTO);
 	 			request.setAttribute("mode", "MODE_PACIJENT");
 	 			
@@ -826,35 +827,37 @@ public class LekarController {
 	 	    	korisnikDTO.setTezina(novi.getTezina());
 	 	    	korisnikDTO.setUsername(novi.getUsername());
 	 	    	korisnikDTO.setVisina(novi.getVisina());
-	 	    	 Korisnik kk=korisnikService.findOne(n);
-	 		   		KorisnikDTO korisnikDTO1=new KorisnikDTO();
-	 		    	korisnikDTO1.setAdresa(kk.getAdresa());
-	 		    	korisnikDTO1.setAlergije(kk.getAlergije());
-	 		    	korisnikDTO1.setAnamneza(kk.getAnamneza());
-	 		    	korisnikDTO1.setBolesti(kk.getBolesti());
-	 		    	korisnikDTO1.setDatum(kk.getDatum());
-	 		    	korisnikDTO1.setDioptrija(kk.getDioptrija());
-	 		    	korisnikDTO1.setDrzava(kk.getDrzava());
-	 		    	korisnikDTO1.setEmail(kk.getEmail());
-	 		    	korisnikDTO1.setFirstLogin(kk.getFirst_Login());
-	 		    	korisnikDTO1.setGrad(kk.getGrad());
-	 		    	korisnikDTO1.setId(kk.getId());
-	 		    	korisnikDTO1.setIme(kk.getIme());
-	 		    	korisnikDTO1.setIsActive(kk.getIsActive());
-	 		    	korisnikDTO1.setJedBrOsig(kk.getJedBrOsig());
-	 		    	korisnikDTO1.setKgrupa(kk.getKgrupa());
-	 		    	korisnikDTO1.setPassword(kk.getPassword());
-	 		    	korisnikDTO1.setPol(kk.getPol());
-	 		    	korisnikDTO1.setPrezime(kk.getPrezime());
-	 		    	korisnikDTO1.setRole(kk.getRoleName());
-	 		    	korisnikDTO1.setTelefon(kk.getTelefon());
-	 		    	korisnikDTO1.setTezina(kk.getTezina());
-	 		    	korisnikDTO1.setUsername(kk.getUsername());
-	 		    	korisnikDTO1.setVisina(kk.getVisina());
+	 	    	
+	 	    	Korisnik kk=korisnikService.findOne(n);
+	 		   	KorisnikDTO korisnikDTO1=new KorisnikDTO();
+	 		    korisnikDTO1.setAdresa(kk.getAdresa());
+	 		    korisnikDTO1.setAlergije(kk.getAlergije());
+	 		    korisnikDTO1.setAnamneza(kk.getAnamneza());
+	 		    korisnikDTO1.setBolesti(kk.getBolesti());
+	 		    korisnikDTO1.setDatum(kk.getDatum());
+	 		    korisnikDTO1.setDioptrija(kk.getDioptrija());
+	 		    korisnikDTO1.setDrzava(kk.getDrzava());
+	 		    korisnikDTO1.setEmail(kk.getEmail());
+	 		    korisnikDTO1.setFirstLogin(kk.getFirst_Login());
+	 		    korisnikDTO1.setGrad(kk.getGrad());
+	 		    korisnikDTO1.setId(kk.getId());
+	 		    korisnikDTO1.setIme(kk.getIme());
+	 		    korisnikDTO1.setIsActive(kk.getIsActive());
+	 		    korisnikDTO1.setJedBrOsig(kk.getJedBrOsig());
+	 		    korisnikDTO1.setKgrupa(kk.getKgrupa());
+	 		    korisnikDTO1.setPassword(kk.getPassword());
+	 		    korisnikDTO1.setPol(kk.getPol());
+	 		    korisnikDTO1.setPrezime(kk.getPrezime());
+	 		    korisnikDTO1.setRole(kk.getRoleName());
+	 		    korisnikDTO1.setTelefon(kk.getTelefon());
+	 		    korisnikDTO1.setTezina(kk.getTezina());
+	 		    korisnikDTO1.setUsername(kk.getUsername());
+	 		    korisnikDTO1.setVisina(kk.getVisina());
 	 		 
-	        	 request.setAttribute("lekar", korisnikDTO1);
+	        	request.setAttribute("lekar", korisnikDTO1);
 	 			request.setAttribute("korisnik", korisnikDTO);request.setAttribute("mode", "MODE_PACIJENT");
-			return "uspesan";
+			
+	 			return "uspesan";
 		}
 	 @RequestMapping(value="/sacuvajNovuOperaciju/{pacijentId}/{lekarId}",method = { RequestMethod.GET, RequestMethod.POST }) // korisnik povezan sa valuom iz js
 		public String cuvajOperaciju(@PathVariable Long pacijentId,@PathVariable Long lekarId,@ModelAttribute OperacijaDTO operacijaDTO, BindingResult bindingResult,
@@ -872,16 +875,17 @@ public class LekarController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 			Date date1 = sdf.parse(o.getTerminoperacija());
 			LocalDate sada=java.time.LocalDate.now();
-			 Date date3=java.sql.Date.valueOf(sada);
-			 if(date1.compareTo(date3) < 0) {
-	        	 System.out.println("Date1 is before Date3");
-	        	 request.setAttribute("lekar", korisnikService.findOne(lekarId));
+			Date date3=java.sql.Date.valueOf(sada);
+			if(date1.compareTo(date3) < 0) {
+	        	System.out.println("Date1 is before Date3");
+	        	request.setAttribute("lekar", korisnikService.findOne(lekarId));
 	 			request.setAttribute("korisnik", korisnikService.findOne(pacijentId));
 	 			request.setAttribute("mode", "MODE_PACIJENT");
 	 			
-	        	 return "drugiDatumOperacija";
+	        	return "drugiDatumOperacija";
 	        }
 			request.setAttribute("message", "uspesno kreirana operacija");
+			
 			Korisnik novi=korisnikService.findOne(pacijentId);
  	   		KorisnikDTO korisnikDTO=new KorisnikDTO();
  	    	korisnikDTO.setAdresa(novi.getAdresa());
@@ -907,34 +911,37 @@ public class LekarController {
  	    	korisnikDTO.setTezina(novi.getTezina());
  	    	korisnikDTO.setUsername(novi.getUsername());
  	    	korisnikDTO.setVisina(novi.getVisina());
- 	    	 Korisnik kk=korisnikService.findOne(lekarId);
- 		   		KorisnikDTO korisnikDTO1=new KorisnikDTO();
- 		    	korisnikDTO1.setAdresa(kk.getAdresa());
- 		    	korisnikDTO1.setAlergije(kk.getAlergije());
- 		    	korisnikDTO1.setAnamneza(kk.getAnamneza());
- 		    	korisnikDTO1.setBolesti(kk.getBolesti());
- 		    	korisnikDTO1.setDatum(kk.getDatum());
- 		    	korisnikDTO1.setDioptrija(kk.getDioptrija());
- 		    	korisnikDTO1.setDrzava(kk.getDrzava());
- 		    	korisnikDTO1.setEmail(kk.getEmail());
- 		    	korisnikDTO1.setFirstLogin(kk.getFirst_Login());
- 		    	korisnikDTO1.setGrad(kk.getGrad());
- 		    	korisnikDTO1.setId(kk.getId());
- 		    	korisnikDTO1.setIme(kk.getIme());
- 		    	korisnikDTO1.setIsActive(kk.getIsActive());
- 		    	korisnikDTO1.setJedBrOsig(kk.getJedBrOsig());
- 		    	korisnikDTO1.setKgrupa(kk.getKgrupa());
- 		    	korisnikDTO1.setPassword(kk.getPassword());
- 		    	korisnikDTO1.setPol(kk.getPol());
- 		    	korisnikDTO1.setPrezime(kk.getPrezime());
- 		    	korisnikDTO1.setRole(kk.getRoleName());
- 		    	korisnikDTO1.setTelefon(kk.getTelefon());
- 		    	korisnikDTO1.setTezina(kk.getTezina());
- 		    	korisnikDTO1.setUsername(kk.getUsername());
- 		    	korisnikDTO1.setVisina(kk.getVisina());
-			request.setAttribute("lekar", korisnikDTO1);
+ 	    	
+ 	    	Korisnik kk=korisnikService.findOne(lekarId);
+ 		   	KorisnikDTO korisnikDTO1=new KorisnikDTO();
+ 		    korisnikDTO1.setAdresa(kk.getAdresa());
+ 		    korisnikDTO1.setAlergije(kk.getAlergije());
+ 		    korisnikDTO1.setAnamneza(kk.getAnamneza());
+ 		    korisnikDTO1.setBolesti(kk.getBolesti());
+ 		    korisnikDTO1.setDatum(kk.getDatum());
+ 		    korisnikDTO1.setDioptrija(kk.getDioptrija());
+ 		    korisnikDTO1.setDrzava(kk.getDrzava());
+ 		    korisnikDTO1.setEmail(kk.getEmail());
+ 		    korisnikDTO1.setFirstLogin(kk.getFirst_Login());
+ 		    korisnikDTO1.setGrad(kk.getGrad());
+ 		    korisnikDTO1.setId(kk.getId());
+ 		    korisnikDTO1.setIme(kk.getIme());
+ 		    korisnikDTO1.setIsActive(kk.getIsActive());
+ 		    korisnikDTO1.setJedBrOsig(kk.getJedBrOsig());
+ 		    korisnikDTO1.setKgrupa(kk.getKgrupa());
+ 		    korisnikDTO1.setPassword(kk.getPassword());
+ 		    korisnikDTO1.setPol(kk.getPol());
+ 		    korisnikDTO1.setPrezime(kk.getPrezime());
+ 		    korisnikDTO1.setRole(kk.getRoleName());
+ 		    korisnikDTO1.setTelefon(kk.getTelefon());
+ 		   	korisnikDTO1.setTezina(kk.getTezina());
+ 		    korisnikDTO1.setUsername(kk.getUsername());
+ 		    korisnikDTO1.setVisina(kk.getVisina());
+			
+ 		    request.setAttribute("lekar", korisnikDTO1);
 			request.setAttribute("korisnik", korisnikDTO);
 			request.setAttribute("mode", "MODE_PACIJENT");
+			
 			return "uspesan";
 		}
 	 
